@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-07-02T08:15:36.418Z</updated>
+  <updated>2022-07-02T07:02:18.947Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hexo本地写作环境配置</title>
-    <link href="https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    <id>https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
-    <published>2022-07-02T07:02:18.943Z</published>
-    <updated>2022-07-02T08:15:36.418Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;写作缘由&quot;&gt;写作缘由&lt;/h2&gt;
-&lt;p&gt;由于经常换电脑设备，每次更换设备时都需要重新配置Hexo环境，故对配置流程进行记录，以供后续使用。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
-    
-      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
-    
-    
-      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
-    
-      <category term="node.js" scheme="https://www.kezhi.tech/tags/node-js/"/>
-    
-  </entry>
   
   <entry>
     <title>实数六大基本定理的相互证明</title>
@@ -352,6 +326,32 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
       <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
     
       <category term="自动化" scheme="https://www.kezhi.tech/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo本地写作环境配置</title>
+    <link href="https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-03-20T15:21:53.000Z</published>
+    <updated>2022-07-02T13:46:38.862Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;写作缘由&quot;&gt;写作缘由&lt;/h2&gt;
+&lt;p&gt;由于经常换电脑设备，每次更换设备时都需要重新配置Hexo环境，故对配置流程进行记录，以供后续使用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    
+      <category term="node.js" scheme="https://www.kezhi.tech/tags/node-js/"/>
     
   </entry>
   
