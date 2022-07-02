@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简介 Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的播放量，追番量，弹幕数量等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。 GitHub地址：https:&#x2F;&#x2F;github.com&#x2F;Ke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取B站所有番剧数据并进行数据分析">
+<meta property="og:url" content="https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="简介 Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的播放量，追番量，弹幕数量等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。 GitHub地址：https:&#x2F;&#x2F;github.com&#x2F;Ke">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014232257.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014232605.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014233531.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014235022.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014235127.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201014235500.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201015000820.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160340.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160804.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160900.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124162738.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124163322.png">
+<meta property="article:published_time" content="2020-10-14T16:24:39.000Z">
+<meta property="article:modified_time" content="2022-07-02T07:02:18.951Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="大数据分析">
+<meta property="article:tag" content="Aprior算法">
+<meta property="article:tag" content="K-means">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/20201014232257.png">
+
+<link rel="canonical" href="https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>爬取B站所有番剧数据并进行数据分析 | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-steam">
+
+    <a href="/steamgames/" rel="section"><i class="fa fa-fw fa-steam"></i>steam</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          爬取B站所有番剧数据并进行数据分析
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-15 00:24:39" itemprop="dateCreated datePublished" datetime="2020-10-15T00:24:39+08:00">2020-10-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-02 15:02:18" itemprop="dateModified" datetime="2022-07-02T15:02:18+08:00">2022-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">工程实践</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介">简介</h2>
+<p>Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的<span class="label primary">播放量</span>，<span class="label success">追番量</span>，<span class="label info">弹幕数量</span>等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。</p>
+<p>GitHub地址：<a
+href="https://github.com/KezhiAdore/BilibiliAnimeData_Analysis">https://github.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
+<p>码云地址：<a
+href="https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis">https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
+<a id="more"></a>
+<h2 id="数据收集">数据收集</h2>
+<p>首先要获取到需要的所有数据，即B站所有番剧播放信息和标签信息。使用爬虫对数据进行爬取，这里使用的是python的<code>scrapy</code>编写爬虫对数据进行爬取。</p>
+<h3 id="页面分析">页面分析</h3>
+<p>首先来到番剧索引页面<img
+src="https://download.kezhi.tech/img/20201014232024.png" /></p>
+<p>从该页面点击某部番剧进入其详情页</p>
+<p><img src="https://download.kezhi.tech/img/20201014232257.png" /></p>
+<p>可以看到该页面中就有需要的番剧播放数据以及番剧的标签。</p>
+<p>对该页面的HTML进行分析得到数据所在的xpath路径，以tag为例：</p>
+<p><img src="https://download.kezhi.tech/img/20201014232605.png" /></p>
+<p>所有数据对应的xpath路径分别为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标签: &#x2F;&#x2F;span[@class&#x3D;&quot;media-tag&quot;]</span><br><span class="line">总播放: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-play&quot;]&#x2F;em</span><br><span class="line">追番人数: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-fans&quot;]&#x2F;em</span><br><span class="line">弹幕总数: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-review&quot;]&#x2F;em</span><br></pre></td></tr></table></figure>
+<p>那么到现在来说循环进入所有的番剧列表页，从该页面进入番剧详情页并对每个番剧详情页进行解析，数据保存就可以了，但此时出现了问题。对番剧列表页进行爬取之后的网页数据相应的地方为：</p>
+<p><img src="https://download.kezhi.tech/img/20201014233531.png" /></p>
+<p>直接对该页面进行访问无法获取到详细的番剧列表信息。由此，转而对页面接受到的文件进行分析，找到了该页面获取的番剧列表信息文件。</p>
+<p><img src="https://download.kezhi.tech/img/20201014235022.png" /></p>
+<p>访问该url得到的信息为：</p>
+<p><img src="https://download.kezhi.tech/img/20201014235127.png" /></p>
+<p>对该api网址进行分析，易得<code>page=1</code>控制着页数信息，通过改变该信息即可访问不同的番剧列表页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;api.bilibili.com&#x2F;pgc&#x2F;season&#x2F;index&#x2F;result?season_version&#x3D;-1&amp;area&#x3D;-1&amp;is_finish&#x3D;-1&amp;copyright&#x3D;-1&amp;season_status&#x3D;-1&amp;season_month&#x3D;-1&amp;year&#x3D;-1&amp;style_id&#x3D;-1&amp;order&#x3D;3&amp;st&#x3D;1&amp;sort&#x3D;0&amp;page&#x3D;1&amp;season_type&#x3D;1&amp;pagesize&#x3D;20&amp;type&#x3D;1</span><br></pre></td></tr></table></figure>
+<p>该页面获取到的信息为json文件，内含信息格式如下：</p>
+<p><img src="https://download.kezhi.tech/img/20201014235500.png" /></p>
+<p>与番剧详情页的网址<a
+href="https://www.bilibili.com/bangumi/media/md22718131">https://www.bilibili.com/bangumi/media/md22718131</a>进行比对可以发现，json文件中的<code>media_id</code>数据即为每个番剧详情页的标识，由此，爬取信息的逻辑基本建立了。</p>
+<ol type="1">
+<li>访问起始api页面（page=1），对其内容进行解析，获取到该页所有番剧的<code>media_id</code></li>
+<li>利用<code>media_id</code>构建访问番剧详情页的链接，爬取该页面进行解析，得到一个番剧的数据</li>
+<li>访问下一个api页面，再次进行上述操作。</li>
+</ol>
+<h3 id="爬虫构建">爬虫构建</h3>
+<p>首先初始化爬虫</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject anime_data</span><br><span class="line">scrapy genspider anime ""</span><br></pre></td></tr></table></figure>
+<p>文件树如下</p>
+<p><img src="https://download.kezhi.tech/img/20201015000820.png" /></p>
+<p>打开<code>items.py</code>，建立需要保存的数据对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimeDataItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    name = scrapy.Field()   <span class="comment">#番剧名称</span></span><br><span class="line">    play=scrapy.Field()     <span class="comment">#总播放量</span></span><br><span class="line">    fllow=scrapy.Field()    <span class="comment">#追番人数</span></span><br><span class="line">    barrage=scrapy.Field()  <span class="comment">#弹幕数量</span></span><br><span class="line">    tags=scrapy.Field()     <span class="comment">#番剧标签，列表形式</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>再打开刚建立的<code>anime.py</code>，访问页面，解析以及数据保存的代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> anime_data.items <span class="keyword">import</span> AnimeDataItem</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimeSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'anime'</span></span><br><span class="line">    <span class="comment">#allowed_domains = ['https://www.bilibili.com']</span></span><br><span class="line">    <span class="comment">#番剧信息表api</span></span><br><span class="line">    url_head=<span class="string">"https://api.bilibili.com/pgc/season/index/result?season_version=-1&amp;area=-1&amp;is_finish=-1&amp;copyright=-1&amp;season_status=-1&amp;season_month=-1&amp;year=-1&amp;style_id=-1&amp;order=3&amp;st=1&amp;sort=0&amp;season_type=1&amp;pagesize=20&amp;type=1"</span></span><br><span class="line">    start_urls = [url_head+<span class="string">"&amp;page=1"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">## 递归解析番剧信息表</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        data=json.loads(response.text)</span><br><span class="line">        next_index=int(response.url[response.url.rfind(<span class="string">"="</span>)+<span class="number">1</span>:])+<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> data[<span class="string">'data'</span>][<span class="string">'size'</span>]==<span class="number">20</span>:</span><br><span class="line">            next_url=self.url_head+<span class="string">"&amp;page="</span>+str(next_index)</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(next_url,callback=self.parse)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> data[<span class="string">'data'</span>][<span class="string">'list'</span>]:</span><br><span class="line">            media_id=i[<span class="string">'media_id'</span>]</span><br><span class="line">            detail_url=(<span class="string">"https://www.bilibili.com/bangumi/media/md"</span>+str(media_id))</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(detail_url,callback=self.parse_detail)</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 解析番剧详情页面</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail</span><span class="params">(self,response)</span>:</span></span><br><span class="line">        item=AnimeDataItem()</span><br><span class="line">        <span class="comment">#番剧名称</span></span><br><span class="line">        item[<span class="string">'name'</span>]=response.xpath(<span class="string">'//span[@class="media-info-title-t"]/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#播放量</span></span><br><span class="line">        item[<span class="string">'play'</span>]=response.xpath(<span class="string">'//span[@class="media-info-count-item media-info-count-item-play"]/em/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#追番数</span></span><br><span class="line">        item[<span class="string">'fllow'</span>]=response.xpath(<span class="string">'//span[@class="media-info-count-item media-info-count-item-fans"]/em/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#弹幕数</span></span><br><span class="line">        item[<span class="string">'barrage'</span>]=response.xpath(<span class="string">'//span[@class="media-info-count-item media-info-count-item-review"]/em/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#番剧标签</span></span><br><span class="line">        item[<span class="string">'tags'</span>]=response.xpath(<span class="string">'//span[@class="media-tag"]/text()'</span>).extract()</span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<h2 id="数据分析">数据分析</h2>
+<h3 id="数据整理及筛选">数据整理及筛选</h3>
+<p>收集到的数据不能直接进行使用，需要对其进行整理和筛选分为两个工作：</p>
+<ol type="1">
+<li>去掉没有tag信息的数据</li>
+<li>将数据中的数量信息转化为数字（如<code>1万</code>转化为<code>10000</code>）</li>
+</ol>
+<p>第一步因为数据量不大，直接使用<code>excel</code>的筛选功能就可以快速完成。</p>
+<p>第二步编写如下函数对数据进行转换：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文字数据转化为数字</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans</span><span class="params">(string)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> string[<span class="number">-1</span>]==<span class="string">'万'</span>:</span><br><span class="line">        <span class="keyword">return</span> int(float(string[<span class="number">0</span>:<span class="number">-1</span>])*<span class="number">1e4</span>)</span><br><span class="line">    <span class="keyword">elif</span> string[<span class="number">-1</span>]==<span class="string">'亿'</span>:</span><br><span class="line">        <span class="keyword">return</span> int(float(string[<span class="number">0</span>:<span class="number">-1</span>])*<span class="number">1e8</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> int(string)</span><br></pre></td></tr></table></figure>
+<h3 id="apriori算法进行频繁项集挖掘">Apriori算法进行频繁项集挖掘</h3>
+<blockquote>
+<ol type="1">
+<li>项集和数据集</li>
+</ol>
+<p>设数据中出现的所有项的集合为<span
+class="math inline">\(U=\left\{I_1,I_2,...,I_n\right\}\)</span>，需要挖掘频繁项集的数据<span
+class="math inline">\(D\)</span>为数据库中事务的集合。<span
+class="math inline">\(D\)</span>中的数据为项集，并且每个项集<span
+class="math inline">\(T\subseteq U\)</span>。</p>
+<ol start="2" type="1">
+<li>关联规则（支持度和置信度）</li>
+</ol>
+<p>设<span class="math inline">\(A\)</span>和<span
+class="math inline">\(B\)</span>是两个项集，<span
+class="math inline">\(A\subset U,B\subset U, A\neq \emptyset，B\neq
+\emptyset，A\cap B=\emptyset\)</span>。</p>
+<p>关联规则是形如<span class="math inline">\(A\Rightarrow
+B\)</span>的蕴含式，其在事物集<span
+class="math inline">\(D\)</span>中的<strong>支持度</strong>为<span
+class="math inline">\(s\)</span>，其中<span
+class="math inline">\(s\)</span>为事务集<span
+class="math inline">\(D\)</span>中包含<span class="math inline">\(A\cup
+B\)</span>的百分比。</p>
+<p>其在事物集D中的<strong>置信度</strong>为<span
+class="math inline">\(c\)</span>，为在事物集D中包含A的事物中包含B的百分比，即<span
+class="math inline">\(P(A|B)\)</span>。 <span class="math display">\[
+c=P(B|A)=\frac{P(A\cup B)}{P(A)}=\frac{support(A\cup
+B)}{support(A)}=\frac{support\text{_}count(A\cup
+B)}{support\text{_}count(A)}
+\]</span></p>
+<ol start="3" type="1">
+<li>频繁项集</li>
+</ol>
+<p>在进行频繁项集挖掘时，设定最小置信度和最小支持度，称同时满足最小支持度和最小置信度的规则称为强规则，满足这种强规则的项集称为频繁项集。</p>
+</blockquote>
+<h4 id="关联规则">关联规则</h4>
+<p>每个番剧都有一定数量的<code>tag</code>来大致描述其内容，用来描述同一部番剧的<code>tag</code>通常是处于不同维度的描述，以《小林家的龙女仆》为例，其<code>tag</code>为<code>[萌系 搞笑 日常 漫画改]</code>，四个<code>tag</code>分别描述了该动画的四个不同的特征。通过对B站上所有的番剧<code>tag</code>数据进行分析，找出其中相关度最高的<code>tag</code>组合。</p>
+<h4 id="算法流程">算法流程</h4>
+<p>数据集：所有番剧的<code>tag</code>数据集，每一条数据为一部番剧的<code>tag</code></p>
+<p>Aprior算法的流程如下：</p>
+<ol type="1">
+<li><p>构造1项集-&gt;统计1项集出现频数-&gt;计算支持度和置信度-&gt;剪枝-&gt;频繁1项集</p></li>
+<li><p>通过k-1项集构造k项集-&gt;统计k项集出现频数-&gt;计算支持度和置信度-&gt;剪枝-&gt;频繁k项集</p></li>
+<li><p>重复第2步直到没有项集符合强规则</p></li>
+</ol>
+<h4 id="编程实现">编程实现</h4>
+<p>首先，将处理后的数据读入，从所有数据中单独取出<code>tag</code>数据转成<code>list</code>类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filepath=<span class="string">'data_processed.csv'</span></span><br><span class="line">df=pd.read_csv(filepath)</span><br><span class="line">tags=df[<span class="string">'tags'</span>].to_list()</span><br></pre></td></tr></table></figure>
+<p>这时<code>tags</code>中的数据为字符串而非<code>tag</code>列表，如：<code>"恋爱,推理,校园,日常"</code>，需要将其转化为列表，实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将逗号分割的字符串以逗号为分隔符转换成列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str_to_list</span><span class="params">(str_data)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> index,data <span class="keyword">in</span> enumerate(str_data):</span><br><span class="line">        tmp,start,end=[],<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> end!=len(data):</span><br><span class="line">            <span class="keyword">if</span> data[start:].find(<span class="string">','</span>)==<span class="number">-1</span>:</span><br><span class="line">                end=len(data)</span><br><span class="line">                tmp.append(data[start:end])</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            end=start+data[start:].find(<span class="string">','</span>)</span><br><span class="line">            tmp.append(data[start:end])</span><br><span class="line">            start=end+<span class="number">1</span></span><br><span class="line">        str_data[index]=tmp</span><br></pre></td></tr></table></figure>
+<p>通过k-1项集构造k项集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Apriori算法连接步 单步实现</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_list</span><span class="params">(l1,l2)</span>:</span></span><br><span class="line">    length=len(l1)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> l1[i]!=l2[i]:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'nope'</span></span><br><span class="line">    <span class="keyword">if</span> l1[<span class="number">-1</span>]&lt;l2[<span class="number">-1</span>]:</span><br><span class="line">        l=l1.copy()</span><br><span class="line">        l.append(l2[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">return</span> l</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'nope'</span></span><br></pre></td></tr></table></figure>
+<p>判断列表的包含关系</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断l2是否包含在l1中</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_exist</span><span class="params">(l1,l2)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l2:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> l1:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>剪枝操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用min_sup和min_conf进行剪枝,即最小支持度和最小置信度,L_last为k-1项频繁集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prune</span><span class="params">(L=[],L_last=<span class="number">0</span>,min_sup=<span class="number">0</span>,min_conf=<span class="number">0</span>)</span>:</span></span><br><span class="line">    tmp_L=[]</span><br><span class="line">    <span class="keyword">if</span> L_last==<span class="number">0</span> <span class="keyword">or</span> min_conf==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">for</span> index,l <span class="keyword">in</span> enumerate(L):</span><br><span class="line">            <span class="keyword">if</span> l[<span class="number">1</span>]&lt;min_sup:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            tmp_L.append(l)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> index,l <span class="keyword">in</span> enumerate(L):</span><br><span class="line">            <span class="keyword">if</span> l[<span class="number">1</span>]&lt;min_sup:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> ll <span class="keyword">in</span> L_last:</span><br><span class="line">                <span class="keyword">if</span> l[<span class="number">0</span>][:<span class="number">-1</span>]==ll[<span class="number">0</span>]:</span><br><span class="line">                    <span class="keyword">if</span> l[<span class="number">1</span>]/ll[<span class="number">1</span>]&gt;=min_conf:</span><br><span class="line">                        tmp_L.append(l)</span><br><span class="line">    <span class="keyword">return</span> tmp_L</span><br></pre></td></tr></table></figure>
+<p>Apriori算法主体：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Apriori</span><span class="params">(data,min_sup,min_conf)</span>:</span></span><br><span class="line">    <span class="comment"># C:临时存储k项集  L:临时存储频繁k项集  L_save:保存频繁1-k项集</span></span><br><span class="line">    C,L,L_save=[],[],[]</span><br><span class="line">    <span class="comment"># 使用支持度计数来代替支持度进行计算</span></span><br><span class="line">    min_sup_count=min_sup*len(data)</span><br><span class="line">    <span class="comment"># 初始化一项集</span></span><br><span class="line">    <span class="keyword">for</span> tags <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span><br><span class="line">            <span class="keyword">if</span> C==[] <span class="keyword">or</span> [tag] <span class="keyword">not</span> <span class="keyword">in</span>[x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> C]:</span><br><span class="line">                C.append([[tag],<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 筛选出频繁一项集</span></span><br><span class="line">    L=C.copy()</span><br><span class="line">    <span class="keyword">for</span> index,l <span class="keyword">in</span> enumerate(L):</span><br><span class="line">        <span class="keyword">for</span> tags <span class="keyword">in</span> data:</span><br><span class="line">            <span class="keyword">if</span> is_exist(tags,l[<span class="number">0</span>]):</span><br><span class="line">                L[index][<span class="number">1</span>]+=<span class="number">1</span></span><br><span class="line">    L=prune(L,min_sup=min_sup)</span><br><span class="line">    L_save.append(L)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 由频繁k-1项集构造k项集</span></span><br><span class="line">        C=[]</span><br><span class="line">        <span class="keyword">for</span> l1 <span class="keyword">in</span> L:</span><br><span class="line">            <span class="keyword">for</span> l2 <span class="keyword">in</span> L:</span><br><span class="line">                list_merge=merge_list(l1[<span class="number">0</span>],l2[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> list_merge!=<span class="string">'nope'</span>:</span><br><span class="line">                    C.append([list_merge,<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># 统计频次，剪枝</span></span><br><span class="line">        L=C.copy()</span><br><span class="line">        <span class="keyword">for</span> index,l <span class="keyword">in</span> enumerate(L):</span><br><span class="line">            <span class="keyword">for</span> tags <span class="keyword">in</span> data:</span><br><span class="line">                <span class="keyword">if</span> is_exist(tags,l[<span class="number">0</span>]):</span><br><span class="line">                    L[index][<span class="number">1</span>]+=<span class="number">1</span></span><br><span class="line">        L=prune(L,L_save[<span class="number">-1</span>],min_sup,min_conf)</span><br><span class="line">        <span class="comment"># L=空集时结束循环</span></span><br><span class="line">        <span class="keyword">if</span> L==[]:</span><br><span class="line">            <span class="keyword">return</span> L_save</span><br><span class="line">        L_save.append(L)</span><br></pre></td></tr></table></figure>
+<h3 id="k-means算法聚类">K-means算法聚类</h3>
+<h4 id="算法介绍">算法介绍</h4>
+<p>K-means是一种无监督聚类算法，算法简单，容易实现，但是可能会产生空簇或收敛到局部最优。</p>
+<p>算法流程如下：</p>
+<ol type="1">
+<li>从样本中随机选取k个点作为初始质心</li>
+<li>计算每个样本到这k个中心的距离，将样本划分到距离它最近的质心所在的簇中</li>
+<li>重新计算每个簇的质心</li>
+<li>重复2和3直到质心不改变</li>
+</ol>
+<h4 id="数据映射">数据映射</h4>
+<p>使用K-means对于番剧进行据类分析，采用的数据为<code>[播放量，追番量，弹幕量]</code>这三种数据形成的三维坐标，但是这三个数据的值从几千到几亿不等，不能直接对其进行使用，对数据使用对数函数进行压缩：
+<span class="math display">\[
+[x,y,z]=[ln\ x,ln\ y,ln\ z]
+\]</span>
+在进行对数变换之后，为了保证每种数据范围一致以保证他们有相同的权重，将数据进行归一化：
+<span class="math display">\[
+x=\frac{x-min}{max-min}
+\]</span> 实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans_data</span><span class="params">(data)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(data):</span><br><span class="line">        data[index]=math.log(item)</span><br><span class="line">    Max=max(data)</span><br><span class="line">    Min=min(data)</span><br><span class="line">    <span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(data):</span><br><span class="line">        data[index]=(item-Min)/(Max-Min)</span><br></pre></td></tr></table></figure>
+<h4 id="k-means编程实现">K-means编程实现</h4>
+<p>在聚类时采用的距离度量为欧式距离，即： <span class="math display">\[
+distance=\sqrt{(x_{1}-y_{1})^2+...+(x_{i}-y_{i})^2+...+(x_{n}-y_{n})^2}
+\]</span> 实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distance</span><span class="params">(point1,point2)</span>:</span></span><br><span class="line">    dim=len(point1)</span><br><span class="line">    <span class="keyword">if</span> dim != len(point2):</span><br><span class="line">        print(<span class="string">'error! dim of point1 and point2 is not same'</span>)</span><br><span class="line">    dist=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(dim):</span><br><span class="line">        dist+=(point1[i]-point2[i])*(point1[i]-point2[i])</span><br><span class="line">    <span class="keyword">return</span> math.sqrt(dist)</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>随机选取k个点作为质心</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">shape=np.array(dire).shape</span><br><span class="line">    k_center_index=[]</span><br><span class="line">    k_center=[]</span><br><span class="line">    temp_k=k</span><br><span class="line">    <span class="keyword">while</span>(temp_k):</span><br><span class="line">        temp=random.randrange(<span class="number">0</span>,shape[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> temp <span class="keyword">not</span> <span class="keyword">in</span> k_center_index:</span><br><span class="line">            k_center_index.append(temp)</span><br><span class="line">            k_center.append(list(dire[temp]))</span><br><span class="line">            temp_k-=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>对所有的数据进行分簇</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_category</span><span class="params">(dire,k,k_center)</span>:</span></span><br><span class="line">    shape=np.array(dire).shape</span><br><span class="line">    k_categories=[[] <span class="keyword">for</span> col <span class="keyword">in</span> range(k)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        Min=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">            dist=distance(dire[i],k_center[j])</span><br><span class="line">            <span class="keyword">if</span> dist&lt;Min:</span><br><span class="line">                Min=dist</span><br><span class="line">                MinNum=j</span><br><span class="line">        k_categories[MinNum].append(i)</span><br><span class="line">    <span class="keyword">return</span> k_categories</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>计算新的中心并重复</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最大迭代次数</span></span><br><span class="line">    Maxloop=<span class="number">500</span></span><br><span class="line">    k_center_new=k_center</span><br><span class="line">    k_center=[]</span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(k_center!=k_center_new <span class="keyword">and</span> count&lt;Maxloop):</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">        k_center=copy.deepcopy(k_center_new)</span><br><span class="line">        k_categories=get_category(dire,k,k_center_new)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">                temp=<span class="number">0</span></span><br><span class="line">                <span class="keyword">for</span> w <span class="keyword">in</span> k_categories[j]:</span><br><span class="line">                    temp+=dire[w][i]</span><br><span class="line">                k_center_new[j][i]=temp/len(k_categories[j])</span><br></pre></td></tr></table></figure>
+<p>完整的k-means算法主体如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_means</span><span class="params">(dire,k)</span>:</span></span><br><span class="line">    <span class="comment"># 随机选取k个点作为中心</span></span><br><span class="line">    shape=np.array(dire).shape</span><br><span class="line">    k_center_index=[]</span><br><span class="line">    k_center=[]</span><br><span class="line">    temp_k=k</span><br><span class="line">    <span class="keyword">while</span>(temp_k):</span><br><span class="line">        temp=random.randrange(<span class="number">0</span>,shape[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> temp <span class="keyword">not</span> <span class="keyword">in</span> k_center_index:</span><br><span class="line">            k_center_index.append(temp)</span><br><span class="line">            k_center.append(list(dire[temp]))</span><br><span class="line">            temp_k-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 最大迭代次数</span></span><br><span class="line">    Maxloop=<span class="number">500</span></span><br><span class="line">    k_center_new=k_center</span><br><span class="line">    k_center=[]</span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(k_center!=k_center_new <span class="keyword">and</span> count&lt;Maxloop):</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">        k_center=copy.deepcopy(k_center_new)</span><br><span class="line">        k_categories=get_category(dire,k,k_center_new)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">                temp=<span class="number">0</span></span><br><span class="line">                <span class="keyword">for</span> w <span class="keyword">in</span> k_categories[j]:</span><br><span class="line">                    temp+=dire[w][i]</span><br><span class="line">                k_center_new[j][i]=temp/len(k_categories[j])</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'k_center'</span>:k_center,<span class="string">'k_categories'</span>:k_categories,<span class="string">'dire'</span>:dire,<span class="string">'k'</span>:k&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="算法结果及评估">算法结果及评估</h4>
+<p>为了更直观的看到分类结果，将分类的点在三维空间中绘制出，用不同的颜色表示不同的类别。</p>
+<blockquote>
+<p>绘图函数如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_k_means</span><span class="params">(k_result)</span>:</span></span><br><span class="line">    k,k_categories,dire=k_result[<span class="string">'k'</span>],k_result[<span class="string">'k_categories'</span>],k_result[<span class="string">'dire'</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        x,y,z=[],[],[]</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> k_categories[i]:</span><br><span class="line">            x.append(dire[index][<span class="number">0</span>])</span><br><span class="line">            y.append(dire[index][<span class="number">1</span>])</span><br><span class="line">            z.append(dire[index][<span class="number">2</span>])</span><br><span class="line">        fig = plt.gcf()</span><br><span class="line">        ax = fig.gca(projection=<span class="string">'3d'</span>)</span><br><span class="line">        ax.scatter(x,y,z)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>分类结果如下：</p>
+<table>
+<tr>
+<td>
+<center>
+k=2
+</center>
+</td>
+<td>
+<center>
+k=5
+</center>
+</td>
+<td>
+<center>
+k=10
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20201124160340.png" width='300'>
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20201124160804.png" width='300'>
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20201124160900.png" width='300'>
+</center>
+</td>
+</tr>
+</table>
+<p>为了更好的评估分类效果，选取DB指数（Davies-Bouldin
+Index）对分类效果进行评估，DB指数的及算法方法如下：</p>
+<ul>
+<li>设一共有<span
+class="math inline">\(k\)</span>个簇，每个簇的中心点为<span
+class="math inline">\(u_i\)</span>，簇中的点用<span
+class="math inline">\(x_{ij}\)</span>表示</li>
+<li>计算出每个簇的簇内平均距离<span
+class="math inline">\(\mu_i\)</span>，即簇内所有点到簇中心的平均距离</li>
+<li>计算出质心之间的距离<span
+class="math inline">\(d(u_i,u_j)\)</span></li>
+<li>计算DBI：</li>
+</ul>
+<p><span class="math display">\[
+DB=\frac1k\sum_{i=1}^k\mathop{max}\limits_{i\neq
+j}(\frac{\mu_i+\mu_j}{d(u_i,u_j)})
+\]</span></p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dbi</span><span class="params">(k_result)</span>:</span></span><br><span class="line">    k_center,k_categories,dire,k=k_result[<span class="string">'k_center'</span>],k_result[<span class="string">'k_categories'</span>],k_result[<span class="string">'dire'</span>],k_result[<span class="string">'k'</span>]</span><br><span class="line">    <span class="comment"># 簇内平均距离</span></span><br><span class="line">    k_ave_dist=[<span class="number">0</span> <span class="keyword">for</span> index <span class="keyword">in</span> range(k)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> k_categories[i]:</span><br><span class="line">            temp+=distance(k_center[i],dire[item])</span><br><span class="line">        k_ave_dist[i]=temp/len(k_categories[i])</span><br><span class="line">    <span class="comment"># 簇中心之间距离</span></span><br><span class="line">    k_center_dist=[[<span class="number">0</span> <span class="keyword">for</span> row <span class="keyword">in</span> range(k)] <span class="keyword">for</span> col <span class="keyword">in</span> range(k)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">            k_center_dist[i][j]=distance(k_center[i],k_center[j])</span><br><span class="line">    <span class="comment"># 计算dbi</span></span><br><span class="line">    DB=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        Max=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">            <span class="keyword">if</span> i !=j:</span><br><span class="line">                temp=(k_ave_dist[i]+k_ave_dist[j])/k_center_dist[i][j]</span><br><span class="line">                <span class="keyword">if</span> temp&gt;Max:</span><br><span class="line">                    Max=temp</span><br><span class="line">        DB+=Max</span><br><span class="line">    <span class="keyword">return</span> DB/k</span><br></pre></td></tr></table></figure>
+<p>计算k=2-10时分类评估结果如下：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">k</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">DBI</td>
+<td style="text-align: center;">0.7028</td>
+<td style="text-align: center;">0.7851</td>
+<td style="text-align: center;">0.8324</td>
+<td style="text-align: center;">0.9075</td>
+<td style="text-align: center;">0.9267</td>
+<td style="text-align: center;">0.9927</td>
+<td style="text-align: center;">0.9242</td>
+<td style="text-align: center;">0.9123</td>
+<td style="text-align: center;">0.8849</td>
+</tr>
+</tbody>
+</table>
+<center>
+<img src="https://download.kezhi.tech/img/20201124162738.png" height='300'>
+</center>
+<p>k从2-50变化时的分类评估结果如下：</p>
+<center>
+<img src="https://download.kezhi.tech/img/20201124163322.png" height='300'>
+</center>
+<p>从上述结果可以看出，在k=2或3时的分类效果最好，从使用的数据和k-means算法的特点进行分析，k-means算法采用欧氏距离进行分类，分出的区域为一个个球形。从三维图像上看，采用的数据并没有一个很明显的界限将数据分开，当k=2或3时，每个簇聚集在一个个球中，表现出较好的分类结果。当k继续增长时，由于数据周围孤立点的影响，使分类效果逐渐变差。</p>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\scrapy爬虫相关\" rel="bookmark">scrapy爬虫相关</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\创新港体育场馆自动预定\" rel="bookmark">创新港体育场馆自动预定</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\nlp工具nltk的安装及使用\" rel="bookmark">nlp工具nltk的安装及使用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（三）直方图均衡\" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（一）图像插值\" rel="bookmark">数字图像处理（一）图像插值(python)</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" title="爬取B站所有番剧数据并进行数据分析" rel="noopener" target="_blank">https://www.kezhi.tech/爬取B站所有番剧数据并进行数据分析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 大数据分析</a>
+              <a href="/tags/Aprior%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> Aprior算法</a>
+              <a href="/tags/K-means/" rel="tag"><i class="fa fa-tag"></i> K-means</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E9%BB%84%E8%9C%82%E7%BE%A4%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/" rel="prev" title="黄蜂群算法改进的多机器人区域覆盖">
+      <i class="fa fa-chevron-left"></i> 黄蜂群算法改进的多机器人区域覆盖
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/scrapy%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/" rel="next" title="scrapy爬虫相关">
+      scrapy爬虫相关 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据收集"><span class="nav-text">数据收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面分析"><span class="nav-text">页面分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫构建"><span class="nav-text">爬虫构建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据分析"><span class="nav-text">数据分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据整理及筛选"><span class="nav-text">数据整理及筛选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apriori算法进行频繁项集挖掘"><span class="nav-text">Apriori算法进行频繁项集挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联规则"><span class="nav-text">关联规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编程实现"><span class="nav-text">编程实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-means算法聚类"><span class="nav-text">K-means算法聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法介绍"><span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据映射"><span class="nav-text">数据映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means编程实现"><span class="nav-text">K-means编程实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法结果及评估"><span class="nav-text">算法结果及评估</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      
+      <!--音乐播放器-->
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">115k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:45</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收通知^_^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '5' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>

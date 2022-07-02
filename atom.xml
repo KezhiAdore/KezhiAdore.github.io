@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kezhi&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.kezhi.tech/"/>
+  <updated>2022-07-02T08:15:36.418Z</updated>
+  <id>https://www.kezhi.tech/</id>
+  
+  <author>
+    <name>Yu Zhao</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo本地写作环境配置</title>
+    <link href="https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-07-02T07:02:18.943Z</published>
+    <updated>2022-07-02T08:15:36.418Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;写作缘由&quot;&gt;写作缘由&lt;/h2&gt;
+&lt;p&gt;由于经常换电脑设备，每次更换设备时都需要重新配置Hexo环境，故对配置流程进行记录，以供后续使用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    
+      <category term="node.js" scheme="https://www.kezhi.tech/tags/node-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实数六大基本定理的相互证明</title>
+    <link href="https://www.kezhi.tech/%E5%AE%9E%E6%95%B0%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E7%9B%B8%E4%BA%92%E8%AF%81%E6%98%8E/"/>
+    <id>https://www.kezhi.tech/%E5%AE%9E%E6%95%B0%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E7%9B%B8%E4%BA%92%E8%AF%81%E6%98%8E/</id>
+    <published>2022-06-30T07:26:13.000Z</published>
+    <updated>2022-07-02T07:02:18.947Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;翟老师的&lt;泛函分析&gt;课程带我重新认识了实数。实数中有一些基本定理，但具体有几个存在着很多不同的观点。本文以六大定理为准，这六大定理分别为&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确界原理&lt;/li&gt;
+&lt;li&gt;单调有界原理&lt;/li&gt;
+&lt;li&gt;Cantor闭区间套定理&lt;/li&gt;
+&lt;li&gt;致密性定理（聚点定理）&lt;/li&gt;
+&lt;li&gt;Cauchy收敛准则&lt;/li&gt;
+&lt;li&gt;有限覆盖定理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文对这六大定理之间进行了循环证明，共计30个证明，如有不正之处，可在评论区指出，我会及时进行修正。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206301525923.jpg&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="实数" scheme="https://www.kezhi.tech/tags/%E5%AE%9E%E6%95%B0/"/>
+    
+      <category term="证明" scheme="https://www.kezhi.tech/tags/%E8%AF%81%E6%98%8E/"/>
+    
+      <category term="数学分析" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>修改操作系统安装时间</title>
+    <link href="https://www.kezhi.tech/%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/"/>
+    <id>https://www.kezhi.tech/%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/</id>
+    <published>2022-06-23T11:52:49.000Z</published>
+    <updated>2022-07-02T07:02:18.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于某些不可名状的原因，导致了有修改操作系统安装时间的需求，在此小记。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206231950445.png&quot; width=30%&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="操作系统" scheme="https://www.kezhi.tech/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="安装时间" scheme="https://www.kezhi.tech/tags/%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/"/>
+    
+      <category term="系统修改" scheme="https://www.kezhi.tech/tags/%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>影片《字节跳动》创作阐述</title>
+    <link href="https://www.kezhi.tech/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/"/>
+    <id>https://www.kezhi.tech/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/</id>
+    <published>2022-06-07T08:25:29.000Z</published>
+    <updated>2022-07-02T07:02:18.948Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;序&quot;&gt;序&lt;/h2&gt;
+&lt;p&gt;《字节跳动》创作于2022年5月下旬至6月上旬，历时半个月。是截至目前为止本人参与的短片拍摄最高水平。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206071619140.jpg&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="影视创作" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
+    
+    
+      <category term="创作" scheme="https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
+    
+      <category term="影视创作" scheme="https://www.kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
+    
+      <category term="微电影" scheme="https://www.kezhi.tech/tags/%E5%BE%AE%E7%94%B5%E5%BD%B1/"/>
+    
+      <category term="协作" scheme="https://www.kezhi.tech/tags/%E5%8D%8F%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于影视创作</title>
+    <link href="https://www.kezhi.tech/%E5%85%B3%E4%BA%8E%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
+    <id>https://www.kezhi.tech/%E5%85%B3%E4%BA%8E%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</id>
+    <published>2022-05-25T09:25:13.000Z</published>
+    <updated>2022-07-02T07:02:18.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;
+            &lt;p&gt;电影是经由极度刻意而达到的自然&lt;/p&gt;
+
+          &lt;/blockquote&gt;
+&lt;h2 id=&quot;影视创作的基本流程&quot;&gt;影视创作的基本流程&lt;/h2&gt;
+&lt;p&gt;&lt;img
+src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="影视创作" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
+    
+    
+      <category term="拍摄" scheme="https://www.kezhi.tech/tags/%E6%8B%8D%E6%91%84/"/>
+    
+      <category term="电影" scheme="https://www.kezhi.tech/tags/%E7%94%B5%E5%BD%B1/"/>
+    
+      <category term="创作" scheme="https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
+    
+      <category term="感悟" scheme="https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网站收藏</title>
+    <link href="https://www.kezhi.tech/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/"/>
+    <id>https://www.kezhi.tech/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</id>
+    <published>2022-05-16T11:54:58.000Z</published>
+    <updated>2022-07-02T07:02:18.952Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img
+src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="码来用" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%A0%81%E6%9D%A5%E7%94%A8/"/>
+    
+    
+      <category term="软件" scheme="https://www.kezhi.tech/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="网站" scheme="https://www.kezhi.tech/tags/%E7%BD%91%E7%AB%99/"/>
+    
+      <category term="收藏" scheme="https://www.kezhi.tech/tags/%E6%94%B6%E8%97%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>来选头像</title>
+    <link href="https://www.kezhi.tech/%E6%9D%A5%E9%80%89%E5%A4%B4%E5%83%8F/"/>
+    <id>https://www.kezhi.tech/%E6%9D%A5%E9%80%89%E5%A4%B4%E5%83%8F/</id>
+    <published>2022-05-11T07:52:09.000Z</published>
+    <updated>2022-07-02T07:02:18.950Z</updated>
+    
+    <summary type="html">
+    
+      &lt;iframe src=&quot;//www.kezhi.tech/avatar/&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;
+&lt;/iframe&gt;
+    
+    </summary>
+    
+    
+      <category term="日常生活" scheme="https://www.kezhi.tech/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>于小鸡历险记（一）</title>
+    <link href="https://www.kezhi.tech/%E4%BA%8E%E5%B0%8F%E9%B8%A1%E5%8E%86%E9%99%A9%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://www.kezhi.tech/%E4%BA%8E%E5%B0%8F%E9%B8%A1%E5%8E%86%E9%99%A9%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</id>
+    <published>2022-05-10T15:09:25.000Z</published>
+    <updated>2022-07-02T07:02:18.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引子&quot;&gt;引子&lt;/h2&gt;
+&lt;p&gt;有时候，生活会带给人一些惊喜。或许是一次翘课偶然碰到的晚霞，亦或是一觉醒来突然开放的花苞。在这个不断向前的工业化时代里，我们每个人都身不由己，裹挟其中。这在我上了研究生，进一步了解这个世界之后，最深的感触。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202205102220466.jpg&quot; width=30%&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日常生活" scheme="https://www.kezhi.tech/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git commit message 规范</title>
+    <link href="https://www.kezhi.tech/Git-commit-message-%E8%A7%84%E8%8C%83/"/>
+    <id>https://www.kezhi.tech/Git-commit-message-%E8%A7%84%E8%8C%83/</id>
+    <published>2022-04-07T14:05:01.000Z</published>
+    <updated>2022-07-02T07:02:18.942Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git-commit-message-规范&quot;&gt;Git commit message 规范&lt;/h2&gt;
+&lt;h3 id=&quot;commit-message-格式&quot;&gt;commit message 格式&lt;/h3&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="git" scheme="https://www.kezhi.tech/tags/git/"/>
+    
+      <category term="语法规范" scheme="https://www.kezhi.tech/tags/%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python高性能编程</title>
+    <link href="https://www.kezhi.tech/Python%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/"/>
+    <id>https://www.kezhi.tech/Python%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/</id>
+    <published>2022-04-07T14:03:09.000Z</published>
+    <updated>2022-07-02T07:02:18.944Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python-高性能编程&quot;&gt;Python 高性能编程&lt;/h1&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    
+      <category term="Cython" scheme="https://www.kezhi.tech/tags/Cython/"/>
+    
+      <category term="numpy" scheme="https://www.kezhi.tech/tags/numpy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NexT标签云配置</title>
+    <link href="https://www.kezhi.tech/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/"/>
+    <id>https://www.kezhi.tech/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-03-22T09:11:28.000Z</published>
+    <updated>2022-07-02T07:02:18.944Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文引自&lt;a
+href=&quot;https://alex-mcavoy.github.io/hexo/7be258c0.html&quot;&gt;Next 7.0+
+TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20220322172925.jpg&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    
+      <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>创新港体育场馆自动预定</title>
+    <link href="https://www.kezhi.tech/%E5%88%9B%E6%96%B0%E6%B8%AF%E4%BD%93%E8%82%B2%E5%9C%BA%E9%A6%86%E8%87%AA%E5%8A%A8%E9%A2%84%E5%AE%9A/"/>
+    <id>https://www.kezhi.tech/%E5%88%9B%E6%96%B0%E6%B8%AF%E4%BD%93%E8%82%B2%E5%9C%BA%E9%A6%86%E8%87%AA%E5%8A%A8%E9%A2%84%E5%AE%9A/</id>
+    <published>2022-03-21T13:05:38.000Z</published>
+    <updated>2022-07-02T07:02:18.947Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;项目由来&quot;&gt;项目由来&lt;/h2&gt;
+&lt;p&gt;创新港羽毛球场馆每天的预定需求较大。在线预定系统每天早上 8:40
+左右开放，并且开放时间不定。这些因素给手动预定场馆带来了很大的麻烦，因此考虑由脚本自动化实现场馆预定过程。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202203212104191.jpg&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="Web" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/Web/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="自动化" scheme="https://www.kezhi.tech/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nlp工具nltk的安装及使用</title>
+    <link href="https://www.kezhi.tech/nlp%E5%B7%A5%E5%85%B7nltk%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
+    <id>https://www.kezhi.tech/nlp%E5%B7%A5%E5%85%B7nltk%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</id>
+    <published>2021-10-21T13:24:53.000Z</published>
+    <updated>2022-07-02T07:02:18.945Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;nltk简介&quot;&gt;nltk简介&lt;/h2&gt;
+&lt;p&gt;NLTK是构建Python程序以使用人类语言数据的领先平台。它为50多种语料库和词汇资源（如WordNet）提供了易于使用的界面，还提供了一套用于分类，标记化，词干化，标记，解析和语义推理的文本处理库。NLTK是Python上著名的⾃然语⾔处理库
+⾃带语料库，具有词性分类库 ⾃带分类，分词，等等功能。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="nlp" scheme="https://www.kezhi.tech/tags/nlp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>社会心理学（一）</title>
+    <link href="https://www.kezhi.tech/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://www.kezhi.tech/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/</id>
+    <published>2021-06-08T13:37:03.000Z</published>
+    <updated>2022-07-02T07:02:18.952Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;社会中的自我&quot;&gt;社会中的自我&lt;/h2&gt;
+&lt;h3 id=&quot;自我概念我是谁&quot;&gt;自我概念：我是谁&lt;/h3&gt;
+    
+    </summary>
+    
+    
+      <category term="我爱读书" scheme="https://www.kezhi.tech/categories/%E6%88%91%E7%88%B1%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="读书笔记" scheme="https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="心理学" scheme="https://www.kezhi.tech/tags/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>摘抄</title>
+    <link href="https://www.kezhi.tech/%E6%91%98%E6%8A%84/"/>
+    <id>https://www.kezhi.tech/%E6%91%98%E6%8A%84/</id>
+    <published>2021-06-08T11:09:06.000Z</published>
+    <updated>2022-07-02T07:02:18.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;section&quot;&gt;2021.04&lt;/h2&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;
+            &lt;p&gt;矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;-- 《银河帝国2：基地与帝国》&lt;/b&gt;&lt;/p&gt;
+
+          &lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="我爱读书" scheme="https://www.kezhi.tech/categories/%E6%88%91%E7%88%B1%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+      <category term="读书笔记" scheme="https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="摘抄" scheme="https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue学习笔记</title>
+    <link href="https://www.kezhi.tech/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://www.kezhi.tech/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-04-13T03:32:27.000Z</published>
+    <updated>2022-07-02T07:02:18.944Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;vue&quot;&gt;Vue&lt;/h2&gt;
+&lt;h3 id=&quot;与flask一起使用时的注意事项&quot;&gt;与Flask一起使用时的注意事项&lt;/h3&gt;
+&lt;p&gt;Vue与Flask一起使用时会出现冲突，更改配置即可解决。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flask&lt;/li&gt;
+&lt;/ul&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="Web" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/Web/"/>
+    
+    
+      <category term="Vue" scheme="https://www.kezhi.tech/tags/Vue/"/>
+    
+      <category term="前端框架" scheme="https://www.kezhi.tech/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scrapy爬虫相关</title>
+    <link href="https://www.kezhi.tech/scrapy%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/"/>
+    <id>https://www.kezhi.tech/scrapy%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/</id>
+    <published>2020-10-24T15:10:17.000Z</published>
+    <updated>2022-07-02T07:02:18.945Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;请求伪装&quot;&gt;请求伪装&lt;/h2&gt;
+&lt;p&gt;在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20201024223544.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="scrapy" scheme="https://www.kezhi.tech/tags/scrapy/"/>
+    
+      <category term="爬虫" scheme="https://www.kezhi.tech/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>爬取B站所有番剧数据并进行数据分析</title>
+    <link href="https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    <id>https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</id>
+    <published>2020-10-14T16:24:39.000Z</published>
+    <updated>2022-07-02T07:02:18.951Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的&lt;span class=&quot;label primary&quot;&gt;播放量&lt;/span&gt;，&lt;span class=&quot;label success&quot;&gt;追番量&lt;/span&gt;，&lt;span class=&quot;label info&quot;&gt;弹幕数量&lt;/span&gt;等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。&lt;/p&gt;
+&lt;p&gt;GitHub地址：&lt;a
+href=&quot;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;码云地址：&lt;a
+href=&quot;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="数据分析" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="爬虫" scheme="https://www.kezhi.tech/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="大数据分析" scheme="https://www.kezhi.tech/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+      <category term="Aprior算法" scheme="https://www.kezhi.tech/tags/Aprior%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="K-means" scheme="https://www.kezhi.tech/tags/K-means/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黄蜂群算法改进的多机器人区域覆盖</title>
+    <link href="https://www.kezhi.tech/%E9%BB%84%E8%9C%82%E7%BE%A4%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/"/>
+    <id>https://www.kezhi.tech/%E9%BB%84%E8%9C%82%E7%BE%A4%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/</id>
+    <published>2020-06-22T17:30:24.000Z</published>
+    <updated>2022-07-02T07:02:18.953Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;GitHub地址：&lt;a
+href=&quot;https://github.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://github.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;码云地址：&lt;a
+href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一问题提出&quot;&gt;一、问题提出&lt;/h2&gt;
+&lt;h3 id=&quot;背景&quot;&gt;1. 背景&lt;/h3&gt;
+&lt;p&gt;机器人在工业、国防和科学技术中的应用日益广泛，
+它能够在枯燥和危险的复杂非结构化环境下工作。使用机器人大大提高了人们的工作效率，
+改变了人们的生活方式， 带来了巨大的经济和社会效益，
+有力地推动了有关学科和技术领域的发展。&lt;/p&gt;
+&lt;p&gt;区域覆盖是指携带有一定探测范围的传感器如激光、声纳等的机器人探索访问整个区域，
+并完成相应任务的过程。区域覆盖是自主移动机器人的一项基本任务。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="科学研究" scheme="https://www.kezhi.tech/categories/%E7%A7%91%E5%AD%A6%E7%A0%94%E7%A9%B6/"/>
+    
+    
+      <category term="智能计算" scheme="https://www.kezhi.tech/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="多机器人" scheme="https://www.kezhi.tech/tags/%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    
+      <category term="覆盖问题" scheme="https://www.kezhi.tech/tags/%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="算法改进" scheme="https://www.kezhi.tech/tags/%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（六）频域滤波器</title>
+    <link href="https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%85%AD%EF%BC%89%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    <id>https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%85%AD%EF%BC%89%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/</id>
+    <published>2020-05-08T13:17:21.000Z</published>
+    <updated>2022-07-02T07:02:18.950Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;频域滤波器简介&quot;&gt;频域滤波器简介&lt;/h2&gt;
+&lt;p&gt;频域滤波器与空域滤波器相对，空域滤波器是空间卷积块与空间图像做卷积运算，而频域滤波是在将图像进行了离散傅里叶变换之后在频域上与滤波器做乘法，之后再进行傅里叶反变换得到滤波之后的图像。&lt;/p&gt;
+&lt;p&gt;使用频域滤波器对图像进行滤波的基本步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对图像进行DFT变换得到原图像的频域图像&lt;/li&gt;
+&lt;li&gt;频域图像与频域滤波器相乘得到新的频域图像&lt;/li&gt;
+&lt;li&gt;对新的频域图像进行IDFT变换到空域得到新图像。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="滤波器" scheme="https://www.kezhi.tech/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+      <category term="频域" scheme="https://www.kezhi.tech/tags/%E9%A2%91%E5%9F%9F/"/>
+    
+  </entry>
+  
+</feed>

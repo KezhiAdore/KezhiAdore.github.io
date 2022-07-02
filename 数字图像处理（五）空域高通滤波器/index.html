@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="高通滤波器经常用来增强图像和提取图像的边缘信息，在日常的图像处理和图像识别中都有着很广泛的应用。这里要说明的高通滤波器主要有如下几种：非锐化掩膜，索贝尔算子，拉普拉斯算子，canny算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像处理（五）空域高通滤波器">
+<meta property="og:url" content="https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/index.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="高通滤波器经常用来增强图像和提取图像的边缘信息，在日常的图像处理和图像识别中都有着很广泛的应用。这里要说明的高通滤波器主要有如下几种：非锐化掩膜，索贝尔算子，拉普拉斯算子，canny算法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141032.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141251.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141327.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141032.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330143516.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330143622.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330143708.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330144324.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330144413.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327172117.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327172117.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141032.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330145641.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330145657.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330144413.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330150103.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330141032.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330151754.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330151852.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200330151924.png">
+<meta property="article:published_time" content="2020-03-30T07:27:33.000Z">
+<meta property="article:modified_time" content="2022-07-02T07:02:18.950Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="数字图像">
+<meta property="article:tag" content="空域滤波器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/20200330141032.bmp">
+
+<link rel="canonical" href="https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>数字图像处理（五）空域高通滤波器 | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-steam">
+
+    <a href="/steamgames/" rel="section"><i class="fa fa-fw fa-steam"></i>steam</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          数字图像处理（五）空域高通滤波器
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-30 15:27:33" itemprop="dateCreated datePublished" datetime="2020-03-30T15:27:33+08:00">2020-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-02 15:02:18" itemprop="dateModified" datetime="2022-07-02T15:02:18+08:00">2022-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">理论学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数字图像处理</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>高通滤波器经常用来增强图像和提取图像的边缘信息，在日常的图像处理和图像识别中都有着很广泛的应用。这里要说明的高通滤波器主要有如下几种：非锐化掩膜，索贝尔算子，拉普拉斯算子，canny算法。</p>
+<a id="more"></a>
+<h2 id="非锐化掩膜">非锐化掩膜</h2>
+<p>该算法经常用于图像的增强，在图像边缘的提取上用的不多。实现的方法如下：</p>
+<ul>
+<li>对于原始图像<span
+class="math inline">\(f(x,y)\)</span>，对其进行高斯模糊得到平滑之后的图像<span
+class="math inline">\(\overline{f(x,y)}\)</span></li>
+<li>原始图像和平滑后的图像做差得到掩膜<span
+class="math inline">\(g_{mask}(x,y)=f(x,y)-\overline{f(x,y)}\)</span></li>
+<li>将原始图像与k倍的掩膜相叠加得到增强后的图像<span
+class="math inline">\(g(x,y)=f(x,y)+k*g_{mask}(x,y)\)</span></li>
+<li>一般将k取值为1，为图像增强，k大于1则为高提升图像。</li>
+</ul>
+<p>该算法得到的图像处理效果如下：</p>
+<blockquote>
+<p>从左致右依次为：原始图像，得到的掩膜（规整到0-255），增强后的图像</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141032.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141251.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141327.bmp">
+</center>
+</td>
+</tr>
+</table>
+<p>由上图的结果可以看出，掩膜图像在边缘处的亮度很高，在其余地方的亮度较低，在和原始图像进行叠加之后，这里采用的取整方式是将叠加后图像进行整体归一化之后再乘255之后取整。因为原图像边缘在和掩膜叠加之后，图像边缘的亮度很大，在进行归一化之后原图像中的亮部有一定程度的变暗。如果采用另一种取整方式即：如果叠加超过255则将其视为255，小于0则统一视为0。可以很有效的解决这个问题，但图像的边缘就没有上一方法这么明显。具体使用哪一种方法根据实际情况进行选择。</p>
+<h2 id="索贝尔算子">索贝尔算子</h2>
+<p>sobel算子在图像边缘的提取中经常用到，它采用的是利用图像的一阶导数来进行边缘的提取。即<span
+class="math inline">\(\nabla f\)</span></p>
+<p>我们知道，二元函数的梯度由x方向和y方向两个方向的方向导数构成，那么sobel算子也一样，有两个，分别为x方向和y方向，两个算子分别如下：
+<span class="math display">\[
+\begin{bmatrix}-1&amp;0&amp;1\\-1&amp;0&amp;2\\-1&amp;0&amp;1\end{bmatrix}
+~~~~~~~~~~\begin{bmatrix}-1&amp;-2&amp;-1\\0&amp;0&amp;0\\1&amp;2&amp;1\end{bmatrix}
+\]</span></p>
+<ul>
+<li>将图像分别与上述两个算子相卷积得到x方向和y方向的边缘<span
+class="math inline">\(G_x\)</span>和<span
+class="math inline">\(G_y\)</span></li>
+<li>通过<span class="math inline">\(G_x\)</span>和<span
+class="math inline">\(G_y\)</span>即可以算出图像的一阶导<span
+class="math inline">\(G=\sqrt{G_x^2+G_y^2}\)</span>，有时为了快速计算也会取<span
+class="math inline">\(G=|G_x|+|G_y|\)</span>或<span
+class="math inline">\(G=max\{|G_x|,|G_y|\}\)</span></li>
+<li>将G规整到0-255即可得到图像的sobel算子边缘</li>
+</ul>
+<blockquote>
+<p>依次为：原图像，x方向边缘，y方向边缘，sobel边缘</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141032.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330143516.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330143622.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330143708.bmp">
+</center>
+</td>
+</tr>
+</table>
+<p>sobel算子在提取图像的明显边缘的表现很好，在提取图像的细节边缘方面也有这很好的表现，用领一幅图的处理结果来说明这一点</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330144324.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330144413.bmp">
+</center>
+</td>
+</tr>
+</table>
+<blockquote>
+<p>可以看出，即使是烟囱上的细小边缘轮廓，sobel算子提取出来的边缘有着很好的体现。</p>
+</blockquote>
+<h2 id="拉普拉斯算子">拉普拉斯算子</h2>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp">
+</center>
+</td>
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >
+</center>
+</td>
+</center>
+</td>
+</tr>
+</table>
+<p><span class="math display">\[
+[f(x+1)-f(x)]-[f(x)-f(x-1)]=f(x+1)+f(x-1)-2f(x)
+\]</span> 由此导出拉普拉斯算子为： <span class="math display">\[
+\begin{bmatrix}0&amp;1&amp;0\\1&amp;-4&amp;1\\0&amp;1&amp;0\end{bmatrix}
+\]</span> 有时也在其中加入对角线方向的二阶导，则算子为： <span
+class="math display">\[
+\begin{bmatrix}1&amp;1&amp;1\\1&amp;-8&amp;1\\1&amp;1&amp;1\end{bmatrix}
+\]</span> 在实践中也经常使用如下这两个算子： <span
+class="math display">\[
+\begin{bmatrix}0&amp;-1&amp;0\\-1&amp;4&amp;-1\\0&amp;-1&amp;0\end{bmatrix}
+\begin{bmatrix}-1&amp;-1&amp;-1\\-1&amp;8&amp;-1\\-1&amp;-1&amp;-1\end{bmatrix}
+\]</span></p>
+<blockquote>
+<p>假设提取出的图像边缘为<span
+class="math inline">\(L(x,y)\)</span>，那么图像增强的算法为<span
+class="math inline">\(g(x,y)=f(x,y)+c*L(x,y)\)</span></p>
+<p>如果使用最上方两个算子提取出的边缘，则c=-1，使用下面的两个算子，c=1</p>
+</blockquote>
+<p>使用拉普拉斯算子提取出的图像边缘信息如下：</p>
+<blockquote>
+<p>依次为：原图像，无对角线的laplace边缘，有对角线的laplace边缘</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141032.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330145641.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330145657.bmp">
+</center>
+</td>
+</tr>
+</table>
+<p>拉普拉斯算子提取出的图像边缘在每个边缘处会有两条边缘线，这是由其二阶导的性质所决定的。相较于sobel算子提取出的边缘结果，laplace边缘更加细致，得到了“边缘的边缘”。由下图的对比可以更加明显的看出：</p>
+<blockquote>
+<p>左边为sobel算子提取结果，右边为laplace</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330144413.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330150103.bmp">
+</center>
+</td>
+</tr>
+</table>
+<p>对于这种稍微复杂的图像来说，laplace算子提取的边缘过于细致，反而导致很多地方难以看清，这给肉眼的分辨造成了一些困难。但在一些图像识别领域，例如根据卫星图片去识别地面的车辆，很多时候地面的车辆就是一个个小的色块，用laplace算子就可以很好的勾勒出这些车辆的边缘轮廓以及内部的一些细节。而sobel算子对于内部的细节就显得有些无能为力。同时
+，“边缘的边缘”这项很好的性质也使得laplace算子提取的边缘可以很好的用于图像增强。</p>
+<h2 id="canny算法">canny算法</h2>
+<p>canny算法是在sobel边缘提取上优化而来。sobel算子不论边缘强弱，都会在最终的图像中有所表征，这就导致有很多无效的边缘被提取出来显示在结果图像上。canny算法的基本思路就是对这些边缘信息进行筛选，只留下最可能是边缘的像素点。实现方法如下：</p>
+<ul>
+<li>和sobel一样，首先算出<span class="math inline">\(G_x\)</span>和<span
+class="math inline">\(G_y\)</span>；</li>
+<li>根据<span class="math inline">\(G_x\)</span>和<span
+class="math inline">\(G_y\)</span>算出每个像素点的<span
+class="math inline">\(weight=\sqrt{G_x^2+G_y^2}\)</span>以及<span
+class="math inline">\(angle=atan\frac{G_y}{G_x}\)</span></li>
+<li>将<span class="math inline">\(angle\)</span>离散化到<span
+class="math inline">\(45^o\)</span>的倍数角度。</li>
+<li>对于图像中的每个像素点<span
+class="math inline">\((x,y)\)</span>，将其权重<span
+class="math inline">\(weight(x,y)\)</span>与其<span
+class="math inline">\(angle(x,y)\)</span>方向和<span
+class="math inline">\(-angle(x,y)\)</span>方向的两个像素点的<span
+class="math inline">\(weight\)</span>进行比较，如果该点的<span
+class="math inline">\(weight\)</span>不是最大的一个，则将其置为0</li>
+<li>双阈值检测：设置边缘的亮度上阈值和下阈值，对图像的边缘进行再一次的筛选，最后将边缘信息规整到0-255,。这里的阈值可以自行手动设置。</li>
+</ul>
+<blockquote>
+<p>依次为：原图像，无双阈值检测，下阈值为150，下阈值为200</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330141032.bmp">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330151754.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330151852.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200330151924.png">
+</center>
+</td>
+</tr>
+</table>
+<h2 id="附录">附录</h2>
+<h3 id="参考文献">参考文献</h3>
+<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael
+C.Gonzalez），（美）理查德·E·伍兹（Richard E.
+Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
+<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16
+[2020-03-23].https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</p>
+<p>[4]顽皮的石头7788121.
+图像边缘检测：Canny算子、Prewitt算子和sobel算子[G/OL].简书 2018-11-06
+[2020-03-26]. https://www.jianshu.com/p/bed4ffe996a1</p>
+<h3 id="源代码">源代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_zeros</span><span class="params">(img,edge)</span>:</span>    <span class="comment">#图像边缘补零</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+<span class="number">2</span>*edge,shape[<span class="number">1</span>]+<span class="number">2</span>*edge))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+edge][j+edge]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> temp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=add_zeros(img,n//<span class="number">2</span>)</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>],<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j][<span class="number">0</span>]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unsharp_mask</span><span class="params">(img,n,is_mask=<span class="number">0</span>)</span>:</span>        <span class="comment">#用n*n高斯模糊后非锐化掩膜,is_mask为0返回叠加后图像，为1返回掩膜</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    new_img=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>],<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            new_img[i][j][<span class="number">0</span>]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    mask=new_img-gauss_filter(img,n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">or</span> j==<span class="number">0</span> <span class="keyword">or</span> i==shape[<span class="number">0</span>]<span class="number">-1</span> <span class="keyword">or</span> j==shape[<span class="number">1</span>]<span class="number">-1</span>:</span><br><span class="line">                mask[i][j][<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">    result=new_img+mask</span><br><span class="line">    result=result-np.min(result)</span><br><span class="line">    result=result/np.max(result)*<span class="number">255</span></span><br><span class="line">    mask=mask-np.min(mask)</span><br><span class="line">    mask=mask/np.max(mask)*<span class="number">255</span></span><br><span class="line">    <span class="keyword">if</span> is_mask:</span><br><span class="line">        <span class="keyword">return</span> mask.astype(np.uint8)    <span class="comment">#返回掩膜</span></span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)  <span class="comment">#返回结果</span></span><br><span class="line"></span><br><span class="line">sobelx=[[<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>],[<span class="number">-2</span>,<span class="number">0</span>,<span class="number">2</span>],[<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line">sobely=[[<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-1</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>]]</span><br><span class="line">laplace4=[[<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>],[<span class="number">-1</span>,<span class="number">4</span>,<span class="number">-1</span>],[<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>]]</span><br><span class="line">laplace8=[[<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>],[<span class="number">-1</span>,<span class="number">8</span>,<span class="number">-1</span>],[<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>]]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">filt_3</span><span class="params">(img,filt)</span>:</span>          <span class="comment">#任意3*3滤波器(图像,算子)</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=add_zeros(img,<span class="number">1</span>)</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>],<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j][<span class="number">0</span>]=tmp</span><br><span class="line">    <span class="comment">#result=np.abs(result)     #分别输出x方向和y方向的边缘信息</span></span><br><span class="line">    <span class="comment">#result=result/np.max(result)*255</span></span><br><span class="line">    <span class="comment">#cv.imwrite("tmp.bmp",result.astype(np.uint8))</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">laplace_edge</span><span class="params">(img,filt)</span>:</span> <span class="comment">#规整后的拉普拉斯算子边缘</span></span><br><span class="line">    tmp=filt_3(img,filt)</span><br><span class="line">    tmp=tmp-np.min(tmp)</span><br><span class="line">    shape=tmp.shape</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range (shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">or</span> j==<span class="number">0</span> <span class="keyword">or</span> i==shape[<span class="number">0</span>]<span class="number">-1</span> <span class="keyword">or</span> j==shape[<span class="number">1</span>]<span class="number">-1</span>:</span><br><span class="line">                tmp[i][j][<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">    tmp=tmp/np.max(tmp)*<span class="number">255</span></span><br><span class="line">    <span class="keyword">return</span> tmp.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">laplace</span><span class="params">(img,filt)</span>:</span>  <span class="comment">#原图像与拉普拉斯边缘叠加的结果图像</span></span><br><span class="line">    tmp=filt_3(img,filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            result[i][j]=tmp[i][j][<span class="number">0</span>]+img[i][j][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">or</span> j==<span class="number">0</span> <span class="keyword">or</span> i==shape[<span class="number">0</span>]<span class="number">-1</span> <span class="keyword">or</span> j==shape[<span class="number">1</span>]<span class="number">-1</span>:</span><br><span class="line">                result[i][j]=<span class="number">0</span></span><br><span class="line">    result-=np.min(result)</span><br><span class="line">    result=result/np.max(result)*<span class="number">255</span></span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sobel</span><span class="params">(img)</span>:</span>     <span class="comment">#提取图像的sobel边缘</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    sobx=filt_3(img,sobelx)</span><br><span class="line">    soby=filt_3(img,sobely)</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">or</span> j==<span class="number">0</span> <span class="keyword">or</span> i==shape[<span class="number">0</span>]<span class="number">-1</span> <span class="keyword">or</span> j==shape[<span class="number">1</span>]<span class="number">-1</span>:</span><br><span class="line">                result[i][j]=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result[i][j]=math.sqrt(sobx[i][j][<span class="number">0</span>]**<span class="number">2</span>+soby[i][j][<span class="number">0</span>]**<span class="number">2</span>)</span><br><span class="line">    result=result/np.max(result)*<span class="number">255</span></span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">canny</span><span class="params">(img,n=<span class="number">3</span>)</span>:</span>     <span class="comment">#使用canny算法提取图像边缘（使用n*n的高斯滤波器进行模糊操作）</span></span><br><span class="line">    de=[[<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>],[<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>]]</span><br><span class="line">    shape=img.shape</span><br><span class="line">    tmp=gauss_filter(img,n)</span><br><span class="line">    sobx=filt_3(tmp,sobelx)</span><br><span class="line">    soby=filt_3(tmp,sobely)</span><br><span class="line">    weight,angle,result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>])),np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>])),np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    angle=angle.astype(np.int)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            weight[i][j]=math.sqrt(sobx[i][j][<span class="number">0</span>]**<span class="number">2</span>+soby[i][j][<span class="number">0</span>]**<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> sobx[i][j][<span class="number">0</span>]:</span><br><span class="line">                angle[i][j]=round((math.atan(soby[i][j][<span class="number">0</span>]/sobx[i][j][<span class="number">0</span>])/(math.pi/<span class="number">4</span>)<span class="number">-0.5</span>))%<span class="number">4</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]<span class="number">-2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]<span class="number">-2</span>):</span><br><span class="line">            tmp_i,tmp_j=i+<span class="number">1</span>,j+<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> weight[tmp_i][tmp_j]&lt;=weight[tmp_i+de[angle[tmp_i][tmp_j]][<span class="number">0</span>]][tmp_j+de[angle[tmp_i][tmp_j]][<span class="number">1</span>]] <span class="keyword">and</span> weight[tmp_i][tmp_j]&lt;=weight[tmp_i+de[angle[tmp_i][tmp_j]][<span class="number">2</span>]][tmp_j+de[angle[tmp_i][tmp_j]][<span class="number">3</span>]]:</span><br><span class="line">                result[tmp_i][tmp_j]=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result[tmp_i][tmp_j]=weight[tmp_i][tmp_j]</span><br><span class="line">    result=result/np.max(result)*<span class="number">255</span></span><br><span class="line">    mean=np.mean(img)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> result[i][j]&lt;<span class="number">100</span>:</span><br><span class="line">                result[i][j]=<span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test3_corrupt.pgm"</span>,<span class="string">"test4.tif"</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    cv.imwrite(i+<span class="string">"_mask.bmp"</span>,unsharp_mask(img,<span class="number">3</span>,<span class="number">1</span>))</span><br><span class="line">    cv.imwrite(i+<span class="string">"_unsharp_mask.bmp"</span>,unsharp_mask(img,<span class="number">3</span>))</span><br><span class="line">    cv.imwrite(i+<span class="string">"_sobel.bmp"</span>,sobel(img))</span><br><span class="line">    cv.imwrite(i+<span class="string">"_canny.bmp"</span>,canny(img,<span class="number">3</span>))</span><br><span class="line">    cv.imwrite(i+<span class="string">"laplace4_edge.bmp"</span>,laplace_edge(img,laplace4))</span><br><span class="line">    cv.imwrite(i+<span class="string">"laplace8_edge.bmp"</span>,laplace_edge(img,laplace8))</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（四）空域低通滤波器\" rel="bookmark">数字图像处理（四）空域低通滤波器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（三）直方图均衡\" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（一）图像插值\" rel="bookmark">数字图像处理（一）图像插值(python)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（二）图像配准\" rel="bookmark">数字图像处理（二）图像配准</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\数字图像处理（六）频域滤波器\" rel="bookmark">数字图像处理（六）频域滤波器</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E7%A9%BA%E5%9F%9F%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/" title="数字图像处理（五）空域高通滤波器" rel="noopener" target="_blank">https://www.kezhi.tech/数字图像处理（五）空域高通滤波器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+              <a href="/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/" rel="tag"><i class="fa fa-tag"></i> 数字图像</a>
+              <a href="/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 空域滤波器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%9B%9B%EF%BC%89%E7%A9%BA%E5%9F%9F%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/" rel="prev" title="数字图像处理（四）空域低通滤波器">
+      <i class="fa fa-chevron-left"></i> 数字图像处理（四）空域低通滤波器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="Git常用命令">
+      Git常用命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#非锐化掩膜"><span class="nav-text">非锐化掩膜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索贝尔算子"><span class="nav-text">索贝尔算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉普拉斯算子"><span class="nav-text">拉普拉斯算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#canny算法"><span class="nav-text">canny算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-text">源代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      
+      <!--音乐播放器-->
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">115k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:45</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收通知^_^",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '5' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
