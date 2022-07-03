@@ -1,50 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git commit message 规范</title>
-    <url>/Git-commit-message-%E8%A7%84%E8%8C%83/</url>
-    <content><![CDATA[<h2 id="git-commit-message-规范">Git commit message 规范</h2>
-<h3 id="commit-message-格式">commit message 格式</h3>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br></pre></td></tr></table></figure>
+    <title>BP神经网络</title>
+    <url>/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h2 id="bp神经网络概述">BP神经网络概述</h2>
+<p>BP神经网络是神经网络中最基础也是应用最多的神经网络，它由三层节点组成，分别为输入层，隐含层和输出层。BP神经网络的实现比较简单，主要分为正向传递输出和反向传递误差两部分。</p>
+<p>神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert
+Hecht-Nielsen）这为神经网络的应用提供了理论依据。</p>
 <a id="more"></a>
-<h3 id="type">type</h3>
-<p>用于说明git commit的类别，只允许使用下面的标识。</p>
-<p>feat：新功能（feature）。</p>
-<p>fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。</p>
+<p>神经网络的优点就在于，很多我们很难去求解的函数映射关系，可以通过对多个一维阶梯函数组合得到，那么如何对这些一维函数进行组合就成了神经网络建立的主要问题和难点。</p>
+<h2 id="bp神经网络认识">BP神经网络认识</h2>
+<p>BP神经网络可以看做是一个多输入多输出的函数，如果不考虑内部结构，它的黑盒模型如下：</p>
+<figure>
+<img src="https://download.kezhi.tech/20200422003115.png"
+alt="BP神经网络的黑盒模型" />
+<figcaption aria-hidden="true">BP神经网络的黑盒模型</figcaption>
+</figure>
+<p>在该BP神经网络中，输入为<span
+class="math inline">\(m\)</span>个，输出为<span
+class="math inline">\(n\)</span>个，我们知道输入和输出之间应当还有一层隐含层，那么隐含层的节点个数应当如何选取。一般来说，隐含层的确定由如下的经验公式所决定：
+<span class="math display">\[
+h=\sqrt{m+n}+a
+\]</span> 其中<span
+class="math inline">\(h\)</span>为隐含层节点数目，<span
+class="math inline">\(m\)</span>为输入层节点数目，<span
+class="math inline">\(n\)</span>为输出层节点数目，<span
+class="math inline">\(a\)</span>为之间的调节常数</p>
+<p>那么根据输入和输出的节点数，我们就可以构造一个简单地BP神经网络模型了，它的内部结构如下（以<span
+class="math inline">\(m=3,n=3,h=3\)</span>为例）：</p>
+<figure>
+<img src="https://download.kezhi.tech/20200422003733.png"
+alt="image-20200422003732195" />
+<figcaption aria-hidden="true">image-20200422003732195</figcaption>
+</figure>
+<p>这样的一个三层的神经网络就可以通过一维函数的组合来实现任意的3维到3维的映射，那么如何建立这种映射呢？，这个问题其实就是如何对BP神经网络进行训练。训练的过程主要分为两部分：前向传递结果，反向传递残差。</p>
+<h2 id="前向传递">前向传递</h2>
+<p>对于BP神经网络中的任何一个节点，其输入为上一层节点输出的加权和，以隐含层为例，设输入层节点的输出为<span
+class="math inline">\(x_i\)</span>，隐含层节点的输入为<span
+class="math inline">\(net_j\)</span>，输入层的节点<span
+class="math inline">\(i\)</span>连接到隐含层节点<span
+class="math inline">\(j\)</span>的权值为<span
+class="math inline">\(w_{ij}\)</span>，常数项为<span
+class="math inline">\(b_j\)</span>则隐含层节点的输入为： <span
+class="math display">\[
+net_j=\sum_{i=1}^m w_{ij}x_i+b_j
+\]</span>
+在BP神经网络中，为了保证激活函数处处可导，选用sigmoid函数作为激活函数，那么节点输出为：
+<span class="math display">\[
+f(net_j)=\frac1{1+e^{-net_j}}
+\]</span></p>
+<blockquote>
+<p>使用sigmoid的优点：</p>
+<ol type="1">
+<li>相比于阶梯函数，它在定义域上处处可导</li>
+<li>令<span
+class="math inline">\(y=sigmoid(x)，则y^,=y(1-y)\)</span>。可以看出sigmoid函数的导数可以用自身来表示。这样，一旦计算出sigmoid函数的值，计算它的导数的值就非常方便。这为后面反向传播时使用梯度下降法提供了便利。</li>
+</ol>
+<p>Sigmoid 函数的主要缺陷：</p>
+<ol type="1">
+<li><p>梯度消失： 注意：Sigmoid 函数趋近 0 和 1
+的时候变化率会变得平坦，也就是说，Sigmoid 的梯度趋近于 0。神经网络使用
+Sigmoid 激活函数进行反向传播时，输出接近 0 或 1 的神经元其梯度趋近于
+0。这些神经元叫作饱和神经元。因此，这些神经元的权重不会更新。此外，与此类神经元相连的神经元的权重也更新得很慢。该问题叫作梯度消失。因此，想象一下，如果一个大型神经网络包含
+Sigmoid
+神经元，而其中很多个都处于饱和状态，那么该网络无法执行反向传播；</p></li>
+<li><p>不以零为中心： Sigmoid 输出不以零为中心的；</p></li>
+<li><p>计算成本高昂： exp()
+函数与其他非线性激活函数相比，计算成本高昂。</p></li>
+</ol>
+<figure>
+<img src="https://download.kezhi.tech/20200422005253.png"
+alt="sigmoidal函数" />
+<figcaption aria-hidden="true">sigmoidal函数</figcaption>
+</figure>
+</blockquote>
+<p>每个神经元进行这样独立的运算，那么对于一组输入，神经网络就可以进行运算得到相应的输出。这就是前向传递的过程。</p>
+<h2 id="反向传递">反向传递</h2>
+<p>在初始时，系统中的所有权值时随机确定的。因此要通过学习训练数据，不断地修正节点中的权值来使得模型趋向于我们希望的结果。反向传递的基本算法思想是非线性规划中的梯度下降算法，规划的目标为最小化损失函数。大体流程如下：</p>
 <ul>
-<li>fix：产生diff并自动修复此问题。适合于一次提交直接修复问题</li>
-<li>to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix</li>
+<li>设定损失函数，假设输出层的所有结果为<span
+class="math inline">\(d_j\)</span>，则损失函数如下：</li>
 </ul>
-<p>docs：文档（documentation）。</p>
-<p>style：格式（不影响代码运行的变动）。</p>
-<p>refactor：重构（即不是新增功能，也不是修改bug的代码变动）。</p>
-<p>perf：优化相关，比如提升性能、体验。</p>
-<p>test：增加测试。</p>
-<p>chore：构建过程或辅助工具的变动。</p>
-<p>revert：回滚到上一个版本。</p>
-<p>merge：代码合并。</p>
-<p>sync：同步主线或分支的Bug。</p>
-<h3 id="scope可选">scope(可选)</h3>
-<p>scope用于说明 commit
-影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
-<p>例如在Angular，可以是location，browser，compile，compile，rootScope，
-ngHref，ngClick，ngView等。如果你的修改影响了不止一个scope，你可以使用*代替。</p>
-<h3 id="subject必须">subject(必须)</h3>
-<p>subject是commit目的的简短描述，不超过50个字符。</p>
-<p>建议使用中文（感觉中国人用中文描述问题能更清楚一些）。</p>
+<p><span class="math display">\[
+E(w,b)=\frac12\sum_{j=0}^{n-1}(d_j-y_j)^2
+\]</span></p>
 <ul>
-<li>结尾不加句号或其他标点符号。</li>
-<li>根据以上规范git commit message将是如下的格式：</li>
+<li>通过损失函数修正隐层到输出层的<span
+class="math inline">\(w、b\)</span>进行修正。对于隐层的节点<span
+class="math inline">\(i\)</span>到输出层节点<span
+class="math inline">\(j\)</span>的权值<span
+class="math inline">\(w_{ij}\)</span>，进行如下修正（其中<span
+class="math inline">\(\eta\)</span>为学习率）：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fix(DAO):用户查询缺少username属性 </span><br><span class="line">feat(Controller):用户查询接口开发</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+\Delta w=-\eta\frac{\partial E}{\partial w_{ij}}
+\]</span></p>
+<ul>
+<li>同样的，对于<span class="math inline">\(b\)</span>的修正为：</li>
+</ul>
+<p><span class="math display">\[
+\Delta b=-\eta\frac{\partial E}{\partial b_{i}}
+\]</span></p>
+<p>基本上就是这么个思路，求偏导的过程比较复杂这里就不展开说了，记住梯度下降法最小化损失函数的思想就可以了。</p>
+<h2 id="参考文献">参考文献</h2>
+<p>[1]ACdreamers. BP神经网络[G/OL]. CSDN: 2015.03.26[2020.04.22].
+https://blog.csdn.net/acdreamers/article/details/44657439</p>
+<p>[2]东皇Amrzs. [整理] BP神经网络讲解——最好的版本[G/OL]. 简书:
+2017.02.28[2020.04.22]. https://www.jianshu.com/p/3d96dbf3f764</p>
+<p>[3]lx青萍之末. BP神经网络[G]. CSDN: 2018.07.20[2020.04.22].
+https://blog.csdn.net/daaikuaichuan/article/details/81135802</p>
 ]]></content>
       <categories>
-        <category>工程实践</category>
-        <category>经验积累</category>
+        <category>理论学习</category>
+        <category>机器学习</category>
       </categories>
       <tags>
-        <tag>git</tag>
-        <tag>语法规范</tag>
+        <tag>机器学习</tag>
+        <tag>神经网络</tag>
+        <tag>BP</tag>
       </tags>
   </entry>
   <entry>
@@ -169,6 +242,53 @@ Hexo</a>进行错误排查。</p>
       </tags>
   </entry>
   <entry>
+    <title>Git commit message 规范</title>
+    <url>/Git-commit-message-%E8%A7%84%E8%8C%83/</url>
+    <content><![CDATA[<h2 id="git-commit-message-规范">Git commit message 规范</h2>
+<h3 id="commit-message-格式">commit message 格式</h3>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="type">type</h3>
+<p>用于说明git commit的类别，只允许使用下面的标识。</p>
+<p>feat：新功能（feature）。</p>
+<p>fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。</p>
+<ul>
+<li>fix：产生diff并自动修复此问题。适合于一次提交直接修复问题</li>
+<li>to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix</li>
+</ul>
+<p>docs：文档（documentation）。</p>
+<p>style：格式（不影响代码运行的变动）。</p>
+<p>refactor：重构（即不是新增功能，也不是修改bug的代码变动）。</p>
+<p>perf：优化相关，比如提升性能、体验。</p>
+<p>test：增加测试。</p>
+<p>chore：构建过程或辅助工具的变动。</p>
+<p>revert：回滚到上一个版本。</p>
+<p>merge：代码合并。</p>
+<p>sync：同步主线或分支的Bug。</p>
+<h3 id="scope可选">scope(可选)</h3>
+<p>scope用于说明 commit
+影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+<p>例如在Angular，可以是location，browser，compile，compile，rootScope，
+ngHref，ngClick，ngView等。如果你的修改影响了不止一个scope，你可以使用*代替。</p>
+<h3 id="subject必须">subject(必须)</h3>
+<p>subject是commit目的的简短描述，不超过50个字符。</p>
+<p>建议使用中文（感觉中国人用中文描述问题能更清楚一些）。</p>
+<ul>
+<li>结尾不加句号或其他标点符号。</li>
+<li>根据以上规范git commit message将是如下的格式：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fix(DAO):用户查询缺少username属性 </span><br><span class="line">feat(Controller):用户查询接口开发</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工程实践</category>
+        <category>经验积累</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>语法规范</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NexT写作常用样式</title>
     <url>/Next%E5%86%99%E4%BD%9C%E5%B8%B8%E7%94%A8%E6%A0%B7%E5%BC%8F/</url>
     <content><![CDATA[<p>一些markdown之外的语法规则，让文章更美观</p>
@@ -261,47 +381,6 @@ danger no-icon
         <tag>Hexo</tag>
         <tag>NexT</tag>
         <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NexT标签云配置</title>
-    <url>/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>本文引自<a
-href="https://alex-mcavoy.github.io/hexo/7be258c0.html">Next 7.0+
-TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)</a></p>
-<p><img src="https://download.kezhi.tech/img/20220322172925.jpg" /></p>
-<a id="more"></a>
-<p>Next 7.0+ 可以对标签进行自定义设置，在此基础上，可以使用球形标签云的
-<code>tagcanvas.js</code> 插件进行样式修改，具体修改步骤如下</p>
-<ol type="1">
-<li><p>下载插件</p>
-<p>关于球形标签云 <code>tagcanvas.js</code> 插件的详细介绍：<a
-href="http://www.goat1000.com/tagcanvas.php">点击这里</a></p>
-<p>将该插件下载后，放入 <code>/theme/next/source/js</code>
-目录下</p></li>
-<li><p>新建标签云 swig 文件</p>
-<p>在 <code>/theme/next/layout/_partials</code> 目录下，建一个名为
-<code>tagcanvas.swig</code> 的文件，并写入如下内容：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"myTags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">id</span>=<span class="string">"my3DTags"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Anything in here will be replaced on browsers that support the canvas element<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">"display: none"</span>&gt;</span></span><br><span class="line">    &#123;&#123; tagcloud(&#123;</span><br><span class="line">        min_font   : theme.tagcloud.min,</span><br><span class="line">        max_font   : theme.tagcloud.max,</span><br><span class="line">        amount     : theme.tagcloud.amount,</span><br><span class="line">        color      : true,</span><br><span class="line">        start_color: theme.tagcloud.start,</span><br><span class="line">        end_color  : theme.tagcloud.end&#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/tagcanvas.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> &gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="actionscript">      TagCanvas.Start(<span class="string">'my3DTags'</span>,<span class="string">'tags'</span>,&#123;</span></span><br><span class="line"><span class="actionscript">        textFont: <span class="string">'Georgia,Optima'</span>,</span></span><br><span class="line"><span class="actionscript">        textColour: <span class="literal">null</span>,</span></span><br><span class="line"><span class="actionscript">        outlineColour: <span class="string">'black'</span>,</span></span><br><span class="line"><span class="actionscript">        weight: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        reverse: <span class="literal">true</span>,</span></span><br><span class="line">        depth: 0.8,</span><br><span class="line">        maxSpeed: 0.05,</span><br><span class="line">        bgRadius: 1,</span><br><span class="line"><span class="actionscript">        freezeDecel: <span class="literal">true</span></span></span><br><span class="line">      &#125;);</span><br><span class="line"><span class="actionscript">    &#125; <span class="keyword">catch</span>(e) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.getElementById(<span class="string">'myTags'</span>).style.display = <span class="string">'none'</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>修改页面配置文件</p>
-<p>对 <code>/theme/next/layout/</code> 中的 <code>page.swig</code>
-文件按照下图所示进行进行修改</p>
-<p><img src="https://download.kezhi.tech/img/20220322171837.png" /></p>
-<p>添加代码为：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;# tagcanvas plugin 球型云标签 #&#125;</span><br><span class="line">&#123;% include '_partials/tagcanvas.swig' %&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>修改主题配置文件</p>
-<p>打开 <code>/theme/config.yml</code>，找到 <code>tagcloud</code>
-字段，根据实际需要进行修改即可：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TagCloud settings for tags page.</span></span><br><span class="line"><span class="attr">tagcloud:</span></span><br><span class="line">  <span class="comment"># All values below are same as default, change them by yourself.</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">20</span> <span class="comment"># Minimun font size in px</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">30</span> <span class="comment"># Maxium font size in px</span></span><br><span class="line">  <span class="attr">start:</span> <span class="string">"#19CAAD"</span> <span class="comment"># Start color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">end:</span> <span class="string">"#F4606C"</span> <span class="comment"># End color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">amount:</span> <span class="number">200</span> <span class="comment"># Amount of tags, change it if you have more than 200 tags</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>工程实践</category>
-        <category>经验积累</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
@@ -441,6 +520,47 @@ l &amp; \textrm{all day long}
       </categories>
       <tags>
         <tag>LetaX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NexT标签云配置</title>
+    <url>/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>本文引自<a
+href="https://alex-mcavoy.github.io/hexo/7be258c0.html">Next 7.0+
+TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)</a></p>
+<p><img src="https://download.kezhi.tech/img/20220322172925.jpg" /></p>
+<a id="more"></a>
+<p>Next 7.0+ 可以对标签进行自定义设置，在此基础上，可以使用球形标签云的
+<code>tagcanvas.js</code> 插件进行样式修改，具体修改步骤如下</p>
+<ol type="1">
+<li><p>下载插件</p>
+<p>关于球形标签云 <code>tagcanvas.js</code> 插件的详细介绍：<a
+href="http://www.goat1000.com/tagcanvas.php">点击这里</a></p>
+<p>将该插件下载后，放入 <code>/theme/next/source/js</code>
+目录下</p></li>
+<li><p>新建标签云 swig 文件</p>
+<p>在 <code>/theme/next/layout/_partials</code> 目录下，建一个名为
+<code>tagcanvas.swig</code> 的文件，并写入如下内容：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"myTags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">id</span>=<span class="string">"my3DTags"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Anything in here will be replaced on browsers that support the canvas element<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">"display: none"</span>&gt;</span></span><br><span class="line">    &#123;&#123; tagcloud(&#123;</span><br><span class="line">        min_font   : theme.tagcloud.min,</span><br><span class="line">        max_font   : theme.tagcloud.max,</span><br><span class="line">        amount     : theme.tagcloud.amount,</span><br><span class="line">        color      : true,</span><br><span class="line">        start_color: theme.tagcloud.start,</span><br><span class="line">        end_color  : theme.tagcloud.end&#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/tagcanvas.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> &gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="actionscript">      TagCanvas.Start(<span class="string">'my3DTags'</span>,<span class="string">'tags'</span>,&#123;</span></span><br><span class="line"><span class="actionscript">        textFont: <span class="string">'Georgia,Optima'</span>,</span></span><br><span class="line"><span class="actionscript">        textColour: <span class="literal">null</span>,</span></span><br><span class="line"><span class="actionscript">        outlineColour: <span class="string">'black'</span>,</span></span><br><span class="line"><span class="actionscript">        weight: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        reverse: <span class="literal">true</span>,</span></span><br><span class="line">        depth: 0.8,</span><br><span class="line">        maxSpeed: 0.05,</span><br><span class="line">        bgRadius: 1,</span><br><span class="line"><span class="actionscript">        freezeDecel: <span class="literal">true</span></span></span><br><span class="line">      &#125;);</span><br><span class="line"><span class="actionscript">    &#125; <span class="keyword">catch</span>(e) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.getElementById(<span class="string">'myTags'</span>).style.display = <span class="string">'none'</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改页面配置文件</p>
+<p>对 <code>/theme/next/layout/</code> 中的 <code>page.swig</code>
+文件按照下图所示进行进行修改</p>
+<p><img src="https://download.kezhi.tech/img/20220322171837.png" /></p>
+<p>添加代码为：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;# tagcanvas plugin 球型云标签 #&#125;</span><br><span class="line">&#123;% include '_partials/tagcanvas.swig' %&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改主题配置文件</p>
+<p>打开 <code>/theme/config.yml</code>，找到 <code>tagcloud</code>
+字段，根据实际需要进行修改即可：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TagCloud settings for tags page.</span></span><br><span class="line"><span class="attr">tagcloud:</span></span><br><span class="line">  <span class="comment"># All values below are same as default, change them by yourself.</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">20</span> <span class="comment"># Minimun font size in px</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">30</span> <span class="comment"># Maxium font size in px</span></span><br><span class="line">  <span class="attr">start:</span> <span class="string">"#19CAAD"</span> <span class="comment"># Start color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">end:</span> <span class="string">"#F4606C"</span> <span class="comment"># End color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">amount:</span> <span class="number">200</span> <span class="comment"># Amount of tags, change it if you have more than 200 tags</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>工程实践</category>
+        <category>经验积累</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
@@ -761,186 +881,6 @@ NLTK - 简书 (jianshu.com)</a></p>
       </tags>
   </entry>
   <entry>
-    <title>BP神经网络</title>
-    <url>/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<h2 id="bp神经网络概述">BP神经网络概述</h2>
-<p>BP神经网络是神经网络中最基础也是应用最多的神经网络，它由三层节点组成，分别为输入层，隐含层和输出层。BP神经网络的实现比较简单，主要分为正向传递输出和反向传递误差两部分。</p>
-<p>神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert
-Hecht-Nielsen）这为神经网络的应用提供了理论依据。</p>
-<a id="more"></a>
-<p>神经网络的优点就在于，很多我们很难去求解的函数映射关系，可以通过对多个一维阶梯函数组合得到，那么如何对这些一维函数进行组合就成了神经网络建立的主要问题和难点。</p>
-<h2 id="bp神经网络认识">BP神经网络认识</h2>
-<p>BP神经网络可以看做是一个多输入多输出的函数，如果不考虑内部结构，它的黑盒模型如下：</p>
-<figure>
-<img src="https://download.kezhi.tech/20200422003115.png"
-alt="BP神经网络的黑盒模型" />
-<figcaption aria-hidden="true">BP神经网络的黑盒模型</figcaption>
-</figure>
-<p>在该BP神经网络中，输入为<span
-class="math inline">\(m\)</span>个，输出为<span
-class="math inline">\(n\)</span>个，我们知道输入和输出之间应当还有一层隐含层，那么隐含层的节点个数应当如何选取。一般来说，隐含层的确定由如下的经验公式所决定：
-<span class="math display">\[
-h=\sqrt{m+n}+a
-\]</span> 其中<span
-class="math inline">\(h\)</span>为隐含层节点数目，<span
-class="math inline">\(m\)</span>为输入层节点数目，<span
-class="math inline">\(n\)</span>为输出层节点数目，<span
-class="math inline">\(a\)</span>为之间的调节常数</p>
-<p>那么根据输入和输出的节点数，我们就可以构造一个简单地BP神经网络模型了，它的内部结构如下（以<span
-class="math inline">\(m=3,n=3,h=3\)</span>为例）：</p>
-<figure>
-<img src="https://download.kezhi.tech/20200422003733.png"
-alt="image-20200422003732195" />
-<figcaption aria-hidden="true">image-20200422003732195</figcaption>
-</figure>
-<p>这样的一个三层的神经网络就可以通过一维函数的组合来实现任意的3维到3维的映射，那么如何建立这种映射呢？，这个问题其实就是如何对BP神经网络进行训练。训练的过程主要分为两部分：前向传递结果，反向传递残差。</p>
-<h2 id="前向传递">前向传递</h2>
-<p>对于BP神经网络中的任何一个节点，其输入为上一层节点输出的加权和，以隐含层为例，设输入层节点的输出为<span
-class="math inline">\(x_i\)</span>，隐含层节点的输入为<span
-class="math inline">\(net_j\)</span>，输入层的节点<span
-class="math inline">\(i\)</span>连接到隐含层节点<span
-class="math inline">\(j\)</span>的权值为<span
-class="math inline">\(w_{ij}\)</span>，常数项为<span
-class="math inline">\(b_j\)</span>则隐含层节点的输入为： <span
-class="math display">\[
-net_j=\sum_{i=1}^m w_{ij}x_i+b_j
-\]</span>
-在BP神经网络中，为了保证激活函数处处可导，选用sigmoid函数作为激活函数，那么节点输出为：
-<span class="math display">\[
-f(net_j)=\frac1{1+e^{-net_j}}
-\]</span></p>
-<blockquote>
-<p>使用sigmoid的优点：</p>
-<ol type="1">
-<li>相比于阶梯函数，它在定义域上处处可导</li>
-<li>令<span
-class="math inline">\(y=sigmoid(x)，则y^,=y(1-y)\)</span>。可以看出sigmoid函数的导数可以用自身来表示。这样，一旦计算出sigmoid函数的值，计算它的导数的值就非常方便。这为后面反向传播时使用梯度下降法提供了便利。</li>
-</ol>
-<p>Sigmoid 函数的主要缺陷：</p>
-<ol type="1">
-<li><p>梯度消失： 注意：Sigmoid 函数趋近 0 和 1
-的时候变化率会变得平坦，也就是说，Sigmoid 的梯度趋近于 0。神经网络使用
-Sigmoid 激活函数进行反向传播时，输出接近 0 或 1 的神经元其梯度趋近于
-0。这些神经元叫作饱和神经元。因此，这些神经元的权重不会更新。此外，与此类神经元相连的神经元的权重也更新得很慢。该问题叫作梯度消失。因此，想象一下，如果一个大型神经网络包含
-Sigmoid
-神经元，而其中很多个都处于饱和状态，那么该网络无法执行反向传播；</p></li>
-<li><p>不以零为中心： Sigmoid 输出不以零为中心的；</p></li>
-<li><p>计算成本高昂： exp()
-函数与其他非线性激活函数相比，计算成本高昂。</p></li>
-</ol>
-<figure>
-<img src="https://download.kezhi.tech/20200422005253.png"
-alt="sigmoidal函数" />
-<figcaption aria-hidden="true">sigmoidal函数</figcaption>
-</figure>
-</blockquote>
-<p>每个神经元进行这样独立的运算，那么对于一组输入，神经网络就可以进行运算得到相应的输出。这就是前向传递的过程。</p>
-<h2 id="反向传递">反向传递</h2>
-<p>在初始时，系统中的所有权值时随机确定的。因此要通过学习训练数据，不断地修正节点中的权值来使得模型趋向于我们希望的结果。反向传递的基本算法思想是非线性规划中的梯度下降算法，规划的目标为最小化损失函数。大体流程如下：</p>
-<ul>
-<li>设定损失函数，假设输出层的所有结果为<span
-class="math inline">\(d_j\)</span>，则损失函数如下：</li>
-</ul>
-<p><span class="math display">\[
-E(w,b)=\frac12\sum_{j=0}^{n-1}(d_j-y_j)^2
-\]</span></p>
-<ul>
-<li>通过损失函数修正隐层到输出层的<span
-class="math inline">\(w、b\)</span>进行修正。对于隐层的节点<span
-class="math inline">\(i\)</span>到输出层节点<span
-class="math inline">\(j\)</span>的权值<span
-class="math inline">\(w_{ij}\)</span>，进行如下修正（其中<span
-class="math inline">\(\eta\)</span>为学习率）：</li>
-</ul>
-<p><span class="math display">\[
-\Delta w=-\eta\frac{\partial E}{\partial w_{ij}}
-\]</span></p>
-<ul>
-<li>同样的，对于<span class="math inline">\(b\)</span>的修正为：</li>
-</ul>
-<p><span class="math display">\[
-\Delta b=-\eta\frac{\partial E}{\partial b_{i}}
-\]</span></p>
-<p>基本上就是这么个思路，求偏导的过程比较复杂这里就不展开说了，记住梯度下降法最小化损失函数的思想就可以了。</p>
-<h2 id="参考文献">参考文献</h2>
-<p>[1]ACdreamers. BP神经网络[G/OL]. CSDN: 2015.03.26[2020.04.22].
-https://blog.csdn.net/acdreamers/article/details/44657439</p>
-<p>[2]东皇Amrzs. [整理] BP神经网络讲解——最好的版本[G/OL]. 简书:
-2017.02.28[2020.04.22]. https://www.jianshu.com/p/3d96dbf3f764</p>
-<p>[3]lx青萍之末. BP神经网络[G]. CSDN: 2018.07.20[2020.04.22].
-https://blog.csdn.net/daaikuaichuan/article/details/81135802</p>
-]]></content>
-      <categories>
-        <category>理论学习</category>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>神经网络</tag>
-        <tag>BP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git常用命令</title>
-    <url>/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="git文件管理系统">Git文件管理系统</h2>
-<blockquote>
-<p>本博客为转载，原文地址<a
-href="https://www.cnblogs.com/chenwolong/p/GIT.html">https://www.cnblogs.com/chenwolong/p/GIT.html</a></p>
-</blockquote>
-<p><img src="http://download.kezhi.tech/img/20200424230007.png" /></p>
-<a id="more"></a>
-<blockquote>
-<ul>
-<li>Workspace：工作区</li>
-<li>Index / Stage：暂存区</li>
-<li>Repository：仓库区（或本地仓库）</li>
-<li>Remote：远程仓库</li>
-</ul>
-</blockquote>
-<h2 id="新建代码仓库">新建代码仓库</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></table></figure>
-<h2 id="配置">配置</h2>
-<p>Git的设置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--<span class="keyword">global</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--<span class="keyword">global</span>] user.name <span class="string">"[name]"</span></span><br><span class="line">$ git config [--<span class="keyword">global</span>] user.email <span class="string">"[email address]"</span></span><br></pre></td></tr></table></figure>
-<h2 id="增加删除文件">增加/删除文件</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
-<h2 id="代码提交">代码提交</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure>
-<h2 id="分支">分支</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --set-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地存在一个分支，名称叫：develop_chen，但远程没有怎么办？</span></span><br><span class="line">$ git push origin develop_chen</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这样就在远程建立一个和本地一样的分支</span></span><br><span class="line"></span><br><span class="line">$ git branch --set-upstream-to=origin/develop  develop  本地分支和远程分支简历跟踪关系</span><br></pre></td></tr></table></figure>
-<h2 id="标签">标签</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
-<h2 id="查看信息">查看信息</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史</span></span><br><span class="line">$ git log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git log --stat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git log -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git log [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件</span></span><br><span class="line">$ git log [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git log --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git log -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git log <span class="number">-5</span> --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的代码差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">"@&#123;0 day ago&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交</span></span><br><span class="line">$ git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从本地master拉取代码更新当前分支：branch 一般为master</span></span><br><span class="line">$ git rebase [branch]</span><br></pre></td></tr></table></figure>
-<h2 id="远程同步">远程同步</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git remote update  --更新远程仓储</span><br><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
-<h2 id="撤销">撤销</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
-<h2 id="其他">其他</h2>
-<ol type="1">
-<li>将开发分支代码合入到master中</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git checkout dev           <span class="comment">#切换到dev开发分支</span></span><br><span class="line">$ git pull</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge dev              <span class="comment">#合并dev分支到master上</span></span><br><span class="line">$ git push origin master     <span class="comment">#将代码推到master上</span></span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>将master的代码同步更新到开发分支中。merge方法：保证主干提交线干净(可以安全回溯)</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git checkout dev           <span class="comment">#切换到dev开发分支</span></span><br><span class="line">$ git pull</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge dev              <span class="comment">#合并dev分支到master上</span></span><br><span class="line">$ git push origin master     <span class="comment">#将代码推到master上</span></span><br></pre></td></tr></table></figure>
-<ol start="3" type="1">
-<li>生成可被发布的压缩包</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line">$ git archive</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工程实践</category>
-        <category>经验积累</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>命令行</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>于小鸡历险记（一）</title>
     <url>/%E4%BA%8E%E5%B0%8F%E9%B8%A1%E5%8E%86%E9%99%A9%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h2 id="引子">引子</h2>
@@ -1036,6 +976,83 @@ href="https://www.kezhi.tech/影片《字节跳动》创作阐述/">影片《字
       </tags>
   </entry>
   <entry>
+    <title>一个用单片机放视频的小项目</title>
+    <url>/%E4%B8%80%E4%B8%AA%E7%94%A8%E5%8D%95%E7%89%87%E6%9C%BA%E6%94%BE%E8%A7%86%E9%A2%91%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h2 id="总体设计思路">总体设计思路</h2>
+<p>视频的播放实际上就是一系列的图片按照一定的顺序，以一定的时间间隔连续播放所产生的视觉效果。因此，使用单片机驱动LCD去播放视频实际上就是让单片机以一定的时间间隔向LCD的缓存推送图片，让其不断刷新屏幕去切换图片即可。在文章的最后我放入了这个项目的源工程文件供大家参考。</p>
+<a id="more"></a>
+<blockquote>
+<p>如果要同时播放音频那么就给单片机的管脚连入一个功放，单片机以音频电压不断给功放上电即可。由于单片机的频率只有1MHz，并且产生的也是方波信号，protues仿真效果不好，所以这里就没有加入声音的播放。</p>
+</blockquote>
+<p>演示视频如下：</p>
+<iframe src="//player.bilibili.com/player.html?aid=74949672&amp;bvid=BV1bE411q7YA&amp;cid=128219853&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<p>因此整个项目可以拆分成如下几部：</p>
+<ul>
+<li>将视频剪裁缩放到该显示器大小，并且对视频内容进行二值化</li>
+<li>将二值化后的视频流按照帧的顺序写入.h文件中方便读取</li>
+<li>在protues仿真平台上连接电路</li>
+<li>编写程序控制单片机不断向LCD写入图像。</li>
+</ul>
+<h2 id="处理视频">1.处理视频</h2>
+<p>这里采用python进行视频的处理，使用了OpenCV对python支持的库对于视频进行操作，参考了一本关于OpenCV-python教程的书，我将该书的电子版放在这里，需要的同学可以自取。<a class="btn" href="https://download.kezhi.tech/document/OpenCV%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%88For%20Python%EF%BC%89.pdf" target="_blank" rel="noopener">
+            <i class="fa fa-download fa-lg fa-fw"></i>点击下载
+          </a></p>
+<p>这里将视频读入</p>
+<p>源代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">video=cv2.VideoCapture(<span class="string">"1.flv"</span>)</span><br><span class="line">writename=<span class="string">"picture.csv"</span></span><br><span class="line">file=open(<span class="string">"1.txt"</span>,mode=<span class="string">'w'</span>)</span><br><span class="line">fourcc=cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line">outvideo=cv2.VideoWriter(<span class="string">"2.avi"</span>,fourcc,<span class="number">25.0</span>,(<span class="number">128</span>,<span class="number">64</span>),<span class="literal">False</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans</span><span class="params">(h,g,f,e,d,c,b,a)</span>:</span> <span class="comment">#将8位像素拼接成一个uint8</span></span><br><span class="line">        high_num=<span class="number">0</span></span><br><span class="line">        low_num=<span class="number">0</span></span><br><span class="line">        high_num=((((((high_num+a)&lt;&lt;<span class="number">1</span>)+b)&lt;&lt;<span class="number">1</span>)+c)&lt;&lt;<span class="number">1</span>)+d</span><br><span class="line">        low_num=((((((low_num+e)&lt;&lt;<span class="number">1</span>)+f)&lt;&lt;<span class="number">1</span>)+g)&lt;&lt;<span class="number">1</span>)+h</span><br><span class="line">        num=(high_num&lt;&lt;<span class="number">4</span>)+low_num</span><br><span class="line">        <span class="keyword">return</span> hex(num)</span><br><span class="line"><span class="comment">#不断循环对每一帧进行二值化，该帧的输出保存在程序同目录的"picture.csv"中，按住q可以不断快进，在需要截取帧暂停并复制"picture.csv"中的数据即可。</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>):	</span><br><span class="line">    ret,frame=video.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    result=cv2.resize(gray,(<span class="number">128</span>,<span class="number">64</span>),interpolation=cv2.INTER_AREA)</span><br><span class="line">    ret,result=cv2.threshold(result,<span class="number">150</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">    print(result)</span><br><span class="line">    cv2.HoughLinesP</span><br><span class="line">    cv2.namedWindow(<span class="string">"frame"</span>,cv2.WINDOW_NORMAL)</span><br><span class="line">    cv2.resizeWindow(<span class="string">"frame"</span>,<span class="number">640</span>,<span class="number">320</span>)</span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>,result)</span><br><span class="line">    outvideo.write(result)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">64</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">128</span>):</span><br><span class="line">            <span class="keyword">if</span> result[i,j]:</span><br><span class="line">                result[i,j]=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result[i,j]=<span class="number">1</span></span><br><span class="line">    bl=result.astype(numpy.int)</span><br><span class="line">    r0x=numpy.zeros((<span class="number">8</span>,<span class="number">128</span>),dtype=numpy.object)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">128</span>):</span><br><span class="line">            r0x[i,j]=trans(bl[i*<span class="number">8</span>,j],bl[i*<span class="number">8</span>+<span class="number">1</span>,j],bl[i*<span class="number">8</span>+<span class="number">2</span>,j],bl[i*<span class="number">8</span>+<span class="number">3</span>,j],bl[i*<span class="number">8</span>+<span class="number">4</span>,j],bl[i*<span class="number">8</span>+<span class="number">5</span>,j],bl[i*<span class="number">8</span>+<span class="number">6</span>,j],bl[i*<span class="number">8</span>+<span class="number">7</span>,j])</span><br><span class="line">    <span class="keyword">with</span> open(writename,<span class="string">'w'</span>,newline=<span class="string">''</span>)<span class="keyword">as</span> f:</span><br><span class="line">        csv_write=csv.writer(f)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> r0x:</span><br><span class="line">            csv_write.writerow(i)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">         <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">video.release()</span><br><span class="line">outvideo.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="将帧数据写入.h文件">2.将帧数据写入.h文件</h2>
+<p>我们将上一步获取到的一些帧数据进行顺序排列并用','分隔即构成了我们需要显示视频的数据集。</p>
+<p>接下了建立一个image.h文件，将所有数据粘贴到静态数组中：</p>
+<figure>
+<img src="https://download.kezhi.tech/img/image-20200324202341272.png"
+alt=".h文件的编写" />
+<figcaption aria-hidden="true">.h文件的编写</figcaption>
+</figure>
+<blockquote>
+<p>这里要注意，我们采用的显示器分辨率为64 *
+128共计8192个像素，每个像素的像素值为0/1，使用状态压缩将8个像素压缩到1B之后，每一帧占用的内存大小为8
+*
+128=1024B=1K。而protues仿真软件中，RAM最大为64K，考虑到还需要一部分空间来存放其他代码，所以这里最多可以存放62~63帧，视其他代码占用空间决定。</p>
+</blockquote>
+<h2 id="在protues上连接电路">3.在protues上连接电路</h2>
+<p>选取的单片机为经典的AT89C51，显示器型号为AMPIPR128*64</p>
+<p>这里连线采用标号的方式，方便连接和查看：</p>
+<figure>
+<img src="https://download.kezhi.tech/img/image-20200324203135152.png"
+alt="LCD部分" />
+<figcaption aria-hidden="true">LCD部分</figcaption>
+</figure>
+<figure>
+<img src="https://download.kezhi.tech/img/image-20200324203205683.png"
+alt="单片机部分" />
+<figcaption aria-hidden="true">单片机部分</figcaption>
+</figure>
+<blockquote>
+<p>有关单片机管脚的含义和使用方法以及该LCD各个引脚的意义大家可以自行搜索学习，网上有很多相关的资料。</p>
+</blockquote>
+<h2 id="编写单片机的程序">4.编写单片机的程序</h2>
+<p>要编写单片机驱动LCD的程序，我们需要了解该LCD各个引脚的作用和如何驱动它显示图像，同上，网上有很多相关的手册供大家自行查询。那么这里我们直接使用一个已经封装好的驱动文件对该显示器进行底层操作，我们只关注应用层面的逻辑即可。</p>
+<p>源代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;lcd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;image.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char</span></span><br><span class="line">sbit power=P2^<span class="number">0</span>;</span><br><span class="line">sbit pause=P2^<span class="number">1</span>;</span><br><span class="line">sbit <span class="built_in">clear</span>=P2^<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_off=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_pause=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_clear=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (a--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	uchar i,j,k;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">63</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[i]);</span><br><span class="line">		<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">		<span class="keyword">if</span> (i==<span class="number">20</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			j=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">while</span> (j--)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (k=i;k&lt;<span class="number">25</span>;k++)</span><br><span class="line">				&#123;</span><br><span class="line">					vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[k]);</span><br><span class="line">					<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (i==<span class="number">41</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			j=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">while</span> (j--)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (k=i;k&lt;<span class="number">45</span>;k++)</span><br><span class="line">				&#123;</span><br><span class="line">					vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[k]);</span><br><span class="line">					<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>封装好的显示驱动.h文件</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;at89x51.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RST P1_2   <span class="comment">/*复位信号，低电平复位*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> E P1_5  <span class="comment">/*E 使能信号，为H或1时表示DRAM数据读到DB7~DB0，为L或0表示锁存DB7~DB0*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RW P1_4 <span class="comment">/* RW 为1  E 为1时数据被读到DB7~DB0，为0 且E为下降沿时DB7~DB0的数据被写入到IR（指令寄存器）或DR（数据寄存器）*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RS P1_3  <span class="comment">/* DI为1表示DB7~DB0为显示数据，为0表示DB7~DB0为显示指令数据*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CS1 P1_0   <span class="comment">/*CS1为1表示选择该芯片（右半屏）信号*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CS2 P1_1   <span class="comment">/*CS2为1表示选择该芯片（左半屏）信号*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDPORT P3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUSYSTATUS P3_7      <span class="comment">//忙状态位。//</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DISONSTATUS P3_5     <span class="comment">//显示开关状态位。//</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RSTSTATUS P3_4     <span class="comment">//复位状态位。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDSTARTROW 0xC0     <span class="comment">//设置起始行指令。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDPAGE 0xB8      <span class="comment">//设置页指令。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDLINE 0x40      <span class="comment">//设置列指令。</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">bit</span> <span class="title">bCheckBusy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LCDPORT=<span class="number">0x00</span>;</span><br><span class="line">	RW=<span class="number">1</span>;</span><br><span class="line">	RS=<span class="number">0</span>;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> BUSYSTATUS; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vWriteData</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucData)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(bCheckBusy());</span><br><span class="line">	LCDPORT=<span class="number">0xFF</span>;</span><br><span class="line">	RW=<span class="number">0</span>;</span><br><span class="line">	RS=<span class="number">1</span>;</span><br><span class="line">	LCDPORT=ucData;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vWriteCMD</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCMD)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(bCheckBusy());</span><br><span class="line">	LCDPORT=<span class="number">0xFF</span>;</span><br><span class="line">	RW=<span class="number">0</span>;</span><br><span class="line">	RS=<span class="number">0</span>;</span><br><span class="line">	LCDPORT=ucCMD;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vLCDInitialize</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	CS1=<span class="number">1</span>;</span><br><span class="line">	CS2=<span class="number">1</span>;</span><br><span class="line">	vWriteCMD(<span class="number">0x38</span>);   <span class="comment">//8位形式，两行字符。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x0F</span>);   <span class="comment">//开显示。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x01</span>);   <span class="comment">//清屏。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x06</span>);   <span class="comment">//画面不动，光标右移。</span></span><br><span class="line">	vWriteCMD(LCDSTARTROW); <span class="comment">//设置起始行。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowCustomRow</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucWidth,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaRow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCount;       <span class="comment">//取值范围：ucPage:0～7；ucLine:0～127；</span></span><br><span class="line">	<span class="keyword">if</span>(ucLine&lt;<span class="number">64</span>)         <span class="comment">//ucWidth:0～127；ucLine+ucWidth&lt;1128。   </span></span><br><span class="line">	&#123;   </span><br><span class="line">		CS1=<span class="number">0</span>;   </span><br><span class="line">		CS2=<span class="number">1</span>;   </span><br><span class="line">		vWriteCMD(LCDPAGE+ucPage);   </span><br><span class="line">		vWriteCMD(LCDLINE+ucLine);   </span><br><span class="line">		<span class="keyword">if</span>((ucLine+ucWidth)&lt;<span class="number">64</span>)    </span><br><span class="line">		&#123;</span><br><span class="line">		    <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucWidth;ucCount++)     </span><br><span class="line">			vWriteData(*(ucaRow+ucCount));    </span><br><span class="line">		&#125;   </span><br><span class="line">		<span class="keyword">else</span>    </span><br><span class="line">		&#123;</span><br><span class="line">		    <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;<span class="number">64</span>-ucLine;ucCount++)     </span><br><span class="line">			vWriteData(*(ucaRow+ucCount));</span><br><span class="line">    		CS1=<span class="number">1</span>;    </span><br><span class="line">			CS2=<span class="number">0</span>;    </span><br><span class="line">			vWriteCMD(LCDPAGE+ucPage);    </span><br><span class="line">			vWriteCMD(LCDLINE);    </span><br><span class="line">			<span class="keyword">for</span>(ucCount=<span class="number">64</span>-ucLine;ucCount&lt;ucWidth;ucCount++)     </span><br><span class="line">				vWriteData(*(ucaRow+ucCount));    </span><br><span class="line">		&#125;  </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>   </span><br><span class="line">	&#123;</span><br><span class="line">	   CS1=<span class="number">1</span>;</span><br><span class="line">	   CS2=<span class="number">0</span>;   </span><br><span class="line">	   vWriteCMD(LCDPAGE+ucPage);   </span><br><span class="line">	   vWriteCMD(LCDLINE+ucLine<span class="number">-64</span>);   </span><br><span class="line">	   <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucWidth;ucCount++)</span><br><span class="line">	       vWriteData(*(ucaRow+ucCount));   </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowOneChin</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaChinMap)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vShowCustomRow(ucPage,ucLine,<span class="number">16</span>,ucaChinMap);</span><br><span class="line">	vShowCustomRow(ucPage+<span class="number">1</span>,ucLine,<span class="number">16</span>,ucaChinMap+<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowOneChar</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaCharMap)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vShowCustomRow(ucPage,ucLine,<span class="number">8</span>,ucaCharMap);</span><br><span class="line">	vShowCustomRow(ucPage+<span class="number">1</span>,ucLine,<span class="number">8</span>,ucaCharMap+<span class="number">8</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowGraph</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucWidth,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucHigh,<span class="keyword">unsigned</span> <span class="keyword">char</span> * ucaGraph)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCount;</span><br><span class="line">	<span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucHigh;ucCount++)</span><br><span class="line">	   vShowCustomRow(ucPage+ucCount,ucLine,ucWidth,ucaGraph+ucCount*ucWidth);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结束语附工程下载链接">5.结束语（附工程下载链接）</h2>
+<p>该项目是博主大三时做的一个电子线路设计，给我最大的启发就是我们在生活中看起来复杂的项目，实际上其背后的原理是简单的，就如视频的播放一样。但同时，简单的事情是复杂的，之后在做语音识别的时候，采用自己提取的语音特征去分辨数字0-9，整体的识别率不到30%。因此，判断一件事难易程度不能凭空去想，而是要思考其运行机制和模块构成，分析其实现原理从而对于每个项目有清晰的认知。</p>
+<p>工程文件下载：<a class="btn" href="https://download.kezhi.tech/document/cxk_video.zip" target="_blank" rel="noopener">
+            <i class="fa fa-download fa-lg fa-fw"></i>点击下载
+          </a></p>
+]]></content>
+      <categories>
+        <category>工程实践</category>
+        <category>单片机开发</category>
+      </categories>
+      <tags>
+        <tag>protues</tag>
+        <tag>单片机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于影视创作</title>
     <url>/%E5%85%B3%E4%BA%8E%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -1123,83 +1140,6 @@ src="https://download.kezhi.tech/img/202205251718490.webp" /></p>
         <tag>电影</tag>
         <tag>创作</tag>
         <tag>感悟</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个用单片机放视频的小项目</title>
-    <url>/%E4%B8%80%E4%B8%AA%E7%94%A8%E5%8D%95%E7%89%87%E6%9C%BA%E6%94%BE%E8%A7%86%E9%A2%91%E7%9A%84%E5%B0%8F%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h2 id="总体设计思路">总体设计思路</h2>
-<p>视频的播放实际上就是一系列的图片按照一定的顺序，以一定的时间间隔连续播放所产生的视觉效果。因此，使用单片机驱动LCD去播放视频实际上就是让单片机以一定的时间间隔向LCD的缓存推送图片，让其不断刷新屏幕去切换图片即可。在文章的最后我放入了这个项目的源工程文件供大家参考。</p>
-<a id="more"></a>
-<blockquote>
-<p>如果要同时播放音频那么就给单片机的管脚连入一个功放，单片机以音频电压不断给功放上电即可。由于单片机的频率只有1MHz，并且产生的也是方波信号，protues仿真效果不好，所以这里就没有加入声音的播放。</p>
-</blockquote>
-<p>演示视频如下：</p>
-<iframe src="//player.bilibili.com/player.html?aid=74949672&amp;bvid=BV1bE411q7YA&amp;cid=128219853&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
-</iframe>
-<p>因此整个项目可以拆分成如下几部：</p>
-<ul>
-<li>将视频剪裁缩放到该显示器大小，并且对视频内容进行二值化</li>
-<li>将二值化后的视频流按照帧的顺序写入.h文件中方便读取</li>
-<li>在protues仿真平台上连接电路</li>
-<li>编写程序控制单片机不断向LCD写入图像。</li>
-</ul>
-<h2 id="处理视频">1.处理视频</h2>
-<p>这里采用python进行视频的处理，使用了OpenCV对python支持的库对于视频进行操作，参考了一本关于OpenCV-python教程的书，我将该书的电子版放在这里，需要的同学可以自取。<a class="btn" href="https://download.kezhi.tech/document/OpenCV%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%88For%20Python%EF%BC%89.pdf" target="_blank" rel="noopener">
-            <i class="fa fa-download fa-lg fa-fw"></i>点击下载
-          </a></p>
-<p>这里将视频读入</p>
-<p>源代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">video=cv2.VideoCapture(<span class="string">"1.flv"</span>)</span><br><span class="line">writename=<span class="string">"picture.csv"</span></span><br><span class="line">file=open(<span class="string">"1.txt"</span>,mode=<span class="string">'w'</span>)</span><br><span class="line">fourcc=cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line">outvideo=cv2.VideoWriter(<span class="string">"2.avi"</span>,fourcc,<span class="number">25.0</span>,(<span class="number">128</span>,<span class="number">64</span>),<span class="literal">False</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans</span><span class="params">(h,g,f,e,d,c,b,a)</span>:</span> <span class="comment">#将8位像素拼接成一个uint8</span></span><br><span class="line">        high_num=<span class="number">0</span></span><br><span class="line">        low_num=<span class="number">0</span></span><br><span class="line">        high_num=((((((high_num+a)&lt;&lt;<span class="number">1</span>)+b)&lt;&lt;<span class="number">1</span>)+c)&lt;&lt;<span class="number">1</span>)+d</span><br><span class="line">        low_num=((((((low_num+e)&lt;&lt;<span class="number">1</span>)+f)&lt;&lt;<span class="number">1</span>)+g)&lt;&lt;<span class="number">1</span>)+h</span><br><span class="line">        num=(high_num&lt;&lt;<span class="number">4</span>)+low_num</span><br><span class="line">        <span class="keyword">return</span> hex(num)</span><br><span class="line"><span class="comment">#不断循环对每一帧进行二值化，该帧的输出保存在程序同目录的"picture.csv"中，按住q可以不断快进，在需要截取帧暂停并复制"picture.csv"中的数据即可。</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>):	</span><br><span class="line">    ret,frame=video.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    result=cv2.resize(gray,(<span class="number">128</span>,<span class="number">64</span>),interpolation=cv2.INTER_AREA)</span><br><span class="line">    ret,result=cv2.threshold(result,<span class="number">150</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">    print(result)</span><br><span class="line">    cv2.HoughLinesP</span><br><span class="line">    cv2.namedWindow(<span class="string">"frame"</span>,cv2.WINDOW_NORMAL)</span><br><span class="line">    cv2.resizeWindow(<span class="string">"frame"</span>,<span class="number">640</span>,<span class="number">320</span>)</span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>,result)</span><br><span class="line">    outvideo.write(result)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">64</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">128</span>):</span><br><span class="line">            <span class="keyword">if</span> result[i,j]:</span><br><span class="line">                result[i,j]=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result[i,j]=<span class="number">1</span></span><br><span class="line">    bl=result.astype(numpy.int)</span><br><span class="line">    r0x=numpy.zeros((<span class="number">8</span>,<span class="number">128</span>),dtype=numpy.object)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">128</span>):</span><br><span class="line">            r0x[i,j]=trans(bl[i*<span class="number">8</span>,j],bl[i*<span class="number">8</span>+<span class="number">1</span>,j],bl[i*<span class="number">8</span>+<span class="number">2</span>,j],bl[i*<span class="number">8</span>+<span class="number">3</span>,j],bl[i*<span class="number">8</span>+<span class="number">4</span>,j],bl[i*<span class="number">8</span>+<span class="number">5</span>,j],bl[i*<span class="number">8</span>+<span class="number">6</span>,j],bl[i*<span class="number">8</span>+<span class="number">7</span>,j])</span><br><span class="line">    <span class="keyword">with</span> open(writename,<span class="string">'w'</span>,newline=<span class="string">''</span>)<span class="keyword">as</span> f:</span><br><span class="line">        csv_write=csv.writer(f)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> r0x:</span><br><span class="line">            csv_write.writerow(i)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">         <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">video.release()</span><br><span class="line">outvideo.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<h2 id="将帧数据写入.h文件">2.将帧数据写入.h文件</h2>
-<p>我们将上一步获取到的一些帧数据进行顺序排列并用','分隔即构成了我们需要显示视频的数据集。</p>
-<p>接下了建立一个image.h文件，将所有数据粘贴到静态数组中：</p>
-<figure>
-<img src="https://download.kezhi.tech/img/image-20200324202341272.png"
-alt=".h文件的编写" />
-<figcaption aria-hidden="true">.h文件的编写</figcaption>
-</figure>
-<blockquote>
-<p>这里要注意，我们采用的显示器分辨率为64 *
-128共计8192个像素，每个像素的像素值为0/1，使用状态压缩将8个像素压缩到1B之后，每一帧占用的内存大小为8
-*
-128=1024B=1K。而protues仿真软件中，RAM最大为64K，考虑到还需要一部分空间来存放其他代码，所以这里最多可以存放62~63帧，视其他代码占用空间决定。</p>
-</blockquote>
-<h2 id="在protues上连接电路">3.在protues上连接电路</h2>
-<p>选取的单片机为经典的AT89C51，显示器型号为AMPIPR128*64</p>
-<p>这里连线采用标号的方式，方便连接和查看：</p>
-<figure>
-<img src="https://download.kezhi.tech/img/image-20200324203135152.png"
-alt="LCD部分" />
-<figcaption aria-hidden="true">LCD部分</figcaption>
-</figure>
-<figure>
-<img src="https://download.kezhi.tech/img/image-20200324203205683.png"
-alt="单片机部分" />
-<figcaption aria-hidden="true">单片机部分</figcaption>
-</figure>
-<blockquote>
-<p>有关单片机管脚的含义和使用方法以及该LCD各个引脚的意义大家可以自行搜索学习，网上有很多相关的资料。</p>
-</blockquote>
-<h2 id="编写单片机的程序">4.编写单片机的程序</h2>
-<p>要编写单片机驱动LCD的程序，我们需要了解该LCD各个引脚的作用和如何驱动它显示图像，同上，网上有很多相关的手册供大家自行查询。那么这里我们直接使用一个已经封装好的驱动文件对该显示器进行底层操作，我们只关注应用层面的逻辑即可。</p>
-<p>源代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;lcd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;image.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uchar unsigned char</span></span><br><span class="line">sbit power=P2^<span class="number">0</span>;</span><br><span class="line">sbit pause=P2^<span class="number">1</span>;</span><br><span class="line">sbit <span class="built_in">clear</span>=P2^<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_off=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_pause=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">bit</span> is_clear=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (a--);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	uchar i,j,k;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">63</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[i]);</span><br><span class="line">		<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">		<span class="keyword">if</span> (i==<span class="number">20</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			j=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">while</span> (j--)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (k=i;k&lt;<span class="number">25</span>;k++)</span><br><span class="line">				&#123;</span><br><span class="line">					vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[k]);</span><br><span class="line">					<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (i==<span class="number">41</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			j=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">while</span> (j--)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (k=i;k&lt;<span class="number">45</span>;k++)</span><br><span class="line">				&#123;</span><br><span class="line">					vShowGraph(<span class="number">0</span>,<span class="number">0</span>,<span class="number">128</span>,<span class="number">8</span>,<span class="built_in">image</span>[k]);</span><br><span class="line">					<span class="built_in">delay</span>(<span class="number">5000</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>封装好的显示驱动.h文件</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;at89x51.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RST P1_2   <span class="comment">/*复位信号，低电平复位*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> E P1_5  <span class="comment">/*E 使能信号，为H或1时表示DRAM数据读到DB7~DB0，为L或0表示锁存DB7~DB0*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RW P1_4 <span class="comment">/* RW 为1  E 为1时数据被读到DB7~DB0，为0 且E为下降沿时DB7~DB0的数据被写入到IR（指令寄存器）或DR（数据寄存器）*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RS P1_3  <span class="comment">/* DI为1表示DB7~DB0为显示数据，为0表示DB7~DB0为显示指令数据*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CS1 P1_0   <span class="comment">/*CS1为1表示选择该芯片（右半屏）信号*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CS2 P1_1   <span class="comment">/*CS2为1表示选择该芯片（左半屏）信号*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDPORT P3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUSYSTATUS P3_7      <span class="comment">//忙状态位。//</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DISONSTATUS P3_5     <span class="comment">//显示开关状态位。//</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RSTSTATUS P3_4     <span class="comment">//复位状态位。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDSTARTROW 0xC0     <span class="comment">//设置起始行指令。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDPAGE 0xB8      <span class="comment">//设置页指令。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCDLINE 0x40      <span class="comment">//设置列指令。</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">bit</span> <span class="title">bCheckBusy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LCDPORT=<span class="number">0x00</span>;</span><br><span class="line">	RW=<span class="number">1</span>;</span><br><span class="line">	RS=<span class="number">0</span>;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> BUSYSTATUS; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vWriteData</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucData)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(bCheckBusy());</span><br><span class="line">	LCDPORT=<span class="number">0xFF</span>;</span><br><span class="line">	RW=<span class="number">0</span>;</span><br><span class="line">	RS=<span class="number">1</span>;</span><br><span class="line">	LCDPORT=ucData;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vWriteCMD</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCMD)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(bCheckBusy());</span><br><span class="line">	LCDPORT=<span class="number">0xFF</span>;</span><br><span class="line">	RW=<span class="number">0</span>;</span><br><span class="line">	RS=<span class="number">0</span>;</span><br><span class="line">	LCDPORT=ucCMD;</span><br><span class="line">	E=<span class="number">1</span>;</span><br><span class="line">	E=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vLCDInitialize</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	CS1=<span class="number">1</span>;</span><br><span class="line">	CS2=<span class="number">1</span>;</span><br><span class="line">	vWriteCMD(<span class="number">0x38</span>);   <span class="comment">//8位形式，两行字符。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x0F</span>);   <span class="comment">//开显示。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x01</span>);   <span class="comment">//清屏。</span></span><br><span class="line">	vWriteCMD(<span class="number">0x06</span>);   <span class="comment">//画面不动，光标右移。</span></span><br><span class="line">	vWriteCMD(LCDSTARTROW); <span class="comment">//设置起始行。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowCustomRow</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucWidth,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaRow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCount;       <span class="comment">//取值范围：ucPage:0～7；ucLine:0～127；</span></span><br><span class="line">	<span class="keyword">if</span>(ucLine&lt;<span class="number">64</span>)         <span class="comment">//ucWidth:0～127；ucLine+ucWidth&lt;1128。   </span></span><br><span class="line">	&#123;   </span><br><span class="line">		CS1=<span class="number">0</span>;   </span><br><span class="line">		CS2=<span class="number">1</span>;   </span><br><span class="line">		vWriteCMD(LCDPAGE+ucPage);   </span><br><span class="line">		vWriteCMD(LCDLINE+ucLine);   </span><br><span class="line">		<span class="keyword">if</span>((ucLine+ucWidth)&lt;<span class="number">64</span>)    </span><br><span class="line">		&#123;</span><br><span class="line">		    <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucWidth;ucCount++)     </span><br><span class="line">			vWriteData(*(ucaRow+ucCount));    </span><br><span class="line">		&#125;   </span><br><span class="line">		<span class="keyword">else</span>    </span><br><span class="line">		&#123;</span><br><span class="line">		    <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;<span class="number">64</span>-ucLine;ucCount++)     </span><br><span class="line">			vWriteData(*(ucaRow+ucCount));</span><br><span class="line">    		CS1=<span class="number">1</span>;    </span><br><span class="line">			CS2=<span class="number">0</span>;    </span><br><span class="line">			vWriteCMD(LCDPAGE+ucPage);    </span><br><span class="line">			vWriteCMD(LCDLINE);    </span><br><span class="line">			<span class="keyword">for</span>(ucCount=<span class="number">64</span>-ucLine;ucCount&lt;ucWidth;ucCount++)     </span><br><span class="line">				vWriteData(*(ucaRow+ucCount));    </span><br><span class="line">		&#125;  </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>   </span><br><span class="line">	&#123;</span><br><span class="line">	   CS1=<span class="number">1</span>;</span><br><span class="line">	   CS2=<span class="number">0</span>;   </span><br><span class="line">	   vWriteCMD(LCDPAGE+ucPage);   </span><br><span class="line">	   vWriteCMD(LCDLINE+ucLine<span class="number">-64</span>);   </span><br><span class="line">	   <span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucWidth;ucCount++)</span><br><span class="line">	       vWriteData(*(ucaRow+ucCount));   </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowOneChin</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaChinMap)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vShowCustomRow(ucPage,ucLine,<span class="number">16</span>,ucaChinMap);</span><br><span class="line">	vShowCustomRow(ucPage+<span class="number">1</span>,ucLine,<span class="number">16</span>,ucaChinMap+<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowOneChar</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> *ucaCharMap)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vShowCustomRow(ucPage,ucLine,<span class="number">8</span>,ucaCharMap);</span><br><span class="line">	vShowCustomRow(ucPage+<span class="number">1</span>,ucLine,<span class="number">8</span>,ucaCharMap+<span class="number">8</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vShowGraph</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPage,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucLine,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucWidth,<span class="keyword">unsigned</span> <span class="keyword">char</span> ucHigh,<span class="keyword">unsigned</span> <span class="keyword">char</span> * ucaGraph)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> ucCount;</span><br><span class="line">	<span class="keyword">for</span>(ucCount=<span class="number">0</span>;ucCount&lt;ucHigh;ucCount++)</span><br><span class="line">	   vShowCustomRow(ucPage+ucCount,ucLine,ucWidth,ucaGraph+ucCount*ucWidth);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="结束语附工程下载链接">5.结束语（附工程下载链接）</h2>
-<p>该项目是博主大三时做的一个电子线路设计，给我最大的启发就是我们在生活中看起来复杂的项目，实际上其背后的原理是简单的，就如视频的播放一样。但同时，简单的事情是复杂的，之后在做语音识别的时候，采用自己提取的语音特征去分辨数字0-9，整体的识别率不到30%。因此，判断一件事难易程度不能凭空去想，而是要思考其运行机制和模块构成，分析其实现原理从而对于每个项目有清晰的认知。</p>
-<p>工程文件下载：<a class="btn" href="https://download.kezhi.tech/document/cxk_video.zip" target="_blank" rel="noopener">
-            <i class="fa fa-download fa-lg fa-fw"></i>点击下载
-          </a></p>
-]]></content>
-      <categories>
-        <category>工程实践</category>
-        <category>单片机开发</category>
-      </categories>
-      <tags>
-        <tag>protues</tag>
-        <tag>单片机</tag>
       </tags>
   </entry>
   <entry>
@@ -1302,6 +1242,273 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
       <tags>
         <tag>python</tag>
         <tag>自动化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站日记</title>
+    <url>/%E5%BB%BA%E7%AB%99%E6%97%A5%E8%AE%B0/</url>
+    <content><![CDATA[<p>本站建立于2020-03-10，建站过程如下：</p>
+<ul>
+<li>2020-03-10
+<span class="label default">godaddy</span>上购买域名<span class="label default">kezhi.me</span>,以hexo为支持架设网站在GitHub仓库上</li>
+<li>2020-03-11 网站使用NexT主题，并不断加入元素进行美化</li>
+<li>2020-03-14 由于<span class="label info">GitHub</span>访问速度很慢，在腾讯云服务器上试部署</li>
+<li>2020-03-15
+购买<span class="label info">阿里云</span>服务器一年，将网站部署在其上，域名<span class="label danger">kezhi.me</span>在国内无法备案，购买并启用新域名<span class="label success">kezhi.tech</span>。</li>
+<li>2020-03-20 网站图片部署至<span class="label info">阿里云oss对象存储</span></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>摘抄</title>
+    <url>/%E6%91%98%E6%8A%84/</url>
+    <content><![CDATA[<h2 id="section">2021.04</h2>
+<blockquote class="blockquote-center">
+            <p>矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。</p>
+<p><b>-- 《银河帝国2：基地与帝国》</b></p>
+
+          </blockquote>
+<a id="more"></a>
+<h2 id="section-1">2021.06</h2>
+<blockquote class="blockquote-center">
+            <p>哭泣可能会持续整个夜晚，但是快乐会随早晨而到来</p>
+<p><b>-- 诗篇 30：5</b></p>
+
+          </blockquote>
+]]></content>
+      <categories>
+        <category>我爱读书</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+        <tag>摘抄</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数字图像处理（一）图像插值(python)</title>
+    <url>/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%E5%9B%BE%E5%83%8F%E6%8F%92%E5%80%BC/</url>
+    <content><![CDATA[<p>数字图像在当代社会有着非常重要的作用，图像的插值作为一种基本的图像处理方法，在很多情况下可以很好的提高图像分辨率，提升图像观感。图像的插值方法主要有以下三种：</p>
+<ul>
+<li>最近邻插值</li>
+<li>双线性插值</li>
+<li>双三次插值 <a id="more"></a></li>
+</ul>
+<h2 id="最近邻插值">最近邻插值</h2>
+<p>最近邻插值，顾名思义，在插值时寻找距离图像像素点最近的像素点的值进行图像像素的填充。这种图像插值方法运算速度快，可以很快的出结果。缺点是插值效果较差，由于直接采用最近的像素点的像素值作为插值数据，因此导致在图像边缘，过渡等颜色变化较为明显的地方会出现较为严重的锯齿。
+<img src="https://s1.ax1x.com/2020/03/13/8u4Uwn.png"
+alt="最近邻插值" /></p>
+<p>实现代码如下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;=<span class="number">2044</span> <span class="keyword">and</span> j&lt;=<span class="number">2044</span>:</span><br><span class="line">            result[i][j]=img[round(i/<span class="number">4</span>)][round(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[math.floor(i/<span class="number">4</span>)][math.floor(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="双线性插值">双线性插值</h2>
+<p>双线性插值采用线性的方法对图像进行插值,对于插值图像中的某个像素点，该点的像素值由距离其最近的四个像素值通过线性计算获得。插值得到的结果较好，计算量相比于最近邻要满，但远快于双三次插值，最终得到的插值图像结果除一些小细节之外和双三次插值得到的插值结果相当。可以用来快速，大量的插值图片。
+<img src="https://s1.ax1x.com/2020/03/13/8u5o40.png" alt="双线性插值" />
+实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">2044</span> <span class="keyword">and</span> j&lt;<span class="number">2044</span>:</span><br><span class="line">            l=i//<span class="number">4</span></span><br><span class="line">            k=j//<span class="number">4</span></span><br><span class="line">            a=i/<span class="number">4</span>-i//<span class="number">4</span></span><br><span class="line">            b=j/<span class="number">4</span>-j//<span class="number">4</span></span><br><span class="line">            result[i][j]=img[l][k][<span class="number">0</span>]*(<span class="number">1</span>-a)*(<span class="number">1</span>-b)+img[l+<span class="number">1</span>][k][<span class="number">0</span>]*a*(<span class="number">1</span>-b)+img[l][k+<span class="number">1</span>][<span class="number">0</span>]*(<span class="number">1</span>-a)*b+img[l+<span class="number">1</span>][k+<span class="number">1</span>][<span class="number">0</span>]*a*b</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[i//<span class="number">4</span>][j//<span class="number">4</span>][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>在图像边缘处采取最近邻插值</p>
+<h2 id="双三次插值">双三次插值</h2>
+<p>双三次插值采用非线性的计算方法，利用三次函数对于图像像素值进行计算。每个像素值由其周围的4*4即16个像素点的像素值计算获得。插值质量较高，运算速度较慢，Photoshop所用的插值方法就是双三次插值。
+<span class="math display">\[
+f_3(x,y)=\sum_{i=0}^3\sum_{j=0}^3a_{ij}x_iy_i
+\]</span></p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight</span><span class="params">(x)</span>:</span></span><br><span class="line">    a=<span class="number">-0.5</span></span><br><span class="line">    x=abs(x)</span><br><span class="line">    <span class="keyword">if</span> x&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span>  (a+<span class="number">2</span>)*x**<span class="number">3</span>-(a+<span class="number">3</span>)*x**<span class="number">2</span>+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> x&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> a*x**<span class="number">3</span><span class="number">-5</span>*a*x**<span class="number">2</span>+<span class="number">8</span>*a*x<span class="number">-4</span>*a</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&gt;<span class="number">4</span> <span class="keyword">and</span> i&lt;<span class="number">2040</span> <span class="keyword">and</span> j&gt;<span class="number">4</span> <span class="keyword">and</span> j&lt;<span class="number">2040</span>:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                <span class="keyword">for</span> w <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                    result[i][j]+=img[i//<span class="number">4</span>+k<span class="number">-1</span>][j//<span class="number">4</span>+w<span class="number">-1</span>][<span class="number">0</span>]*weight(i/<span class="number">4</span>-(i//<span class="number">4</span>+k<span class="number">-1</span>))*weight(j/<span class="number">4</span>-(j//<span class="number">4</span>+w<span class="number">-1</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[i//<span class="number">4</span>][j//<span class="number">4</span>][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="结束语">结束语</h2>
+<p>这三种插值方法是图像插值的传统方法，分辨率的提升是基于局部像素的综合运算得到空白像素的像素值。这样的插值方法可以满足当代社会的绝大部分需求，但如果要追求更好的插值效果，或是将图像分辨率成几十倍的扩充即超分辨率，这样的插值方法就不能满足需求。这时，就需要通过一些其他的方法例如机器学习来进行图片质量的提升。</p>
+]]></content>
+      <categories>
+        <category>理论学习</category>
+        <category>数字图像处理</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>数字图像</tag>
+        <tag>图像处理</tag>
+        <tag>插值</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>影片《字节跳动》创作阐述</title>
+    <url>/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/</url>
+    <content><![CDATA[<h2 id="序">序</h2>
+<p>《字节跳动》创作于2022年5月下旬至6月上旬，历时半个月。是截至目前为止本人参与的短片拍摄最高水平。</p>
+<p><img src="https://download.kezhi.tech/img/202206071619140.jpg" /></p>
+<a id="more"></a>
+<h2 id="影片概述">影片概述</h2>
+<p>《字节跳动》荣获了2022年西安交通大学硕士研究生通选课程<em>影视创作</em>课程最佳影片奖，影片中林宁的饰演者获得了最佳演员奖。该影片全片观看如下：</p>
+<iframe src="//player.bilibili.com/player.html?aid=257448226&amp;bvid=BV18Y411K7PV&amp;cid=743040841&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="工作流程">工作流程</h2>
+<p>本次影视创作过程主要包含以下步骤：</p>
+<ul>
+<li>确定故事题材及大纲</li>
+<li>撰写剧本</li>
+<li>根据剧本编写分镜</li>
+<li>确认拍摄地点</li>
+<li>制定拍摄计划，准备拍摄器材和道具</li>
+<li>影片拍摄</li>
+<li>后期制作</li>
+</ul>
+<p>后文将对上述过程进行逐一说明。</p>
+<p>在团队协作方面，主要用到了以下方案：</p>
+<ul>
+<li>腾讯会议：线上进行开会交流，不受地理空间限制</li>
+<li>石墨在线文档：多人在线共同编辑和查看文档，对文档有修改可以及时看到，便于文本工作的协同</li>
+<li>seafile
+网盘：可以挂载到电脑目录的云盘，本小组使用其来存放所有的拍摄素材，以便于后期与特效对文件进行访问。</li>
+</ul>
+<table>
+<tr>
+<td>
+<center>
+石墨文档
+</center>
+</td>
+<td>
+<center>
+Seafile
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202205301641610.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202205301643646.png">
+</center>
+</td>
+</tr>
+</table>
+<h3 id="确定故事题材及大纲">确定故事题材及大纲</h3>
+<p>这一步是整个创作中最需要头脑风暴和创意的部分。本小组都是理工科专业的学生，相对来说这一步较为困难。本小组在课上讨论环节中考虑了很多题材，悬疑，爱情，科幻，乃至关于人生意义的思考。科幻的拍摄和后期难度略高，第一个被pass。关于人生的意义由于组内成员难以达成共识，遂也被放弃。最后便是在悬疑和爱情题材上进行讨论，讨论过程中突然想到我们是人工智能背景的学生，于是便将目光放在了人工智能与人恋爱的这样一个故事上。</p>
+<p>故事的脉络并不复杂，讲的是人工智能男主与人类女主之间产生感情的故事。男主的特征已经很明显了，就是人工智能。这时需要给女主赋予一定的特点，人工智能最通常的特点就是没有显式的感情，那么赋予女主读心术的能力便可以将男主在女主的世界中的特殊性表现出来。此外，还需要考虑两人之间产生感情的动机，初步考虑如下：</p>
+<ul>
+<li>女主因为能够读到他人的心声发现大家往往都是心口不一的，而男主她无法读到心声，便对男主产生好奇，两人成为好友之后，随着男主的陪伴逐渐对男主产生感情。</li>
+<li>男主是一次强人工智能计划的产物，理论上来说没有显式的情感，与女主的相处的经历构成了他感情产生的基础，从而在此之上产生了感情。</li>
+</ul>
+<p>至此，本次影视创作的故事核心完成。</p>
+<h3 id="撰写剧本">撰写剧本</h3>
+<p>撰写剧本是将大纲丰富，完善成一个完整故事的过程。换句话说也就是逐步敲定细节。整个过程本小组采用<strong>腾讯会议+石墨在线文档</strong>的方式进行。主要进行了两次会议来讨论剧本，第一次会议完成了剧本的草稿，第二次会议确认了剧本中的一些细节（如男女主如何熟悉，故事如何转折以及最终如何收尾等问题）。此外，剧本在撰写分镜，拍摄计划以及实际拍摄过程中，也经过了多次修改。这里面挑几个有意思的过程进行阐述：</p>
+<ol type="1">
+<li>对于男女主名字的确定。林宁，莫迟来源于 Machine Learning
+的谐音。此外，由于人工智能与机器人要求每位研究生早起打卡，莫迟也有该所研究生莫要迟到之意。</li>
+<li>关于收尾部分的那句心声修改过很多次，有“林宁，我喜欢你”，“林宁，我想我明白喜欢是什么意思了”等等，最终敲定为“林宁，我知道什么是喜欢了”。一方面，林宁读到了莫迟的心声表现出莫迟有了感情，另一方面，也是一种留白，这里没有直接交代莫迟对于林宁的感情，留给观众想象空间。</li>
+<li>关于片名。字节跳动这个名字是随着故事情节自然而然出来的，字节代表人工智能，跳动代表其有了感情。故字节跳动十分贴切。可能字节跳动这家AI公司的创始人也有这样的想法在里面？</li>
+</ol>
+<h3 id="根据剧本编写分镜">根据剧本编写分镜</h3>
+<p>写分镜是个看似简单的工作，将剧本写成一幕一幕的分镜即可。然而，如果写的分镜存在问题，那么会给拍摄带来很大的不便。由于之前没有拍摄影视作品的经验，本小组在写分镜时着重考虑了对后续拍摄的指导作用，对于大部分画面采用了现场排练+手机试拍的方式来确认画面如何构成，摄像机大概在什么位置等分镜信息。</p>
+<h3 id="确认拍摄地点">确认拍摄地点</h3>
+<p>在写分镜时对拍摄地点有一定的构想，例如在一个公园里，在教室，在走廊等等。然而如果按照这样的分镜来指导拍摄，拍摄期间必然有大量的时间耗费在寻找合适的场地上，大大降低了拍摄效率。因此，在确定了拍摄时间之后，我，靖雪，子谦便提前寻找合适的场地和时间。本小组拍摄的影片主要涉及如下几个地点：教室，学校道路，公园，天台，宿舍楼下，宿舍内。地点选择过程如下：</p>
+<ul>
+<li>教室考虑了涵英楼西辅楼的阶梯教室，选择该地的原因有两点：一是这里的阶梯教室比较有青春校园的感觉，室内光线也较好；二是傍晚室外的光透过窗户打进来，可以得到一个很好的拍摄效果（然而在实际拍摄那天室外光线不好没有用上）。</li>
+<li>学校道路初步考虑了涵英楼南面的宽阔道路，弘理楼门口的廊道，以及三号楼外面的廊道。最终初步选择了三号楼北面的廊道，因为其附近没有大量的共享单车影响画面（弘理楼附近有很多共享单车），附近还有大量的绿植形成光斑，比较好看。最终拍摄时因为那里的光比较暗，选择了三号楼东边的廊道，并且该路与涵英楼南面的宽阔道路相连接，可以很好的与剧情对应衔接。</li>
+<li>公园的选址是个很大的问题，创新港附近真的是什么都没有！！！并且创新港内本身的绿地也没有风景特别好的地方。最终决定在所谓的创新港胭脂坡附近进行拍摄。</li>
+<li>天台这个地点是在寻找场地的时候确定的，最开始是想找一个风景好看的地方，最后到那天傍晚的时候发现夕阳很好看，就决定要不要去天台试试，结果效果确实不错。并且运气很好，在实际拍摄的那天夕阳更好看了。</li>
+<li>宿舍楼下，这个地点确认了很久，因为这场戏涉及到猫的出境，不能离猫的居住地太远。并且杂物不能太多。在B南区宿舍确定食堂南边的路作为拍摄地点。</li>
+<li>宿舍内，这个相对很简单了，靖雪的宿舍布置非常漂亮，拍出来很好看，Nice！</li>
+<li>此外，在主要剧情中间还穿插着男女主一起出游的场景，为了将其拍摄的有现实生活的气息也有一些浪漫色彩在里面，选用了商场的场景，创新港绿地的场景以及米兰楼的场景来进行拍摄。在设计这些场景的时候我们发现，太多的镜头下是在一起走路:joy:：两人谈心在散步，去商场一起走路，在爱因斯坦旁边也在走路，在米兰楼还一起走路参观，总之好像两人除了走路就还是走路:happy:（虽然据有恋爱经历的人说确实会经常散步），为了让这些场景的戏显得不那么一致单调，我们对每个场景都进行了一定的设计。商场改为了一起抓娃娃（然而道客商场没有抓娃娃机改成吃饭了），在爱因斯坦雕像旁加入了女主模仿爱因斯坦的戏，米兰楼有转椅于是突发奇想加入了办公室转椅竞速赛的镜头。从而使这些画面看起来比较丰富。</li>
+</ul>
+<h3
+id="制定拍摄计划准备拍摄器材和道具">制定拍摄计划，准备拍摄器材和道具</h3>
+<p>本次拍摄所用到的器材和道具如下：</p>
+<p>录像设备：Canon 600D×1，Canon 70D×1，Canon 6D Mark II×1</p>
+<p>录音设备：品士无线领夹麦克风 [一拖一] [type-c
+接口]×2，手机×2（作为麦克风的接收设备）</p>
+<p>稳定设备：三脚架×2，相机稳定器</p>
+<p>场记板：实物场记板×1，iPad场记板×2（场记软件：<em>轻松场记</em>）</p>
+<p>动物：布偶（猫）×1</p>
+<p>道具：鸽子粮×1，画×1，猫猫水杯×1，服装若干，《机器学习》×1，《深度学习》×1，笔记本（Notebook）×1，笔记本（laptop）×1</p>
+<hr />
+<p>拍摄道具的准备是分阶段进行的，在确定拍摄之后，相机，录音设备，稳定设备以及场记板这些器材的准备就被提上日程；剧情中的关键道具是在讨论剧本和分镜的过程中确定的，如鸽子粮，猫，画等；剩下的一些道具是具体布景和拍摄时确定的，如服装，笔记本，书本等。</p>
+<p>拍摄计划对于影片拍摄的高效进行非常重要。本小组的男女主并非居住在创新港，因此拍摄时间十分紧张，需要在一天半的时间内完成全部的拍摄。因此，拍摄计划以及拍摄前的准备都是按照尽可能节省拍摄时间而准备的。在制定拍摄计划时，首先考虑如下原则：</p>
+<ul>
+<li>对于有时间要求的场优先安排（如夕阳下的天台）</li>
+<li>将同一地点的戏一次性拍完，从而节省转移场地的时间</li>
+<li>具有剧情衔接的戏尽量放在一起，以保证演员对于剧情的理解</li>
+<li>多机位多角度拍摄，多设备录音，保证素材的冗余</li>
+</ul>
+<h3 id="影片拍摄">影片拍摄</h3>
+<p>拍摄是影片从创意和计划到现实的过程，影片的拍摄过程需要一套严格遵循的流程来保证拍摄出素材的可用性与规范性。由于拍摄的时间定在了周五和周六两天，恰巧周五那天的影视创作课程讲拍摄的部分。我们在课前的拍摄的过程中采取了以下流程：</p>
+<ol type="1">
+<li>到达拍摄地点，制作团队每人持一份拍摄计划单，演员持剧本</li>
+<li>导演根据拍摄计划单告知制作团队及演员要拍的戏，并且给演员讲戏以确保演员对情绪理解到位</li>
+<li>摄影师根据导演要求确定机位和拍摄路径</li>
+<li>录音师根据演员的动作和拍摄的角度确定麦克风的放置位置</li>
+<li>各部门就绪，场记拿着场记板放在摄影机前。</li>
+<li>导演喊“三、二、一，开始”。喊“三”时录音师和摄像师开机录制，喊到“一”时场记从摄像机前移走。</li>
+<li>导演喊停，录音师和摄影师停止录制</li>
+<li>录音师对录音文件重命名，格式为 "n_k_r次" <span
+class="math inline">\(n,k,r \in N^+\)</span></li>
+</ol>
+<p>而在结束了周五的录制之后，在教室听课时老师降到了拍摄流程的部分，考虑到我们团队自己的拍摄流程，总结下来有几个问题：</p>
+<ol type="1">
+<li>之前的拍摄中，场记板放在摄影机前，保证了场记板的清晰可见。但是在摄像机的拍摄主体较远时，会导致场记板在拿走后，相机需要大概3秒的时间再次对焦，也就是说相机拍摄到的前3秒画面基本是无法使用的。上课时听了老师的讲述，才反应过来需要将场记板放到相机的焦点附近，以保证在拍摄过程中相机的焦点一致</li>
+<li>录音文件一般来说相对较小，可以较早开机。</li>
+<li>导演喊“三、二、一，开始”的同时，也需要观察现场各部门的准备情况和演员的就绪情况，不能只顾着喊开始。</li>
+<li>每次画面拍摄完都需要回看。在之前的拍摄中，导演在拍摄完毕后只和摄像确认了有没有拍摄成功，而没有逐一确认拍摄画面。导致在后期过程中有一些画面由于过曝或者过暗无法使用。造成了素材的损失。</li>
+</ol>
+<p>此外，在拍摄过程中比较有意思的一点就是藏麦克风了。录音设备要在保证不出现在拍摄画面里的情况下尽可能离演员近。本小组采用的录音设备是一种无线领夹式的麦克风，本身的体积较小，藏匿空间较大。在拍摄过程中采取了以下几种方案</p>
+<ul>
+<li>女主和室友一起走路上课时，麦克风放在女主抱着的书与衣服的间隔处</li>
+<li>上课时，麦克风放在打开的书页下面</li>
+<li>猫的那个镜头里面，两人对话时麦克风在男主的手上</li>
+<li>男主有一件胸前有口袋的衣服，当穿这身衣服出镜时，麦克风在这个口袋里</li>
+<li>两人在公园边走便聊天时，正面和背面各拍摄了一遍。拍正面视角时麦克风夹在后领，拍背面视角的时候麦克风夹在胸前（拍这场戏的时候蚊子真的好多，并且由于是一场关键戏反复拍了很多次，被咬出了工伤:cry:）</li>
+<li>两人坐在山坡上聊天时，麦克风放在怀里</li>
+</ul>
+<h3 id="后期制作">后期制作</h3>
+<p>本片的后期相对来说工作量较大，涉及到影片的剪辑，对于配音（心声）的处理，特效的制作，回忆画面的效果等。因此将工期工作分给了三个小组成员来进行。分别是艺馨，靖雪和我。其中，靖雪负责影片前半部分的开场、剪辑、音频效果及转场；艺馨负责影片后半部分的剪辑，音频效果，回忆画面效果及专场；我负责特效，字幕以及片尾。这样的分工最大程度上减少了工作之间的耦合性，保证了各部分可以独立并行进行，大大提高了生产效率。</p>
+<p>其中，所有的素材均存按照场次和镜头号分文件夹放在上文提到的 Seafile
+网盘中。在后期过程中，遵循的第一原则就是永远不在原素材上进行任何的修改，所有的修改过程在本地进行。网盘只用于素材的存放以及成片的管理。在这样的原则指导之下，三个人之间的协作没有出现大的问题。</p>
+<p>此外，在开始剪辑之初，本小组的三名后期人员便建立微信群方便相互沟通。在经过初步的剪辑之后，这个小组迎来了一名不速之客——我。她并不进行任何剪辑工作，进这个群的初衷是为了尽快看到成片而来不断地push剪辑小组的成员。不过，后来她起到的作用远不止于次，在不断催后期小组工作的基础上，她对于每一个剪辑的片段都会进行评价和改进的建议。这从现在看来是非常必要的，由于剪辑师对于一个片段可能会反复进行观看和改动，从而可能会忽略影片在整体上的观感，也就是观众在看到影片时候的第一感受。而这位“不速之客”的到来使得每一个片段都会有一个观众来提建议，这对于影片后期的成片质量是有很大的作用的。</p>
+<h2 id="器材设备使用">器材设备使用</h2>
+<p>本次拍摄使用到的器材如下：</p>
+<p>录像设备：Canon 600D×1，Canon 70D×1，Canon 6D Mark II×1</p>
+<p>录音设备：品士无线领夹麦克风 [一拖一] [type-c
+接口]×2，手机×2（作为麦克风的接收设备）</p>
+<p>稳定设备：三脚架×2，相机稳定器</p>
+<hr />
+<p>关于器材的详细说明以及使用情况见上文工作流程中关于“准备拍摄器材和道具”以及“影片拍摄”部分。</p>
+<p>一些补充：</p>
+<ul>
+<li>相机稳定器是租来的，但是不好用，调平一次需要花费很久的时间。后来放弃使用改为手持。结果拍出来的有一点抖动的画面其实比完全静态的画面表现力要更好的。另一方面，摄影师手持相机的能力也大大提升</li>
+<li>三脚架在拍摄过程中起到了很大的作用，一些摇的镜头都是由三脚架提供的硬件支持</li>
+</ul>
+<h2 id="问题解决方案及经验总结">问题，解决方案及经验总结</h2>
+<p>本次影视创作让我们小组经历了一次从一个创意到一部影片的全过程，在此过程中我们遇到了很多困难和挑战，而想办法克服这些困难的过程就是我们成长的过程。在此，将创作过程中遇到的问题，解决方案和经验记录如下。</p>
+<h3 id="镜头缺失的问题">1. 镜头缺失的问题</h3>
+<p>由于男主线的剧本剪辑并没有在之前想的特别详细，导致在拍摄结束后剪辑男主线的镜头的衔接上有一定的突兀。而男女主演员并不常驻在创新港，补拍镜头的成本过高。此时考虑采用一些第一视角以及部分特写的补拍来补足画面（反正看不见脸）。于是就出现了影片后面部分第一视角跑步的衔接镜头<del>（我抱着相机在创新港到处跑的样子真的很像呆逼）</del>。此外，拍摄过程中涉及到女主送男主画的镜头，然而这副画的内容是在送画这场戏之后拍摄的。为了保证拍摄的顺利进行并且避免补拍成本，在拍摄时使用白纸来充当道具，之后再由手替演员来补足看画的特写。</p>
+<h3 id="影片拍摄过程中存在穿帮镜头">2. 影片拍摄过程中存在穿帮镜头</h3>
+<p>在拍摄电梯镜头时，电梯内部存在镜面反射，这样在相机拍摄时无可避免会照到摄影师入镜，如下左图所示。并且此时的画面还在不断地移动，无法使用简单地覆盖来进行消除。在查找了很多方案之后采取<a
+href="https://www.bilibili.com/video/BV1KE411X7gY?share_source=copy_web">【Premiere】pr移除场景中的杂物_哔哩哔哩_bilibili</a>
+中的方案对拍摄到的人像进行移除，移除结果如右图所示</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206052135720.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206052135469.png">
+</center>
+</td>
+</tr>
+</table>
+]]></content>
+      <categories>
+        <category>工程实践</category>
+        <category>影视创作</category>
+      </categories>
+      <tags>
+        <tag>创作</tag>
+        <tag>影视创作</tag>
+        <tag>微电影</tag>
+        <tag>协作</tag>
       </tags>
   </entry>
   <entry>
@@ -2536,270 +2743,63 @@ class="math inline">\(\cup H_1\supset [a,b]\supset
       </tags>
   </entry>
   <entry>
-    <title>建站日记</title>
-    <url>/%E5%BB%BA%E7%AB%99%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<p>本站建立于2020-03-10，建站过程如下：</p>
-<ul>
-<li>2020-03-10
-<span class="label default">godaddy</span>上购买域名<span class="label default">kezhi.me</span>,以hexo为支持架设网站在GitHub仓库上</li>
-<li>2020-03-11 网站使用NexT主题，并不断加入元素进行美化</li>
-<li>2020-03-14 由于<span class="label info">GitHub</span>访问速度很慢，在腾讯云服务器上试部署</li>
-<li>2020-03-15
-购买<span class="label info">阿里云</span>服务器一年，将网站部署在其上，域名<span class="label danger">kezhi.me</span>在国内无法备案，购买并启用新域名<span class="label success">kezhi.tech</span>。</li>
-<li>2020-03-20 网站图片部署至<span class="label info">阿里云oss对象存储</span></li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>影片《字节跳动》创作阐述</title>
-    <url>/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/</url>
-    <content><![CDATA[<h2 id="序">序</h2>
-<p>《字节跳动》创作于2022年5月下旬至6月上旬，历时半个月。是截至目前为止本人参与的短片拍摄最高水平。</p>
-<p><img src="https://download.kezhi.tech/img/202206071619140.jpg" /></p>
+    <title>Git常用命令</title>
+    <url>/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="git文件管理系统">Git文件管理系统</h2>
+<blockquote>
+<p>本博客为转载，原文地址<a
+href="https://www.cnblogs.com/chenwolong/p/GIT.html">https://www.cnblogs.com/chenwolong/p/GIT.html</a></p>
+</blockquote>
+<p><img src="http://download.kezhi.tech/img/20200424230007.png" /></p>
 <a id="more"></a>
-<h2 id="影片概述">影片概述</h2>
-<p>《字节跳动》荣获了2022年西安交通大学硕士研究生通选课程<em>影视创作</em>课程最佳影片奖，影片中林宁的饰演者获得了最佳演员奖。该影片全片观看如下：</p>
-<iframe src="//player.bilibili.com/player.html?aid=257448226&amp;bvid=BV18Y411K7PV&amp;cid=743040841&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
-</iframe>
-<h2 id="工作流程">工作流程</h2>
-<p>本次影视创作过程主要包含以下步骤：</p>
+<blockquote>
 <ul>
-<li>确定故事题材及大纲</li>
-<li>撰写剧本</li>
-<li>根据剧本编写分镜</li>
-<li>确认拍摄地点</li>
-<li>制定拍摄计划，准备拍摄器材和道具</li>
-<li>影片拍摄</li>
-<li>后期制作</li>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：仓库区（或本地仓库）</li>
+<li>Remote：远程仓库</li>
 </ul>
-<p>后文将对上述过程进行逐一说明。</p>
-<p>在团队协作方面，主要用到了以下方案：</p>
-<ul>
-<li>腾讯会议：线上进行开会交流，不受地理空间限制</li>
-<li>石墨在线文档：多人在线共同编辑和查看文档，对文档有修改可以及时看到，便于文本工作的协同</li>
-<li>seafile
-网盘：可以挂载到电脑目录的云盘，本小组使用其来存放所有的拍摄素材，以便于后期与特效对文件进行访问。</li>
-</ul>
-<table>
-<tr>
-<td>
-<center>
-石墨文档
-</center>
-</td>
-<td>
-<center>
-Seafile
-</center>
-</td>
-</tr>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/202205301641610.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/202205301643646.png">
-</center>
-</td>
-</tr>
-</table>
-<h3 id="确定故事题材及大纲">确定故事题材及大纲</h3>
-<p>这一步是整个创作中最需要头脑风暴和创意的部分。本小组都是理工科专业的学生，相对来说这一步较为困难。本小组在课上讨论环节中考虑了很多题材，悬疑，爱情，科幻，乃至关于人生意义的思考。科幻的拍摄和后期难度略高，第一个被pass。关于人生的意义由于组内成员难以达成共识，遂也被放弃。最后便是在悬疑和爱情题材上进行讨论，讨论过程中突然想到我们是人工智能背景的学生，于是便将目光放在了人工智能与人恋爱的这样一个故事上。</p>
-<p>故事的脉络并不复杂，讲的是人工智能男主与人类女主之间产生感情的故事。男主的特征已经很明显了，就是人工智能。这时需要给女主赋予一定的特点，人工智能最通常的特点就是没有显式的感情，那么赋予女主读心术的能力便可以将男主在女主的世界中的特殊性表现出来。此外，还需要考虑两人之间产生感情的动机，初步考虑如下：</p>
-<ul>
-<li>女主因为能够读到他人的心声发现大家往往都是心口不一的，而男主她无法读到心声，便对男主产生好奇，两人成为好友之后，随着男主的陪伴逐渐对男主产生感情。</li>
-<li>男主是一次强人工智能计划的产物，理论上来说没有显式的情感，与女主的相处的经历构成了他感情产生的基础，从而在此之上产生了感情。</li>
-</ul>
-<p>至此，本次影视创作的故事核心完成。</p>
-<h3 id="撰写剧本">撰写剧本</h3>
-<p>撰写剧本是将大纲丰富，完善成一个完整故事的过程。换句话说也就是逐步敲定细节。整个过程本小组采用<strong>腾讯会议+石墨在线文档</strong>的方式进行。主要进行了两次会议来讨论剧本，第一次会议完成了剧本的草稿，第二次会议确认了剧本中的一些细节（如男女主如何熟悉，故事如何转折以及最终如何收尾等问题）。此外，剧本在撰写分镜，拍摄计划以及实际拍摄过程中，也经过了多次修改。这里面挑几个有意思的过程进行阐述：</p>
+</blockquote>
+<h2 id="新建代码仓库">新建代码仓库</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2>
+<p>Git的设置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--<span class="keyword">global</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--<span class="keyword">global</span>] user.name <span class="string">"[name]"</span></span><br><span class="line">$ git config [--<span class="keyword">global</span>] user.email <span class="string">"[email address]"</span></span><br></pre></td></tr></table></figure>
+<h2 id="增加删除文件">增加/删除文件</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+<h2 id="代码提交">代码提交</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure>
+<h2 id="分支">分支</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --set-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地存在一个分支，名称叫：develop_chen，但远程没有怎么办？</span></span><br><span class="line">$ git push origin develop_chen</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这样就在远程建立一个和本地一样的分支</span></span><br><span class="line"></span><br><span class="line">$ git branch --set-upstream-to=origin/develop  develop  本地分支和远程分支简历跟踪关系</span><br></pre></td></tr></table></figure>
+<h2 id="标签">标签</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
+<h2 id="查看信息">查看信息</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史</span></span><br><span class="line">$ git log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git log --stat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git log -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git log [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件</span></span><br><span class="line">$ git log [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git log --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git log -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git log <span class="number">-5</span> --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的代码差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">"@&#123;0 day ago&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交</span></span><br><span class="line">$ git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从本地master拉取代码更新当前分支：branch 一般为master</span></span><br><span class="line">$ git rebase [branch]</span><br></pre></td></tr></table></figure>
+<h2 id="远程同步">远程同步</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git remote update  --更新远程仓储</span><br><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
+<h2 id="撤销">撤销</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+<h2 id="其他">其他</h2>
 <ol type="1">
-<li>对于男女主名字的确定。林宁，莫迟来源于 Machine Learning
-的谐音。此外，由于人工智能与机器人要求每位研究生早起打卡，莫迟也有该所研究生莫要迟到之意。</li>
-<li>关于收尾部分的那句心声修改过很多次，有“林宁，我喜欢你”，“林宁，我想我明白喜欢是什么意思了”等等，最终敲定为“林宁，我知道什么是喜欢了”。一方面，林宁读到了莫迟的心声表现出莫迟有了感情，另一方面，也是一种留白，这里没有直接交代莫迟对于林宁的感情，留给观众想象空间。</li>
-<li>关于片名。字节跳动这个名字是随着故事情节自然而然出来的，字节代表人工智能，跳动代表其有了感情。故字节跳动十分贴切。可能字节跳动这家AI公司的创始人也有这样的想法在里面？</li>
+<li>将开发分支代码合入到master中</li>
 </ol>
-<h3 id="根据剧本编写分镜">根据剧本编写分镜</h3>
-<p>写分镜是个看似简单的工作，将剧本写成一幕一幕的分镜即可。然而，如果写的分镜存在问题，那么会给拍摄带来很大的不便。由于之前没有拍摄影视作品的经验，本小组在写分镜时着重考虑了对后续拍摄的指导作用，对于大部分画面采用了现场排练+手机试拍的方式来确认画面如何构成，摄像机大概在什么位置等分镜信息。</p>
-<h3 id="确认拍摄地点">确认拍摄地点</h3>
-<p>在写分镜时对拍摄地点有一定的构想，例如在一个公园里，在教室，在走廊等等。然而如果按照这样的分镜来指导拍摄，拍摄期间必然有大量的时间耗费在寻找合适的场地上，大大降低了拍摄效率。因此，在确定了拍摄时间之后，我，靖雪，子谦便提前寻找合适的场地和时间。本小组拍摄的影片主要涉及如下几个地点：教室，学校道路，公园，天台，宿舍楼下，宿舍内。地点选择过程如下：</p>
-<ul>
-<li>教室考虑了涵英楼西辅楼的阶梯教室，选择该地的原因有两点：一是这里的阶梯教室比较有青春校园的感觉，室内光线也较好；二是傍晚室外的光透过窗户打进来，可以得到一个很好的拍摄效果（然而在实际拍摄那天室外光线不好没有用上）。</li>
-<li>学校道路初步考虑了涵英楼南面的宽阔道路，弘理楼门口的廊道，以及三号楼外面的廊道。最终初步选择了三号楼北面的廊道，因为其附近没有大量的共享单车影响画面（弘理楼附近有很多共享单车），附近还有大量的绿植形成光斑，比较好看。最终拍摄时因为那里的光比较暗，选择了三号楼东边的廊道，并且该路与涵英楼南面的宽阔道路相连接，可以很好的与剧情对应衔接。</li>
-<li>公园的选址是个很大的问题，创新港附近真的是什么都没有！！！并且创新港内本身的绿地也没有风景特别好的地方。最终决定在所谓的创新港胭脂坡附近进行拍摄。</li>
-<li>天台这个地点是在寻找场地的时候确定的，最开始是想找一个风景好看的地方，最后到那天傍晚的时候发现夕阳很好看，就决定要不要去天台试试，结果效果确实不错。并且运气很好，在实际拍摄的那天夕阳更好看了。</li>
-<li>宿舍楼下，这个地点确认了很久，因为这场戏涉及到猫的出境，不能离猫的居住地太远。并且杂物不能太多。在B南区宿舍确定食堂南边的路作为拍摄地点。</li>
-<li>宿舍内，这个相对很简单了，靖雪的宿舍布置非常漂亮，拍出来很好看，Nice！</li>
-<li>此外，在主要剧情中间还穿插着男女主一起出游的场景，为了将其拍摄的有现实生活的气息也有一些浪漫色彩在里面，选用了商场的场景，创新港绿地的场景以及米兰楼的场景来进行拍摄。在设计这些场景的时候我们发现，太多的镜头下是在一起走路:joy:：两人谈心在散步，去商场一起走路，在爱因斯坦旁边也在走路，在米兰楼还一起走路参观，总之好像两人除了走路就还是走路:happy:（虽然据有恋爱经历的人说确实会经常散步），为了让这些场景的戏显得不那么一致单调，我们对每个场景都进行了一定的设计。商场改为了一起抓娃娃（然而道客商场没有抓娃娃机改成吃饭了），在爱因斯坦雕像旁加入了女主模仿爱因斯坦的戏，米兰楼有转椅于是突发奇想加入了办公室转椅竞速赛的镜头。从而使这些画面看起来比较丰富。</li>
-</ul>
-<h3
-id="制定拍摄计划准备拍摄器材和道具">制定拍摄计划，准备拍摄器材和道具</h3>
-<p>本次拍摄所用到的器材和道具如下：</p>
-<p>录像设备：Canon 600D×1，Canon 70D×1，Canon 6D Mark II×1</p>
-<p>录音设备：品士无线领夹麦克风 [一拖一] [type-c
-接口]×2，手机×2（作为麦克风的接收设备）</p>
-<p>稳定设备：三脚架×2，相机稳定器</p>
-<p>场记板：实物场记板×1，iPad场记板×2（场记软件：<em>轻松场记</em>）</p>
-<p>动物：布偶（猫）×1</p>
-<p>道具：鸽子粮×1，画×1，猫猫水杯×1，服装若干，《机器学习》×1，《深度学习》×1，笔记本（Notebook）×1，笔记本（laptop）×1</p>
-<hr />
-<p>拍摄道具的准备是分阶段进行的，在确定拍摄之后，相机，录音设备，稳定设备以及场记板这些器材的准备就被提上日程；剧情中的关键道具是在讨论剧本和分镜的过程中确定的，如鸽子粮，猫，画等；剩下的一些道具是具体布景和拍摄时确定的，如服装，笔记本，书本等。</p>
-<p>拍摄计划对于影片拍摄的高效进行非常重要。本小组的男女主并非居住在创新港，因此拍摄时间十分紧张，需要在一天半的时间内完成全部的拍摄。因此，拍摄计划以及拍摄前的准备都是按照尽可能节省拍摄时间而准备的。在制定拍摄计划时，首先考虑如下原则：</p>
-<ul>
-<li>对于有时间要求的场优先安排（如夕阳下的天台）</li>
-<li>将同一地点的戏一次性拍完，从而节省转移场地的时间</li>
-<li>具有剧情衔接的戏尽量放在一起，以保证演员对于剧情的理解</li>
-<li>多机位多角度拍摄，多设备录音，保证素材的冗余</li>
-</ul>
-<h3 id="影片拍摄">影片拍摄</h3>
-<p>拍摄是影片从创意和计划到现实的过程，影片的拍摄过程需要一套严格遵循的流程来保证拍摄出素材的可用性与规范性。由于拍摄的时间定在了周五和周六两天，恰巧周五那天的影视创作课程讲拍摄的部分。我们在课前的拍摄的过程中采取了以下流程：</p>
-<ol type="1">
-<li>到达拍摄地点，制作团队每人持一份拍摄计划单，演员持剧本</li>
-<li>导演根据拍摄计划单告知制作团队及演员要拍的戏，并且给演员讲戏以确保演员对情绪理解到位</li>
-<li>摄影师根据导演要求确定机位和拍摄路径</li>
-<li>录音师根据演员的动作和拍摄的角度确定麦克风的放置位置</li>
-<li>各部门就绪，场记拿着场记板放在摄影机前。</li>
-<li>导演喊“三、二、一，开始”。喊“三”时录音师和摄像师开机录制，喊到“一”时场记从摄像机前移走。</li>
-<li>导演喊停，录音师和摄影师停止录制</li>
-<li>录音师对录音文件重命名，格式为 "n_k_r次" <span
-class="math inline">\(n,k,r \in N^+\)</span></li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git checkout dev           <span class="comment">#切换到dev开发分支</span></span><br><span class="line">$ git pull</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge dev              <span class="comment">#合并dev分支到master上</span></span><br><span class="line">$ git push origin master     <span class="comment">#将代码推到master上</span></span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>将master的代码同步更新到开发分支中。merge方法：保证主干提交线干净(可以安全回溯)</li>
 </ol>
-<p>而在结束了周五的录制之后，在教室听课时老师降到了拍摄流程的部分，考虑到我们团队自己的拍摄流程，总结下来有几个问题：</p>
-<ol type="1">
-<li>之前的拍摄中，场记板放在摄影机前，保证了场记板的清晰可见。但是在摄像机的拍摄主体较远时，会导致场记板在拿走后，相机需要大概3秒的时间再次对焦，也就是说相机拍摄到的前3秒画面基本是无法使用的。上课时听了老师的讲述，才反应过来需要将场记板放到相机的焦点附近，以保证在拍摄过程中相机的焦点一致</li>
-<li>录音文件一般来说相对较小，可以较早开机。</li>
-<li>导演喊“三、二、一，开始”的同时，也需要观察现场各部门的准备情况和演员的就绪情况，不能只顾着喊开始。</li>
-<li>每次画面拍摄完都需要回看。在之前的拍摄中，导演在拍摄完毕后只和摄像确认了有没有拍摄成功，而没有逐一确认拍摄画面。导致在后期过程中有一些画面由于过曝或者过暗无法使用。造成了素材的损失。</li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ git checkout dev           <span class="comment">#切换到dev开发分支</span></span><br><span class="line">$ git pull</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge dev              <span class="comment">#合并dev分支到master上</span></span><br><span class="line">$ git push origin master     <span class="comment">#将代码推到master上</span></span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>生成可被发布的压缩包</li>
 </ol>
-<p>此外，在拍摄过程中比较有意思的一点就是藏麦克风了。录音设备要在保证不出现在拍摄画面里的情况下尽可能离演员近。本小组采用的录音设备是一种无线领夹式的麦克风，本身的体积较小，藏匿空间较大。在拍摄过程中采取了以下几种方案</p>
-<ul>
-<li>女主和室友一起走路上课时，麦克风放在女主抱着的书与衣服的间隔处</li>
-<li>上课时，麦克风放在打开的书页下面</li>
-<li>猫的那个镜头里面，两人对话时麦克风在男主的手上</li>
-<li>男主有一件胸前有口袋的衣服，当穿这身衣服出镜时，麦克风在这个口袋里</li>
-<li>两人在公园边走便聊天时，正面和背面各拍摄了一遍。拍正面视角时麦克风夹在后领，拍背面视角的时候麦克风夹在胸前（拍这场戏的时候蚊子真的好多，并且由于是一场关键戏反复拍了很多次，被咬出了工伤:cry:）</li>
-<li>两人坐在山坡上聊天时，麦克风放在怀里</li>
-</ul>
-<h3 id="后期制作">后期制作</h3>
-<p>本片的后期相对来说工作量较大，涉及到影片的剪辑，对于配音（心声）的处理，特效的制作，回忆画面的效果等。因此将工期工作分给了三个小组成员来进行。分别是艺馨，靖雪和我。其中，靖雪负责影片前半部分的开场、剪辑、音频效果及转场；艺馨负责影片后半部分的剪辑，音频效果，回忆画面效果及专场；我负责特效，字幕以及片尾。这样的分工最大程度上减少了工作之间的耦合性，保证了各部分可以独立并行进行，大大提高了生产效率。</p>
-<p>其中，所有的素材均存按照场次和镜头号分文件夹放在上文提到的 Seafile
-网盘中。在后期过程中，遵循的第一原则就是永远不在原素材上进行任何的修改，所有的修改过程在本地进行。网盘只用于素材的存放以及成片的管理。在这样的原则指导之下，三个人之间的协作没有出现大的问题。</p>
-<p>此外，在开始剪辑之初，本小组的三名后期人员便建立微信群方便相互沟通。在经过初步的剪辑之后，这个小组迎来了一名不速之客——我。她并不进行任何剪辑工作，进这个群的初衷是为了尽快看到成片而来不断地push剪辑小组的成员。不过，后来她起到的作用远不止于次，在不断催后期小组工作的基础上，她对于每一个剪辑的片段都会进行评价和改进的建议。这从现在看来是非常必要的，由于剪辑师对于一个片段可能会反复进行观看和改动，从而可能会忽略影片在整体上的观感，也就是观众在看到影片时候的第一感受。而这位“不速之客”的到来使得每一个片段都会有一个观众来提建议，这对于影片后期的成片质量是有很大的作用的。</p>
-<h2 id="器材设备使用">器材设备使用</h2>
-<p>本次拍摄使用到的器材如下：</p>
-<p>录像设备：Canon 600D×1，Canon 70D×1，Canon 6D Mark II×1</p>
-<p>录音设备：品士无线领夹麦克风 [一拖一] [type-c
-接口]×2，手机×2（作为麦克风的接收设备）</p>
-<p>稳定设备：三脚架×2，相机稳定器</p>
-<hr />
-<p>关于器材的详细说明以及使用情况见上文工作流程中关于“准备拍摄器材和道具”以及“影片拍摄”部分。</p>
-<p>一些补充：</p>
-<ul>
-<li>相机稳定器是租来的，但是不好用，调平一次需要花费很久的时间。后来放弃使用改为手持。结果拍出来的有一点抖动的画面其实比完全静态的画面表现力要更好的。另一方面，摄影师手持相机的能力也大大提升</li>
-<li>三脚架在拍摄过程中起到了很大的作用，一些摇的镜头都是由三脚架提供的硬件支持</li>
-</ul>
-<h2 id="问题解决方案及经验总结">问题，解决方案及经验总结</h2>
-<p>本次影视创作让我们小组经历了一次从一个创意到一部影片的全过程，在此过程中我们遇到了很多困难和挑战，而想办法克服这些困难的过程就是我们成长的过程。在此，将创作过程中遇到的问题，解决方案和经验记录如下。</p>
-<h3 id="镜头缺失的问题">1. 镜头缺失的问题</h3>
-<p>由于男主线的剧本剪辑并没有在之前想的特别详细，导致在拍摄结束后剪辑男主线的镜头的衔接上有一定的突兀。而男女主演员并不常驻在创新港，补拍镜头的成本过高。此时考虑采用一些第一视角以及部分特写的补拍来补足画面（反正看不见脸）。于是就出现了影片后面部分第一视角跑步的衔接镜头<del>（我抱着相机在创新港到处跑的样子真的很像呆逼）</del>。此外，拍摄过程中涉及到女主送男主画的镜头，然而这副画的内容是在送画这场戏之后拍摄的。为了保证拍摄的顺利进行并且避免补拍成本，在拍摄时使用白纸来充当道具，之后再由手替演员来补足看画的特写。</p>
-<h3 id="影片拍摄过程中存在穿帮镜头">2. 影片拍摄过程中存在穿帮镜头</h3>
-<p>在拍摄电梯镜头时，电梯内部存在镜面反射，这样在相机拍摄时无可避免会照到摄影师入镜，如下左图所示。并且此时的画面还在不断地移动，无法使用简单地覆盖来进行消除。在查找了很多方案之后采取<a
-href="https://www.bilibili.com/video/BV1KE411X7gY?share_source=copy_web">【Premiere】pr移除场景中的杂物_哔哩哔哩_bilibili</a>
-中的方案对拍摄到的人像进行移除，移除结果如右图所示</p>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/202206052135720.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/202206052135469.png">
-</center>
-</td>
-</tr>
-</table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line">$ git archive</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工程实践</category>
-        <category>影视创作</category>
+        <category>经验积累</category>
       </categories>
       <tags>
-        <tag>创作</tag>
-        <tag>影视创作</tag>
-        <tag>微电影</tag>
-        <tag>协作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>摘抄</title>
-    <url>/%E6%91%98%E6%8A%84/</url>
-    <content><![CDATA[<h2 id="section">2021.04</h2>
-<blockquote class="blockquote-center">
-            <p>矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。</p>
-<p><b>-- 《银河帝国2：基地与帝国》</b></p>
-
-          </blockquote>
-<a id="more"></a>
-<h2 id="section-1">2021.06</h2>
-<blockquote class="blockquote-center">
-            <p>哭泣可能会持续整个夜晚，但是快乐会随早晨而到来</p>
-<p><b>-- 诗篇 30：5</b></p>
-
-          </blockquote>
-]]></content>
-      <categories>
-        <category>我爱读书</category>
-      </categories>
-      <tags>
-        <tag>读书笔记</tag>
-        <tag>摘抄</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数字图像处理（一）图像插值(python)</title>
-    <url>/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%E5%9B%BE%E5%83%8F%E6%8F%92%E5%80%BC/</url>
-    <content><![CDATA[<p>数字图像在当代社会有着非常重要的作用，图像的插值作为一种基本的图像处理方法，在很多情况下可以很好的提高图像分辨率，提升图像观感。图像的插值方法主要有以下三种：</p>
-<ul>
-<li>最近邻插值</li>
-<li>双线性插值</li>
-<li>双三次插值 <a id="more"></a></li>
-</ul>
-<h2 id="最近邻插值">最近邻插值</h2>
-<p>最近邻插值，顾名思义，在插值时寻找距离图像像素点最近的像素点的值进行图像像素的填充。这种图像插值方法运算速度快，可以很快的出结果。缺点是插值效果较差，由于直接采用最近的像素点的像素值作为插值数据，因此导致在图像边缘，过渡等颜色变化较为明显的地方会出现较为严重的锯齿。
-<img src="https://s1.ax1x.com/2020/03/13/8u4Uwn.png"
-alt="最近邻插值" /></p>
-<p>实现代码如下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;=<span class="number">2044</span> <span class="keyword">and</span> j&lt;=<span class="number">2044</span>:</span><br><span class="line">            result[i][j]=img[round(i/<span class="number">4</span>)][round(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[math.floor(i/<span class="number">4</span>)][math.floor(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="双线性插值">双线性插值</h2>
-<p>双线性插值采用线性的方法对图像进行插值,对于插值图像中的某个像素点，该点的像素值由距离其最近的四个像素值通过线性计算获得。插值得到的结果较好，计算量相比于最近邻要满，但远快于双三次插值，最终得到的插值图像结果除一些小细节之外和双三次插值得到的插值结果相当。可以用来快速，大量的插值图片。
-<img src="https://s1.ax1x.com/2020/03/13/8u5o40.png" alt="双线性插值" />
-实现代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">2044</span> <span class="keyword">and</span> j&lt;<span class="number">2044</span>:</span><br><span class="line">            l=i//<span class="number">4</span></span><br><span class="line">            k=j//<span class="number">4</span></span><br><span class="line">            a=i/<span class="number">4</span>-i//<span class="number">4</span></span><br><span class="line">            b=j/<span class="number">4</span>-j//<span class="number">4</span></span><br><span class="line">            result[i][j]=img[l][k][<span class="number">0</span>]*(<span class="number">1</span>-a)*(<span class="number">1</span>-b)+img[l+<span class="number">1</span>][k][<span class="number">0</span>]*a*(<span class="number">1</span>-b)+img[l][k+<span class="number">1</span>][<span class="number">0</span>]*(<span class="number">1</span>-a)*b+img[l+<span class="number">1</span>][k+<span class="number">1</span>][<span class="number">0</span>]*a*b</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[i//<span class="number">4</span>][j//<span class="number">4</span>][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p>在图像边缘处采取最近邻插值</p>
-<h2 id="双三次插值">双三次插值</h2>
-<p>双三次插值采用非线性的计算方法，利用三次函数对于图像像素值进行计算。每个像素值由其周围的4*4即16个像素点的像素值计算获得。插值质量较高，运算速度较慢，Photoshop所用的插值方法就是双三次插值。
-<span class="math display">\[
-f_3(x,y)=\sum_{i=0}^3\sum_{j=0}^3a_{ij}x_iy_i
-\]</span></p>
-<p>实现代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight</span><span class="params">(x)</span>:</span></span><br><span class="line">    a=<span class="number">-0.5</span></span><br><span class="line">    x=abs(x)</span><br><span class="line">    <span class="keyword">if</span> x&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span>  (a+<span class="number">2</span>)*x**<span class="number">3</span>-(a+<span class="number">3</span>)*x**<span class="number">2</span>+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> x&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> a*x**<span class="number">3</span><span class="number">-5</span>*a*x**<span class="number">2</span>+<span class="number">8</span>*a*x<span class="number">-4</span>*a</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&gt;<span class="number">4</span> <span class="keyword">and</span> i&lt;<span class="number">2040</span> <span class="keyword">and</span> j&gt;<span class="number">4</span> <span class="keyword">and</span> j&lt;<span class="number">2040</span>:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                <span class="keyword">for</span> w <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                    result[i][j]+=img[i//<span class="number">4</span>+k<span class="number">-1</span>][j//<span class="number">4</span>+w<span class="number">-1</span>][<span class="number">0</span>]*weight(i/<span class="number">4</span>-(i//<span class="number">4</span>+k<span class="number">-1</span>))*weight(j/<span class="number">4</span>-(j//<span class="number">4</span>+w<span class="number">-1</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[i//<span class="number">4</span>][j//<span class="number">4</span>][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="结束语">结束语</h2>
-<p>这三种插值方法是图像插值的传统方法，分辨率的提升是基于局部像素的综合运算得到空白像素的像素值。这样的插值方法可以满足当代社会的绝大部分需求，但如果要追求更好的插值效果，或是将图像分辨率成几十倍的扩充即超分辨率，这样的插值方法就不能满足需求。这时，就需要通过一些其他的方法例如机器学习来进行图片质量的提升。</p>
-]]></content>
-      <categories>
-        <category>理论学习</category>
-        <category>数字图像处理</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>数字图像</tag>
-        <tag>图像处理</tag>
-        <tag>插值</tag>
+        <tag>Git</tag>
+        <tag>命令行</tag>
       </tags>
   </entry>
   <entry>
@@ -3314,6 +3314,171 @@ Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
       </tags>
   </entry>
   <entry>
+    <title>数字图像处理（四）空域低通滤波器</title>
+    <url>/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%9B%9B%EF%BC%89%E7%A9%BA%E5%9F%9F%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/</url>
+    <content><![CDATA[<p>低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。</p>
+<a id="more"></a>
+<p>这一篇文章主要介绍空域低通滤波器及其实现。</p>
+<p>常用的空域滤波器有平均滤波，中值滤波和高斯滤波。这里主要介绍中值滤波和高斯滤波。</p>
+<h2 id="中值滤波">中值滤波</h2>
+<p>中值滤波，顾名思义，是一种基于统计方法的滤波器。具体的实现方法为：对于一个n*n的中值滤波器，输出图像的像素点(x,y)的像素值等于输入图像中以(x,y)为中心的n*n大小的图像区域中所有像素值的中位数。</p>
+<p>滤波器的大小可以根据不同的需要进行选取。</p>
+<p>中值滤波器得到的效果如下：</p>
+<blockquote>
+<p>依次分别为原图像，3*3中值滤波，5*5中值滤波，7*7中值滤波。</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp" >3*3中值
+</center>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">5*5中值
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">7*7中值
+</center>
+</td>
+</tr>
+</table>
+<p>原图中有很多分布不规律的噪声，其中有一部分是盐噪声，但大部分是一些突然的脉冲噪声。在使用3*3的中值滤波时，盐噪声已经很好的去除掉了，但脉冲噪声依然很明显。使用5*5的中值时，脉冲噪声情况有了很大的改善。7*7的滤波器几乎完全去除了噪声，但图像的模糊也很严重。</p>
+<h2 id="高斯滤波">高斯滤波</h2>
+<p>高斯滤波是一些图形处理软件中经常使用的模糊方法，由二维正态分布函数：<span
+class="math inline">\(p(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}\)</span>产生，具体做法如下：</p>
+<ul>
+<li>若要产生n*n的高斯滤波器，将该n阶仿真的中心置为(0,0)，生成矩阵中其他位置的坐标；</li>
+<li>将该n*n矩阵中的每个位置的坐标带入二维正态分布函数得到每个位置的数值；</li>
+<li>以矩阵左上角置1为标准等比缩放矩阵中数值大小；</li>
+<li>对矩阵进行取整得到的结果就是n*n的高斯滤波器</li>
+</ul>
+<blockquote>
+<p>生成高斯滤波器的函数如下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<p>3*3，5*5，7*7的高斯滤波器如下：</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170522.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170620.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170658.png">
+</center>
+</td>
+</tr>
+</table>
+<p>其在二维坐标系中的图像如下：</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170756.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170817.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170835.png">
+</center>
+</td>
+</tr>
+</table>
+</blockquote>
+<p>在得到了高斯滤波器的算子之后，使用该算子与输入图像进行卷积即可得到高斯滤波器滤波后的结果。</p>
+<p>其效果如下：</p>
+<blockquote>
+<p>依次为原图，3*3，5*5，7*7高斯滤波的结果：</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
+</center>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<center>
+&lt;img src="https://
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
+</center>
+</td>
+/img/20200327172156.bmp"&gt;5*5高斯
+</center>
+</td>
+<td>
+<center>
+&lt;img src="https://
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
+</center>
+</td>
+/img/20200327172217.bmp" &gt;7*7高斯
+</center>
+</td>
+</tr>
+</table>
+<p>高斯模糊对于图像中的盐噪声去除效果较好，但对于脉冲噪声的去除显得颇为吃力，7*7的高斯滤波依然无法滤除掉图像中的脉冲噪声。另一方面，高斯模糊相较于终止模糊图像的信息保留较为完全，细节保留较多。</p>
+<h2 id="附录">附录</h2>
+<h3 id="参考文献">参考文献</h3>
+<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael
+C.Gonzalez），（美）理查德·E·伍兹（Richard E.
+Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
+<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16
+[2020-03-23].https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</p>
+<p>[3]予你心安.Numpy求均值、中位数、众数的方法[G/OL].博客园: 2018-11-04
+[2020-03-23].https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html</p>
+<h3 id="源代码">源代码</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">img=cv.imread(<span class="string">"test1.pgm"</span>)</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像img进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))   <span class="comment">#对边缘进行补0操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_filter</span><span class="params">(img, n)</span>:</span>  <span class="comment">#使用n*n的中值滤波器对图像进行低通滤波</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    tmp=np.zeros(n*n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp[k*n+l]=temp[i+k][j+l]</span><br><span class="line">            result[i][j]=np.median(tmp)</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test1.pgm"</span>,<span class="string">"test2.tif"</span>]</span><br><span class="line">size=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> size:</span><br><span class="line">        cv.imwrite(i+<span class="string">'gauss-'</span>+str(j)+<span class="string">'.bmp'</span>,gauss_filter(img,j))</span><br><span class="line">        cv.imwrite(i+<span class="string">'center-'</span>+str(j)+<span class="string">'.bmp'</span>,center_filter(img,j))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>理论学习</category>
+        <category>数字图像处理</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>数字图像</tag>
+        <tag>图像处理</tag>
+        <tag>空域滤波器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数字图像处理（六）频域滤波器</title>
     <url>/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%85%AD%EF%BC%89%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/</url>
     <content><![CDATA[<h2 id="频域滤波器简介">频域滤波器简介</h2>
@@ -3546,6 +3711,62 @@ lcxxcl_1234.numpy中的fft和scipy中的fft，fftshift以及fftfreq[G/OL].CSDN:
       </tags>
   </entry>
   <entry>
+    <title>网站收藏</title>
+    <url>/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</url>
+    <content><![CDATA[<p><img
+src="https://download.kezhi.tech/img/202205251650671.webp" /></p>
+<a id="more"></a>
+<h2 id="实用工具">实用工具</h2>
+<ul>
+<li><a href="https://geekuninstaller.com/" target="_blank" rel="noopener">Geek Uninstaller - the best
+FREE uninstaller</a></li>
+<li><a href="https://www.bandisoft.com/bandizip/" target="_blank" rel="noopener">Windows 版本的
+Bandizip · 业内领先的压缩文件解决方案 (bandisoft.com)</a></li>
+<li><a href="https://www.7-zip.org/" target="_blank" rel="noopener">7-Zip</a></li>
+</ul>
+<h2 id="文本转语音">文本转语音</h2>
+<ul>
+<li><p>Free TTS https://freetts.com/</p></li>
+<li><p>Balabolka http://balabolka.site/balabolka.htm</p></li>
+</ul>
+<h2 id="data-source">Data Source</h2>
+<h3 id="defi">Defi</h3>
+<ul>
+<li><p><a
+href="https://www.cryptodatadownload.com/">cryptodatadownload.com</a>
+下载Defi交易所历史数据</p></li>
+<li><p><a href="https://www.coinario.com/" target="_blank" rel="noopener">Cryptocurrency -
+Coinario.com</a> 查询交易所基本信息</p></li>
+<li><p><a href="https://nomics.com/" target="_blank" rel="noopener">Nomics: Crypto Market Caps -
+Prices, All-Time Highs, Charts</a></p></li>
+</ul>
+<h3 id="transportation">Transportation</h3>
+<ul>
+<li><a href="https://www.transtats.bts.gov/" target="_blank" rel="noopener">OST_R | BTS | Transtats</a>
+美国交通运输数据</li>
+</ul>
+<h3 id="weather">Weather</h3>
+<ul>
+<li><a href="https://openweathermap.org/" target="_blank" rel="noopener">Сurrent weather and forecast -
+OpenWeatherMap</a></li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li><a href="https://api.muxiaoguo.cn/" target="_blank" rel="noopener">木小果API - 提供免费接口调用平台
+(muxiaoguo.cn)</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工程实践</category>
+        <category>码来用</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>网站</tag>
+        <tag>收藏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>来选头像</title>
     <url>/%E6%9D%A5%E9%80%89%E5%A4%B4%E5%83%8F/</url>
     <content><![CDATA[<iframe src="//www.kezhi.tech/avatar/" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
@@ -3562,171 +3783,6 @@ QuAn_的插画 - pixiv</a></li>
       </categories>
       <tags>
         <tag>日常</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数字图像处理（四）空域低通滤波器</title>
-    <url>/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%9B%9B%EF%BC%89%E7%A9%BA%E5%9F%9F%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8/</url>
-    <content><![CDATA[<p>低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。</p>
-<a id="more"></a>
-<p>这一篇文章主要介绍空域低通滤波器及其实现。</p>
-<p>常用的空域滤波器有平均滤波，中值滤波和高斯滤波。这里主要介绍中值滤波和高斯滤波。</p>
-<h2 id="中值滤波">中值滤波</h2>
-<p>中值滤波，顾名思义，是一种基于统计方法的滤波器。具体的实现方法为：对于一个n*n的中值滤波器，输出图像的像素点(x,y)的像素值等于输入图像中以(x,y)为中心的n*n大小的图像区域中所有像素值的中位数。</p>
-<p>滤波器的大小可以根据不同的需要进行选取。</p>
-<p>中值滤波器得到的效果如下：</p>
-<blockquote>
-<p>依次分别为原图像，3*3中值滤波，5*5中值滤波，7*7中值滤波。</p>
-</blockquote>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp" >3*3中值
-</center>
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">5*5中值
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">7*7中值
-</center>
-</td>
-</tr>
-</table>
-<p>原图中有很多分布不规律的噪声，其中有一部分是盐噪声，但大部分是一些突然的脉冲噪声。在使用3*3的中值滤波时，盐噪声已经很好的去除掉了，但脉冲噪声依然很明显。使用5*5的中值时，脉冲噪声情况有了很大的改善。7*7的滤波器几乎完全去除了噪声，但图像的模糊也很严重。</p>
-<h2 id="高斯滤波">高斯滤波</h2>
-<p>高斯滤波是一些图形处理软件中经常使用的模糊方法，由二维正态分布函数：<span
-class="math inline">\(p(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}\)</span>产生，具体做法如下：</p>
-<ul>
-<li>若要产生n*n的高斯滤波器，将该n阶仿真的中心置为(0,0)，生成矩阵中其他位置的坐标；</li>
-<li>将该n*n矩阵中的每个位置的坐标带入二维正态分布函数得到每个位置的数值；</li>
-<li>以矩阵左上角置1为标准等比缩放矩阵中数值大小；</li>
-<li>对矩阵进行取整得到的结果就是n*n的高斯滤波器</li>
-</ul>
-<blockquote>
-<p>生成高斯滤波器的函数如下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br></pre></td></tr></table></figure>
-<p>3*3，5*5，7*7的高斯滤波器如下：</p>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170522.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170620.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170658.png">
-</center>
-</td>
-</tr>
-</table>
-<p>其在二维坐标系中的图像如下：</p>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170756.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170817.png">
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327170835.png">
-</center>
-</td>
-</tr>
-</table>
-</blockquote>
-<p>在得到了高斯滤波器的算子之后，使用该算子与输入图像进行卷积即可得到高斯滤波器滤波后的结果。</p>
-<p>其效果如下：</p>
-<blockquote>
-<p>依次为原图，3*3，5*5，7*7高斯滤波的结果：</p>
-</blockquote>
-<table>
-<tr>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
-</center>
-</td>
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
-</center>
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td>
-<center>
-&lt;img src="https://
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
-</center>
-</td>
-/img/20200327172156.bmp"&gt;5*5高斯
-</center>
-</td>
-<td>
-<center>
-&lt;img src="https://
-<td>
-<center>
-<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
-</center>
-</td>
-/img/20200327172217.bmp" &gt;7*7高斯
-</center>
-</td>
-</tr>
-</table>
-<p>高斯模糊对于图像中的盐噪声去除效果较好，但对于脉冲噪声的去除显得颇为吃力，7*7的高斯滤波依然无法滤除掉图像中的脉冲噪声。另一方面，高斯模糊相较于终止模糊图像的信息保留较为完全，细节保留较多。</p>
-<h2 id="附录">附录</h2>
-<h3 id="参考文献">参考文献</h3>
-<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael
-C.Gonzalez），（美）理查德·E·伍兹（Richard E.
-Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
-<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16
-[2020-03-23].https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</p>
-<p>[3]予你心安.Numpy求均值、中位数、众数的方法[G/OL].博客园: 2018-11-04
-[2020-03-23].https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html</p>
-<h3 id="源代码">源代码</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">img=cv.imread(<span class="string">"test1.pgm"</span>)</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像img进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))   <span class="comment">#对边缘进行补0操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_filter</span><span class="params">(img, n)</span>:</span>  <span class="comment">#使用n*n的中值滤波器对图像进行低通滤波</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    tmp=np.zeros(n*n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp[k*n+l]=temp[i+k][j+l]</span><br><span class="line">            result[i][j]=np.median(tmp)</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test1.pgm"</span>,<span class="string">"test2.tif"</span>]</span><br><span class="line">size=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> size:</span><br><span class="line">        cv.imwrite(i+<span class="string">'gauss-'</span>+str(j)+<span class="string">'.bmp'</span>,gauss_filter(img,j))</span><br><span class="line">        cv.imwrite(i+<span class="string">'center-'</span>+str(j)+<span class="string">'.bmp'</span>,center_filter(img,j))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>理论学习</category>
-        <category>数字图像处理</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>数字图像</tag>
-        <tag>图像处理</tag>
-        <tag>空域滤波器</tag>
       </tags>
   </entry>
   <entry>
@@ -4012,59 +4068,41 @@ j}(\frac{\mu_i+\mu_j}{d(u_i,u_j)})
       </tags>
   </entry>
   <entry>
-    <title>网站收藏</title>
-    <url>/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</url>
-    <content><![CDATA[<p><img
-src="https://download.kezhi.tech/img/202205251650671.webp" /></p>
+    <title>社会心理学（一）</title>
+    <url>/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="社会中的自我">社会中的自我</h2>
+<h3 id="自我概念我是谁">自我概念：我是谁</h3>
 <a id="more"></a>
-<h2 id="实用工具">实用工具</h2>
-<ul>
-<li><a href="https://geekuninstaller.com/" target="_blank" rel="noopener">Geek Uninstaller - the best
-FREE uninstaller</a></li>
-<li><a href="https://www.bandisoft.com/bandizip/" target="_blank" rel="noopener">Windows 版本的
-Bandizip · 业内领先的压缩文件解决方案 (bandisoft.com)</a></li>
-<li><a href="https://www.7-zip.org/" target="_blank" rel="noopener">7-Zip</a></li>
-</ul>
-<h2 id="文本转语音">文本转语音</h2>
-<ul>
-<li><p>Free TTS https://freetts.com/</p></li>
-<li><p>Balabolka http://balabolka.site/balabolka.htm</p></li>
-</ul>
-<h2 id="data-source">Data Source</h2>
-<h3 id="defi">Defi</h3>
-<ul>
-<li><p><a
-href="https://www.cryptodatadownload.com/">cryptodatadownload.com</a>
-下载Defi交易所历史数据</p></li>
-<li><p><a href="https://www.coinario.com/" target="_blank" rel="noopener">Cryptocurrency -
-Coinario.com</a> 查询交易所基本信息</p></li>
-<li><p><a href="https://nomics.com/" target="_blank" rel="noopener">Nomics: Crypto Market Caps -
-Prices, All-Time Highs, Charts</a></p></li>
-</ul>
-<h3 id="transportation">Transportation</h3>
-<ul>
-<li><a href="https://www.transtats.bts.gov/" target="_blank" rel="noopener">OST_R | BTS | Transtats</a>
-美国交通运输数据</li>
-</ul>
-<h3 id="weather">Weather</h3>
-<ul>
-<li><a href="https://openweathermap.org/" target="_blank" rel="noopener">Сurrent weather and forecast -
-OpenWeatherMap</a></li>
-</ul>
-<h2 id="api">API</h2>
-<ul>
-<li><a href="https://api.muxiaoguo.cn/" target="_blank" rel="noopener">木小果API - 提供免费接口调用平台
-(muxiaoguo.cn)</a></li>
-</ul>
+<ol type="1">
+<li>人们往往会把自己看做是一切的中心，从而高估别人对我们的注意度。即<strong>焦点效应</strong></li>
+<li>我们能够敏锐的察觉自己情感的变化，并且认为这也是很清楚地被别人注意到的。而实际注意到我们的人比我们认为的要少。即<strong>透明度错觉</strong></li>
+<li>社会环境会影响自我认知，在不同的环境中对自我的认知更多来源于与环境的差异。如在国外时认为自己是中国人，而在国内则不会对这有很强的意识，更多的认为自己是某个地区的人（如陕西人，西安人）。</li>
+<li>在自我认知时带有很强的<strong>自利色彩</strong>。在出现问题时，人往往将责任归咎到他人身上。而当作出成绩时，人们往往觉得低估了自己的贡献。</li>
+<li>我们在社会关系中界定自我。往往我们在与不同的人相处时会有不同的表现，这些表现得差异和多样化有助于我们了解自己和界定自己的角色。</li>
+<li><strong>自我图式</strong>。我们对于自己的认识，会在很大程度上影响我们对于信息的加工。这也就决定了如何感知，回忆和评价他人和自己。（对于一名专业的运动员来说，会特别关注别人的身体和技巧）。</li>
+<li><strong>自我参照效应</strong>。我们对于与自己相关的事情总是记忆深刻，并且由于我们将自己看做是世界的核心位置，因此在对事件认知时会高估对自己的指向程度（我们总是认为自己是完成某件事的核心人物）。</li>
+</ol>
+<h3 id="自我认识">自我认识</h3>
+<ol type="1">
+<li>在解释自己行为的过程中，往往倾向于高估自己思维和意识的作用，而低估外部因素的影响。如人们往往认为自己不会受媒体的影响，并且认为媒体会对其他人产生影响。</li>
+<li>在预测自己的行为时，他人往往能够比自己更准确地预测结果。这是因为在进行自我预测时，我们自己往往关心当下比较突出的因素，而忽略那些其实很重要但没有被注意到的因素。这就造成对未来预期的错误。</li>
+<li>在消极事件中，我们尤其会表现出影响偏见，即高估事件的持久性影响，低估自身的自愈能力。并且重大的消极事件会激发我们的心理防御机制，可能会比轻微的情绪波动所引发的痛苦持续时间更短。</li>
+<li>一种观点认为，我们实际的思维过程和我们对于思维的解释是两码事。例如，在挑选一副喜欢的画时，要求被试者阐述喜欢的原因，他们在几周之后对画的满意程度要低于那些没有进行归因的。也就是说，当我们对自己的心理过程进行理性的归因时，对我们未来的预测将变得无效。这从某一方面说明了，我们实际的思考过程存在很多我们在分析自己思维时无法体现的东西。</li>
+</ol>
+<h3 id="自我控制">自我控制</h3>
+<ol type="1">
+<li><p>自我控制是一种会被消耗的能力，它类似于肌肉力量。在被使用后会变得虚弱，经过休息之后又会回复，随着不断训练会加强。自我控制能力是有限的，当我们花费了大量的精力在日常生活中进行自我控制时（如强迫自己不吃东西，压抑自己的思想），在面对难题时会变得无力。</p></li>
+<li><p><strong>自我效能</strong>，即对自己能力与效率的乐观信念可以获得更大的回报。自我效能高的人会更有韧性，生活的更加健康。</p></li>
+<li><p>控制点。认为自己的命运是自己来控制的（内部控制点）还是由外部的力量来掌控（外部控制点）。是否感觉命运受自己掌控取决于我们如何解释挫折。内部控制的人往往归因于意外或是需要尝试新的方法来解决。外部控制的人把失败归因于自己无法控制的因素（如学习成绩的糟糕归因于自己笨，不喜欢老师等）。</p></li>
+<li><p><strong>习得性无助</strong>，人无法对自己做的事和别人做的事进行控制，从而对事件失去掌控能力，产生习得性无助。与之相反的是自我决定，对自我和环境有一定的控制权。习得性无助常常会让人有更大的压力，变得虚弱，快速衰老。增加一定的自我控制可以增强个体的幸福和健康。但过度的自由和自我决定也会导致人们生活满意度下降，抑郁症增多。过于多的选择会让人们无所适从。</p></li>
+</ol>
 ]]></content>
       <categories>
-        <category>工程实践</category>
-        <category>码来用</category>
+        <category>我爱读书</category>
       </categories>
       <tags>
-        <tag>软件</tag>
-        <tag>网站</tag>
-        <tag>收藏</tag>
+        <tag>读书笔记</tag>
+        <tag>心理学</tag>
       </tags>
   </entry>
   <entry>
@@ -4297,44 +4335,6 @@ s=s\times\alpha^k
         <tag>多机器人</tag>
         <tag>覆盖问题</tag>
         <tag>算法改进</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>社会心理学（一）</title>
-    <url>/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="社会中的自我">社会中的自我</h2>
-<h3 id="自我概念我是谁">自我概念：我是谁</h3>
-<a id="more"></a>
-<ol type="1">
-<li>人们往往会把自己看做是一切的中心，从而高估别人对我们的注意度。即<strong>焦点效应</strong></li>
-<li>我们能够敏锐的察觉自己情感的变化，并且认为这也是很清楚地被别人注意到的。而实际注意到我们的人比我们认为的要少。即<strong>透明度错觉</strong></li>
-<li>社会环境会影响自我认知，在不同的环境中对自我的认知更多来源于与环境的差异。如在国外时认为自己是中国人，而在国内则不会对这有很强的意识，更多的认为自己是某个地区的人（如陕西人，西安人）。</li>
-<li>在自我认知时带有很强的<strong>自利色彩</strong>。在出现问题时，人往往将责任归咎到他人身上。而当作出成绩时，人们往往觉得低估了自己的贡献。</li>
-<li>我们在社会关系中界定自我。往往我们在与不同的人相处时会有不同的表现，这些表现得差异和多样化有助于我们了解自己和界定自己的角色。</li>
-<li><strong>自我图式</strong>。我们对于自己的认识，会在很大程度上影响我们对于信息的加工。这也就决定了如何感知，回忆和评价他人和自己。（对于一名专业的运动员来说，会特别关注别人的身体和技巧）。</li>
-<li><strong>自我参照效应</strong>。我们对于与自己相关的事情总是记忆深刻，并且由于我们将自己看做是世界的核心位置，因此在对事件认知时会高估对自己的指向程度（我们总是认为自己是完成某件事的核心人物）。</li>
-</ol>
-<h3 id="自我认识">自我认识</h3>
-<ol type="1">
-<li>在解释自己行为的过程中，往往倾向于高估自己思维和意识的作用，而低估外部因素的影响。如人们往往认为自己不会受媒体的影响，并且认为媒体会对其他人产生影响。</li>
-<li>在预测自己的行为时，他人往往能够比自己更准确地预测结果。这是因为在进行自我预测时，我们自己往往关心当下比较突出的因素，而忽略那些其实很重要但没有被注意到的因素。这就造成对未来预期的错误。</li>
-<li>在消极事件中，我们尤其会表现出影响偏见，即高估事件的持久性影响，低估自身的自愈能力。并且重大的消极事件会激发我们的心理防御机制，可能会比轻微的情绪波动所引发的痛苦持续时间更短。</li>
-<li>一种观点认为，我们实际的思维过程和我们对于思维的解释是两码事。例如，在挑选一副喜欢的画时，要求被试者阐述喜欢的原因，他们在几周之后对画的满意程度要低于那些没有进行归因的。也就是说，当我们对自己的心理过程进行理性的归因时，对我们未来的预测将变得无效。这从某一方面说明了，我们实际的思考过程存在很多我们在分析自己思维时无法体现的东西。</li>
-</ol>
-<h3 id="自我控制">自我控制</h3>
-<ol type="1">
-<li><p>自我控制是一种会被消耗的能力，它类似于肌肉力量。在被使用后会变得虚弱，经过休息之后又会回复，随着不断训练会加强。自我控制能力是有限的，当我们花费了大量的精力在日常生活中进行自我控制时（如强迫自己不吃东西，压抑自己的思想），在面对难题时会变得无力。</p></li>
-<li><p><strong>自我效能</strong>，即对自己能力与效率的乐观信念可以获得更大的回报。自我效能高的人会更有韧性，生活的更加健康。</p></li>
-<li><p>控制点。认为自己的命运是自己来控制的（内部控制点）还是由外部的力量来掌控（外部控制点）。是否感觉命运受自己掌控取决于我们如何解释挫折。内部控制的人往往归因于意外或是需要尝试新的方法来解决。外部控制的人把失败归因于自己无法控制的因素（如学习成绩的糟糕归因于自己笨，不喜欢老师等）。</p></li>
-<li><p><strong>习得性无助</strong>，人无法对自己做的事和别人做的事进行控制，从而对事件失去掌控能力，产生习得性无助。与之相反的是自我决定，对自我和环境有一定的控制权。习得性无助常常会让人有更大的压力，变得虚弱，快速衰老。增加一定的自我控制可以增强个体的幸福和健康。但过度的自由和自我决定也会导致人们生活满意度下降，抑郁症增多。过于多的选择会让人们无所适从。</p></li>
-</ol>
-]]></content>
-      <categories>
-        <category>我爱读书</category>
-      </categories>
-      <tags>
-        <tag>读书笔记</tag>
-        <tag>心理学</tag>
       </tags>
   </entry>
 </search>
