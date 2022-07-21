@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-07-02T07:02:18.947Z</updated>
+  <updated>2022-07-21T11:38:39.184Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>科研问题记录</title>
+    <link href="https://www.kezhi.tech/4efb358.html"/>
+    <id>https://www.kezhi.tech/4efb358.html</id>
+    <published>2022-07-19T18:00:14.000Z</published>
+    <updated>2022-07-21T11:38:39.184Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+&lt;p&gt;在科研和工程实践的过程中，问题的解决往往伴随着新问题的发生。往往这些问题都是在特定场景下才会出现，但是其问题的抽象又具有一定的普适性，从而这些问题能够构成一个个科学研究的起点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202207200159235.jpg&quot; width=30%&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="科学研究" scheme="https://www.kezhi.tech/categories/%E7%A7%91%E5%AD%A6%E7%A0%94%E7%A9%B6/"/>
+    
+    
+      <category term="科研" scheme="https://www.kezhi.tech/tags/%E7%A7%91%E7%A0%94/"/>
+    
+      <category term="问题" scheme="https://www.kezhi.tech/tags/%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>实数六大基本定理的相互证明</title>
-    <link href="https://www.kezhi.tech/%E5%AE%9E%E6%95%B0%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E7%9B%B8%E4%BA%92%E8%AF%81%E6%98%8E/"/>
-    <id>https://www.kezhi.tech/%E5%AE%9E%E6%95%B0%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E7%9B%B8%E4%BA%92%E8%AF%81%E6%98%8E/</id>
+    <link href="https://www.kezhi.tech/24a1693.html"/>
+    <id>https://www.kezhi.tech/24a1693.html</id>
     <published>2022-06-30T07:26:13.000Z</published>
-    <updated>2022-07-02T07:02:18.947Z</updated>
+    <updated>2022-07-21T02:02:12.705Z</updated>
     
     <summary type="html">
     
@@ -54,10 +79,10 @@
   
   <entry>
     <title>修改操作系统安装时间</title>
-    <link href="https://www.kezhi.tech/%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/"/>
-    <id>https://www.kezhi.tech/%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/</id>
+    <link href="https://www.kezhi.tech/629d278e.html"/>
+    <id>https://www.kezhi.tech/629d278e.html</id>
     <published>2022-06-23T11:52:49.000Z</published>
-    <updated>2022-07-02T07:02:18.946Z</updated>
+    <updated>2022-07-21T02:02:12.694Z</updated>
     
     <summary type="html">
     
@@ -82,10 +107,10 @@
   
   <entry>
     <title>影片《字节跳动》创作阐述</title>
-    <link href="https://www.kezhi.tech/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/"/>
-    <id>https://www.kezhi.tech/%E5%BD%B1%E7%89%87%E3%80%8A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E3%80%8B%E5%88%9B%E4%BD%9C%E9%98%90%E8%BF%B0/</id>
+    <link href="https://www.kezhi.tech/fa011f5e.html"/>
+    <id>https://www.kezhi.tech/fa011f5e.html</id>
     <published>2022-06-07T08:25:29.000Z</published>
-    <updated>2022-07-02T07:02:18.948Z</updated>
+    <updated>2022-07-21T02:02:12.708Z</updated>
     
     <summary type="html">
     
@@ -113,10 +138,10 @@
   
   <entry>
     <title>关于影视创作</title>
-    <link href="https://www.kezhi.tech/%E5%85%B3%E4%BA%8E%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
-    <id>https://www.kezhi.tech/%E5%85%B3%E4%BA%8E%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</id>
+    <link href="https://www.kezhi.tech/624fe65f.html"/>
+    <id>https://www.kezhi.tech/624fe65f.html</id>
     <published>2022-05-25T09:25:13.000Z</published>
-    <updated>2022-07-02T07:02:18.946Z</updated>
+    <updated>2022-07-21T02:02:12.696Z</updated>
     
     <summary type="html">
     
@@ -148,10 +173,10 @@ src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>网站收藏</title>
-    <link href="https://www.kezhi.tech/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/"/>
-    <id>https://www.kezhi.tech/%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/</id>
+    <link href="https://www.kezhi.tech/16fab331.html"/>
+    <id>https://www.kezhi.tech/16fab331.html</id>
     <published>2022-05-16T11:54:58.000Z</published>
-    <updated>2022-07-02T07:02:18.952Z</updated>
+    <updated>2022-07-21T02:02:12.718Z</updated>
     
     <summary type="html">
     
@@ -176,10 +201,10 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>来选头像</title>
-    <link href="https://www.kezhi.tech/%E6%9D%A5%E9%80%89%E5%A4%B4%E5%83%8F/"/>
-    <id>https://www.kezhi.tech/%E6%9D%A5%E9%80%89%E5%A4%B4%E5%83%8F/</id>
+    <link href="https://www.kezhi.tech/ca112d32.html"/>
+    <id>https://www.kezhi.tech/ca112d32.html</id>
     <published>2022-05-11T07:52:09.000Z</published>
-    <updated>2022-07-02T07:02:18.950Z</updated>
+    <updated>2022-07-21T02:02:12.720Z</updated>
     
     <summary type="html">
     
@@ -198,10 +223,10 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>于小鸡历险记（一）</title>
-    <link href="https://www.kezhi.tech/%E4%BA%8E%E5%B0%8F%E9%B8%A1%E5%8E%86%E9%99%A9%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>https://www.kezhi.tech/%E4%BA%8E%E5%B0%8F%E9%B8%A1%E5%8E%86%E9%99%A9%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</id>
+    <link href="https://www.kezhi.tech/32347def.html"/>
+    <id>https://www.kezhi.tech/32347def.html</id>
     <published>2022-05-10T15:09:25.000Z</published>
-    <updated>2022-07-02T07:02:18.946Z</updated>
+    <updated>2022-07-21T02:02:12.697Z</updated>
     
     <summary type="html">
     
@@ -221,10 +246,10 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>Git commit message 规范</title>
-    <link href="https://www.kezhi.tech/Git-commit-message-%E8%A7%84%E8%8C%83/"/>
-    <id>https://www.kezhi.tech/Git-commit-message-%E8%A7%84%E8%8C%83/</id>
+    <link href="https://www.kezhi.tech/58877bc8.html"/>
+    <id>https://www.kezhi.tech/58877bc8.html</id>
     <published>2022-04-07T14:05:01.000Z</published>
-    <updated>2022-07-02T07:02:18.942Z</updated>
+    <updated>2022-07-21T02:02:12.671Z</updated>
     
     <summary type="html">
     
@@ -248,10 +273,10 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>Python高性能编程</title>
-    <link href="https://www.kezhi.tech/Python%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/"/>
-    <id>https://www.kezhi.tech/Python%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://www.kezhi.tech/411c70cb.html"/>
+    <id>https://www.kezhi.tech/411c70cb.html</id>
     <published>2022-04-07T14:03:09.000Z</published>
-    <updated>2022-07-02T07:02:18.944Z</updated>
+    <updated>2022-07-21T02:02:12.684Z</updated>
     
     <summary type="html">
     
@@ -275,10 +300,10 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
   
   <entry>
     <title>NexT标签云配置</title>
-    <link href="https://www.kezhi.tech/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/"/>
-    <id>https://www.kezhi.tech/Next%E6%A0%87%E7%AD%BE%E4%BA%91%E9%85%8D%E7%BD%AE/</id>
+    <link href="https://www.kezhi.tech/47930864.html"/>
+    <id>https://www.kezhi.tech/47930864.html</id>
     <published>2022-03-22T09:11:28.000Z</published>
-    <updated>2022-07-02T07:02:18.944Z</updated>
+    <updated>2022-07-21T02:02:12.678Z</updated>
     
     <summary type="html">
     
@@ -303,10 +328,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>创新港体育场馆自动预定</title>
-    <link href="https://www.kezhi.tech/%E5%88%9B%E6%96%B0%E6%B8%AF%E4%BD%93%E8%82%B2%E5%9C%BA%E9%A6%86%E8%87%AA%E5%8A%A8%E9%A2%84%E5%AE%9A/"/>
-    <id>https://www.kezhi.tech/%E5%88%9B%E6%96%B0%E6%B8%AF%E4%BD%93%E8%82%B2%E5%9C%BA%E9%A6%86%E8%87%AA%E5%8A%A8%E9%A2%84%E5%AE%9A/</id>
+    <link href="https://www.kezhi.tech/66f3a0f6.html"/>
+    <id>https://www.kezhi.tech/66f3a0f6.html</id>
     <published>2022-03-21T13:05:38.000Z</published>
-    <updated>2022-07-03T11:28:55.404Z</updated>
+    <updated>2022-07-21T02:02:12.699Z</updated>
     
     <summary type="html">
     
@@ -331,10 +356,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>Hexo本地写作环境配置</title>
-    <link href="https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    <id>https://www.kezhi.tech/Hexo%E6%9C%AC%E5%9C%B0%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <link href="https://www.kezhi.tech/315fc17e.html"/>
+    <id>https://www.kezhi.tech/315fc17e.html</id>
     <published>2022-03-20T15:21:53.000Z</published>
-    <updated>2022-07-02T13:46:38.862Z</updated>
+    <updated>2022-07-21T02:02:12.669Z</updated>
     
     <summary type="html">
     
@@ -357,10 +382,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>nlp工具nltk的安装及使用</title>
-    <link href="https://www.kezhi.tech/nlp%E5%B7%A5%E5%85%B7nltk%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
-    <id>https://www.kezhi.tech/nlp%E5%B7%A5%E5%85%B7nltk%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</id>
+    <link href="https://www.kezhi.tech/3300cce2.html"/>
+    <id>https://www.kezhi.tech/3300cce2.html</id>
     <published>2021-10-21T13:24:53.000Z</published>
-    <updated>2022-07-02T07:02:18.945Z</updated>
+    <updated>2022-07-21T02:02:12.689Z</updated>
     
     <summary type="html">
     
@@ -384,10 +409,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>社会心理学（一）</title>
-    <link href="https://www.kezhi.tech/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>https://www.kezhi.tech/%E7%A4%BE%E4%BC%9A%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%88%E4%B8%80%EF%BC%89/</id>
+    <link href="https://www.kezhi.tech/1eea1e9f.html"/>
+    <id>https://www.kezhi.tech/1eea1e9f.html</id>
     <published>2021-06-08T13:37:03.000Z</published>
-    <updated>2022-07-02T07:02:18.952Z</updated>
+    <updated>2022-07-21T02:02:12.726Z</updated>
     
     <summary type="html">
     
@@ -408,10 +433,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>摘抄</title>
-    <link href="https://www.kezhi.tech/%E6%91%98%E6%8A%84/"/>
-    <id>https://www.kezhi.tech/%E6%91%98%E6%8A%84/</id>
+    <link href="https://www.kezhi.tech/639b053d.html"/>
+    <id>https://www.kezhi.tech/639b053d.html</id>
     <published>2021-06-08T11:09:06.000Z</published>
-    <updated>2022-07-02T07:02:18.949Z</updated>
+    <updated>2022-07-21T02:02:12.704Z</updated>
     
     <summary type="html">
     
@@ -436,10 +461,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>Vue学习笔记</title>
-    <link href="https://www.kezhi.tech/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://www.kezhi.tech/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://www.kezhi.tech/71513ccb.html"/>
+    <id>https://www.kezhi.tech/71513ccb.html</id>
     <published>2021-04-13T03:32:27.000Z</published>
-    <updated>2022-07-02T07:02:18.944Z</updated>
+    <updated>2022-07-21T02:02:12.686Z</updated>
     
     <summary type="html">
     
@@ -470,10 +495,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>scrapy爬虫相关</title>
-    <link href="https://www.kezhi.tech/scrapy%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/"/>
-    <id>https://www.kezhi.tech/scrapy%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/</id>
+    <link href="https://www.kezhi.tech/68a55fd7.html"/>
+    <id>https://www.kezhi.tech/68a55fd7.html</id>
     <published>2020-10-24T15:10:17.000Z</published>
-    <updated>2022-07-02T07:02:18.945Z</updated>
+    <updated>2022-07-21T02:02:12.687Z</updated>
     
     <summary type="html">
     
@@ -500,10 +525,10 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
   
   <entry>
     <title>爬取B站所有番剧数据并进行数据分析</title>
-    <link href="https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    <id>https://www.kezhi.tech/%E7%88%AC%E5%8F%96B%E7%AB%99%E6%89%80%E6%9C%89%E7%95%AA%E5%89%A7%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</id>
+    <link href="https://www.kezhi.tech/6b2dc3cb.html"/>
+    <id>https://www.kezhi.tech/6b2dc3cb.html</id>
     <published>2020-10-14T16:24:39.000Z</published>
-    <updated>2022-07-02T07:02:18.951Z</updated>
+    <updated>2022-07-21T02:02:12.722Z</updated>
     
     <summary type="html">
     
@@ -536,10 +561,10 @@ href=&quot;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;http
   
   <entry>
     <title>黄蜂群算法改进的多机器人区域覆盖</title>
-    <link href="https://www.kezhi.tech/%E9%BB%84%E8%9C%82%E7%BE%A4%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/"/>
-    <id>https://www.kezhi.tech/%E9%BB%84%E8%9C%82%E7%BE%A4%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%9A%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/</id>
+    <link href="https://www.kezhi.tech/623a6b90.html"/>
+    <id>https://www.kezhi.tech/623a6b90.html</id>
     <published>2020-06-22T17:30:24.000Z</published>
-    <updated>2022-07-02T07:02:18.953Z</updated>
+    <updated>2022-07-21T02:02:12.727Z</updated>
     
     <summary type="html">
     
@@ -569,42 +594,6 @@ href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gi
       <category term="覆盖问题" scheme="https://www.kezhi.tech/tags/%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/"/>
     
       <category term="算法改进" scheme="https://www.kezhi.tech/tags/%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数字图像处理（六）频域滤波器</title>
-    <link href="https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%85%AD%EF%BC%89%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
-    <id>https://www.kezhi.tech/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E5%85%AD%EF%BC%89%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/</id>
-    <published>2020-05-08T13:17:21.000Z</published>
-    <updated>2022-07-02T07:02:18.950Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;频域滤波器简介&quot;&gt;频域滤波器简介&lt;/h2&gt;
-&lt;p&gt;频域滤波器与空域滤波器相对，空域滤波器是空间卷积块与空间图像做卷积运算，而频域滤波是在将图像进行了离散傅里叶变换之后在频域上与滤波器做乘法，之后再进行傅里叶反变换得到滤波之后的图像。&lt;/p&gt;
-&lt;p&gt;使用频域滤波器对图像进行滤波的基本步骤：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对图像进行DFT变换得到原图像的频域图像&lt;/li&gt;
-&lt;li&gt;频域图像与频域滤波器相乘得到新的频域图像&lt;/li&gt;
-&lt;li&gt;对新的频域图像进行IDFT变换到空域得到新图像。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
-    
-    
-      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
-    
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
-      <category term="滤波器" scheme="https://www.kezhi.tech/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
-    
-      <category term="频域" scheme="https://www.kezhi.tech/tags/%E9%A2%91%E5%9F%9F/"/>
     
   </entry>
   

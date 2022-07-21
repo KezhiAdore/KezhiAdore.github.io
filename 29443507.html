@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像处理（四）空域低通滤波器">
+<meta property="og:url" content="https://www.kezhi.tech/29443507.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/tmp.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170522.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170620.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170658.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170756.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170817.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327170835.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/tmp.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327172117.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327172156.bmp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20200327172217.bmp">
+<meta property="article:published_time" content="2020-03-27T08:03:46.000Z">
+<meta property="article:modified_time" content="2022-07-21T02:02:12.717Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="数字图像">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="空域滤波器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/tmp.bmp">
+
+<link rel="canonical" href="https://www.kezhi.tech/29443507.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>数字图像处理（四）空域低通滤波器 | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-steam">
+
+    <a href="/steamgames/" rel="section"><i class="fa fa-fw fa-steam"></i>steam</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <!--本地搜索-->
+      <div class="site-search">
+        <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      </div>
+    
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/29443507.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          数字图像处理（四）空域低通滤波器
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-27 16:03:46" itemprop="dateCreated datePublished" datetime="2020-03-27T16:03:46+08:00">2020-03-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-21 10:02:12" itemprop="dateModified" datetime="2022-07-21T10:02:12+08:00">2022-07-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">理论学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">数字图像处理</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/29443507.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/29443507.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。</p>
+<a id="more"></a>
+<p>这一篇文章主要介绍空域低通滤波器及其实现。</p>
+<p>常用的空域滤波器有平均滤波，中值滤波和高斯滤波。这里主要介绍中值滤波和高斯滤波。</p>
+<h2 id="中值滤波">中值滤波</h2>
+<p>中值滤波，顾名思义，是一种基于统计方法的滤波器。具体的实现方法为：对于一个n*n的中值滤波器，输出图像的像素点(x,y)的像素值等于输入图像中以(x,y)为中心的n*n大小的图像区域中所有像素值的中位数。</p>
+<p>滤波器的大小可以根据不同的需要进行选取。</p>
+<p>中值滤波器得到的效果如下：</p>
+<blockquote>
+<p>依次分别为原图像，3*3中值滤波，5*5中值滤波，7*7中值滤波。</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp" >3*3中值
+</center>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">5*5中值
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">7*7中值
+</center>
+</td>
+</tr>
+</table>
+<p>原图中有很多分布不规律的噪声，其中有一部分是盐噪声，但大部分是一些突然的脉冲噪声。在使用3*3的中值滤波时，盐噪声已经很好的去除掉了，但脉冲噪声依然很明显。使用5*5的中值时，脉冲噪声情况有了很大的改善。7*7的滤波器几乎完全去除了噪声，但图像的模糊也很严重。</p>
+<h2 id="高斯滤波">高斯滤波</h2>
+<p>高斯滤波是一些图形处理软件中经常使用的模糊方法，由二维正态分布函数：<span
+class="math inline">\(p(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}\)</span>产生，具体做法如下：</p>
+<ul>
+<li>若要产生n*n的高斯滤波器，将该n阶仿真的中心置为(0,0)，生成矩阵中其他位置的坐标；</li>
+<li>将该n*n矩阵中的每个位置的坐标带入二维正态分布函数得到每个位置的数值；</li>
+<li>以矩阵左上角置1为标准等比缩放矩阵中数值大小；</li>
+<li>对矩阵进行取整得到的结果就是n*n的高斯滤波器</li>
+</ul>
+<blockquote>
+<p>生成高斯滤波器的函数如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br></pre></td></tr></table></figure>
+<p>3*3，5*5，7*7的高斯滤波器如下：</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170522.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170620.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170658.png">
+</center>
+</td>
+</tr>
+</table>
+<p>其在二维坐标系中的图像如下：</p>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170756.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170817.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170835.png">
+</center>
+</td>
+</tr>
+</table>
+</blockquote>
+<p>在得到了高斯滤波器的算子之后，使用该算子与输入图像进行卷积即可得到高斯滤波器滤波后的结果。</p>
+<p>其效果如下：</p>
+<blockquote>
+<p>依次为原图，3*3，5*5，7*7高斯滤波的结果：</p>
+</blockquote>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
+</center>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172156.bmp">5*5高斯
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172217.bmp">7*7高斯
+</center>
+</td>
+</tr>
+</table>
+<p>高斯模糊对于图像中的盐噪声去除效果较好，但对于脉冲噪声的去除显得颇为吃力，7*7的高斯滤波依然无法滤除掉图像中的脉冲噪声。另一方面，高斯模糊相较于终止模糊图像的信息保留较为完全，细节保留较多。</p>
+<h2 id="附录">附录</h2>
+<h3 id="参考文献">参考文献</h3>
+<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael
+C.Gonzalez），（美）理查德·E·伍兹（Richard E.
+Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
+<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16
+[2020-03-23].https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</p>
+<p>[3]予你心安.Numpy求均值、中位数、众数的方法[G/OL].博客园: 2018-11-04
+[2020-03-23].https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html</p>
+<h3 id="源代码">源代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">img=cv.imread(<span class="string">"test1.pgm"</span>)</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像img进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))   <span class="comment">#对边缘进行补0操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_filter</span><span class="params">(img, n)</span>:</span>  <span class="comment">#使用n*n的中值滤波器对图像进行低通滤波</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    tmp=np.zeros(n*n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp[k*n+l]=temp[i+k][j+l]</span><br><span class="line">            result[i][j]=np.median(tmp)</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test1.pgm"</span>,<span class="string">"test2.tif"</span>]</span><br><span class="line">size=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> size:</span><br><span class="line">        cv.imwrite(i+<span class="string">'gauss-'</span>+str(j)+<span class="string">'.bmp'</span>,gauss_filter(img,j))</span><br><span class="line">        cv.imwrite(i+<span class="string">'center-'</span>+str(j)+<span class="string">'.bmp'</span>,center_filter(img,j))</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\bbc72bae.html" rel="bookmark">数字图像处理（五）空域高通滤波器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(python)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\a6c8a314.html" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\3cac2a44.html" rel="bookmark">数字图像处理（二）图像配准</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\b8e0d4a2.html" rel="bookmark">数字图像处理（六）频域滤波器</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/29443507.html" title="数字图像处理（四）空域低通滤波器" rel="noopener" target="_blank">https://www.kezhi.tech/29443507.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/" rel="tag"><i class="fa fa-tag"></i> 数字图像</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+              <a href="/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 空域滤波器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/d9a2f421.html" rel="prev" title="一个用单片机放视频的小项目">
+      <i class="fa fa-chevron-left"></i> 一个用单片机放视频的小项目
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/bbc72bae.html" rel="next" title="数字图像处理（五）空域高通滤波器">
+      数字图像处理（五）空域高通滤波器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中值滤波"><span class="nav-text">中值滤波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯滤波"><span class="nav-text">高斯滤波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-text">源代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      
+      <!--音乐播放器-->
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">115k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:45</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收回复^_^",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '15' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
