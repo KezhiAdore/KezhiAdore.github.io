@@ -597,4 +597,358 @@ href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gi
     
   </entry>
   
+  <entry>
+    <title>数字图像处理（六）频域滤波器</title>
+    <link href="https://www.kezhi.tech/b8e0d4a2.html"/>
+    <id>https://www.kezhi.tech/b8e0d4a2.html</id>
+    <published>2020-05-08T13:17:21.000Z</published>
+    <updated>2022-07-21T02:02:12.715Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;频域滤波器简介&quot;&gt;频域滤波器简介&lt;/h2&gt;
+&lt;p&gt;频域滤波器与空域滤波器相对，空域滤波器是空间卷积块与空间图像做卷积运算，而频域滤波是在将图像进行了离散傅里叶变换之后在频域上与滤波器做乘法，之后再进行傅里叶反变换得到滤波之后的图像。&lt;/p&gt;
+&lt;p&gt;使用频域滤波器对图像进行滤波的基本步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对图像进行DFT变换得到原图像的频域图像&lt;/li&gt;
+&lt;li&gt;频域图像与频域滤波器相乘得到新的频域图像&lt;/li&gt;
+&lt;li&gt;对新的频域图像进行IDFT变换到空域得到新图像。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="滤波器" scheme="https://www.kezhi.tech/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+      <category term="频域" scheme="https://www.kezhi.tech/tags/%E9%A2%91%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BP神经网络</title>
+    <link href="https://www.kezhi.tech/4f98a72.html"/>
+    <id>https://www.kezhi.tech/4f98a72.html</id>
+    <published>2020-05-06T06:45:22.000Z</published>
+    <updated>2022-07-21T02:02:12.674Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;bp神经网络概述&quot;&gt;BP神经网络概述&lt;/h2&gt;
+&lt;p&gt;BP神经网络是神经网络中最基础也是应用最多的神经网络，它由三层节点组成，分别为输入层，隐含层和输出层。BP神经网络的实现比较简单，主要分为正向传递输出和反向传递误差两部分。&lt;/p&gt;
+&lt;p&gt;神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert
+Hecht-Nielsen）这为神经网络的应用提供了理论依据。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://www.kezhi.tech/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="神经网络" scheme="https://www.kezhi.tech/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="BP" scheme="https://www.kezhi.tech/tags/BP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git常用命令</title>
+    <link href="https://www.kezhi.tech/caff8000.html"/>
+    <id>https://www.kezhi.tech/caff8000.html</id>
+    <published>2020-04-25T07:38:41.000Z</published>
+    <updated>2022-07-21T02:02:12.665Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;git文件管理系统&quot;&gt;Git文件管理系统&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本博客为转载，原文地址&lt;a
+href=&quot;https://www.cnblogs.com/chenwolong/p/GIT.html&quot;&gt;https://www.cnblogs.com/chenwolong/p/GIT.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://download.kezhi.tech/img/20200424230007.png&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Git" scheme="https://www.kezhi.tech/tags/Git/"/>
+    
+      <category term="命令行" scheme="https://www.kezhi.tech/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（五）空域高通滤波器</title>
+    <link href="https://www.kezhi.tech/bbc72bae.html"/>
+    <id>https://www.kezhi.tech/bbc72bae.html</id>
+    <published>2020-03-30T07:27:33.000Z</published>
+    <updated>2022-07-21T02:02:12.714Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;高通滤波器经常用来增强图像和提取图像的边缘信息，在日常的图像处理和图像识别中都有着很广泛的应用。这里要说明的高通滤波器主要有如下几种：非锐化掩膜，索贝尔算子，拉普拉斯算子，canny算法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（四）空域低通滤波器</title>
+    <link href="https://www.kezhi.tech/29443507.html"/>
+    <id>https://www.kezhi.tech/29443507.html</id>
+    <published>2020-03-27T08:03:46.000Z</published>
+    <updated>2022-07-21T02:02:12.717Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;低通滤波器在我们的日常生活中很有用，图像模糊，图像去噪以及图像识别都需要低通滤波器的处理。低通滤波即滤除图像中的高频部分（变化很快的部分），留下低频部分（变化不明显得到部分）。滤波器的实现有空域和频域两种：空域滤波器是直接在空间图像上进行操作，图像矩阵和滤波器算子进行卷积得到滤波后的输出；频域滤波器是将图像经过傅里叶变换到频域上再与滤波器做乘法得到输出。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个用单片机放视频的小项目</title>
+    <link href="https://www.kezhi.tech/d9a2f421.html"/>
+    <id>https://www.kezhi.tech/d9a2f421.html</id>
+    <published>2020-03-24T11:40:59.000Z</published>
+    <updated>2022-07-21T02:02:12.692Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;总体设计思路&quot;&gt;总体设计思路&lt;/h2&gt;
+&lt;p&gt;视频的播放实际上就是一系列的图片按照一定的顺序，以一定的时间间隔连续播放所产生的视觉效果。因此，使用单片机驱动LCD去播放视频实际上就是让单片机以一定的时间间隔向LCD的缓存推送图片，让其不断刷新屏幕去切换图片即可。在文章的最后我放入了这个项目的源工程文件供大家参考。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="单片机开发" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E5%8D%95%E7%89%87%E6%9C%BA%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="protues" scheme="https://www.kezhi.tech/tags/protues/"/>
+    
+      <category term="单片机" scheme="https://www.kezhi.tech/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（三）直方图均衡</title>
+    <link href="https://www.kezhi.tech/a6c8a314.html"/>
+    <id>https://www.kezhi.tech/a6c8a314.html</id>
+    <published>2020-03-19T13:33:46.000Z</published>
+    <updated>2022-07-21T02:02:12.711Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在数字图像处理中，直方图均衡是调整图像亮度，对比度，图像增晰等操作中常用的做法。对于图像中各个不同的颜色进行直方图统计，采取统计数据对于颜色进行重新映射，从而达到调整对比度，图像增晰的目的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="直方图均衡" scheme="https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeTaX数学公式常用语法</title>
+    <link href="https://www.kezhi.tech/fc7e112.html"/>
+    <id>https://www.kezhi.tech/fc7e112.html</id>
+    <published>2020-03-14T09:35:38.000Z</published>
+    <updated>2022-07-21T02:02:12.682Z</updated>
+    
+    <summary type="html">
+    
+      &lt;center&gt;
+码一些经常使用的LeTaX数学公式语法
+&lt;/center&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="LetaX" scheme="https://www.kezhi.tech/tags/LetaX/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（二）图像配准</title>
+    <link href="https://www.kezhi.tech/3cac2a44.html"/>
+    <id>https://www.kezhi.tech/3cac2a44.html</id>
+    <published>2020-03-14T09:04:38.000Z</published>
+    <updated>2022-07-21T02:02:12.712Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;图像配准即对于内容大致相同，但在角度，大小或是其他几何位置上有所偏差的两张或几张图像进行坐标变换。使得这些图像矫正到同一规整的大小，角度，坐标上。&lt;/p&gt;
+&lt;p&gt;图像配准对于图像拼接，制作全景图像，进行环境识别等方面有很大的用处。其原理简单，使用矩阵运算转换速度也很快，在选取映射点合适的情况下，配准效果很好。具体的转化方法如下：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="图像配准" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>建站日记</title>
+    <link href="https://www.kezhi.tech/18273dec.html"/>
+    <id>https://www.kezhi.tech/18273dec.html</id>
+    <published>2020-03-13T16:32:01.000Z</published>
+    <updated>2022-07-21T12:24:33.164Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本站建立于2020-03-10，建站过程如下：&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+&lt;li&gt;&lt;input type=&quot;checkbox&quot; disabled=&quot;&quot; checked=&quot;&quot; /&gt;
+2020-03-10
+&lt;span class=&quot;label
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NexT写作常用样式</title>
+    <link href="https://www.kezhi.tech/61ad1e34.html"/>
+    <id>https://www.kezhi.tech/61ad1e34.html</id>
+    <published>2020-03-13T15:32:16.000Z</published>
+    <updated>2022-07-21T02:02:12.676Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一些markdown之外的语法规则，让文章更美观&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文摘录自 &lt;span class=&quot;label success&quot;&gt;周宇峰的博客&lt;/span&gt; &lt;a
+href=&quot;https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/&quot;&gt;原文链接&lt;/a&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/8MAadJ.md.jpg&quot;
+alt=&quot;8MAadJ.md&quot; /&gt;
+    
+    </summary>
+    
+    
+      <category term="工程实践" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="经验积累" scheme="https://www.kezhi.tech/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    
+      <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    
+      <category term="markdown" scheme="https://www.kezhi.tech/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字图像处理（一）图像插值(python)</title>
+    <link href="https://www.kezhi.tech/2b8fba10.html"/>
+    <id>https://www.kezhi.tech/2b8fba10.html</id>
+    <published>2020-03-13T08:18:30.000Z</published>
+    <updated>2022-07-21T02:02:12.707Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数字图像在当代社会有着非常重要的作用，图像的插值作为一种基本的图像处理方法，在很多情况下可以很好的提高图像分辨率，提升图像观感。图像的插值方法主要有以下三种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最近邻插值&lt;/li&gt;
+&lt;li&gt;双线性插值&lt;/li&gt;
+&lt;li&gt;双三次插值
+    
+    </summary>
+    
+    
+      <category term="理论学习" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数字图像处理" scheme="https://www.kezhi.tech/categories/%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="python" scheme="https://www.kezhi.tech/tags/python/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    
+      <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="插值" scheme="https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
+    
+  </entry>
+  
 </feed>

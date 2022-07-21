@@ -1206,14 +1206,42 @@ src="https://download.kezhi.tech/img/202205251718490.webp" /></p>
     <title>建站日记</title>
     <url>/18273dec.html</url>
     <content><![CDATA[<p>本站建立于2020-03-10，建站过程如下：</p>
-<ul>
-<li>2020-03-10
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+2020-03-10
 <span class="label default">godaddy</span>上购买域名<span class="label default">kezhi.me</span>,以hexo为支持架设网站在GitHub仓库上</li>
-<li>2020-03-11 网站使用NexT主题，并不断加入元素进行美化</li>
-<li>2020-03-14 由于<span class="label info">GitHub</span>访问速度很慢，在腾讯云服务器上试部署</li>
-<li>2020-03-15
+<li><input type="checkbox" disabled="" checked="" />
+2020-03-11 网站使用NexT主题，并不断加入元素进行美化</li>
+<li><input type="checkbox" disabled="" checked="" />
+2020-03-14 由于<span class="label info">GitHub</span>访问速度很慢，在腾讯云服务器上试部署</li>
+<li><input type="checkbox" disabled="" checked="" />
+2020-03-15
 购买<span class="label info">阿里云</span>服务器一年，将网站部署在其上，域名<span class="label danger">kezhi.me</span>在国内无法备案，购买并启用新域名<span class="label success">kezhi.tech</span>。</li>
-<li>2020-03-20 网站图片部署至<span class="label info">阿里云oss对象存储</span></li>
+<li><input type="checkbox" disabled="" checked="" />
+2020-03-20 网站图片部署至<span class="label info">阿里云oss对象存储</span></li>
+</ul>
+<h2 id="section">2020</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+2020-10-24
+网站本地内容使用<code>git</code>进行管理并托管在<code>gitee</code>上以便于在多个设备之间进行同步。</li>
+</ul>
+<h2 id="section-1">2021</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+2021-01-24
+考虑到阿里云成本较高（最低配置一年约￥100:money_with_wings:），并且上传带宽较低（1Mbps）。经过多种方案比较之后考虑迁移个人网站到树莓派4B（2G内存，￥260）上，并且使用家里宽带套餐提供上传带宽（20Mbps）</li>
+</ul>
+<h2 id="section-2">2022</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+2022-05-22 将标签页面改为标签云:cloud:的形式，感觉很不戳</li>
+<li><input type="checkbox" disabled="" checked="" />
+2022-05-26
+新增友链页面，把朋友们的页面都放进去:busts_in_silhouette:。</li>
+<li><input type="checkbox" disabled="" checked="" />
+2022-07-21
+网站更改中文链接为8位16进制编码（hexo-attrlink），这会影响网站之前的<code>SEO</code>优化:clown_face:，但为了分享时的便利，还是要改成短链接的。</li>
 </ul>
 ]]></content>
   </entry>
