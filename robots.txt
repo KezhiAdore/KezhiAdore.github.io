@@ -8,5 +8,4 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://kezhi.tech/sitemap.xml
-Sitemap: http://kezhi.tech/baidusitemap.xml
+Sitemap: https://www.kezhi.tech/sitemap.xml

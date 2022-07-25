@@ -8,7 +8,7 @@
 <p>本博客为转载，原文地址<a
 href="https://www.cnblogs.com/chenwolong/p/GIT.html">https://www.cnblogs.com/chenwolong/p/GIT.html</a></p>
 </blockquote>
-<p><img src="http://download.kezhi.tech/img/20200424230007.png" /></p>
+<p><img src="https://download.kezhi.tech/img/20200424230007.png" /></p>
 <a id="more"></a>
 <blockquote>
 <ul>
@@ -865,7 +865,7 @@ https://docs.python.org/zh-cn/3/library/bisect.html (accessed Apr. 07,
 <p>nltk包安装完成后打开python命令行运行以下命令（也可以新建python文件写入以下命令并运行）</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">nltk.download()</span><br></pre></td></tr></table></figure>
 <p>会出现以下界面：</p>
-<p><img src="http://download.kezhi.tech/img/202110212046568.png" /></p>
+<p><img src="https://download.kezhi.tech/img/202110212046568.png" /></p>
 <p>最开始这个列表是空白的，点击右下方<code>refresh</code>后出现nltk-data的列表。</p>
 <p>点击左下角的<code>Download</code>开始下载数据，等下载完成后即可正常使用</p>
 <h2 id="国内加速下载">国内加速下载</h2>
@@ -885,7 +885,7 @@ https://docs.python.org/zh-cn/3/library/bisect.html (accessed Apr. 07,
 <li><p>将server
 index中的地址替换为<code>http://localhost:8000/index.xml</code>如下图:</p>
 <figure>
-<img src="http://download.kezhi.tech/img/202110212123817.png"
+<img src="https://download.kezhi.tech/img/202110212123817.png"
 alt="image-20211021212307774" />
 <figcaption aria-hidden="true">image-20211021212307774</figcaption>
 </figure>
@@ -4071,7 +4071,7 @@ j}(\frac{\mu_i+\mu_j}{d(u_i,u_j)})
     <content><![CDATA[<p><img
 src="https://download.kezhi.tech/img/202205251650671.webp" /></p>
 <a id="more"></a>
-<h2 id="实用工具">实用工具</h2>
+<h2 id="实用软件">实用软件</h2>
 <ul>
 <li><a href="https://geekuninstaller.com/" target="_blank" rel="noopener">Geek Uninstaller - the best
 FREE uninstaller</a></li>
@@ -4109,6 +4109,10 @@ OpenWeatherMap</a></li>
 <ul>
 <li><a href="https://api.muxiaoguo.cn/" target="_blank" rel="noopener">木小果API - 提供免费接口调用平台
 (muxiaoguo.cn)</a></li>
+</ul>
+<h2 id="标准信息查找">标准信息查找</h2>
+<ul>
+<li>Mac 厂商对照表 https://standards-oui.ieee.org/oui/oui.txt</li>
 </ul>
 ]]></content>
       <categories>
