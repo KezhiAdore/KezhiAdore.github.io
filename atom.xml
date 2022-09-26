@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-09-26T09:28:02.775Z</updated>
+  <updated>2022-09-26T09:31:59.117Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -21,16 +21,13 @@
     <link href="https://www.kezhi.tech/a7298e70.html"/>
     <id>https://www.kezhi.tech/a7298e70.html</id>
     <published>2022-09-26T09:25:50.000Z</published>
-    <updated>2022-09-26T09:28:02.775Z</updated>
+    <updated>2022-09-26T09:31:59.117Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;关于网络的parameters&quot;&gt;关于网络的parameters&lt;/h2&gt;
+      &lt;h2 id=&quot;关于网络的parameters&quot;&gt;关于网络的parameters&lt;/h2&gt;
 &lt;p&gt;Pytorch中，每一个网络继承于&lt;code&gt;nn.Module&lt;/code&gt;类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的：&lt;/p&gt;
-&lt;figure class=
-      
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;_parameters&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_buffers&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_backward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_state_dict_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_load_state_dict_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_modules&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
