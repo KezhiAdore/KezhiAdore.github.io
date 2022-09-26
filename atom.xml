@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-08-29T12:26:10.108Z</updated>
+  <updated>2022-09-26T09:25:50.333Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pytorch网络构造Tips</title>
+    <link href="https://www.kezhi.tech/a7298e70.html"/>
+    <id>https://www.kezhi.tech/a7298e70.html</id>
+    <published>2022-09-26T09:25:50.000Z</published>
+    <updated>2022-09-26T09:25:50.333Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;关于网络的parameters&quot;&gt;关于网络的parameters&lt;/h2&gt;
+&lt;p&gt;Pytorch中，每一个网络继承于&lt;code&gt;nn.Module&lt;/code&gt;类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的：&lt;/p&gt;
+&lt;figure class=
+      
+    
+    </summary>
+    
+    
+      <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    
+    
+      <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    
+      <category term="Pytorch" scheme="https://www.kezhi.tech/tags/Pytorch/"/>
+    
+      <category term="Neural Network" scheme="https://www.kezhi.tech/tags/Neural-Network/"/>
+    
+  </entry>
   
   <entry>
     <title>云南施甸二中支教小记</title>

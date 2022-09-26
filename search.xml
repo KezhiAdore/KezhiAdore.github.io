@@ -4560,4 +4560,22 @@ s=s\times\alpha^k
         <tag>心理学</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Pytorch网络构造Tips</title>
+    <url>/a7298e70.html</url>
+    <content><![CDATA[<h2 id="关于网络的parameters">关于网络的parameters</h2>
+<p>Pytorch中，每一个网络继承于<code>nn.Module</code>类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">_parameters</span><br><span class="line">_buffers</span><br><span class="line">_backward_hooks</span><br><span class="line">_forward_hooks</span><br><span class="line">_forward_pre_hooks</span><br><span class="line">_state_dict_hooks</span><br><span class="line">_load_state_dict_pre_hooks</span><br><span class="line">_modules</span><br></pre></td></tr></table></figure>
+<p>在网络初始化<code>__init__</code>过程中，所有类内变量的定义都会通过<code>__setattr__</code>方法在<code>__dict__</code>中进行注册，而<code>nn.Module</code>重写了注册方法，将所有类内变量中，类型派生于<code>Parameter</code>的变量归属到<code>_parameters</code>字典中，这就解释了为什么使用一个<code>list</code>来存放网络的每一层会导致网络中的<code>parameters</code>为空。</p>
+<p>此外，在获取参数时，<code>nn.Module</code>是通过遍历整个<code>_modules</code>字典来实现的，因此在定义时可以使用<code>nn.ModuleList</code>类型来替代<code>list</code>类型存放多个网络层。</p>
+]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
+        <tag>Neural Network</tag>
+      </tags>
+  </entry>
 </search>
