@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-09-26T09:31:59.117Z</updated>
+  <updated>2022-10-25T06:53:01.872Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>限制WSL内存使用</title>
+    <link href="https://www.kezhi.tech/a587561c.html"/>
+    <id>https://www.kezhi.tech/a587561c.html</id>
+    <published>2022-10-15T03:54:01.000Z</published>
+    <updated>2022-10-25T06:53:01.872Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用WSL2时，系统有空余内存的情况下，Linux子系统在运行时会不断分配系统内存。随着其不断运行，占据的内存越来越大，甚至会将Windows系统内存占满。因此，在运行WSL时要限制其内存的使用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    
+    
+      <category term="WSL" scheme="https://www.kezhi.tech/tags/WSL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Pytorch网络构造Tips</title>
     <link href="https://www.kezhi.tech/a7298e70.html"/>
     <id>https://www.kezhi.tech/a7298e70.html</id>
     <published>2022-09-26T09:25:50.000Z</published>
-    <updated>2022-09-26T09:31:59.117Z</updated>
+    <updated>2022-10-25T06:53:01.871Z</updated>
     
     <summary type="html">
     
@@ -32,7 +53,7 @@
     </summary>
     
     
-      <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+      <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
     
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>

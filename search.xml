@@ -831,7 +831,7 @@ https://docs.python.org/zh-cn/3/library/bisect.html (accessed Apr. 07,
 2022).</p>
 ]]></content>
       <categories>
-        <category>Note</category>
+        <category>Tips</category>
       </categories>
       <tags>
         <tag>Python</tag>
@@ -4717,6 +4717,30 @@ s=s\times\alpha^k
         <tag>多机器人</tag>
         <tag>覆盖问题</tag>
         <tag>算法改进</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>限制WSL内存使用</title>
+    <url>/a587561c.html</url>
+    <content><![CDATA[<p>在使用WSL2时，系统有空余内存的情况下，Linux子系统在运行时会不断分配系统内存。随着其不断运行，占据的内存越来越大，甚至会将Windows系统内存占满。因此，在运行WSL时要限制其内存的使用。</p>
+<a id="more"></a>
+<p>操作流程如下：</p>
+<ol type="1">
+<li><p>在用户目录下创建<code>.wslconfig</code>配置文件</p>
+<ul>
+<li>打开命令行</li>
+<li>输入命令<code>notepad .wslconfig</code>创建并编辑配置文件</li>
+</ul></li>
+<li><p>写入WSL配置：</p>
+<p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">memory&#x3D;2GB</span><br><span class="line">swap&#x3D;8GB</span><br><span class="line">localhostForwarding&#x3D;true</span><br></pre></td></tr></table></figure></p></li>
+<li><p>重启WSL<code>wsl --shutdown</code></p></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>WSL</tag>
       </tags>
   </entry>
 </search>
