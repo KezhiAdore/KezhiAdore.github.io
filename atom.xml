@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-10-25T06:53:01.872Z</updated>
+  <updated>2022-11-26T11:23:38.684Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>程序中的命名与作用域</title>
+    <link href="https://www.kezhi.tech/48242c23.html"/>
+    <id>https://www.kezhi.tech/48242c23.html</id>
+    <published>2022-11-26T11:23:38.000Z</published>
+    <updated>2022-11-26T11:23:38.684Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。&lt;/p&gt;
+&lt;h2 id=&quot;命名&quot;&gt;命名&lt;/h2&gt;
+&lt;p&gt;计算机在执行程序时是根据内存地址中的信息来执行的，其无需得知每个变量的名字是什么。因此早期
+      
+    
+    </summary>
+    
+    
+      <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    
+    
+      <category term="Programming" scheme="https://www.kezhi.tech/tags/Programming/"/>
+    
+  </entry>
   
   <entry>
     <title>限制WSL内存使用</title>
@@ -500,7 +526,7 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
     <link href="https://www.kezhi.tech/639b053d.html"/>
     <id>https://www.kezhi.tech/639b053d.html</id>
     <published>2021-06-08T11:09:06.000Z</published>
-    <updated>2022-07-28T16:26:02.552Z</updated>
+    <updated>2022-11-26T08:14:43.184Z</updated>
     
     <summary type="html">
     
