@@ -6676,7 +6676,9 @@ Lower Bound
     <title>王者荣耀目标检测--Yolov5实现</title>
     <url>/86b4b2c0.html</url>
     <content><![CDATA[<h1 id="智能体对战目标检测">智能体对战目标检测</h1>
-<p>手动标注数据集及视频分割程序下载链接：https://download.kezhi.tech/document/video2img.zip</p>
+<p>手动标注数据集及视频分割程序下载链接：<a class="btn" href="https://download.kezhi.tech/document/video2img.zip" target="_blank" rel="noopener">
+            <i class="fa fa-download fa-lg fa-fw"></i>video2img.zip
+          </a></p>
 <p><img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;" /></p>
 <a id="more"></a>
 <p>识别演示视频：</p>
