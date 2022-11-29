@@ -6368,6 +6368,7 @@ then the trajectory of the searching is same as ahead.</p>
     <content><![CDATA[<h1 id="分支定界法在背包问题中的应用">分支定界法在背包问题中的应用</h1>
 <p>西安交通大学《系统优化与调度》课程期末报告</p>
 <p><img src="https://download.kezhi.tech/img/202211291638345.jpg" style="width:30%;" /></p>
+<a id="more"></a>
 <h2 id="背景简介">1 背景简介</h2>
 <p>背包问题（Knapsack
 problem）是一种组合优化的NP完全（NP-Complete，NPC）问题。问题可以描述为：给定一组物品，每种物品都有自己的重量和价格，在限定的总重量内，我们如何选择，才能使得物品的总价格最高。问题的名称来源于如何选择最合适的物品放置于给定背包中。相似问题经常出现在商业、组合数学，计算复杂性理论、密码学和应用数学等领域中。</p>
