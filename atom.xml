@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-11-29T08:41:12.314Z</updated>
+  <updated>2022-11-29T09:02:09.701Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>王者荣耀目标检测--Yolov5实现</title>
+    <link href="https://www.kezhi.tech/86b4b2c0.html"/>
+    <id>https://www.kezhi.tech/86b4b2c0.html</id>
+    <published>2022-11-29T09:01:37.000Z</published>
+    <updated>2022-11-29T09:02:09.701Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;智能体对战目标检测&quot;&gt;智能体对战目标检测&lt;/h1&gt;
+&lt;p&gt;手动标注数据集及视频分割程序下载链接：https://download.kezhi.tech/document/video2img.zip&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291652294.jpg&quot; style=&quot;width:80%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Project" scheme="https://www.kezhi.tech/categories/Project/"/>
+    
+    
+      <category term="Computer Vision" scheme="https://www.kezhi.tech/tags/Computer-Vision/"/>
+    
+      <category term="Target Detection" scheme="https://www.kezhi.tech/tags/Target-Detection/"/>
+    
+  </entry>
   
   <entry>
     <title>XJTU System Optimization and Scheduling Final Report</title>
