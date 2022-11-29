@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-11-26T11:53:00.433Z</updated>
+  <updated>2022-11-29T08:14:00.365Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -17,20 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>XJTU System Optimization and Scheduling Course Assignments</title>
+    <link href="https://www.kezhi.tech/7d0182be.html"/>
+    <id>https://www.kezhi.tech/7d0182be.html</id>
+    <published>2022-11-29T08:08:38.000Z</published>
+    <updated>2022-11-29T08:14:00.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;西安交通大学研究生《系统优化与调度》课程作业&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291608420.png&quot; style=&quot;width:30%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    
+    
+      <category term="Optimal" scheme="https://www.kezhi.tech/tags/Optimal/"/>
+    
+      <category term="Schedule" scheme="https://www.kezhi.tech/tags/Schedule/"/>
+    
+  </entry>
+  
+  <entry>
     <title>程序中的命名与作用域</title>
     <link href="https://www.kezhi.tech/48242c23.html"/>
     <id>https://www.kezhi.tech/48242c23.html</id>
     <published>2022-11-26T11:23:38.000Z</published>
-    <updated>2022-11-26T11:53:00.433Z</updated>
+    <updated>2022-11-29T08:13:41.499Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。&lt;/p&gt;
-&lt;figure&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211261934570.png&quot;
-alt=&quot;转自:米游社@战小医仙&quot; /&gt;
-&lt;figcaption aria-hidden=&quot;true&quot;&gt;转自:米游社@战小医仙&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211261934570.png&quot; alt=&quot;转自:米游社@战小医仙&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     

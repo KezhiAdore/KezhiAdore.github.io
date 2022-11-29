@@ -33,16 +33,16 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。   转自:米游社@战小医仙">
+  <meta name="description" content="最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="程序中的命名与作用域">
 <meta property="og:url" content="https://www.kezhi.tech/48242c23.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。   转自:米游社@战小医仙">
+<meta property="og:description" content="最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.kezhi.tech/img/202211261934570.png">
 <meta property="article:published_time" content="2022-11-26T11:23:38.000Z">
-<meta property="article:modified_time" content="2022-11-26T11:53:00.433Z">
+<meta property="article:modified_time" content="2022-11-29T08:13:41.499Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Programming">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">69</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">71</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -147,7 +147,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">36</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -266,10 +266,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-11-26 19:23:38 / 修改时间：19:53:00" itemprop="dateCreated datePublished" datetime="2022-11-26T19:23:38+08:00">2022-11-26</time>
+              <time title="创建时间：2022-11-26 19:23:38" itemprop="dateCreated datePublished" datetime="2022-11-26T19:23:38+08:00">2022-11-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-29 16:13:41" itemprop="dateModified" datetime="2022-11-29T16:13:41+08:00">2022-11-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -300,7 +306,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -320,11 +326,7 @@
 
       
         <p>最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。</p>
-<figure>
-<img src="https://download.kezhi.tech/img/202211261934570.png"
-alt="转自:米游社@战小医仙" />
-<figcaption aria-hidden="true">转自:米游社@战小医仙</figcaption>
-</figure>
+<p><img src="https://download.kezhi.tech/img/202211261934570.png" alt="转自:米游社@战小医仙" style="width:50%;" /></p>
 <a id="more"></a>
 <h2 id="命名">命名</h2>
 <p>计算机在执行程序时是根据内存地址中的信息来执行的，其无需得知每个变量的名字是什么。因此早期的编程中是没有命名这一概念的。后来为了方便人在编程时对变量所代表的含义和类型进行记忆，才开始给变量和函数进行取名。例如，相比于"经度：108.654519、纬度：34.255314"来说，中国西部科技创新港更容易理解和记忆，又比如相比"8.7.198.46"来说，"某个不存在的网站"这种描述更令人印象深刻。</p>
@@ -461,7 +463,10 @@ z[z]-->a</pre>
     <a href="/a587561c.html" rel="prev" title="限制WSL内存使用">
       <i class="fa fa-chevron-left"></i> 限制WSL内存使用
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/7d0182be.html" rel="next" title="XJTU System Optimization and Scheduling Course Assignments">
+      XJTU System Optimization and Scheduling Course Assignments <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -538,7 +543,7 @@ z[z]-->a</pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -551,7 +556,7 @@ z[z]-->a</pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -896,13 +901,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">127k</span>
+    <span title="站点总字数">154k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:56</span>
+    <span title="站点阅读时长">2:20</span>
 </div>
 
 
