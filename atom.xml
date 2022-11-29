@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-11-29T08:19:20.133Z</updated>
+  <updated>2022-11-29T08:32:12.838Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>XJTU System Optimization and Scheduling Midterm Report</title>
+    <link href="https://www.kezhi.tech/f95f8ff4.html"/>
+    <id>https://www.kezhi.tech/f95f8ff4.html</id>
+    <published>2022-11-29T08:31:55.000Z</published>
+    <updated>2022-11-29T08:32:12.838Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;midterm-report&quot;&gt;Midterm Report&lt;/h1&gt;
+&lt;p&gt;西安交通大学《系统优化与调度》课程中期报告&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291631791.jpg&quot; alt=&quot;&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    
+    
+      <category term="Optimal" scheme="https://www.kezhi.tech/tags/Optimal/"/>
+    
+  </entry>
   
   <entry>
     <title>XJTU System Optimization and Scheduling Course Assignments</title>

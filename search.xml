@@ -6058,4 +6058,308 @@ s=s\times\alpha^k
         <tag>算法改进</tag>
       </tags>
   </entry>
+  <entry>
+    <title>XJTU System Optimization and Scheduling Midterm Report</title>
+    <url>/f95f8ff4.html</url>
+    <content><![CDATA[<h1 id="midterm-report">Midterm Report</h1>
+<p>西安交通大学《系统优化与调度》课程中期报告</p>
+<p><img src="https://download.kezhi.tech/img/202211291631791.jpg" alt="" style="width:50%;" /></p>
+<a id="more"></a>
+<h2 id="problem">Problem</h2>
+<p><span class="math display">\[
+min\ \ x_1^3+x_2^3-2x_1^2x_2+5x_1x_2^2+10x_1x_2+7x_1-x_2\\
+s.t.\left\{
+    \begin{array}{**lr**}
+    -x_1+x_2\leq0\\
+    -2x_1-5x_2-10\leq0\\
+    x_1-100\leq 0
+    \end{array}
+\right.
+\]</span></p>
+<p>The graph of the object function is shown below:</p>
+<figure>
+<img src="http://download.kezhi.tech/img/202112211558169.png"
+alt="object function" />
+<figcaption aria-hidden="true">object function</figcaption>
+</figure>
+<p>The feasible region by the constraint is shown blow:</p>
+<figure>
+<img src="http://download.kezhi.tech/img/202112211600017.png"
+alt="constraint" />
+<figcaption aria-hidden="true">constraint</figcaption>
+</figure>
+<h2 id="method">Method</h2>
+<p>For this problem, we can see that the feasible region is a convex
+set, and the object function is not convex. Considering the feasible
+region, the constraint works only when searching out the boundary. Using
+projection method could let the searched point outing the boundary move
+to the boundary. So the method I using is below:</p>
+<blockquote>
+<ol type="1">
+<li>choose the start point <span class="math inline">\(x^0\)</span></li>
+<li>replace point with the projection<span
+class="math inline">\([x^0]^+\)</span></li>
+<li>get the projection of next direction point <span
+class="math inline">\(\bar x_k=[x^k-\nabla f(x^k)]^+\)</span></li>
+<li>get the search direction <span class="math inline">\(d^k=\bar
+x^k-x^k\)</span></li>
+<li>calculate the next point <span
+class="math inline">\(x^{k+1}=x^k+\alpha^kd^k\)</span></li>
+<li>if the terminal condition is satisficed, stop the search and output
+the result, else go to the step 3</li>
+</ol>
+</blockquote>
+<p>In this project, I choose Armjio rule to control the step size.</p>
+<p>The parameters of the method is following: <span
+class="math display">\[
+s=1\ \ \beta=0.5\ \ \sigma=1e-5
+\]</span></p>
+<h2 id="solution">Solution</h2>
+<p>Considering the floating error of computers, stipulate <span
+class="math inline">\(a=b\)</span> when <span
+class="math inline">\(|a-b|&lt;\varepsilon\)</span>, and <span
+class="math inline">\(a=0\)</span> if <span
+class="math inline">\(|a|&lt;\varepsilon\)</span>. In this project,
+<span class="math inline">\(\varepsilon=1e-19\)</span>.</p>
+<p>choose the start point (0,0), we could get the following answer:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">（0,0）</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
+</tr>
+</tbody>
+</table>
+<p>The final result is <span class="math inline">\(x^*=[-0.20805,
+-1.91678],f(x^*)=-6.25904\)</span>.</p>
+<p>same as the result solved by the python package
+<code>scipy.optimize.minimize</code>:</p>
+<figure>
+<img src="https://download.kezhi.tech/img/20211222010041.png"
+alt="image-20211222010030267" />
+<figcaption aria-hidden="true">image-20211222010030267</figcaption>
+</figure>
+<p>Change the start point to (5,-8), and the answer following:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 15%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(6.37931,-4.55172)</td>
+<td style="text-align: center;">955.45385</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-7.80788,3.12315)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that the searching point went to the boundary quickly, and
+then the trajectory of the searching is same as ahead.</p>
+<h2 id="appendix">Appendix</h2>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">language: python</span><br><span class="line">package: numpy, matplotlib, scipy</span><br></pre></td></tr></table></figure>
+<p>The source code is following:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小于该数则判断为0</span></span><br><span class="line">epsilon=<span class="number">1e-19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求梯度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">autograd</span><span class="params">(f,*args)</span>:</span></span><br><span class="line">    delta=<span class="number">1e-9</span></span><br><span class="line">    var_num=len(args)</span><br><span class="line">    grads=[]</span><br><span class="line">    <span class="comment"># 计算当前函数值</span></span><br><span class="line">    func_value=f(args)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(var_num):</span><br><span class="line">        <span class="comment"># 计算偏移后的变量</span></span><br><span class="line">        args_new=list(args)</span><br><span class="line">        args_new[i]+=delta</span><br><span class="line">        args_new=tuple(args_new)</span><br><span class="line">        <span class="comment"># 计算偏移后函数值</span></span><br><span class="line">        delta_func_value=f(args_new)</span><br><span class="line">        <span class="comment"># 求偏导</span></span><br><span class="line">        partial=(delta_func_value-func_value)/delta</span><br><span class="line">        grads.append(partial)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> tuple(grads)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数</span></span><br><span class="line">f=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]**<span class="number">3</span>+x[<span class="number">1</span>]**<span class="number">3</span><span class="number">-2</span>*x[<span class="number">0</span>]**<span class="number">2</span>*x[<span class="number">1</span>]+<span class="number">5</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]**<span class="number">2</span>+<span class="number">10</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]+<span class="number">7</span>*x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g1=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g2=<span class="keyword">lambda</span> x: <span class="number">2</span>*x[<span class="number">0</span>]+<span class="number">5</span>*x[<span class="number">1</span>]+<span class="number">10</span></span><br><span class="line">g3=<span class="keyword">lambda</span> x: -x[<span class="number">0</span>]+<span class="number">10</span></span><br><span class="line"></span><br><span class="line">line1=[(<span class="number">10</span>,<span class="number">-6</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line2=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line3=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">-6</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算凸包上的最近距离点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_closest_point</span><span class="params">(x,y,line)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> line[<span class="number">0</span>][<span class="number">0</span>]==line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">        px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        py=y</span><br><span class="line">        <span class="keyword">if</span> py&gt;line[<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> py&lt;line[<span class="number">0</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        k=(line[<span class="number">0</span>][<span class="number">1</span>]-line[<span class="number">1</span>][<span class="number">1</span>])/(line[<span class="number">0</span>][<span class="number">0</span>]-line[<span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">        b=line[<span class="number">0</span>][<span class="number">1</span>]-k*line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        px=(y+x/k-b)/(k+<span class="number">1</span>/k)</span><br><span class="line">        py=k*px+b</span><br><span class="line">        <span class="keyword">if</span> px&lt;line[<span class="number">0</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> px&gt;line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    distance=sqrt((x-px)**<span class="number">2</span>+(y-py)**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> distance,(px,py)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算点(x,y)在凸包上的投影</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> g1([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g2([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g3([x,y])&gt;=<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (x,y)</span><br><span class="line">    d1,p1=get_closest_point(x,y,line1)</span><br><span class="line">    d2,p2=get_closest_point(x,y,line2)</span><br><span class="line">    d3,p3=get_closest_point(x,y,line3)</span><br><span class="line">    <span class="keyword">if</span> d1==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p1</span><br><span class="line">    <span class="keyword">if</span> d2==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p2</span><br><span class="line">    <span class="keyword">if</span> d3==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影最速下降法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">steepest_method</span><span class="params">(f,*start_point)</span>:</span></span><br><span class="line">    s=<span class="number">1</span></span><br><span class="line">    beta=<span class="number">0.5</span></span><br><span class="line">    m=<span class="number">0</span></span><br><span class="line">    sigma=<span class="number">1e-5</span></span><br><span class="line">    point=np.array(project(*start_point))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        last_point=point</span><br><span class="line">        <span class="comment"># 计算函数值</span></span><br><span class="line">        value=f(point)</span><br><span class="line">        <span class="comment"># 计算梯度</span></span><br><span class="line">        grad_f=autograd(f,*point)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 检查是否达到终止条件</span></span><br><span class="line">        is_solve=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> grad <span class="keyword">in</span> grad_f:</span><br><span class="line">            <span class="keyword">if</span> abs(grad)&gt;epsilon:</span><br><span class="line">                is_solve=<span class="literal">False</span></span><br><span class="line">        <span class="comment"># 如果精度达到终止条件，则停止并返回当前点</span></span><br><span class="line">        <span class="keyword">if</span> is_solve:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># 否则继续向下运算</span></span><br><span class="line">        point=point-grad_f</span><br><span class="line">        <span class="comment"># 对点进行投影</span></span><br><span class="line">        point=project(*point)</span><br><span class="line">        <span class="comment"># 计算更新方向</span></span><br><span class="line">        direction=point-last_point</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算下一个搜索点</span></span><br><span class="line">        point=last_point</span><br><span class="line">        <span class="comment"># Armijo准则选择步长</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            alpha=beta**m*s</span><br><span class="line">            new_point=point+alpha*direction</span><br><span class="line">            d_sum=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(direction):</span><br><span class="line">                d_sum+=grad_f[i]*d</span><br><span class="line">            <span class="keyword">if</span> f(point)-f(new_point)&gt;=-sigma*alpha*d_sum:</span><br><span class="line">                point=new_point</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            m+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 打印日志</span></span><br><span class="line">        print(<span class="string">'x_k:(&#123;:.5f&#125;,&#123;:.5f&#125;) f: &#123;:.5f&#125; a: &#123;:.5f&#125; d: (&#123;:.5f&#125;,&#123;:.5f&#125;)'</span>.format(last_point[<span class="number">0</span>],last_point[<span class="number">1</span>],f(last_point),alpha,direction[<span class="number">0</span>],direction[<span class="number">1</span>]))</span><br><span class="line">        point=last_point+alpha*direction</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果迭代步长很小，则停止迭代</span></span><br><span class="line">        err=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(point)):</span><br><span class="line">            err+=abs(point[i]-last_point[i])</span><br><span class="line">        <span class="keyword">if</span> err&lt;<span class="number">1e-5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 对结果保留5位小数</span></span><br><span class="line">    ans=[]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> point:</span><br><span class="line">        ans.append(round(p,<span class="number">5</span>))</span><br><span class="line">    <span class="keyword">return</span> ans,f(ans)</span><br><span class="line">    </span><br><span class="line">print(steepest_method(f,<span class="number">5</span>,<span class="number">-8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">######################</span></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">x=np.arange(<span class="number">-5</span>,<span class="number">15</span>,<span class="number">0.1</span>)</span><br><span class="line">y1=x</span><br><span class="line">y2=<span class="number">-0.4</span>*x<span class="number">-2</span></span><br><span class="line"></span><br><span class="line">plt.plot(x,y1)</span><br><span class="line">plt.plot(x,y2)</span><br><span class="line">plt.plot([<span class="number">10</span>,<span class="number">10</span>],[<span class="number">-10</span>,<span class="number">15</span>])</span><br><span class="line">plt.fill_between(x,y1,y2,where=(x&lt;<span class="number">10</span>)&amp;(y1&gt;y2),alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.savefig(<span class="string">'constraint.png'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">figure = plt.figure()</span><br><span class="line">ax = Axes3D(figure)<span class="comment">#设置图像为三维格式</span></span><br><span class="line">X = np.arange(<span class="number">-1.5</span>,<span class="number">10</span>,<span class="number">0.1</span>)</span><br><span class="line">Y = np.arange(<span class="number">-6</span>,<span class="number">10</span>,<span class="number">0.1</span>)<span class="comment">#X,Y的范围</span></span><br><span class="line">X,Y = np.meshgrid(X,Y)<span class="comment">#绘制网格</span></span><br><span class="line">Z=f([X,Y])</span><br><span class="line">ax.plot_surface(X,Y,Z,rstride=<span class="number">1</span>,cstride=<span class="number">1</span>,cmap=<span class="string">'rainbow'</span>)</span><br><span class="line"><span class="comment">#绘制3D图，后面的参数为调节图像的格式</span></span><br><span class="line">plt.savefig(<span class="string">'obj_func.png'</span>)</span><br><span class="line"><span class="comment">#######################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># scipy求解验证结果正确性</span></span><br><span class="line"></span><br><span class="line">cons=(&#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g1&#125;,</span><br><span class="line">      &#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g2&#125;,</span><br><span class="line">      &#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g3&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x0 = np.asarray((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">res=minimize(f,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Study</category>
+      </categories>
+      <tags>
+        <tag>Optimal</tag>
+      </tags>
+  </entry>
 </search>
