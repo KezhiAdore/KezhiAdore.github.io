@@ -7027,4 +7027,476 @@ arXiv:2004.10934</em>.</li>
         <tag>Target Detection</tag>
       </tags>
   </entry>
+  <entry>
+    <title>线性滤波与非线性滤波实验</title>
+    <url>/10ee70e7.html</url>
+    <content><![CDATA[<p>本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
+该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202211291710418.jpg"
+alt="Map of Control Theory" />
+<figcaption aria-hidden="true">Map of Control Theory</figcaption>
+</figure>
+<a id="more"></a>
+<h2 id="问题描述">问题描述</h2>
+<ol type="1">
+<li><p>已知一物体作自由落体运动，对其高度进行了20次测量，测量值如下表：</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202206171143534.png"
+alt="image-20220617114332337" />
+<figcaption aria-hidden="true">image-20220617114332337</figcaption>
+</figure></li>
+<li><p>同样考虑自由落体运动的物体，用雷达（和物体在同一水平面）进行测量，如图所示，如果雷达测距和测角的量测噪声为高斯白噪声序列，均值为0，方差阵
+<span class="math inline">\(R=\begin{bmatrix}0.04
+&amp;0\\0&amp;0.01\end{bmatrix}\)</span>，试根据以下测量数据确定物体的高度和下落速度随时间变化的估计值：</p>
+<p><img src="https://download.kezhi.tech/img/202206171202388.png" /></p>
+<p><img src="https://download.kezhi.tech/img/202206171212236.png" /></p>
+<p>该下落运动和雷达检测信息如下图所示：</p>
+<p><img
+src="https://download.kezhi.tech/img/202206171212177.png" /></p></li>
+</ol>
+<h2 id="模型介绍">模型介绍</h2>
+<h3 id="线性估计问题">1. 线性估计问题</h3>
+<p>设在自由落体运动时，物体高度为 <span
+class="math inline">\(h\)</span>，速度为 <span
+class="math inline">\(v\)</span> （向下为正），设 <span
+class="math inline">\(x_1=h,x_2=v\)</span>，则系统的状态方程为：</p>
+<p><span class="math display">\[
+    \begin{bmatrix}
+        \dot x_1\\\dot x_2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0&amp;-1\\
+        0&amp;0\\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}+
+    \begin{bmatrix}
+        0\\1
+    \end{bmatrix}g\ \ (g=9.80m/s^2)
+\]</span></p>
+<p>由上述状态方程可以解出系统的状态转移函数为：</p>
+<p><span class="math display">\[
+    x(t)=\begin{bmatrix}
+        1&amp;-t\\
+        0&amp;1
+    \end{bmatrix}x(0)
+    +\begin{bmatrix}
+        -t\\1
+    \end{bmatrix}u(t)
+\]</span></p>
+<p>当步长为 1s 时系统的状态转移函数为：</p>
+<p><span class="math display">\[
+\Phi_{k+1,k}=\begin{bmatrix}
+        1&amp;-1\\
+        0&amp;1
+    \end{bmatrix}
+    \ \Psi_{k+1,k}=\begin{bmatrix}
+        -1\\
+        1
+    \end{bmatrix}
+\]</span></p>
+<p>由此可得，系统的一步预测为：</p>
+<p><span class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k
+\]</span></p>
+<p>由于观测是对物体高度的直接测量，并且假设量测误差为均值为0，方差为1的白噪声，则量测方程为：
+<span class="math display">\[
+    y_k=H_kx_k+v_k
+\]</span></p>
+<p>其中： <span class="math display">\[
+H_k\equiv \begin{bmatrix}
+    1\\0
+\end{bmatrix},
+\ v_k \sim N(0,1),
+\ R=1
+\]</span></p>
+<p>本题给出的数据中，量测高度单位为<span
+class="math inline">\(km\)</span>，加速度为<span
+class="math inline">\(9.8m/s\)</span>，为便于计算，统一距离单位为<span
+class="math inline">\(km\)</span>，时间单位统一为<span
+class="math inline">\(s\)</span>，即重力加速度<span
+class="math inline">\(g=0.0098km/s\)</span>。由于滤波初值未给定，根据量测数据估算初始高度为<span
+class="math inline">\(2km\)</span>，初始速度为0，即<span
+class="math inline">\(x_{0|0}=\begin{bmatrix}2&amp;0\end{bmatrix}\)</span>。由于这样确定的初始估计值比较粗糙，因此方差较大，设定系统初始方差阵为<span
+class="math inline">\(P_{0|0}=\begin{bmatrix}10&amp;0\\0&amp;10\end{bmatrix}\)</span>。</p>
+<p>建立卡尔曼滤波： <span class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k\\
+P_{k+1|k}=\Phi_{k+1,k}P_{k|k}\Phi^\top_{k+1,k}\\
+P_{k+1|k+1}=[P_{k+1|k}^{-1}+H_{k+1}^{\top} R_{k+1}^{-1}H_{k+1}]^{-1}\\
+K_{k+1}=P_{k+1|k+1}H_{k+1}^\top R_{k+1}^{-1}\\
+\hat x_{k+1|k+1}=\hat x_{k+1|k}+K_{k+1}(y_{k+1}-H_{k+1}\hat x_{k+1|k})
+\]</span>
+对物体自由落体下降高度和速度进行计算，计算结果见后文实验结果部分。</p>
+<h3 id="非线性估计问题">2. 非线性估计问题</h3>
+<p>在第2个问题中，量测与估计值为非线性关系，考虑采用非线性卡尔曼滤波算法对其进行估计，本报告中采用扩展式卡尔曼滤波算法（EKF）。</p>
+<p>设测量的斜距为<span
+class="math inline">\(l(km)\)</span>，俯仰角为<span
+class="math inline">\(\theta(rad)\)</span>，物体高度为<span
+class="math inline">\(h(km)\)</span>，下降速度为<span
+class="math inline">\(v(km/s)\)</span>（向下为正），物体在地面上的竖直投影到雷达的距离为<span
+class="math inline">\(d_0\)</span>。</p>
+<p>为便于后续线性化计算，选取系统状态量为： <span
+class="math display">\[
+x_1=h,\ x_2=v,\ x_3=d_0
+\]</span> 则系统的状态方程为： <span class="math display">\[
+\dot x=
+\begin{bmatrix}
+0&amp;-1&amp;0\\
+0&amp;0&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}x+
+\begin{bmatrix}
+0\\
+1\\
+0
+\end{bmatrix}g,\ 其中\ g=0.0098\ km/s
+\]</span> 求解得出当时间间隔为<span
+class="math inline">\(0.5s\)</span>时，系统的离散状态转移函数为： <span
+class="math display">\[
+\Phi_{k+1,k}=\begin{bmatrix}
+1&amp;-0.5&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix},\
+\Psi_{k+1,k}=\begin{bmatrix}
+-0.125\\
+0.5\\
+0
+\end{bmatrix}
+\]</span> 系统观测为雷达测量出的斜距和俯仰角，则： <span
+class="math display">\[
+y_1=l=\sqrt{h^2+d_0^2}=\sqrt{x_1^2+x_3^2}\\
+y_2=\theta=\arctan(\frac{h}{d_0})=\arctan(\frac{x_1}{x_3})
+\]</span> 观测量对状态量求导可得： <span class="math display">\[
+\frac{\partial y_1}{\partial x_1}=\frac{x_1}{\sqrt{x_1^2+x_3^2}}\\
+\frac{\partial y_1}{\partial x_2}=0\\
+\frac{\partial y_1}{\partial x_3}=\frac{x_3}{\sqrt{x_1^2+x_3^2}}\\
+\frac{\partial y_2}{\partial x_1}=\frac{x_3}{x_1^2+x_3^2}\\
+\frac{\partial y_2}{\partial x_2}=0\\
+\frac{\partial y_2}{\partial x_3}=-\frac{x_1}{x_1^2+x_3^2}\\
+\]</span> 因此，系统的局部线性化系数为： <span class="math display">\[
+H=\begin{bmatrix}
+\frac{x_1}{\sqrt{x_1^2+x_3^2}}&amp;0&amp;\frac{x_3}{\sqrt{x_1^2+x_3^2}}\\
+\frac{x_3}{x_1^2+x_3^2}&amp;0&amp;-\frac{x_1}{x_1^2+x_3^2}
+\end{bmatrix}
+\]</span> 扩展卡尔曼滤波（EKF）的计算过程如下： <span
+class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k\\
+P_{k+1|k}=\Phi_{k+1,k}P_{k|k}\Phi^\top_{k+1,k}\\
+P_{k+1|k+1}=[P_{k+1|k}^{-1}+H_{k+1}^{\top} R_{k+1}^{-1}H_{k+1}]^{-1}\\
+K_{k+1}=P_{k+1|k+1}H_{k+1}^\top R_{k+1}^{-1}\\
+\hat x_{k+1|k+1}=\hat x_{k+1|k}+K_{k+1}(y_{k+1}-H_{k+1}\hat x_{k+1|k})
+\]</span> 其中，与卡尔曼滤波不同的地方在于<span
+class="math inline">\(H\)</span>系数矩阵是通过在观测点进行局部线性化得到的。通过上述步骤即可对非线性观测进行滤波估计。</p>
+<h2 id="实验结果">实验结果</h2>
+<h3 id="线性滤波问题">1. 线性滤波问题</h3>
+<p>根据题中给出的高度观测数据进行线性卡尔曼滤波，计算得到的结果如下：</p>
+<p>高度估计数据为：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">1.9943</td>
+<td style="text-align: center;">1.9791</td>
+<td style="text-align: center;">1.9550</td>
+<td style="text-align: center;">1.9211</td>
+<td style="text-align: center;">1.8774</td>
+<td style="text-align: center;">1.8244</td>
+<td style="text-align: center;">1.7605</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">1.6870</td>
+<td style="text-align: center;">1.6038</td>
+<td style="text-align: center;">1.5103</td>
+<td style="text-align: center;">1.4075</td>
+<td style="text-align: center;">1.2947</td>
+<td style="text-align: center;">1.1723</td>
+<td style="text-align: center;">1.0400</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">15</th>
+<th style="text-align: center;">16</th>
+<th style="text-align: center;">17</th>
+<th style="text-align: center;">18</th>
+<th style="text-align: center;">19</th>
+<th style="text-align: center;">20</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">0.8980</td>
+<td style="text-align: center;">0.7460</td>
+<td style="text-align: center;">0.5845</td>
+<td style="text-align: center;">0.4129</td>
+<td style="text-align: center;">0.2317</td>
+<td style="text-align: center;">0.0405</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>绘制出高度变化图如下：</p>
+<p><img src="https://download.kezhi.tech/img/202206171314878.png" /></p>
+<p>下落速度（向下为正）滤波数据如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.0078</td>
+<td style="text-align: center;">0.0157</td>
+<td style="text-align: center;">0.0247</td>
+<td style="text-align: center;">0.0343</td>
+<td style="text-align: center;">0.0439</td>
+<td style="text-align: center;">0.0536</td>
+<td style="text-align: center;">0.0635</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.0733</td>
+<td style="text-align: center;">0.0831</td>
+<td style="text-align: center;">0.0930</td>
+<td style="text-align: center;">0.1028</td>
+<td style="text-align: center;">0.1126</td>
+<td style="text-align: center;">0.1224</td>
+<td style="text-align: center;">0.1322</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">15</th>
+<th style="text-align: center;">16</th>
+<th style="text-align: center;">17</th>
+<th style="text-align: center;">18</th>
+<th style="text-align: center;">19</th>
+<th style="text-align: center;">20</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.1420</td>
+<td style="text-align: center;">0.1519</td>
+<td style="text-align: center;">0.1616</td>
+<td style="text-align: center;">0.1714</td>
+<td style="text-align: center;">0.1812</td>
+<td style="text-align: center;">0.1911</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>绘制出速度变化图如下：</p>
+<p><img src="https://download.kezhi.tech/img/202206171354944.png" /></p>
+<p>同时，高度和下落速度的估计方差随时间变化为：</p>
+<table>
+<tr>
+<td>
+<center>
+高度估计方差
+</center>
+</td>
+<td>
+<center>
+速度估计方差
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206171355785.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206171356665.png">
+</center>
+</td>
+</tr>
+</table>
+<p>从上图中的结果可以看出，卡尔曼滤波对于物体下落高度和速度的估计在新息一开始加入后就迅速减小，之后渐进减小到0附近之后不再有明显下降。物体自由落体的高度变化曲线为抛物线，速度为匀加速变化，符合自由落体的相关物理定律。</p>
+<h3 id="非线性估计问题-1">2. 非线性估计问题</h3>
+<p>根据题中给出的量测数据以及上文中提到的非线性滤波模型，滤波估计出下落物体的高度和速度变化如下。</p>
+<p>物体高度变化为：</p>
+<p><img src="https://download.kezhi.tech/img/202206172029931.png" /></p>
+<p>物体下落速度变化为：</p>
+<p><img src="https://download.kezhi.tech/img/202206172029342.png" /></p>
+<p>物体自由下落高度和速度估计误差为：</p>
+<table>
+<tr>
+<td>
+<center>
+高度估计方差
+</center>
+</td>
+<td>
+<center>
+速度估计方差
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172030142.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172030896.png">
+</center>
+</td>
+</tr>
+</table>
+<p>从上图估计结果可以看出，下落高度随时间呈抛物线变化，下落速度（向下为正）随时间匀速上升，符合自由落体物理规律。</p>
+<h2 id="实验过程中的一些发现">实验过程中的一些发现</h2>
+<p>在最开始的编程和实验过程中，由于题目给出的量测数据以<span
+class="math inline">\(km\)</span>为单位，为便于计算，将距离单位统一换算为<span
+class="math inline">\(km\)</span>处理。但是由于题面中未给出量测方差的单位，故未对该数值进行换算，即按照单位为<span
+class="math inline">\(km\)</span>进行处理。</p>
+<p>在求解第1题过程中，未发现任何异常，然而在求解第二题时，如果未对量测协方差进行单位换算，将其单位当作<span
+class="math inline">\(km\)</span>进行处理，估计出的结果会如下图所示：</p>
+<table>
+<tr>
+<td>
+<center>
+高度变化
+</center>
+</td>
+<td>
+<center>
+速度变化
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172039755.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172039518.png">
+</center>
+</td>
+</tr>
+</table>
+<p>对比上图中计算结果和实验结果中第二问的计算结果可以看出，相对于线性卡尔曼滤波，非线性卡尔曼滤波在计算时收到量测误差的影响更大。这是由于非线性滤波时量测系数矩阵<span
+class="math inline">\(H\)</span>是经过局部线性化得到的，如果量测误差本身较大，则会影响卡尔曼系数的计算结果，最终导致估计结果不准确。</p>
+<h2 id="附录">附录</h2>
+<h3 id="常量配置">常量配置</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-10 16:59:11</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 21:02:09</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cache_dir=<span class="string">"cache/"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># observation</span></span><br><span class="line"></span><br><span class="line">observation_1=[</span><br><span class="line">    [<span class="number">1.9945</span>],</span><br><span class="line">    [<span class="number">1.9794</span>],</span><br><span class="line">    [<span class="number">1.9554</span>],</span><br><span class="line">    [<span class="number">1.9214</span>],</span><br><span class="line">    [<span class="number">1.8777</span>],</span><br><span class="line">    [<span class="number">1.8250</span>],</span><br><span class="line">    [<span class="number">1.7598</span>],</span><br><span class="line">    [<span class="number">1.6867</span>],</span><br><span class="line">    [<span class="number">1.6036</span>],</span><br><span class="line">    [<span class="number">1.5092</span>],</span><br><span class="line">    [<span class="number">1.4076</span>],</span><br><span class="line">    [<span class="number">1.2944</span>],</span><br><span class="line">    [<span class="number">1.1724</span>],</span><br><span class="line">    [<span class="number">1.0399</span>],</span><br><span class="line">    [<span class="number">0.8980</span>],</span><br><span class="line">    [<span class="number">0.7455</span>],</span><br><span class="line">    [<span class="number">0.5850</span>],</span><br><span class="line">    [<span class="number">0.4125</span>],</span><br><span class="line">    [<span class="number">0.2318</span>],</span><br><span class="line">    [<span class="number">0.0399</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">observation_2=[</span><br><span class="line">    [<span class="number">2.82741643781891</span>,<span class="number">0.00075850435876</span>],</span><br><span class="line">    [<span class="number">2.82519811729771</span>,<span class="number">0.00083282260478</span>],</span><br><span class="line">    [<span class="number">2.82066686966236</span>,<span class="number">0.00067808241639</span>],</span><br><span class="line">    [<span class="number">2.81487233105901</span>,<span class="number">0.00085279036802</span>],</span><br><span class="line">    [<span class="number">2.80671786536244</span>,<span class="number">0.00072900768452</span>],</span><br><span class="line">    [<span class="number">2.79725268974089</span>,<span class="number">0.00080072481819</span>],</span><br><span class="line">    [<span class="number">2.78664273475039</span>,<span class="number">0.00075095576213</span>],</span><br><span class="line">    [<span class="number">2.77320365026313</span>,<span class="number">0.00065762725379</span>],</span><br><span class="line">    [<span class="number">2.75919535464551</span>,<span class="number">0.00081186148545</span>],</span><br><span class="line">    [<span class="number">2.74331288628195</span>,<span class="number">0.00079783727034</span>],</span><br><span class="line">    [<span class="number">2.72538888482812</span>,<span class="number">0.00073060712986</span>],</span><br><span class="line">    [<span class="number">2.70664967712312</span>,<span class="number">0.00063242006530</span>],</span><br><span class="line">    [<span class="number">2.68632403406473</span>,<span class="number">0.00063656524495</span>],</span><br><span class="line">    [<span class="number">2.66386533852220</span>,<span class="number">0.00080659845639</span>],</span><br><span class="line">    [<span class="number">2.64093529707333</span>,<span class="number">0.00067704740069</span>],</span><br><span class="line">    [<span class="number">2.61621111727357</span>,<span class="number">0.00076573767706</span>],</span><br><span class="line">    [<span class="number">2.59038109850785</span>,<span class="number">0.00054955759081</span>],</span><br><span class="line">    [<span class="number">2.56298794272843</span>,<span class="number">0.00058487913971</span>],</span><br><span class="line">    [<span class="number">2.53498317950797</span>,<span class="number">0.00055602747368</span>],</span><br><span class="line">    [<span class="number">2.50647589372246</span>,<span class="number">0.00033550412588</span>],</span><br><span class="line">    [<span class="number">2.47571075016386</span>,<span class="number">0.00056012688452</span>],</span><br><span class="line">    [<span class="number">2.44560676000982</span>,<span class="number">0.00056694491978</span>],</span><br><span class="line">    [<span class="number">2.41403690772088</span>,<span class="number">0.00059380631025</span>],</span><br><span class="line">    [<span class="number">2.38252228611696</span>,<span class="number">0.00053681916544</span>],</span><br><span class="line">    [<span class="number">2.35016501182332</span>,<span class="number">0.00065871960781</span>],</span><br><span class="line">    [<span class="number">2.31790939837137</span>,<span class="number">0.00068598344328</span>],</span><br><span class="line">    [<span class="number">2.28597616656453</span>,<span class="number">0.00060922471348</span>],</span><br><span class="line">    [<span class="number">2.25418431681401</span>,<span class="number">0.00057086018918</span>],</span><br><span class="line">    [<span class="number">2.22259320219535</span>,<span class="number">0.00041308535708</span>],</span><br><span class="line">    [<span class="number">2.19237398969466</span>,<span class="number">0.00047302026281</span>],</span><br><span class="line">    [<span class="number">2.16290177997271</span>,<span class="number">0.00030949309972</span>],</span><br><span class="line">    [<span class="number">2.13441725793706</span>,<span class="number">0.00040552624986</span>],</span><br><span class="line">    [<span class="number">2.10811064690727</span>,<span class="number">0.00037545033142</span>],</span><br><span class="line">    [<span class="number">2.08322179823195</span>,<span class="number">0.00017282319262</span>],</span><br><span class="line">    [<span class="number">2.06148109026767</span>,<span class="number">0.00020758327980</span>],</span><br><span class="line">    [<span class="number">2.04219885094031</span>,<span class="number">0.00037186464579</span>],</span><br><span class="line">    [<span class="number">2.02610235314357</span>,<span class="number">0.00018082163465</span>],</span><br><span class="line">    [<span class="number">2.01290326863579</span>,<span class="number">0.00023323830160</span>],</span><br><span class="line">    [<span class="number">2.00463157388395</span>,<span class="number">-0.00004536186964</span>],</span><br><span class="line">    [<span class="number">2.00058143251913</span>,<span class="number">0.00003246284068</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># dimension transform</span></span><br><span class="line">observation_2=[[observation[<span class="number">0</span>],observation[<span class="number">1</span>]*<span class="number">1000</span>] <span class="keyword">for</span> observation <span class="keyword">in</span> observation_2]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the parameters of problem 1</span></span><br><span class="line">param_1=&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Phi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">-1</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Psi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">-1</span>],</span><br><span class="line">            [<span class="number">1</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"H"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"R"</span>:np.matrix(</span><br><span class="line">        [<span class="number">1</span>/<span class="number">1000</span>]</span><br><span class="line">    ),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># the parameters of problem 2</span></span><br><span class="line">param_2=&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Phi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">-0.5</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Psi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">-0.125</span>],</span><br><span class="line">            [<span class="number">0.5</span>],</span><br><span class="line">            [<span class="number">0</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"R"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">0.04</span>/<span class="number">1000</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">0.01</span>],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="题目1-代码">题目1 代码</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-10 14:44:08</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 12:45:17</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> cache_dir,observation_1,param_1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 支持中文</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建cache文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(cache_dir):</span><br><span class="line">    os.mkdir(cache_dir)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Kalman filter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Kalman_filter</span><span class="params">(x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  H:np.matrix=None,    <span class="comment"># y=Hx+v</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=Psi.copy()</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> H <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        H=np.matrix(np.ones((y_1.shape[<span class="number">0</span>],x_0.shape[<span class="number">0</span>])))</span><br><span class="line">        print(<span class="string">"H is lacked, use default value: &#123;&#125;"</span>.format(H))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-H@x_10)</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_result</span><span class="params">(record:dict,problem)</span>:</span></span><br><span class="line">    pprint(record)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> record.items():</span><br><span class="line">        plt.title(key)</span><br><span class="line">        plt.xlabel(<span class="string">"step"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"h"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"高度:km"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"v"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"速度:km/s (向下为正)"</span>)</span><br><span class="line">        plt.plot(value)</span><br><span class="line">        plt.savefig(os.path.join(cache_dir,problem+<span class="string">"_"</span>+key+<span class="string">".png"</span>),dpi=<span class="number">600</span>)</span><br><span class="line">        plt.clf()</span><br><span class="line">        plt.cla()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># solve problem 1</span></span><br><span class="line">    x_0=np.matrix([[<span class="number">2</span>],[<span class="number">0</span>]])</span><br><span class="line">    P_0=np.matrix([[<span class="number">10</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">10</span>]])</span><br><span class="line">    x_record=[x_0]</span><br><span class="line">    P_record=[P_0]</span><br><span class="line">    K_record=[<span class="literal">None</span>]</span><br><span class="line">    <span class="keyword">for</span> obs <span class="keyword">in</span> observation_1:</span><br><span class="line">        y_1=np.matrix(obs).T</span><br><span class="line">        x_1,P_1,K_1=Kalman_filter(</span><br><span class="line">            x_0,</span><br><span class="line">            P_0,</span><br><span class="line">            y_1,</span><br><span class="line">            u_0=np.matrix(<span class="number">9.8</span>/<span class="number">1000</span>),</span><br><span class="line">            Phi=np.matrix(param_1[<span class="string">"Phi"</span>]),</span><br><span class="line">            Psi=np.matrix(param_1[<span class="string">"Psi"</span>]),</span><br><span class="line">            H=np.matrix(param_1[<span class="string">"H"</span>]),</span><br><span class="line">            R=np.matrix(param_1[<span class="string">"R"</span>]),</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        x_record.append(x_1)</span><br><span class="line">        P_record.append(P_1)</span><br><span class="line">        K_record.append(K_1)</span><br><span class="line">        </span><br><span class="line">        x_0=x_1</span><br><span class="line">        P_0=P_1</span><br><span class="line">        </span><br><span class="line">    result_record=&#123;</span><br><span class="line">        <span class="string">"h"</span>:[x[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"v"</span>:[x[<span class="number">1</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"P_0"</span>:[P[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_1"</span>:[P[<span class="number">1</span>,<span class="number">1</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="comment"># "K":K_record,</span></span><br><span class="line">    &#125;</span><br><span class="line">    show_result(result_record,problem=<span class="string">"p1"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="题目2代码">题目2代码</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-17 16:54:31</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 21:02:28</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> cache_dir,observation_2,param_2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 支持中文</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建cache文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(cache_dir):</span><br><span class="line">    os.mkdir(cache_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compute H in EKF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_H</span><span class="params">(x)</span>:</span></span><br><span class="line">    l_2=x[<span class="number">0</span>,<span class="number">0</span>]**<span class="number">2</span>+x[<span class="number">2</span>,<span class="number">0</span>]**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [x[<span class="number">0</span>,<span class="number">0</span>]/np.sqrt(l_2),<span class="number">0</span>,x[<span class="number">2</span>,<span class="number">0</span>]/np.sqrt(l_2)],</span><br><span class="line">            [x[<span class="number">2</span>,<span class="number">0</span>]/l_2,<span class="number">0</span>,-x[<span class="number">0</span>,<span class="number">0</span>]/l_2],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># function of observation</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">y</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [np.sqrt(x[<span class="number">0</span>,<span class="number">0</span>]**<span class="number">2</span>+x[<span class="number">2</span>,<span class="number">0</span>]**<span class="number">2</span>)],</span><br><span class="line">            [np.arctan(x[<span class="number">0</span>,<span class="number">0</span>]/x[<span class="number">2</span>,<span class="number">0</span>])],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># Kalman filter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">EKF</span><span class="params">(x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">        Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">        R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># local linearization</span></span><br><span class="line">    H=get_H(x_10)</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mse</span><span class="params">(x_1:np.matrix,x_2:np.matrix)</span>:</span></span><br><span class="line">    loss=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x_1.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(x_1.shape[<span class="number">1</span>]):</span><br><span class="line">            loss+=(x_1[i,j]-x_2[i,j])**<span class="number">2</span></span><br><span class="line">    loss=loss/(x_1.shape[<span class="number">0</span>]*x_1.shape[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line"><span class="comment"># iteration EKF, which may have a worse result TAT</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">EKF_iter</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">    Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">    R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># local linearization</span></span><br><span class="line">    H=get_H(x_10)</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># iteration</span></span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    epsilon=<span class="number">1e-9</span></span><br><span class="line">    <span class="keyword">while</span> count&lt;<span class="number">500</span> <span class="keyword">and</span> mse(x_11,x_10)&gt;epsilon:</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">        x_10=x_11</span><br><span class="line">        <span class="comment"># local linearization</span></span><br><span class="line">        H=get_H(x_10)</span><br><span class="line">        <span class="comment"># time amend</span></span><br><span class="line">        P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">        K_1=P_11@H.T@R.I</span><br><span class="line">        x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_result</span><span class="params">(record:dict,problem)</span>:</span></span><br><span class="line">    pprint(record)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> record.items():</span><br><span class="line">        plt.title(key)</span><br><span class="line">        plt.xlabel(<span class="string">"step"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"h"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"高度:km"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"v"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"速度:km/s (向下为正)"</span>)</span><br><span class="line">        plt.plot(value)</span><br><span class="line">        plt.savefig(os.path.join(cache_dir,problem+<span class="string">"_"</span>+key+<span class="string">".png"</span>),dpi=<span class="number">600</span>)</span><br><span class="line">        plt.clf()</span><br><span class="line">        plt.cla()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># solve problem 1</span></span><br><span class="line">    x_0=np.matrix([[<span class="number">2</span>],[<span class="number">0</span>],[<span class="number">2</span>]])</span><br><span class="line">    P_0=np.matrix([[<span class="number">10</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">10</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">10</span>]])</span><br><span class="line">    x_record=[x_0]</span><br><span class="line">    P_record=[P_0]</span><br><span class="line">    K_record=[<span class="literal">None</span>]</span><br><span class="line">    <span class="keyword">for</span> obs <span class="keyword">in</span> observation_2:</span><br><span class="line">        y_1=np.matrix(obs).T</span><br><span class="line">        x_1,P_1,K_1=EKF(</span><br><span class="line">            x_0,</span><br><span class="line">            P_0,</span><br><span class="line">            y_1,</span><br><span class="line">            u_0=np.matrix(<span class="number">9.8</span>/<span class="number">1000</span>),</span><br><span class="line">            Phi=np.matrix(param_2[<span class="string">"Phi"</span>]),</span><br><span class="line">            Psi=np.matrix(param_2[<span class="string">"Psi"</span>]),</span><br><span class="line">            R=np.matrix(param_2[<span class="string">"R"</span>]),</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        x_record.append(x_1)</span><br><span class="line">        P_record.append(P_1)</span><br><span class="line">        K_record.append(K_1)</span><br><span class="line">        </span><br><span class="line">        x_0=x_1</span><br><span class="line">        P_0=P_1</span><br><span class="line">        </span><br><span class="line">    result_record=&#123;</span><br><span class="line">        <span class="string">"h"</span>:[x[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"v"</span>:[x[<span class="number">1</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"d_0"</span>:[x[<span class="number">2</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"P_0"</span>:[P[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_1"</span>:[P[<span class="number">1</span>,<span class="number">1</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_2"</span>:[P[<span class="number">2</span>,<span class="number">2</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="comment"># "K":K_record,</span></span><br><span class="line">    &#125;</span><br><span class="line">    show_result(result_record,problem=<span class="string">"p2"</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Study</category>
+      </categories>
+      <tags>
+        <tag>Kalman Filter</tag>
+        <tag>Linear Filter</tag>
+        <tag>Nonlinear Filter</tag>
+      </tags>
+  </entry>
 </search>

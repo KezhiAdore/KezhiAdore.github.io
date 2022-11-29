@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-11-29T09:02:09.701Z</updated>
+  <updated>2022-11-29T09:15:13.865Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>线性滤波与非线性滤波实验</title>
+    <link href="https://www.kezhi.tech/10ee70e7.html"/>
+    <id>https://www.kezhi.tech/10ee70e7.html</id>
+    <published>2022-11-29T09:15:13.000Z</published>
+    <updated>2022-11-29T09:15:13.865Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
+该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/202211291710418.jpg&quot;
+alt=&quot;Map of Control Theory&quot; /&gt;
+&lt;figcaption aria-hidden=&quot;true&quot;&gt;Map of Control Theory&lt;/figcaption&gt;
+&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    
+    
+      <category term="Kalman Filter" scheme="https://www.kezhi.tech/tags/Kalman-Filter/"/>
+    
+      <category term="Linear Filter" scheme="https://www.kezhi.tech/tags/Linear-Filter/"/>
+    
+      <category term="Nonlinear Filter" scheme="https://www.kezhi.tech/tags/Nonlinear-Filter/"/>
+    
+  </entry>
   
   <entry>
     <title>王者荣耀目标检测--Yolov5实现</title>

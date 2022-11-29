@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。 该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。   Map of Control Theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性滤波与非线性滤波实验">
+<meta property="og:url" content="https://www.kezhi.tech/10ee70e7.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。 该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。   Map of Control Theory">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202211291710418.jpg">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171143534.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171202388.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171212236.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171314878.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171354944.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171355785.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206171356665.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172029931.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172029342.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172030142.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172030896.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172039755.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202206172039518.png">
+<meta property="article:published_time" content="2022-11-29T09:15:13.000Z">
+<meta property="article:modified_time" content="2022-11-29T09:15:13.865Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="Kalman Filter">
+<meta property="article:tag" content="Linear Filter">
+<meta property="article:tag" content="Nonlinear Filter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202211291710418.jpg">
+
+<link rel="canonical" href="https://www.kezhi.tech/10ee70e7.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>线性滤波与非线性滤波实验 | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">78</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-fw fa-book"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-steam">
+
+    <a href="/steamgames/" rel="section"><i class="fa fa-fw fa-steam"></i>steam</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <!--本地搜索-->
+      <div class="site-search">
+        <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      </div>
+    
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/10ee70e7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          线性滤波与非线性滤波实验
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-29 17:15:13" itemprop="dateCreated datePublished" datetime="2022-11-29T17:15:13+08:00">2022-11-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/10ee70e7.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/10ee70e7.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
+该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202211291710418.jpg"
+alt="Map of Control Theory" />
+<figcaption aria-hidden="true">Map of Control Theory</figcaption>
+</figure>
+<a id="more"></a>
+<h2 id="问题描述">问题描述</h2>
+<ol type="1">
+<li><p>已知一物体作自由落体运动，对其高度进行了20次测量，测量值如下表：</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202206171143534.png"
+alt="image-20220617114332337" />
+<figcaption aria-hidden="true">image-20220617114332337</figcaption>
+</figure></li>
+<li><p>同样考虑自由落体运动的物体，用雷达（和物体在同一水平面）进行测量，如图所示，如果雷达测距和测角的量测噪声为高斯白噪声序列，均值为0，方差阵
+<span class="math inline">\(R=\begin{bmatrix}0.04
+&amp;0\\0&amp;0.01\end{bmatrix}\)</span>，试根据以下测量数据确定物体的高度和下落速度随时间变化的估计值：</p>
+<p><img src="https://download.kezhi.tech/img/202206171202388.png" /></p>
+<p><img src="https://download.kezhi.tech/img/202206171212236.png" /></p>
+<p>该下落运动和雷达检测信息如下图所示：</p>
+<p><img
+src="https://download.kezhi.tech/img/202206171212177.png" /></p></li>
+</ol>
+<h2 id="模型介绍">模型介绍</h2>
+<h3 id="线性估计问题">1. 线性估计问题</h3>
+<p>设在自由落体运动时，物体高度为 <span
+class="math inline">\(h\)</span>，速度为 <span
+class="math inline">\(v\)</span> （向下为正），设 <span
+class="math inline">\(x_1=h,x_2=v\)</span>，则系统的状态方程为：</p>
+<p><span class="math display">\[
+    \begin{bmatrix}
+        \dot x_1\\\dot x_2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0&amp;-1\\
+        0&amp;0\\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\x_2
+    \end{bmatrix}+
+    \begin{bmatrix}
+        0\\1
+    \end{bmatrix}g\ \ (g=9.80m/s^2)
+\]</span></p>
+<p>由上述状态方程可以解出系统的状态转移函数为：</p>
+<p><span class="math display">\[
+    x(t)=\begin{bmatrix}
+        1&amp;-t\\
+        0&amp;1
+    \end{bmatrix}x(0)
+    +\begin{bmatrix}
+        -t\\1
+    \end{bmatrix}u(t)
+\]</span></p>
+<p>当步长为 1s 时系统的状态转移函数为：</p>
+<p><span class="math display">\[
+\Phi_{k+1,k}=\begin{bmatrix}
+        1&amp;-1\\
+        0&amp;1
+    \end{bmatrix}
+    \ \Psi_{k+1,k}=\begin{bmatrix}
+        -1\\
+        1
+    \end{bmatrix}
+\]</span></p>
+<p>由此可得，系统的一步预测为：</p>
+<p><span class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k
+\]</span></p>
+<p>由于观测是对物体高度的直接测量，并且假设量测误差为均值为0，方差为1的白噪声，则量测方程为：
+<span class="math display">\[
+    y_k=H_kx_k+v_k
+\]</span></p>
+<p>其中： <span class="math display">\[
+H_k\equiv \begin{bmatrix}
+    1\\0
+\end{bmatrix},
+\ v_k \sim N(0,1),
+\ R=1
+\]</span></p>
+<p>本题给出的数据中，量测高度单位为<span
+class="math inline">\(km\)</span>，加速度为<span
+class="math inline">\(9.8m/s\)</span>，为便于计算，统一距离单位为<span
+class="math inline">\(km\)</span>，时间单位统一为<span
+class="math inline">\(s\)</span>，即重力加速度<span
+class="math inline">\(g=0.0098km/s\)</span>。由于滤波初值未给定，根据量测数据估算初始高度为<span
+class="math inline">\(2km\)</span>，初始速度为0，即<span
+class="math inline">\(x_{0|0}=\begin{bmatrix}2&amp;0\end{bmatrix}\)</span>。由于这样确定的初始估计值比较粗糙，因此方差较大，设定系统初始方差阵为<span
+class="math inline">\(P_{0|0}=\begin{bmatrix}10&amp;0\\0&amp;10\end{bmatrix}\)</span>。</p>
+<p>建立卡尔曼滤波： <span class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k\\
+P_{k+1|k}=\Phi_{k+1,k}P_{k|k}\Phi^\top_{k+1,k}\\
+P_{k+1|k+1}=[P_{k+1|k}^{-1}+H_{k+1}^{\top} R_{k+1}^{-1}H_{k+1}]^{-1}\\
+K_{k+1}=P_{k+1|k+1}H_{k+1}^\top R_{k+1}^{-1}\\
+\hat x_{k+1|k+1}=\hat x_{k+1|k}+K_{k+1}(y_{k+1}-H_{k+1}\hat x_{k+1|k})
+\]</span>
+对物体自由落体下降高度和速度进行计算，计算结果见后文实验结果部分。</p>
+<h3 id="非线性估计问题">2. 非线性估计问题</h3>
+<p>在第2个问题中，量测与估计值为非线性关系，考虑采用非线性卡尔曼滤波算法对其进行估计，本报告中采用扩展式卡尔曼滤波算法（EKF）。</p>
+<p>设测量的斜距为<span
+class="math inline">\(l(km)\)</span>，俯仰角为<span
+class="math inline">\(\theta(rad)\)</span>，物体高度为<span
+class="math inline">\(h(km)\)</span>，下降速度为<span
+class="math inline">\(v(km/s)\)</span>（向下为正），物体在地面上的竖直投影到雷达的距离为<span
+class="math inline">\(d_0\)</span>。</p>
+<p>为便于后续线性化计算，选取系统状态量为： <span
+class="math display">\[
+x_1=h,\ x_2=v,\ x_3=d_0
+\]</span> 则系统的状态方程为： <span class="math display">\[
+\dot x=
+\begin{bmatrix}
+0&amp;-1&amp;0\\
+0&amp;0&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}x+
+\begin{bmatrix}
+0\\
+1\\
+0
+\end{bmatrix}g,\ 其中\ g=0.0098\ km/s
+\]</span> 求解得出当时间间隔为<span
+class="math inline">\(0.5s\)</span>时，系统的离散状态转移函数为： <span
+class="math display">\[
+\Phi_{k+1,k}=\begin{bmatrix}
+1&amp;-0.5&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix},\
+\Psi_{k+1,k}=\begin{bmatrix}
+-0.125\\
+0.5\\
+0
+\end{bmatrix}
+\]</span> 系统观测为雷达测量出的斜距和俯仰角，则： <span
+class="math display">\[
+y_1=l=\sqrt{h^2+d_0^2}=\sqrt{x_1^2+x_3^2}\\
+y_2=\theta=\arctan(\frac{h}{d_0})=\arctan(\frac{x_1}{x_3})
+\]</span> 观测量对状态量求导可得： <span class="math display">\[
+\frac{\partial y_1}{\partial x_1}=\frac{x_1}{\sqrt{x_1^2+x_3^2}}\\
+\frac{\partial y_1}{\partial x_2}=0\\
+\frac{\partial y_1}{\partial x_3}=\frac{x_3}{\sqrt{x_1^2+x_3^2}}\\
+\frac{\partial y_2}{\partial x_1}=\frac{x_3}{x_1^2+x_3^2}\\
+\frac{\partial y_2}{\partial x_2}=0\\
+\frac{\partial y_2}{\partial x_3}=-\frac{x_1}{x_1^2+x_3^2}\\
+\]</span> 因此，系统的局部线性化系数为： <span class="math display">\[
+H=\begin{bmatrix}
+\frac{x_1}{\sqrt{x_1^2+x_3^2}}&amp;0&amp;\frac{x_3}{\sqrt{x_1^2+x_3^2}}\\
+\frac{x_3}{x_1^2+x_3^2}&amp;0&amp;-\frac{x_1}{x_1^2+x_3^2}
+\end{bmatrix}
+\]</span> 扩展卡尔曼滤波（EKF）的计算过程如下： <span
+class="math display">\[
+x_{k+1,k}=\Phi_{k+1,k}x_{k|k}+\Psi_{k+1,k}u_k\\
+P_{k+1|k}=\Phi_{k+1,k}P_{k|k}\Phi^\top_{k+1,k}\\
+P_{k+1|k+1}=[P_{k+1|k}^{-1}+H_{k+1}^{\top} R_{k+1}^{-1}H_{k+1}]^{-1}\\
+K_{k+1}=P_{k+1|k+1}H_{k+1}^\top R_{k+1}^{-1}\\
+\hat x_{k+1|k+1}=\hat x_{k+1|k}+K_{k+1}(y_{k+1}-H_{k+1}\hat x_{k+1|k})
+\]</span> 其中，与卡尔曼滤波不同的地方在于<span
+class="math inline">\(H\)</span>系数矩阵是通过在观测点进行局部线性化得到的。通过上述步骤即可对非线性观测进行滤波估计。</p>
+<h2 id="实验结果">实验结果</h2>
+<h3 id="线性滤波问题">1. 线性滤波问题</h3>
+<p>根据题中给出的高度观测数据进行线性卡尔曼滤波，计算得到的结果如下：</p>
+<p>高度估计数据为：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">1.9943</td>
+<td style="text-align: center;">1.9791</td>
+<td style="text-align: center;">1.9550</td>
+<td style="text-align: center;">1.9211</td>
+<td style="text-align: center;">1.8774</td>
+<td style="text-align: center;">1.8244</td>
+<td style="text-align: center;">1.7605</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">1.6870</td>
+<td style="text-align: center;">1.6038</td>
+<td style="text-align: center;">1.5103</td>
+<td style="text-align: center;">1.4075</td>
+<td style="text-align: center;">1.2947</td>
+<td style="text-align: center;">1.1723</td>
+<td style="text-align: center;">1.0400</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">15</th>
+<th style="text-align: center;">16</th>
+<th style="text-align: center;">17</th>
+<th style="text-align: center;">18</th>
+<th style="text-align: center;">19</th>
+<th style="text-align: center;">20</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">高度</td>
+<td style="text-align: center;">0.8980</td>
+<td style="text-align: center;">0.7460</td>
+<td style="text-align: center;">0.5845</td>
+<td style="text-align: center;">0.4129</td>
+<td style="text-align: center;">0.2317</td>
+<td style="text-align: center;">0.0405</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>绘制出高度变化图如下：</p>
+<p><img src="https://download.kezhi.tech/img/202206171314878.png" /></p>
+<p>下落速度（向下为正）滤波数据如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.0078</td>
+<td style="text-align: center;">0.0157</td>
+<td style="text-align: center;">0.0247</td>
+<td style="text-align: center;">0.0343</td>
+<td style="text-align: center;">0.0439</td>
+<td style="text-align: center;">0.0536</td>
+<td style="text-align: center;">0.0635</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.0733</td>
+<td style="text-align: center;">0.0831</td>
+<td style="text-align: center;">0.0930</td>
+<td style="text-align: center;">0.1028</td>
+<td style="text-align: center;">0.1126</td>
+<td style="text-align: center;">0.1224</td>
+<td style="text-align: center;">0.1322</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">时间</th>
+<th style="text-align: center;">15</th>
+<th style="text-align: center;">16</th>
+<th style="text-align: center;">17</th>
+<th style="text-align: center;">18</th>
+<th style="text-align: center;">19</th>
+<th style="text-align: center;">20</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">下落速度</td>
+<td style="text-align: center;">0.1420</td>
+<td style="text-align: center;">0.1519</td>
+<td style="text-align: center;">0.1616</td>
+<td style="text-align: center;">0.1714</td>
+<td style="text-align: center;">0.1812</td>
+<td style="text-align: center;">0.1911</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>绘制出速度变化图如下：</p>
+<p><img src="https://download.kezhi.tech/img/202206171354944.png" /></p>
+<p>同时，高度和下落速度的估计方差随时间变化为：</p>
+<table>
+<tr>
+<td>
+<center>
+高度估计方差
+</center>
+</td>
+<td>
+<center>
+速度估计方差
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206171355785.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206171356665.png">
+</center>
+</td>
+</tr>
+</table>
+<p>从上图中的结果可以看出，卡尔曼滤波对于物体下落高度和速度的估计在新息一开始加入后就迅速减小，之后渐进减小到0附近之后不再有明显下降。物体自由落体的高度变化曲线为抛物线，速度为匀加速变化，符合自由落体的相关物理定律。</p>
+<h3 id="非线性估计问题-1">2. 非线性估计问题</h3>
+<p>根据题中给出的量测数据以及上文中提到的非线性滤波模型，滤波估计出下落物体的高度和速度变化如下。</p>
+<p>物体高度变化为：</p>
+<p><img src="https://download.kezhi.tech/img/202206172029931.png" /></p>
+<p>物体下落速度变化为：</p>
+<p><img src="https://download.kezhi.tech/img/202206172029342.png" /></p>
+<p>物体自由下落高度和速度估计误差为：</p>
+<table>
+<tr>
+<td>
+<center>
+高度估计方差
+</center>
+</td>
+<td>
+<center>
+速度估计方差
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172030142.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172030896.png">
+</center>
+</td>
+</tr>
+</table>
+<p>从上图估计结果可以看出，下落高度随时间呈抛物线变化，下落速度（向下为正）随时间匀速上升，符合自由落体物理规律。</p>
+<h2 id="实验过程中的一些发现">实验过程中的一些发现</h2>
+<p>在最开始的编程和实验过程中，由于题目给出的量测数据以<span
+class="math inline">\(km\)</span>为单位，为便于计算，将距离单位统一换算为<span
+class="math inline">\(km\)</span>处理。但是由于题面中未给出量测方差的单位，故未对该数值进行换算，即按照单位为<span
+class="math inline">\(km\)</span>进行处理。</p>
+<p>在求解第1题过程中，未发现任何异常，然而在求解第二题时，如果未对量测协方差进行单位换算，将其单位当作<span
+class="math inline">\(km\)</span>进行处理，估计出的结果会如下图所示：</p>
+<table>
+<tr>
+<td>
+<center>
+高度变化
+</center>
+</td>
+<td>
+<center>
+速度变化
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172039755.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/202206172039518.png">
+</center>
+</td>
+</tr>
+</table>
+<p>对比上图中计算结果和实验结果中第二问的计算结果可以看出，相对于线性卡尔曼滤波，非线性卡尔曼滤波在计算时收到量测误差的影响更大。这是由于非线性滤波时量测系数矩阵<span
+class="math inline">\(H\)</span>是经过局部线性化得到的，如果量测误差本身较大，则会影响卡尔曼系数的计算结果，最终导致估计结果不准确。</p>
+<h2 id="附录">附录</h2>
+<h3 id="常量配置">常量配置</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-10 16:59:11</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 21:02:09</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cache_dir=<span class="string">"cache/"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># observation</span></span><br><span class="line"></span><br><span class="line">observation_1=[</span><br><span class="line">    [<span class="number">1.9945</span>],</span><br><span class="line">    [<span class="number">1.9794</span>],</span><br><span class="line">    [<span class="number">1.9554</span>],</span><br><span class="line">    [<span class="number">1.9214</span>],</span><br><span class="line">    [<span class="number">1.8777</span>],</span><br><span class="line">    [<span class="number">1.8250</span>],</span><br><span class="line">    [<span class="number">1.7598</span>],</span><br><span class="line">    [<span class="number">1.6867</span>],</span><br><span class="line">    [<span class="number">1.6036</span>],</span><br><span class="line">    [<span class="number">1.5092</span>],</span><br><span class="line">    [<span class="number">1.4076</span>],</span><br><span class="line">    [<span class="number">1.2944</span>],</span><br><span class="line">    [<span class="number">1.1724</span>],</span><br><span class="line">    [<span class="number">1.0399</span>],</span><br><span class="line">    [<span class="number">0.8980</span>],</span><br><span class="line">    [<span class="number">0.7455</span>],</span><br><span class="line">    [<span class="number">0.5850</span>],</span><br><span class="line">    [<span class="number">0.4125</span>],</span><br><span class="line">    [<span class="number">0.2318</span>],</span><br><span class="line">    [<span class="number">0.0399</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">observation_2=[</span><br><span class="line">    [<span class="number">2.82741643781891</span>,<span class="number">0.00075850435876</span>],</span><br><span class="line">    [<span class="number">2.82519811729771</span>,<span class="number">0.00083282260478</span>],</span><br><span class="line">    [<span class="number">2.82066686966236</span>,<span class="number">0.00067808241639</span>],</span><br><span class="line">    [<span class="number">2.81487233105901</span>,<span class="number">0.00085279036802</span>],</span><br><span class="line">    [<span class="number">2.80671786536244</span>,<span class="number">0.00072900768452</span>],</span><br><span class="line">    [<span class="number">2.79725268974089</span>,<span class="number">0.00080072481819</span>],</span><br><span class="line">    [<span class="number">2.78664273475039</span>,<span class="number">0.00075095576213</span>],</span><br><span class="line">    [<span class="number">2.77320365026313</span>,<span class="number">0.00065762725379</span>],</span><br><span class="line">    [<span class="number">2.75919535464551</span>,<span class="number">0.00081186148545</span>],</span><br><span class="line">    [<span class="number">2.74331288628195</span>,<span class="number">0.00079783727034</span>],</span><br><span class="line">    [<span class="number">2.72538888482812</span>,<span class="number">0.00073060712986</span>],</span><br><span class="line">    [<span class="number">2.70664967712312</span>,<span class="number">0.00063242006530</span>],</span><br><span class="line">    [<span class="number">2.68632403406473</span>,<span class="number">0.00063656524495</span>],</span><br><span class="line">    [<span class="number">2.66386533852220</span>,<span class="number">0.00080659845639</span>],</span><br><span class="line">    [<span class="number">2.64093529707333</span>,<span class="number">0.00067704740069</span>],</span><br><span class="line">    [<span class="number">2.61621111727357</span>,<span class="number">0.00076573767706</span>],</span><br><span class="line">    [<span class="number">2.59038109850785</span>,<span class="number">0.00054955759081</span>],</span><br><span class="line">    [<span class="number">2.56298794272843</span>,<span class="number">0.00058487913971</span>],</span><br><span class="line">    [<span class="number">2.53498317950797</span>,<span class="number">0.00055602747368</span>],</span><br><span class="line">    [<span class="number">2.50647589372246</span>,<span class="number">0.00033550412588</span>],</span><br><span class="line">    [<span class="number">2.47571075016386</span>,<span class="number">0.00056012688452</span>],</span><br><span class="line">    [<span class="number">2.44560676000982</span>,<span class="number">0.00056694491978</span>],</span><br><span class="line">    [<span class="number">2.41403690772088</span>,<span class="number">0.00059380631025</span>],</span><br><span class="line">    [<span class="number">2.38252228611696</span>,<span class="number">0.00053681916544</span>],</span><br><span class="line">    [<span class="number">2.35016501182332</span>,<span class="number">0.00065871960781</span>],</span><br><span class="line">    [<span class="number">2.31790939837137</span>,<span class="number">0.00068598344328</span>],</span><br><span class="line">    [<span class="number">2.28597616656453</span>,<span class="number">0.00060922471348</span>],</span><br><span class="line">    [<span class="number">2.25418431681401</span>,<span class="number">0.00057086018918</span>],</span><br><span class="line">    [<span class="number">2.22259320219535</span>,<span class="number">0.00041308535708</span>],</span><br><span class="line">    [<span class="number">2.19237398969466</span>,<span class="number">0.00047302026281</span>],</span><br><span class="line">    [<span class="number">2.16290177997271</span>,<span class="number">0.00030949309972</span>],</span><br><span class="line">    [<span class="number">2.13441725793706</span>,<span class="number">0.00040552624986</span>],</span><br><span class="line">    [<span class="number">2.10811064690727</span>,<span class="number">0.00037545033142</span>],</span><br><span class="line">    [<span class="number">2.08322179823195</span>,<span class="number">0.00017282319262</span>],</span><br><span class="line">    [<span class="number">2.06148109026767</span>,<span class="number">0.00020758327980</span>],</span><br><span class="line">    [<span class="number">2.04219885094031</span>,<span class="number">0.00037186464579</span>],</span><br><span class="line">    [<span class="number">2.02610235314357</span>,<span class="number">0.00018082163465</span>],</span><br><span class="line">    [<span class="number">2.01290326863579</span>,<span class="number">0.00023323830160</span>],</span><br><span class="line">    [<span class="number">2.00463157388395</span>,<span class="number">-0.00004536186964</span>],</span><br><span class="line">    [<span class="number">2.00058143251913</span>,<span class="number">0.00003246284068</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># dimension transform</span></span><br><span class="line">observation_2=[[observation[<span class="number">0</span>],observation[<span class="number">1</span>]*<span class="number">1000</span>] <span class="keyword">for</span> observation <span class="keyword">in</span> observation_2]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the parameters of problem 1</span></span><br><span class="line">param_1=&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Phi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">-1</span>],</span><br><span class="line">            [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Psi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">-1</span>],</span><br><span class="line">            [<span class="number">1</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"H"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"R"</span>:np.matrix(</span><br><span class="line">        [<span class="number">1</span>/<span class="number">1000</span>]</span><br><span class="line">    ),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># the parameters of problem 2</span></span><br><span class="line">param_2=&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Phi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">1</span>,<span class="number">-0.5</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"Psi"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">-0.125</span>],</span><br><span class="line">            [<span class="number">0.5</span>],</span><br><span class="line">            [<span class="number">0</span>],</span><br><span class="line">        ]</span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    <span class="string">"R"</span>:np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [<span class="number">0.04</span>/<span class="number">1000</span>,<span class="number">0</span>],</span><br><span class="line">            [<span class="number">0</span>,<span class="number">0.01</span>],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="题目1-代码">题目1 代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-10 14:44:08</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 12:45:17</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> cache_dir,observation_1,param_1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 支持中文</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建cache文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(cache_dir):</span><br><span class="line">    os.mkdir(cache_dir)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Kalman filter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Kalman_filter</span><span class="params">(x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  H:np.matrix=None,    <span class="comment"># y=Hx+v</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">                  Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=Psi.copy()</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> H <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        H=np.matrix(np.ones((y_1.shape[<span class="number">0</span>],x_0.shape[<span class="number">0</span>])))</span><br><span class="line">        print(<span class="string">"H is lacked, use default value: &#123;&#125;"</span>.format(H))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-H@x_10)</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_result</span><span class="params">(record:dict,problem)</span>:</span></span><br><span class="line">    pprint(record)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> record.items():</span><br><span class="line">        plt.title(key)</span><br><span class="line">        plt.xlabel(<span class="string">"step"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"h"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"高度:km"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"v"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"速度:km/s (向下为正)"</span>)</span><br><span class="line">        plt.plot(value)</span><br><span class="line">        plt.savefig(os.path.join(cache_dir,problem+<span class="string">"_"</span>+key+<span class="string">".png"</span>),dpi=<span class="number">600</span>)</span><br><span class="line">        plt.clf()</span><br><span class="line">        plt.cla()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># solve problem 1</span></span><br><span class="line">    x_0=np.matrix([[<span class="number">2</span>],[<span class="number">0</span>]])</span><br><span class="line">    P_0=np.matrix([[<span class="number">10</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">10</span>]])</span><br><span class="line">    x_record=[x_0]</span><br><span class="line">    P_record=[P_0]</span><br><span class="line">    K_record=[<span class="literal">None</span>]</span><br><span class="line">    <span class="keyword">for</span> obs <span class="keyword">in</span> observation_1:</span><br><span class="line">        y_1=np.matrix(obs).T</span><br><span class="line">        x_1,P_1,K_1=Kalman_filter(</span><br><span class="line">            x_0,</span><br><span class="line">            P_0,</span><br><span class="line">            y_1,</span><br><span class="line">            u_0=np.matrix(<span class="number">9.8</span>/<span class="number">1000</span>),</span><br><span class="line">            Phi=np.matrix(param_1[<span class="string">"Phi"</span>]),</span><br><span class="line">            Psi=np.matrix(param_1[<span class="string">"Psi"</span>]),</span><br><span class="line">            H=np.matrix(param_1[<span class="string">"H"</span>]),</span><br><span class="line">            R=np.matrix(param_1[<span class="string">"R"</span>]),</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        x_record.append(x_1)</span><br><span class="line">        P_record.append(P_1)</span><br><span class="line">        K_record.append(K_1)</span><br><span class="line">        </span><br><span class="line">        x_0=x_1</span><br><span class="line">        P_0=P_1</span><br><span class="line">        </span><br><span class="line">    result_record=&#123;</span><br><span class="line">        <span class="string">"h"</span>:[x[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"v"</span>:[x[<span class="number">1</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"P_0"</span>:[P[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_1"</span>:[P[<span class="number">1</span>,<span class="number">1</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="comment"># "K":K_record,</span></span><br><span class="line">    &#125;</span><br><span class="line">    show_result(result_record,problem=<span class="string">"p1"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="题目2代码">题目2代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">@ Author: Yu Zhao</span></span><br><span class="line"><span class="string">@ Contact: yuzhaokz@163.com</span></span><br><span class="line"><span class="string">@ Date: 2022-06-17 16:54:31</span></span><br><span class="line"><span class="string">@ LastEditors: Yu Zhao</span></span><br><span class="line"><span class="string">@ LastEditTime: 2022-06-17 21:02:28</span></span><br><span class="line"><span class="string">@ Description: 知识因被记录而产生价值</span></span><br><span class="line"><span class="string">@ Website: https://www.kezhi.tech</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> cache_dir,observation_2,param_2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 支持中文</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 用来正常显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建cache文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(cache_dir):</span><br><span class="line">    os.mkdir(cache_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compute H in EKF</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_H</span><span class="params">(x)</span>:</span></span><br><span class="line">    l_2=x[<span class="number">0</span>,<span class="number">0</span>]**<span class="number">2</span>+x[<span class="number">2</span>,<span class="number">0</span>]**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [x[<span class="number">0</span>,<span class="number">0</span>]/np.sqrt(l_2),<span class="number">0</span>,x[<span class="number">2</span>,<span class="number">0</span>]/np.sqrt(l_2)],</span><br><span class="line">            [x[<span class="number">2</span>,<span class="number">0</span>]/l_2,<span class="number">0</span>,-x[<span class="number">0</span>,<span class="number">0</span>]/l_2],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># function of observation</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">y</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.matrix(</span><br><span class="line">        [</span><br><span class="line">            [np.sqrt(x[<span class="number">0</span>,<span class="number">0</span>]**<span class="number">2</span>+x[<span class="number">2</span>,<span class="number">0</span>]**<span class="number">2</span>)],</span><br><span class="line">            [np.arctan(x[<span class="number">0</span>,<span class="number">0</span>]/x[<span class="number">2</span>,<span class="number">0</span>])],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># Kalman filter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">EKF</span><span class="params">(x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">        u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">        Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">        R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">        Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># local linearization</span></span><br><span class="line">    H=get_H(x_10)</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mse</span><span class="params">(x_1:np.matrix,x_2:np.matrix)</span>:</span></span><br><span class="line">    loss=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x_1.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(x_1.shape[<span class="number">1</span>]):</span><br><span class="line">            loss+=(x_1[i,j]-x_2[i,j])**<span class="number">2</span></span><br><span class="line">    loss=loss/(x_1.shape[<span class="number">0</span>]*x_1.shape[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line"><span class="comment"># iteration EKF, which may have a worse result TAT</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">EKF_iter</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    x_0:np.matrix,  <span class="comment"># the status of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    P_0:np.matrix,  <span class="comment"># the variance of last step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    y_1:np.matrix,  <span class="comment"># the observation of this step</span></span></span></span><br><span class="line"><span class="function"><span class="params">    u_0:np.matrix=None, <span class="comment"># the input of system</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Phi:np.matrix=None,  <span class="comment"># the status transform matrix </span></span></span></span><br><span class="line"><span class="function"><span class="params">    Psi:np.matrix=None,  <span class="comment"># coefficient of system input</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Gamma:np.matrix=None,   <span class="comment"># coefficient of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">    R:np.matrix=None,    <span class="comment"># the variance of observing noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">    Q:np.matrix=None,    <span class="comment"># the variance of status noise</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span>:</span></span><br><span class="line">    <span class="comment"># variable check</span></span><br><span class="line">    <span class="keyword">if</span> u_0 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        u_0=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"u_0 is lacked, use default value: &#123;&#125;"</span>.format(u_0))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Phi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Phi=np.matrix(np.eye(x_0.shape[<span class="number">0</span>]))</span><br><span class="line">        print(<span class="string">"Phi is lacked, use default value: &#123;&#125;"</span>.format(Phi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Psi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Psi=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Psi is lacked, use default value: &#123;&#125;"</span>.format(Psi))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> Gamma <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Gamma=np.matrix(np.zeros((x_0.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"Gamma is lacked, use default value: &#123;&#125;"</span>.format(Gamma))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        R=np.matrix(np.zeros((y_1.shape[<span class="number">0</span>],<span class="number">1</span>)))</span><br><span class="line">        print(<span class="string">"R is lacked, use default value: &#123;&#125;"</span>.format(R))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> Q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        Q=np.matrix(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">"Q is lacked, use default value: &#123;&#125;"</span>.format(Q))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># one step prediction</span></span><br><span class="line">    x_10=Phi@x_0+Psi@u_0</span><br><span class="line">    P_10=Phi@P_0@Phi.T+Gamma@Q@Gamma.T</span><br><span class="line">    <span class="comment"># local linearization</span></span><br><span class="line">    H=get_H(x_10)</span><br><span class="line">    <span class="comment"># time amend</span></span><br><span class="line">    P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">    K_1=P_11@H.T@R.I</span><br><span class="line">    x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># iteration</span></span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    epsilon=<span class="number">1e-9</span></span><br><span class="line">    <span class="keyword">while</span> count&lt;<span class="number">500</span> <span class="keyword">and</span> mse(x_11,x_10)&gt;epsilon:</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">        x_10=x_11</span><br><span class="line">        <span class="comment"># local linearization</span></span><br><span class="line">        H=get_H(x_10)</span><br><span class="line">        <span class="comment"># time amend</span></span><br><span class="line">        P_11=(P_10.I+H.T@R.I@H).I</span><br><span class="line">        K_1=P_11@H.T@R.I</span><br><span class="line">        x_11=x_10+K_1@(y_1-y(x_10))</span><br><span class="line">    <span class="keyword">return</span> x_11,P_11,K_1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_result</span><span class="params">(record:dict,problem)</span>:</span></span><br><span class="line">    pprint(record)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> record.items():</span><br><span class="line">        plt.title(key)</span><br><span class="line">        plt.xlabel(<span class="string">"step"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"h"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"高度:km"</span>)</span><br><span class="line">        <span class="keyword">if</span> key==<span class="string">"v"</span>:</span><br><span class="line">            plt.ylabel(<span class="string">"速度:km/s (向下为正)"</span>)</span><br><span class="line">        plt.plot(value)</span><br><span class="line">        plt.savefig(os.path.join(cache_dir,problem+<span class="string">"_"</span>+key+<span class="string">".png"</span>),dpi=<span class="number">600</span>)</span><br><span class="line">        plt.clf()</span><br><span class="line">        plt.cla()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># solve problem 1</span></span><br><span class="line">    x_0=np.matrix([[<span class="number">2</span>],[<span class="number">0</span>],[<span class="number">2</span>]])</span><br><span class="line">    P_0=np.matrix([[<span class="number">10</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">10</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">10</span>]])</span><br><span class="line">    x_record=[x_0]</span><br><span class="line">    P_record=[P_0]</span><br><span class="line">    K_record=[<span class="literal">None</span>]</span><br><span class="line">    <span class="keyword">for</span> obs <span class="keyword">in</span> observation_2:</span><br><span class="line">        y_1=np.matrix(obs).T</span><br><span class="line">        x_1,P_1,K_1=EKF(</span><br><span class="line">            x_0,</span><br><span class="line">            P_0,</span><br><span class="line">            y_1,</span><br><span class="line">            u_0=np.matrix(<span class="number">9.8</span>/<span class="number">1000</span>),</span><br><span class="line">            Phi=np.matrix(param_2[<span class="string">"Phi"</span>]),</span><br><span class="line">            Psi=np.matrix(param_2[<span class="string">"Psi"</span>]),</span><br><span class="line">            R=np.matrix(param_2[<span class="string">"R"</span>]),</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        x_record.append(x_1)</span><br><span class="line">        P_record.append(P_1)</span><br><span class="line">        K_record.append(K_1)</span><br><span class="line">        </span><br><span class="line">        x_0=x_1</span><br><span class="line">        P_0=P_1</span><br><span class="line">        </span><br><span class="line">    result_record=&#123;</span><br><span class="line">        <span class="string">"h"</span>:[x[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"v"</span>:[x[<span class="number">1</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"d_0"</span>:[x[<span class="number">2</span>,<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> x_record],</span><br><span class="line">        <span class="string">"P_0"</span>:[P[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_1"</span>:[P[<span class="number">1</span>,<span class="number">1</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="string">"P_2"</span>:[P[<span class="number">2</span>,<span class="number">2</span>] <span class="keyword">for</span> P <span class="keyword">in</span> P_record],</span><br><span class="line">        <span class="comment"># "K":K_record,</span></span><br><span class="line">    &#125;</span><br><span class="line">    show_result(result_record,problem=<span class="string">"p2"</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/10ee70e7.html" title="线性滤波与非线性滤波实验" rel="noopener" target="_blank">https://www.kezhi.tech/10ee70e7.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Kalman-Filter/" rel="tag"><i class="fa fa-tag"></i> Kalman Filter</a>
+              <a href="/tags/Linear-Filter/" rel="tag"><i class="fa fa-tag"></i> Linear Filter</a>
+              <a href="/tags/Nonlinear-Filter/" rel="tag"><i class="fa fa-tag"></i> Nonlinear Filter</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/86b4b2c0.html" rel="prev" title="王者荣耀目标检测--Yolov5实现">
+      <i class="fa fa-chevron-left"></i> 王者荣耀目标检测--Yolov5实现
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型介绍"><span class="nav-text">模型介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性估计问题"><span class="nav-text">1. 线性估计问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非线性估计问题"><span class="nav-text">2. 非线性估计问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性滤波问题"><span class="nav-text">1. 线性滤波问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非线性估计问题-1"><span class="nav-text">2. 非线性估计问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验过程中的一些发现"><span class="nav-text">实验过程中的一些发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常量配置"><span class="nav-text">常量配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目1-代码"><span class="nav-text">题目1 代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目2代码"><span class="nav-text">题目2代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">78</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      
+      <!--音乐播放器
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      -->
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">189k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:52</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : '[object Object]',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收回复^_^",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '15' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
