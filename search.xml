@@ -1615,7 +1615,7 @@ of the triangle in turn, we see that all sides should be equal.</p>
 <h2 id="section-12">(4) 3.3.5</h2>
 <h3 id="a-6">(a)</h3>
 <p>Let <span class="math inline">\(d\in \bar F(x^*)\)</span>, so <span
-class="math inline">\(\exist \{d^k\}\subset F(x^*)\)</span>, so that
+class="math inline">\(\exists \{d^k\}\subset F(x^*)\)</span>, so that
 <span class="math inline">\(d^k\rightarrow d\)</span>.</p>
 <p>And we have: <span class="math display">\[
 \nabla f(x^*)&#39;d^k=lim_{\alpha\rightarrow0}\frac{f(x^*+\alpha
@@ -1929,7 +1929,7 @@ class="math inline">\(k\)</span>, we obtain <span
 class="math display">\[
 \frac1{C^2}\sum_{k=0}^\infin(q^*-q(\mu^k))^2\leq||\mu^0-\mu^*||^2
 \]</span> so <span class="math inline">\(\lim_{k\rightarrow
-\infin}q(\mu^k)=q^*\)</span></p>
+\infty}q(\mu^k)=q^*\)</span></p>
 <p>Since <span class="math inline">\({\mu^k}\)</span> is bounded, there
 exist a vector <span class="math inline">\(\hat \mu\)</span> and a
 subsequence ${^k}_{kK} {^k} $converging to <span
@@ -1957,7 +1957,7 @@ M^∗\)</span>, implying that <span class="math inline">\(\hat
 <li></li>
 </ol>
 <p>Let <span class="math inline">\(q\)</span> be real-valued and concave
-over the entire space <span class="math inline">\(\R^r\)</span>.
+over the entire space <span class="math inline">\(\mathbb{R}^r\)</span>.
 According to Prop. B.24 of Appendix B, since <span
 class="math inline">\(\{\mu^k\}\)</span> is bounded, the set <span
 class="math inline">\(∪_{k≥0}∂q(\mu^k)\)</span> is bounded, and so is
@@ -1967,7 +1967,7 @@ class="math inline">\(∪_{k≥0}∂q(\mu^k)\)</span> is bounded, and so is
 <li></li>
 </ol>
 <p>Suppose that <span
-class="math inline">\(\lim_{k\rightarrow\infin}\inf\sqrt{k}(q^*-q(\mu^k))&gt;0\)</span>,
+class="math inline">\(\lim_{k\rightarrow\infty}\inf\sqrt{k}(q^*-q(\mu^k))&gt;0\)</span>,
 Then there is an <span class="math inline">\(\epsilon&gt;0\)</span> and
 large enough <span class="math inline">\(\bar k\)</span> such that <span
 class="math inline">\(\sqrt{k}(q^*-q(\mu^k))\geq\epsilon\)</span> for
