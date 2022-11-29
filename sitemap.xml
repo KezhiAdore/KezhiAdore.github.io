@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.kezhi.tech/a7067052.html</loc>
+    
+    <lastmod>2022-11-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/f95f8ff4.html</loc>
     
     <lastmod>2022-11-29</lastmod>
@@ -810,6 +817,20 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B/</loc>
+    <lastmod>2022-11-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2022-11-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/branch-and-bound/</loc>
     <lastmod>2022-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

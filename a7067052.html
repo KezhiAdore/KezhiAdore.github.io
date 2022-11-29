@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="分支定界法在背包问题中的应用 西安交通大学《系统优化与调度》课程期末报告  1 背景简介 背包问题（Knapsack problem）是一种组合优化的NP完全（NP-Complete，NPC）问题。问题可以描述为：给定一组物品，每种物品都有自己的重量和价格，在限定的总重量内，我们如何选择，才能使得物品的总价格最高。问题的名称来源于如何选择最合适的物品放置于给定背包中。相似问题经常出现在商">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XJTU System Optimization and Scheduling Final Report">
+<meta property="og:url" content="https://www.kezhi.tech/a7067052.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="分支定界法在背包问题中的应用 西安交通大学《系统优化与调度》课程期末报告  1 背景简介 背包问题（Knapsack problem）是一种组合优化的NP完全（NP-Complete，NPC）问题。问题可以描述为：给定一组物品，每种物品都有自己的重量和价格，在限定的总重量内，我们如何选择，才能使得物品的总价格最高。问题的名称来源于如何选择最合适的物品放置于给定背包中。相似问题经常出现在商">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202211291638345.jpg">
+<meta property="article:published_time" content="2022-11-29T08:39:37.000Z">
+<meta property="article:modified_time" content="2022-11-29T08:39:37.145Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="Optimal">
+<meta property="article:tag" content="背包问题">
+<meta property="article:tag" content="branch-and-bound">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202211291638345.jpg">
+
+<link rel="canonical" href="https://www.kezhi.tech/a7067052.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>XJTU System Optimization and Scheduling Final Report | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">73</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-fw fa-book"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-steam">
+
+    <a href="/steamgames/" rel="section"><i class="fa fa-fw fa-steam"></i>steam</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <!--本地搜索-->
+      <div class="site-search">
+        <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      </div>
+    
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/a7067052.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          XJTU System Optimization and Scheduling Final Report
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-29 16:39:37" itemprop="dateCreated datePublished" datetime="2022-11-29T16:39:37+08:00">2022-11-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/a7067052.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/a7067052.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="分支定界法在背包问题中的应用">分支定界法在背包问题中的应用</h1>
+<p>西安交通大学《系统优化与调度》课程期末报告</p>
+<p><img src="https://download.kezhi.tech/img/202211291638345.jpg" style="width:30%;" /></p>
+<h2 id="背景简介">1 背景简介</h2>
+<p>背包问题（Knapsack
+problem）是一种组合优化的NP完全（NP-Complete，NPC）问题。问题可以描述为：给定一组物品，每种物品都有自己的重量和价格，在限定的总重量内，我们如何选择，才能使得物品的总价格最高。问题的名称来源于如何选择最合适的物品放置于给定背包中。相似问题经常出现在商业、组合数学，计算复杂性理论、密码学和应用数学等领域中。</p>
+<h2 id="数学描述">2 数学描述</h2>
+<p>背包问题根据物品数量限制的不同分为以下三类：0-1背包问题，完全背包问题和多重背包问题。0-1背包问题是指每样物品只有一件，即每件物品只有未放入背包和放入背包（0和1）两种状态；而在完全背包问题中，每样物品的数量没有限制，即可以向背包中放入任意多个任意物品；多重背包问题则是指每样物品有一定的数量限制，即在背包中放入的某样物品数量不能超过其数量限制。下文将分别介绍这三类背包问题的数学描述。</p>
+<h3 id="背包问题">2.1 0-1 背包问题</h3>
+<p>最基本的背包问题，其数学描述为：有 <span
+class="math inline">\(n\)</span> 件物品，物品 <span
+class="math inline">\(i\)</span>
+的体积（有时也被称为代价，重量等。后文均使用体积作为代表）为 <span
+class="math inline">\(w_i\)</span>，价值为 <span
+class="math inline">\(v_i\)</span>。背包的容积（预算，最大承受重量等。后文均使用体积作为代表）为
+<span
+class="math inline">\(W\)</span>。限定每个物品最多只能往背包中放入1个，求将那些物品装入背包可以使装入物品的总体积不超过背包的容积并且总价值最大。即：
+<span class="math display">\[
+\max \sum_{i=1}^nv_ix_i\\
+s.t.\left\{
+    \begin{array}{**lr**}
+    \sum_{i=1}^nw_ix_i\leq W\\
+    x_i\in\{0,1\}
+    \end{array}
+\right.
+\]</span></p>
+<h3 id="完全背包问题">2.2 完全背包问题</h3>
+<p>完全背包问题的数学描述为：有 <span class="math inline">\(n\)</span>
+件物品，物品 <span class="math inline">\(i\)</span> 的体积为 <span
+class="math inline">\(w_i\)</span>，价值为 <span
+class="math inline">\(v_i\)</span>。背包的容积为 <span
+class="math inline">\(W\)</span>。每件物品有无穷多个，求如何将物品装入背包可以使装入物品的总体积不超过背包的容积并且总价值最大。即：
+<span class="math display">\[
+\max \sum_{i=1}^nv_ix_i\\
+s.t.\left\{
+    \begin{array}{**lr**}
+    \sum_{i=1}^nw_ix_i\leq W\\
+    x_i\in N_+
+    \end{array}
+\right.
+\]</span></p>
+<h3 id="多重背包问题">2.3 多重背包问题</h3>
+<p>多重背包问题的数学描述为：有 <span class="math inline">\(n\)</span>
+件物品，物品 <span class="math inline">\(i\)</span> 的体积为 <span
+class="math inline">\(w_i\)</span>，价值为 <span
+class="math inline">\(v_i\)</span>，数量为<span
+class="math inline">\(b_i\)</span>。背包的容积为 <span
+class="math inline">\(W\)</span>。求如何将物品装入背包可以使装入物品的总体积不超过背包的容积并且总价值最大。即：
+<span class="math display">\[
+\max \sum_{i=1}^nv_ix_i\\
+s.t.\left\{
+    \begin{array}{**lr**}
+    \sum_{i=1}^nw_ix_i\leq W\\
+    x_i\leq m_i\\
+    x_i\in N_+\\
+    \end{array}
+\right.
+\]</span></p>
+<h2 id="求解算法">3 求解算法</h2>
+<h3 id="分支定界算法">3.1 分支定界算法</h3>
+<p>分支定界法（branch and
+bound）是一种求解整数规划问题的最常用算法。这种方法不但可以求解纯整数规划，还可以求解混合整数规划问题。分支定界法是一种搜索与迭代的方法，选择不同的分支变量和子问题进行分支。通常，把全部可行解空间反复地分割为越来越小的子集，称为分支；并且对每个子集内的解集计算一个目标下界（对于最小值问题），这称为定界。在每次分枝后，凡是界限超出已知可行解集目标值的那些子集不再进一步分枝，这样，许多子集可不予考虑，这称剪枝。这就是分枝定界法的主要思路。分支定界算法的步骤如下：</p>
+<blockquote>
+<ol type="1">
+<li>对于最小化问题，设定初始最优解的值为 <span
+class="math inline">\(best=+\infin\)</span>;</li>
+<li>根据分枝法则（Branching
+rule），从尚未被洞悉（Fathomed）的节点（局部解）中选择一个节点，并在此节点的下一阶层中分为几个新的节点；</li>
+<li>根据下界函数计算出每个节点的下界值（Lower Bound，LB）；</li>
+<li>若节点的下限值大于当前最优值 <span
+class="math inline">\(best\)</span>，则其之后的节点中不包含可行解，因此该节点在后续计算中将不再被考虑；若已找到在此节点中，具最小下限值的可行解，则停止向下搜索；否则将该节点作为未洞悉节点继续向下搜索；</li>
+<li>判断是否仍有尚未被洞悉的节点，如果有，则进行步骤二，如果已无尚未被洞悉的节点，则演算停止，并得到最优解。</li>
+</ol>
+</blockquote>
+<p>分支定界算法的关键在于分支规则和下界函数的选取。对于不同的问题，有着不同的选取方式。在背包问题中，将每件物品放入的数量作为分支依据，每件物品的不同选取方式产生搜索树的不同层。下界函数可以通过松弛放入物品个数为整数这个约束来进行计算。具体算法见后文。</p>
+<h3 id="求解0-1背包问题">3.2 求解0-1背包问题</h3>
+<p>在此问题中，节点的Lower Bound 的计算方法如下：</p>
+<blockquote>
+<ol type="1">
+<li>计算每件物品的单位体积价值，即 <span
+class="math inline">\(p_i=v_i/w_i\)</span>；</li>
+<li>计算已经确定状态（装入/不装入）物品的总体积 <span
+class="math inline">\(w_{sum}\)</span> 和总价值 <span
+class="math inline">\(v_{sum}\)</span>；</li>
+<li>若 <span
+class="math inline">\(w_{sum}&gt;W\)</span>，则节点无效；否则从未确定状态的物品中挑选单位体积价值最高的物品依次装入背包，直到将背包装满（此时可以装入浮点数个物品，如6/7个物品2，松弛条件在这里生效）。再次计算背包中物品的总价值
+<span class="math inline">\(v_{sum}\)</span>，即为该节点的 Lower
+Bound。</li>
+</ol>
+</blockquote>
+<p>分支定界算法过程如下：</p>
+<blockquote>
+<ol type="1">
+<li>创建空队列，将根节点放入队列中；</li>
+<li>从队列中选取一个节点，生成该节点的子节点。若无子节点说明该节点为可行解，与当前最优解进行比较，若小于最优解则替换当前最优解；若子节点存在，则计算每个子节点的Lower
+Bound，若子节点不合法或者Lower
+Bound大于当前最优解则将该节点舍去，否则将该节点加入队列中。</li>
+<li>重复步骤2直到队列为空，此时保留下来的最优解即为该问题最优解。</li>
+</ol>
+</blockquote>
+<p>节点生成算法如下：</p>
+<blockquote>
+<ol type="1">
+<li>找出所有未确定状态的物品；</li>
+<li>选出这些物品中单位体积价值最大的物品；</li>
+<li>生成两个节点分别为放入该物品和不放入该物品之后的状态节点。</li>
+</ol>
+</blockquote>
+<p>在分支定界过程中，从队列中选取节点方法主要有以下两种：</p>
+<ul>
+<li>FIFO
+选取，即先入先出，依照队列的顺序进行节点的选取。优点为存储空间需求较小；缺点为搜索方式类似BFS，需要大量的运算后才能搜索到可行解从而更新最优解和剪枝，运算量较大。</li>
+<li>优先队列选取，每次从队列中选取Lower
+Bound最小的节点进行探索。优点为运算量小，快速向下探索更新可行最优解便于更有效的剪枝；缺点为需要更多的存储空间。</li>
+</ul>
+<p>以一个简单的0-1背包问题为例：</p>
+<p>背包容量为10，物品个数为5，其体积和价值如下表所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">cost</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">value</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">6</td>
+</tr>
+</tbody>
+</table>
+<p>通过以上两种不同节点选取方式计算出的结果均为：</p>
+<p>选取物品1, 2,
+5，最大价值为15。其中，采用FIFO选取算法循环运算46次，采用优先队列选取算法循环运算13次。</p>
+<h3 id="求解多维背包问题">3.3 求解多维背包问题</h3>
+<p>多维背包问题与0-1背包问题的区别在于，每件物品可以放入背包一定数量以内个而非只有一个，即物品
+<span class="math inline">\(i\)</span> 最多可以在背包中放入 <span
+class="math inline">\(b_i\)</span>
+个。通过对0-1背包问题的分支定界求解算法作出一部分调整即可进行求解。改动如下：</p>
+<p>在此问题中，节点的Lower Bound 的计算方法如下：</p>
+<blockquote>
+<ol type="1">
+<li>计算每件物品的单位体积价值，即 <span
+class="math inline">\(p_i=v_i/w_i\)</span>；</li>
+<li>计算已经确定装入数量物品的总体积 <span
+class="math inline">\(w_{sum}\)</span> 和总价值 <span
+class="math inline">\(v_{sum}\)</span>；</li>
+<li>若 <span
+class="math inline">\(w_{sum}&gt;W\)</span>，则节点无效；否则从未确定状态的物品中挑选单位体积价值最高的物品依次装入背包，直到将背包装满（此时可以装入浮点数个物品，如1.5个物品2，松弛条件在这里生效）。再次计算背包中物品的总价值
+<span class="math inline">\(v_{sum}\)</span>，即为该节点的 Lower
+Bound。</li>
+</ol>
+</blockquote>
+<p>子节点生成的计算方法如下：</p>
+<blockquote>
+<ol type="1">
+<li>找出所有未确定状态的物品；</li>
+<li>选出这些物品中单位体积价值最大的物品；</li>
+<li>根据该物品的数量限制 <span class="math inline">\(b_i\)</span> 生成
+<span class="math inline">\(b_{i}+1\)</span>
+个子节点，每个子节点分别放入该物品 <span
+class="math inline">\(0,1,...,b_{i}\)</span>个</li>
+</ol>
+</blockquote>
+<p>其余部分的计算方法与0-1背包问题相同。通过多次迭代即可得到最优解。</p>
+<h3 id="求解完全背包问题">3.4 求解完全背包问题</h3>
+<p>分支定界算法的核心部分为剪枝搜索，而完全背包问题每一件物品没有数量限制。这就导致每一个搜索树中的非叶节点有无穷个子节点。采用该算法无法构建与之对应的搜索树。因此，对于完全背包问题，分支定界算法并不适用。</p>
+<h2 id="数值运算">4 数值运算</h2>
+<h3 id="背包问题数值运算">4.1 0-1 背包问题数值运算</h3>
+<p>选取多个背包问题对上述算法进行测试（具体测试数据见附录），测试结果如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">物品个数</th>
+<th style="text-align: center;">背包大小</th>
+<th style="text-align: center;">最大价值</th>
+<th style="text-align: center;">循环次数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">133</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">200</td>
+<td style="text-align: center;">334</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">383</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">2614</td>
+<td style="text-align: center;">276</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">2541</td>
+<td style="text-align: center;">287</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">2617</td>
+<td style="text-align: center;">244</td>
+</tr>
+</tbody>
+</table>
+<p>上述计算结果均使用优先队列选取方式，其运算速度相较于队列选取计算速度要快上很多。此外，动态规划也常用来求解背包问题。但动态规划求解的复杂度对数据敏感，在同样大小，不同内容的数据上的复杂度不同。而分支定界法在一般情况下计算时间复杂度较为稳定，基本不会受到数据内容的影响。</p>
+<h3 id="多重背包问题数值运算">4.2 多重背包问题数值运算</h3>
+<p>其余数据与上述0-1背包相同，增加每件物品的数量限制，将每件物品的数量上限均设置为2个，得到计算结果如下</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">物品个数</th>
+<th style="text-align: center;">背包大小</th>
+<th style="text-align: center;">最大价值</th>
+<th style="text-align: center;">循环次数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">196</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">200</td>
+<td style="text-align: center;">481</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">559</td>
+<td style="text-align: center;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">3645</td>
+<td style="text-align: center;">12580</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">3766</td>
+<td style="text-align: center;">14216</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">3440</td>
+<td style="text-align: center;">9490</td>
+</tr>
+</tbody>
+</table>
+<p>上述计算结果均使用优先队列选取方式，可以看出，相较于0-1背包问题，计算多重背包问题需要更长的时间。这是因为增加物品数量会指数级提升搜索树的节点个数。从而大大提升计算所需要的循环次数。因此，分支定界算对于大规模的多重背包问题并不适用。</p>
+<h2 id="小结">5 小结</h2>
+<p>分支定界算法是一种剪枝搜索算法，其核心思想在于通过松弛部分约束条件来快速求得每种状态下的Lower
+Bound，通过Lower
+Bound和Best比较来进行剪枝。从而快速去除大量不存在可行解的区域，最终快速求得最优解。</p>
+<p>但是，分支定界算法也有其固有的局限性。首先，分支定界算法在计算时需要在搜索树中进行搜索。这在面对多维大规模的问题时，虽然通过剪枝可以减少很多不必要的搜索过程，但剩余的搜索规模依然很大，特别是在搜索树很深时，增加一点宽度就可能会增加大量的计算量；其次，分支定界算法在数学上是不稳定的，其剪枝过程依赖的
+Lower Bound
+是下届而非下确界，因此完全可以构造一组数据使得分支定界算法无法完成剪枝操作从而使其需要搜索树中的每个节点，大大增加算法的复杂度。</p>
+<h2 id="附录">6 附录</h2>
+<h3 id="数值计算代码">数值计算代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># simple example</span></span><br><span class="line">N=<span class="number">5</span></span><br><span class="line">W=<span class="number">20</span></span><br><span class="line">w=np.array([<span class="number">2</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>])</span><br><span class="line">v=-np.array([<span class="number">6</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">6</span>])</span><br><span class="line">b=np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">4</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># read data from file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'temp.txt'</span>,<span class="string">'r+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    w=[]</span><br><span class="line">    v=[]</span><br><span class="line">    text=f.readline()[:<span class="number">-1</span>]</span><br><span class="line">    data=text.split(<span class="string">' '</span>)</span><br><span class="line">    N=int(data[<span class="number">0</span>])</span><br><span class="line">    W=int(data[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        text=f.readline()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> text:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        text=text[:<span class="number">-1</span>]</span><br><span class="line">        data=text.split(<span class="string">' '</span>)</span><br><span class="line">        w.append(int(data[<span class="number">0</span>]))</span><br><span class="line">        v.append(int(data[<span class="number">1</span>]))</span><br><span class="line">    w=np.array(w)</span><br><span class="line">    v=-np.array(v)</span><br><span class="line"></span><br><span class="line">b=np.array([<span class="number">2</span>]*<span class="number">100</span>)</span><br><span class="line">root_state=[<span class="number">-1</span>]*N</span><br><span class="line"></span><br><span class="line">v_per_w=v/w</span><br><span class="line">sort_index=np.argsort(v_per_w)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_min_good</span><span class="params">(state)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sort_index:</span><br><span class="line">        <span class="keyword">if</span> state[i]&lt;<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lower_bound</span><span class="params">(state)</span>:</span></span><br><span class="line">    w_sum=<span class="number">0</span></span><br><span class="line">    v_sum=<span class="number">0</span></span><br><span class="line">    state=list(state)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i,s <span class="keyword">in</span> enumerate(state):</span><br><span class="line">        <span class="keyword">if</span> s&gt;=<span class="number">0</span>:</span><br><span class="line">            w_sum+=w[i]*s</span><br><span class="line">            v_sum+=v[i]*s</span><br><span class="line">    <span class="keyword">if</span> w_sum&gt;W:</span><br><span class="line">        <span class="keyword">return</span> math.inf</span><br><span class="line">    <span class="keyword">while</span> w_sum&lt;W:</span><br><span class="line">        w_free=W-w_sum</span><br><span class="line">        selected_good=get_min_good(state)</span><br><span class="line">        <span class="keyword">if</span> selected_good <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> w[selected_good]&lt;w_free*b[selected_good]:</span><br><span class="line">            w_sum+=w[selected_good]*b[selected_good]</span><br><span class="line">            v_sum+=v[selected_good]*b[selected_good]</span><br><span class="line">            state[selected_good]=b[selected_good]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            w_sum=W</span><br><span class="line">            v_sum+=v[selected_good]*w_free/w[selected_good]</span><br><span class="line">    <span class="keyword">return</span> v_sum</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_children</span><span class="params">(state)</span>:</span></span><br><span class="line">    selected_good=get_min_good(state)</span><br><span class="line">    <span class="keyword">if</span> selected_good <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    state_list=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(b[selected_good]+<span class="number">1</span>):</span><br><span class="line">        child=list(state)</span><br><span class="line">        child[selected_good]=i</span><br><span class="line">        state_list.append(child)</span><br><span class="line">    <span class="keyword">return</span> state_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the accurate value of state</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(state)</span>:</span></span><br><span class="line">    w_sum=<span class="number">0</span></span><br><span class="line">    v_sum=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i,s <span class="keyword">in</span> enumerate(state):</span><br><span class="line">        <span class="keyword">if</span> s&gt;=<span class="number">0</span>:</span><br><span class="line">            w_sum+=w[i]*s</span><br><span class="line">            v_sum+=v[i]*s</span><br><span class="line">    <span class="keyword">if</span> w_sum&gt;W:</span><br><span class="line">        <span class="keyword">return</span> math.inf</span><br><span class="line">    <span class="keyword">return</span> v_sum</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queue_search</span><span class="params">(state)</span>:</span></span><br><span class="line">    best=math.inf</span><br><span class="line">    best_state=<span class="literal">None</span></span><br><span class="line">    temporal_cost=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">    search_queue=queue.SimpleQueue()</span><br><span class="line">    search_queue.put(state)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> search_queue.empty():</span><br><span class="line">        temporal_cost+=<span class="number">1</span></span><br><span class="line">        state_now=search_queue.get()</span><br><span class="line">        state_list=get_children(state_now)</span><br><span class="line">        <span class="keyword">if</span> state_list <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> best&gt;func(state_now):</span><br><span class="line">                best=func(state_now)</span><br><span class="line">                best_state=state_now</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> state <span class="keyword">in</span> state_list:</span><br><span class="line">            bound=lower_bound(state)</span><br><span class="line">            <span class="keyword">if</span> bound == math.inf <span class="keyword">or</span> bound&gt;best:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            search_queue.put(state)</span><br><span class="line">    print(<span class="string">'FIFO Search\n    Temporal Cost:'</span>,temporal_cost,<span class="string">'Optimal Result:'</span>,best_state,<span class="string">'Optimal Value:'</span>,best)</span><br><span class="line">    <span class="keyword">return</span> best,best_state</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,state)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.state=state</span><br><span class="line">        self.bound=lower_bound(state)</span><br><span class="line"></span><br><span class="line"><span class="comment"># find the node with the lowest lower bound</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_lowest_node</span><span class="params">(search_queue)</span>:</span></span><br><span class="line">    lowest_bound=math.inf</span><br><span class="line">    lowest_node=<span class="literal">None</span></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> search_queue:</span><br><span class="line">        <span class="keyword">if</span> node.bound&lt;lowest_bound:</span><br><span class="line">            lowest_bound=node.bound</span><br><span class="line">            lowest_node=node</span><br><span class="line">    <span class="keyword">return</span> lowest_node</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">priority_search</span><span class="params">(state)</span>:</span></span><br><span class="line">    best=math.inf</span><br><span class="line">    best_state=<span class="literal">None</span></span><br><span class="line">    temporal_cost=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">    search_queue=[]</span><br><span class="line">    search_queue.append(Node(state))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> search_queue!=[]:</span><br><span class="line">        temporal_cost+=<span class="number">1</span></span><br><span class="line">        node_selected=get_lowest_node(search_queue)</span><br><span class="line">        search_queue.remove(node_selected)</span><br><span class="line">        <span class="keyword">if</span> node_selected <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        state_now=node_selected.state</span><br><span class="line">        state_list=get_children(state_now)</span><br><span class="line">        <span class="keyword">if</span> state_list <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> best&gt;func(state_now):</span><br><span class="line">                best=func(state_now)</span><br><span class="line">                best_state=state_now</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> state <span class="keyword">in</span> state_list:</span><br><span class="line">            bound=lower_bound(state)</span><br><span class="line">            <span class="keyword">if</span> bound == math.inf <span class="keyword">or</span> bound&gt;best:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            search_queue.append(Node(state))</span><br><span class="line">    print(<span class="string">'Priority Search\n    Temporal Cost:'</span>,temporal_cost,<span class="string">'Optimal Result:'</span>,best_state,<span class="string">'Optimal Value:'</span>,best)</span><br><span class="line">    <span class="keyword">return</span> best,best_state</span><br><span class="line"></span><br><span class="line">priority_search(root_state)</span><br><span class="line"><span class="comment"># queue_search(root_state)</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\7d0182be.html" rel="bookmark">XJTU System Optimization and Scheduling Course Assignments</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\f95f8ff4.html" rel="bookmark">XJTU System Optimization and Scheduling Midterm Report</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/a7067052.html" title="XJTU System Optimization and Scheduling Final Report" rel="noopener" target="_blank">https://www.kezhi.tech/a7067052.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Optimal/" rel="tag"><i class="fa fa-tag"></i> Optimal</a>
+              <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 背包问题</a>
+              <a href="/tags/branch-and-bound/" rel="tag"><i class="fa fa-tag"></i> branch-and-bound</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/f95f8ff4.html" rel="prev" title="XJTU System Optimization and Scheduling Midterm Report">
+      <i class="fa fa-chevron-left"></i> XJTU System Optimization and Scheduling Midterm Report
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分支定界法在背包问题中的应用"><span class="nav-text">分支定界法在背包问题中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景简介"><span class="nav-text">1 背景简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学描述"><span class="nav-text">2 数学描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-text">2.1 0-1 背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完全背包问题"><span class="nav-text">2.2 完全背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多重背包问题"><span class="nav-text">2.3 多重背包问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解算法"><span class="nav-text">3 求解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支定界算法"><span class="nav-text">3.1 分支定界算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解0-1背包问题"><span class="nav-text">3.2 求解0-1背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解多维背包问题"><span class="nav-text">3.3 求解多维背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解完全背包问题"><span class="nav-text">3.4 求解完全背包问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值运算"><span class="nav-text">4 数值运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题数值运算"><span class="nav-text">4.1 0-1 背包问题数值运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多重背包问题数值运算"><span class="nav-text">4.2 多重背包问题数值运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-text">5 小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-text">6 附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值计算代码"><span class="nav-text">数值计算代码</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      
+      <!--音乐播放器
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      -->
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">168k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:33</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : '[object Object]',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收回复^_^",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '15' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
