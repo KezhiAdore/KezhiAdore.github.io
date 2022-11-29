@@ -1301,14 +1301,14 @@ x^{k+1}=(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)+Q^{-1}b&#39;\\
 x^{k+1}-x^*=(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)+Q^{-1}b&#39;-Q^{-1}b&#39;\\
 x^{k+1}-x^*=(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)\\
 \]</span> so: <span class="math display">\[
-\lim_{k\rightarrow\infin}(x^{k+1}-x^*)=\lim_{k\rightarrow\infin}(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)
+\lim_{k\rightarrow\infty}(x^{k+1}-x^*)=\lim_{k\rightarrow\infty}(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)
 \]</span></p>
 <p><span class="math display">\[
 \forall s\in(0,2/L),\quad (I-sDQ)&lt;1
 \]</span></p>
 <p>then: <span class="math display">\[
-\lim_{k\rightarrow\infin}(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)=0\\
-\lim_{k\rightarrow\infin}(x^{k+1}-x^*)=0
+\lim_{k\rightarrow\infty}(I-sDQ)^{k+1}(x^0-Q^{-1}b&#39;)=0\\
+\lim_{k\rightarrow\infty}(x^{k+1}-x^*)=0
 \]</span> Summarizing, the method converges to <span
 class="math inline">\(x^*=Q^{-1}b&#39;\)</span> for every starting point
 <span class="math inline">\(x^0\)</span> if and only if <span
@@ -1828,7 +1828,7 @@ i\leq n}v_i\)</span>. By including in the subset each replica of an
 object assembled in the optimal solution to the original problem, we see
 that <span class="math inline">\(f^*(k)\geq kf^*\)</span> . It then
 follows that <span class="math display">\[
-\lim_{k\rightarrow\infin}(q^*(k)-f^*(k))=0
+\lim_{k\rightarrow\infty}(q^*(k)-f^*(k))=0
 \]</span></p>
 <h1 id="assignment-3">Assignment 3</h1>
 <h2 id="section-14">5.5.2</h2>
@@ -1927,7 +1927,7 @@ class="math inline">\(k\)</span>, then <span class="math display">\[
 \]</span> By summing these inequalities over all <span
 class="math inline">\(k\)</span>, we obtain <span
 class="math display">\[
-\frac1{C^2}\sum_{k=0}^\infin(q^*-q(\mu^k))^2\leq||\mu^0-\mu^*||^2
+\frac1{C^2}\sum_{k=0}^\infty(q^*-q(\mu^k))^2\leq||\mu^0-\mu^*||^2
 \]</span> so <span class="math inline">\(\lim_{k\rightarrow
 \infty}q(\mu^k)=q^*\)</span></p>
 <p>Since <span class="math inline">\({\mu^k}\)</span> is bounded, there
@@ -1935,7 +1935,7 @@ exist a vector <span class="math inline">\(\hat \mu\)</span> and a
 subsequence ${^k}_{kK} {^k} $converging to <span
 class="math inline">\(\hat\mu ∈ M\)</span>. By using the
 upper-semicontinuity of q, we have <span class="math display">\[
-\lim_{k\rightarrow\infin}\sup_{k\in\mathcal K}q(\mu^k)\leq q(\hat
+\lim_{k\rightarrow\infty}\sup_{k\in\mathcal K}q(\mu^k)\leq q(\hat
 \mu)\leq q^*
 \]</span> Now we show that <span
 class="math inline">\(\{\mu^k\}\)</span> actually converges. Let <span
@@ -1975,10 +1975,10 @@ all <span class="math inline">\(k\geq \bar k\)</span>, so <span
 class="math display">\[
 (q^*-q(\mu^k))^2\geq\frac{\epsilon^2}{k},\ \ \ \ \forall k\geq \bar k
 \]</span> implying that <span class="math display">\[
-\sum_{k=\bar k}^\infin(q^*-q(\mu^k))^2\geq \epsilon^2\sum_{k=\bar
-k}^\infin\frac1k=\infin
+\sum_{k=\bar k}^\infty(q^*-q(\mu^k))^2\geq \epsilon^2\sum_{k=\bar
+k}^\infty\frac1k=\infty
 \]</span> which contradicts the relation <span class="math display">\[
-\sum_{k=0}^\infin(q^*-q(\mu^k))^2&lt;\infin
+\sum_{k=0}^\infty(q^*-q(\mu^k))^2&lt;\infty
 \]</span> (b)</p>
 <p>As seen in 6.3.1, we have for all dual optimal solutions <span
 class="math inline">\(\mu^*\)</span> and all <span
@@ -2047,7 +2047,7 @@ class="math inline">\(j\)</span> are not processed on time t</p>
 <p>We would like the cpu process the job with high weight as quickly as
 possible, so we get the following objective optimization problem: <span
 class="math display">\[
-min\ \ \sum_{j=1}^n\int_0^{+\infin}g(j,t)w_j\\
+min\ \ \sum_{j=1}^n\int_0^{+\infty}g(j,t)w_j\\
 s.t.\ \ \sum_{j=1}^nf(j,t)\leq 1\\
 \ \ \ \ g(j,t)=\left\{
     \begin{array}{**lr**}
@@ -2055,7 +2055,7 @@ s.t.\ \ \sum_{j=1}^nf(j,t)\leq 1\\
     0 &amp; otherwise
     \end{array}
 \right.\\
-\int_0^{+\infin}f(j,\tau)d\tau=c_j
+\int_0^{+\infty}f(j,\tau)d\tau=c_j
 \]</span></p>
 <h2 id="section-20">2.9</h2>
 <table>
@@ -6431,7 +6431,7 @@ bound）是一种求解整数规划问题的最常用算法。这种方法不但
 <blockquote>
 <ol type="1">
 <li>对于最小化问题，设定初始最优解的值为 <span
-class="math inline">\(best=+\infin\)</span>;</li>
+class="math inline">\(best=+\infty\)</span>;</li>
 <li>根据分枝法则（Branching
 rule），从尚未被洞悉（Fathomed）的节点（局部解）中选择一个节点，并在此节点的下一阶层中分为几个新的节点；</li>
 <li>根据下界函数计算出每个节点的下界值（Lower Bound，LB）；</li>
