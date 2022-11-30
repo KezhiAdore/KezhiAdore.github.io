@@ -1259,7 +1259,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cbff12;
+  background: #d742ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2829,8 +2829,6 @@ canvas#canvas {
   margin-top: 20px;
 }
 body {
-  background: url("/images/background.jpg");
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -2858,4 +2856,8 @@ body {
 }
 .popup {
   opacity: 0.9;
+}
+html {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
