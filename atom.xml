@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2022-11-30T12:03:22.604Z</updated>
+  <updated>2022-11-29T09:15:19.682Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,30 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>缅怀长者</title>
-    <link href="https://www.kezhi.tech/ec78475a.html"/>
-    <id>https://www.kezhi.tech/ec78475a.html</id>
-    <published>2022-11-30T11:47:26.000Z</published>
-    <updated>2022-11-30T12:03:22.604Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211301943814.jpeg&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;
-🕯🕯🕯
-&lt;/center&gt;
-
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>线性滤波与非线性滤波实验</title>
