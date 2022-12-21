@@ -5958,9 +5958,7 @@ Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
     <title>王者荣耀目标检测--Yolov5实现</title>
     <url>/86b4b2c0.html</url>
     <content><![CDATA[<h1 id="智能体对战目标检测">智能体对战目标检测</h1>
-<p>手动标注数据集及视频分割程序下载链接：<a class="btn" href="https://download.kezhi.tech/document/video2img.zip" target="_blank" rel="noopener">
-            <i class="fa fa-download fa-lg fa-fw"></i>video2img.zip
-          </a></p>
+<p>手动标注数据集及视频分割程序下载见文章末。</p>
 <p><img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;" /></p>
 <a id="more"></a>
 <p>识别演示视频：</p>
@@ -6302,6 +6300,10 @@ https://ultralytics.com/yolov5.</li>
 speed and accuracy of object detection. <em>arXiv preprint
 arXiv:2004.10934</em>.</li>
 </ol>
+<h2 id="附件下载">附件下载</h2>
+<p>手动标注数据集及视频分割程序：<a class="btn" href="https://server.kezhi.tech:9160/f/9c47b7368cde4dcdbae5/?dl=1" target="_blank" rel="noopener">
+            <i class="fa fa-download fa-lg fa-fw"></i>video2img.zip
+          </a></p>
 ]]></content>
       <categories>
         <category>Project</category>
