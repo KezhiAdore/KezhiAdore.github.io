@@ -1097,7 +1097,7 @@ if(canvas.getContext){
   
   <script src="/lib/anime.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -1191,7 +1191,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js';
+      script.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/a11y/assistive-mml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();
@@ -1209,7 +1209,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail,link';
     guest = guest.split(',').filter(item => {
