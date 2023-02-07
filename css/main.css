@@ -1259,7 +1259,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #49f141;
+  background: #d2525c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2829,7 +2829,7 @@ canvas#canvas {
   margin-top: 20px;
 }
 body {
-  background: url("/images/background.jpg");
+  background: url("https://server.kezhi.tech:8090/image/63e25fb16ca8a.jpg");
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-repeat: no-repeat;
@@ -2848,14 +2848,14 @@ body {
   color: #009393;
 }
 .content-wrap {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .sidebar {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .header-inner {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .popup {
-  opacity: 0.9;
+  opacity: 0.8;
 }
