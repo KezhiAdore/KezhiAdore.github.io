@@ -1259,7 +1259,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #6e94e4;
+  background: #249032;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2829,7 +2829,7 @@ canvas#canvas {
   margin-top: 20px;
 }
 body {
-  background: url("https://server.kezhi.tech:8090/image/63e25fb16ca8a.jpg");
+  background: url("https://server.kezhi.tech:8090/image/63e4cf5f383bb.jpg");
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-repeat: no-repeat;
