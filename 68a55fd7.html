@@ -140,7 +140,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">82</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -150,7 +150,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -330,7 +330,7 @@
       
         <h2 id="请求伪装">请求伪装</h2>
 <p>在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：</p>
-<p><img src="https://download.kezhi.tech/img/20201024223544.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/20201024223544.png" /></p>
 <p>这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：</p>
 <a id="more"></a>
 <ol type="1">
@@ -342,7 +342,7 @@
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">USER_AGENT_LIST=[</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">    <span class="string">'projectname.HeaderMidWare.ProcessHeaderMidware'</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>添加完毕后重新运行爬虫，其便可以自动选择user_agent进行伪装，成功爬取到网页上的内容。</p>
-<p><img src="https://download.kezhi.tech/img/20201024224545.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/20201024224545.png" /></p>
 
     </div>
 
@@ -376,7 +376,7 @@
       <div class="popular-posts-title"><a href="\3300cce2.html" rel="bookmark">NLP工具NLTK的安装及使用</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(Python)</a></div>
+      <div class="popular-posts-title"><a href="\66f3a0f6.html" rel="bookmark">创新港体育场馆自动预定</a></div>
     </li>
   </ul>
 
@@ -534,7 +534,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -547,7 +547,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -895,13 +895,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">189k</span>
+    <span title="站点总字数">193k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:52</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-02-28T08:25:55.255Z</updated>
+  <updated>2023-03-02T07:32:17.319Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vanilla Policy Gradient关于loss mean与sum的探讨</title>
+    <link href="https://www.kezhi.tech/b69f94c6.html"/>
+    <id>https://www.kezhi.tech/b69f94c6.html</id>
+    <published>2023-03-01T14:05:22.000Z</published>
+    <updated>2023-03-02T07:32:17.319Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy
+Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。&lt;/p&gt;
+&lt;p&gt;先说结论：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在进行策略梯度下降优化策略时，可以对每个动作的loss逐一（for操作）进行反向传播后进行梯度下降，也可以对每个动作的loss求和（sum操作）之后进行反向传播后梯度下降，但尽量避免对所有动作的loss求平均（mean操作）之后进行反向传播后梯度下降，这会导致收敛速度较慢，甚至无法收敛。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;具体的论证和实验过程见下文。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    
+    
+      <category term="Neural Network" scheme="https://www.kezhi.tech/tags/Neural-Network/"/>
+    
+      <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Learning" scheme="https://www.kezhi.tech/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Zotero插件推荐及下载</title>
     <link href="https://www.kezhi.tech/b2344ef.html"/>
     <id>https://www.kezhi.tech/b2344ef.html</id>
     <published>2023-02-28T08:25:48.000Z</published>
-    <updated>2023-02-28T08:25:55.255Z</updated>
+    <updated>2023-03-02T07:29:40.411Z</updated>
     
     <summary type="html">
     
@@ -33,7 +64,7 @@
 &lt;li&gt;支持markdown笔记&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;本文主要介绍部分常用的Zotero插件，并附上其下载链接，同时谈谈使用感受。顺序按照我个人认为的好用程度排序。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/105617048_p0.png&quot; style=&quot;zoom: 33%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303021529700.png&quot; width=33% /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -571,9 +602,9 @@ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
       <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
     
     
-      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
-    
       <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
     
   </entry>
   
@@ -1131,9 +1162,9 @@ alt=&quot;8MAadJ.md&quot; /&gt;
       <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
     
     
-      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
-    
       <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    
+      <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
     
       <category term="Markdown" scheme="https://www.kezhi.tech/tags/Markdown/"/>
     

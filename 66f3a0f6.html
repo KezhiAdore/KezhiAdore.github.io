@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">82</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -336,7 +336,7 @@
         <h2 id="项目由来">项目由来</h2>
 <p>创新港羽毛球场馆每天的预定需求较大。在线预定系统每天早上 8:40
 左右开放，并且开放时间不定。这些因素给手动预定场馆带来了很大的麻烦，因此考虑由脚本自动化实现场馆预定过程。</p>
-<p><img src="https://download.kezhi.tech/img/202203212104191.jpg" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203212104191.jpg" /></p>
 <a id="more"></a>
 <h2 id="项目构思">项目构思</h2>
 <p>体育场馆预定系统需要通过交大身份认证系统来确认身份。考虑携带登录之后的身份信息来访问体育场馆预定系统。这里的身份认证参考了果果的图书馆订座脚本：</p>
@@ -364,16 +364,16 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib3.util.retry <span class="keyword">import</span> Retry</span><br><span class="line"><span class="keyword">from</span> requests.adapters <span class="keyword">import</span> HTTPAdapter</span><br><span class="line"></span><br><span class="line">MAX_RETRIES = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">SLEEP_INTERVAL=<span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">retries=Retry(</span><br><span class="line">    total=MAX_RETRIES,</span><br><span class="line">    backoff_factor=SLEEP_INTERVAL,</span><br><span class="line">    status_forcelist=[<span class="number">403</span>, <span class="number">500</span>, <span class="number">502</span>, <span class="number">503</span>, <span class="number">504</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line">session.mount(<span class="string">"http://"</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">session.mount(<span class="string">"https://"</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">        <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62"</span>,</span><br><span class="line">        <span class="string">"Accept-Encoding"</span>: <span class="string">"gzip, deflate"</span>,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>接下来就是查询场馆信息了。以创新港乒乓球场馆为例（因为未被预定的场地较多，便于测试
 ^_^）。</p>
-<p><img src="https://download.kezhi.tech/img/202203211850928.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203211850928.png" /></p>
 <p>通过观察链接以及进行测试，可以推测出每个场馆通过一个 <code>id</code>
 来进行标识，后续的场馆信息查询和预定申请都需要用到该信息。</p>
-<p><img src="https://download.kezhi.tech/img/202203211904502.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203211904502.png" /></p>
 <p>通过查看页面请求，找到向 <code>/findtime.html</code>发送
 <code>GET</code> 请求可以查询到需要查询的信息。</p>
 <p>但是该请求返回的信息是不完全的，有一个场次 <code>id</code>
 没有被返回到，而这个场次 <code>id</code>
 在之后的预定中是要用到的，经过多番查找，最终在网球场预定页面找到如下<code>api</code>:</p>
-<p><img src="https://download.kezhi.tech/img/202203211912146.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203211912146.png" /></p>
 <p>从该 <code>api</code> 中可以找到三个关键信息:</p>
 <ul>
 <li>id 每个场地的每个时间场次的标识符</li>
@@ -391,7 +391,7 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
 href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests库/">XJTU图书馆抢座位脚本--requests库
 | 果果的博客
 (gwyxjtu.github.io)</a>。唯一不同之处在于，登录身份认证系统后跳转的应用不同。在浏览器中通过体育场馆预定系统跳转到身份认证页面，查询页面cookie即可得到相应的<code>appid</code></p>
-<p><img src="https://download.kezhi.tech/img/202203211921930.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203211921930.png" /></p>
 <p>将对应的 <code>appid</code>
 填充到相应位置，便可进行登录和跳转。登录部分代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt_pwd</span><span class="params">(raw_pwd, publicKey=<span class="string">'0725@pwdorgopenp'</span>)</span>:</span></span><br><span class="line">    <span class="string">''' AES-ECB encrypt '''</span></span><br><span class="line">    publicKey = publicKey.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment"># pkcs7 padding</span></span><br><span class="line">    BS = AES.block_size</span><br><span class="line">    pad = <span class="keyword">lambda</span> s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)</span><br><span class="line">    pwd = pad(raw_pwd)</span><br><span class="line">    <span class="comment"># zero padding</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    pwd = raw_pwd</span></span><br><span class="line"><span class="string">    while len(raw_pwd.encode('utf-8')) % 16 != 0:</span></span><br><span class="line"><span class="string">    pwd += '\0'</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    cipher = AES.new(publicKey, AES.MODE_ECB)</span><br><span class="line">    pwd = cipher.encrypt(pwd.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">    <span class="keyword">return</span> str(base64.b64encode(pwd), encoding=<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># get cookie route</span></span><br><span class="line">        session.get(<span class="string">'https://org.xjtu.edu.cn/openplatform/login.html'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># get JcaptchaCode and cookie JSESSIONID &amp; sid_code</span></span><br><span class="line">        r_JcaptchaCode = session.post(<span class="string">'https://org.xjtu.edu.cn/openplatform/g/admin/getJcaptchaCode'</span>,</span><br><span class="line">                              headers=headers)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># is_JcaptchaCode_show</span></span><br><span class="line">        url = <span class="string">'https://org.xjtu.edu.cn/openplatform/g/admin/getIsShowJcaptchaCode'</span></span><br><span class="line">        params = &#123;</span><br><span class="line">            <span class="string">'userName'</span>: config[<span class="string">'username'</span>],</span><br><span class="line">            <span class="string">'_'</span>: str(int(time.time() * <span class="number">1000</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        r = session.get(url, params=params, headers=headers)</span><br><span class="line">        <span class="comment"># print(r.text)</span></span><br><span class="line">        <span class="comment"># login</span></span><br><span class="line">        url = <span class="string">'https://org.xjtu.edu.cn/openplatform/g/admin/login'</span></span><br><span class="line">        cookie = &#123;</span><br><span class="line">            <span class="string">'cur_appId_'</span>:<span class="string">'n0C/SQT28fY='</span></span><br><span class="line">        &#125;</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">"loginType"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="string">"username"</span>: config[<span class="string">'username'</span>],</span><br><span class="line">            <span class="string">"pwd"</span>: encrypt_pwd(config[<span class="string">'password'</span>]),</span><br><span class="line">            <span class="string">"jcaptchaCode"</span>: <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">        headers[<span class="string">'Content-Type'</span>] = <span class="string">'application/json;charset=UTF-8'</span></span><br><span class="line">        r = session.post(url, data=json.dumps(data), headers=headers,cookies=cookie)</span><br><span class="line">        print(r.text)</span><br><span class="line">        print(<span class="string">'身份认证成功，正在跳转...'</span>)</span><br><span class="line">        token = json.loads(r.text)[<span class="string">'data'</span>][<span class="string">'tokenKey'</span>]</span><br><span class="line">        memberId=json.loads(r.text)[<span class="string">'data'</span>][<span class="string">'orgInfo'</span>][<span class="string">'memberId'</span>]</span><br><span class="line"></span><br><span class="line">        cookie = &#123;</span><br><span class="line">            <span class="string">'cur_appId_'</span>:<span class="string">'n0C/SQT28fY='</span>,</span><br><span class="line">            <span class="string">'open_Platform_User'</span> : token,</span><br><span class="line">            <span class="string">'memberId'</span>: str(memberId)</span><br><span class="line">        &#125;</span><br><span class="line">        r=session.get(<span class="string">'http://org.xjtu.edu.cn/openplatform/oauth/auth/getRedirectUrl?userType=1&amp;personNo=3121154016&amp;_=1590998261976'</span>,cookies = cookie)</span><br><span class="line">        r=session.get(json.loads(r.text)[<span class="string">'data'</span>])</span><br></pre></td></tr></table></figure>
@@ -407,10 +407,10 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
 </ol>
 <p>通过对这些流程中的页面请求进行查看和分析，关系到预定成功的只有两个过程：①获取并识别验证码，②带着验证码提交一个预定<code>post</code>。</p>
 <p>还是以乒乓球场地的预定页面为例，其验证码生成方式如下：</p>
-<p><img src="https://download.kezhi.tech/img/202203212042773.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203212042773.png" /></p>
 <p>也就是访问地址http://202.117.17.144/login/yzm.html?+(任意一个float随机数)即可得到验证码图像。</p>
 <p><code>post</code>请求一步步通过函数嵌套即可进行定位：</p>
-<p><img src="https://download.kezhi.tech/img/202203212046298.png" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202203212046298.png" /></p>
 <p>可以看出，最终提交的<code>post</code>请求地址为<code>/order/book</code>，参数有两个，一个为预定信息转换成的字符串，一个是验证码。下面分别介绍如何获取这两个参数。</p>
 <p>预定信息中有大量的参数，但是大量参数为<code>null</code>
 ，不用进行考虑。需要构造的有以下几个参数：</p>
@@ -613,7 +613,7 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -626,7 +626,7 @@ href="https://gwyxjtu.github.io/2020/06/02/XJTU图书馆抢座位脚本-requests
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -974,13 +974,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">189k</span>
+    <span title="站点总字数">193k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:52</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 

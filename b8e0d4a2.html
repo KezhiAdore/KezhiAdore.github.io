@@ -165,7 +165,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">82</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -175,7 +175,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -377,7 +377,7 @@ class="math inline">\(i,j\)</span>分别为以图像左上角为原点，向右�
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ifft</span><span class="params">(f_img)</span>:</span>    <span class="comment">#二维傅里叶反变换</span></span><br><span class="line">    img=np.real(np.fft.ifft2(f_img))</span><br><span class="line">    shape=img.shape</span><br><span class="line">    new_img=np.zeros((shape[<span class="number">0</span>]//<span class="number">2</span>,shape[<span class="number">1</span>]//<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]//<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]//<span class="number">2</span>):</span><br><span class="line">            new_img[i][j]=img[i][j]*(<span class="number">-1</span>)**(i+j)</span><br><span class="line">    new_img=new_img-np.min(new_img)</span><br><span class="line">    new_img=new_img/np.max(new_img)*<span class="number">255</span></span><br><span class="line">    <span class="keyword">return</span> new_img.astype(np.uint8)</span><br></pre></td></tr></table></figure>
 <h2 id="频域低通滤波器">频域低通滤波器</h2>
 <p>低通滤波器顾名思义，即为通低频，阻高频。如果把频域原点放在图像中心，则理想的低通滤波器的图像为：</p>
-<p><img src="https://download.kezhi.tech/img/20200508194306.bmp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/20200508194306.bmp" /></p>
 <p>但是这种滤波器由于在边界处不连续，一是无法使用物理器件实现，而来即使在计算机上进行仿真也会对图像有一些影响。因此一般不使用这种理想的滤波器</p>
 <h3 id="高斯低通滤波器">高斯低通滤波器</h3>
 <p>高斯低通滤波器（GLPF）是最常使用的高通滤波器之一，其生成为二维高斯函数，数学表达式为：
@@ -391,17 +391,17 @@ class="math inline">\(D(u,v)=D_0\)</span>时，GLPF下降到其最大值的0.607
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508195417.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508195417.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508195511.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508195511.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508195551.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508195551.jpg">
 </center>
 </td>
 </tr>
@@ -412,13 +412,13 @@ class="math inline">\(D(u,v)=D_0\)</span>时，GLPF下降到其最大值的0.607
 <table>
 <tr>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508195837.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508195837.jpg"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508195909.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508195909.jpg"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508195923.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508195923.jpg"></cneter>
 </td>
 </tr>
 </table>
@@ -433,13 +433,13 @@ H(u,v)=\frac 1{1+[D(u,v)/D_0]^{2n}}
 <table>
 <tr>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508203825.bmp"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508203825.bmp"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508203838.bmp"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508203838.bmp"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508203853.bmp"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508203853.bmp"></cneter>
 </td>
 </tr>
 </table>
@@ -449,13 +449,13 @@ H(u,v)=\frac 1{1+[D(u,v)/D_0]^{2n}}
 <table>
 <tr>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508195837.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508195837.jpg"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508204916.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508204916.jpg"></cneter>
 </td>
 <td>
-<cneter><img src="https://download.kezhi.tech/img/20200508204931.jpg"></cneter>
+<cneter><img data-src="https://download.kezhi.tech/img/20200508204931.jpg"></cneter>
 </td>
 </tr>
 </table>
@@ -463,7 +463,7 @@ H(u,v)=\frac 1{1+[D(u,v)/D_0]^{2n}}
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">butterwroth</span><span class="params">(img,n,D0)</span>:</span>  <span class="comment">#使用n阶，半径为D0的butterworth滤波器对图像进行滤波</span></span><br><span class="line">    f_img=fft(img)</span><br><span class="line">    shape=f_img.shape</span><br><span class="line">    f_result=f_img*butter_filter(shape,n,D0)</span><br><span class="line">    <span class="keyword">return</span> ifft(f_result)</span><br></pre></td></tr></table></figure>
 <h2 id="频域高通滤波器">频域高通滤波器</h2>
 <p>与低通滤波器相对，其作用为阻低频，通高频，理想高通滤波器在图像上的表示为：</p>
-<p><img src="https://download.kezhi.tech/img/20200508205640.bmp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/20200508205640.bmp" /></p>
 <h3 id="高斯高通滤波器">高斯高通滤波器</h3>
 <p>截止频率为<span
 class="math inline">\(D_0\)</span>的高斯高通滤波器（GHPF）的定义为：
@@ -475,17 +475,17 @@ H(u,v)=1-e^{-D^2(u,v)/2D_0 ^2}
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210105.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508210105.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210119.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508210119.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210127.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508210127.jpg">
 </center>
 </td>
 </tr>
@@ -497,17 +497,17 @@ H(u,v)=1-e^{-D^2(u,v)/2D_0 ^2}
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210619.bmp">
+<img data-src="https://download.kezhi.tech/img/20200508210619.bmp">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210648.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508210648.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210700.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508210700.jpg">
 </center>
 </td>
 </tr>
@@ -523,17 +523,17 @@ H(u,v)=\frac 1{1+[D_0/D(u,v)]^{2n}}
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508211205.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508211205.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508211217.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508211217.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508211330.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508211330.jpg">
 </center>
 </td>
 </tr>
@@ -545,17 +545,17 @@ H(u,v)=\frac 1{1+[D_0/D(u,v)]^{2n}}
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508210619.bmp">
+<img data-src="https://download.kezhi.tech/img/20200508210619.bmp">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508211615.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508211615.jpg">
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20200508211630.jpg">
+<img data-src="https://download.kezhi.tech/img/20200508211630.jpg">
 </center>
 </td>
 </tr>
@@ -762,7 +762,7 @@ lcxxcl_1234.numpy中的fft和scipy中的fft，fftshift以及fftfreq[G/OL].CSDN:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -775,7 +775,7 @@ lcxxcl_1234.numpy中的fft和scipy中的fft，fftshift以及fftfreq[G/OL].CSDN:
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1123,13 +1123,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">189k</span>
+    <span title="站点总字数">193k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:52</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 

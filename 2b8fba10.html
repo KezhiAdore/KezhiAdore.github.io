@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">82</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -151,7 +151,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -337,13 +337,13 @@
 </ul>
 <h2 id="最近邻插值">最近邻插值</h2>
 <p>最近邻插值，顾名思义，在插值时寻找距离图像像素点最近的像素点的值进行图像像素的填充。这种图像插值方法运算速度快，可以很快的出结果。缺点是插值效果较差，由于直接采用最近的像素点的像素值作为插值数据，因此导致在图像边缘，过渡等颜色变化较为明显的地方会出现较为严重的锯齿。
-<img src="https://s1.ax1x.com/2020/03/13/8u4Uwn.png"
+<img data-src="https://s1.ax1x.com/2020/03/13/8u4Uwn.png"
 alt="最近邻插值" /></p>
 <p>实现代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;=<span class="number">2044</span> <span class="keyword">and</span> j&lt;=<span class="number">2044</span>:</span><br><span class="line">            result[i][j]=img[round(i/<span class="number">4</span>)][round(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[math.floor(i/<span class="number">4</span>)][math.floor(j/<span class="number">4</span>)][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="双线性插值">双线性插值</h2>
 <p>双线性插值采用线性的方法对图像进行插值,对于插值图像中的某个像素点，该点的像素值由距离其最近的四个像素值通过线性计算获得。插值得到的结果较好，计算量相比于最近邻要满，但远快于双三次插值，最终得到的插值图像结果除一些小细节之外和双三次插值得到的插值结果相当。可以用来快速，大量的插值图片。
-<img src="https://s1.ax1x.com/2020/03/13/8u5o40.png" alt="双线性插值" />
+<img data-src="https://s1.ax1x.com/2020/03/13/8u5o40.png" alt="双线性插值" />
 实现代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2048</span>):</span><br><span class="line">        <span class="keyword">if</span> i&lt;<span class="number">2044</span> <span class="keyword">and</span> j&lt;<span class="number">2044</span>:</span><br><span class="line">            l=i//<span class="number">4</span></span><br><span class="line">            k=j//<span class="number">4</span></span><br><span class="line">            a=i/<span class="number">4</span>-i//<span class="number">4</span></span><br><span class="line">            b=j/<span class="number">4</span>-j//<span class="number">4</span></span><br><span class="line">            result[i][j]=img[l][k][<span class="number">0</span>]*(<span class="number">1</span>-a)*(<span class="number">1</span>-b)+img[l+<span class="number">1</span>][k][<span class="number">0</span>]*a*(<span class="number">1</span>-b)+img[l][k+<span class="number">1</span>][<span class="number">0</span>]*(<span class="number">1</span>-a)*b+img[l+<span class="number">1</span>][k+<span class="number">1</span>][<span class="number">0</span>]*a*b</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result[i][j]=img[i//<span class="number">4</span>][j//<span class="number">4</span>][<span class="number">0</span>]</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">cv.namedWindow(<span class="string">"test"</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">"test"</span>,result)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>在图像边缘处采取最近邻插值</p>
@@ -545,7 +545,7 @@ f_3(x,y)=\sum_{i=0}^3\sum_{j=0}^3a_{ij}x_iy_i
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -558,7 +558,7 @@ f_3(x,y)=\sum_{i=0}^3\sum_{j=0}^3a_{ij}x_iy_i
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -906,13 +906,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">189k</span>
+    <span title="站点总字数">193k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:52</span>
+    <span title="站点阅读时长">2:56</span>
 </div>
 
 
