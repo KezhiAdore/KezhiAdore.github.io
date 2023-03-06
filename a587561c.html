@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">84</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">85</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">45</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -304,7 +304,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>256</span>
+              <span>241</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -326,15 +326,21 @@
         <p>在使用WSL2时，系统有空余内存的情况下，Linux子系统在运行时会不断分配系统内存。随着其不断运行，占据的内存越来越大，甚至会将Windows系统内存占满。因此，在运行WSL时要限制其内存的使用。</p>
 <a id="more"></a>
 <p>操作流程如下：</p>
-<ol type="1">
-<li><p>在用户目录下创建<code>.wslconfig</code>配置文件</p>
+<ol>
+<li>
+<p>在用户目录下创建<code>.wslconfig</code>配置文件</p>
 <ul>
 <li>打开命令行</li>
 <li>输入命令<code>notepad .wslconfig</code>创建并编辑配置文件</li>
-</ul></li>
-<li><p>写入WSL配置：</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">memory&#x3D;2GB</span><br><span class="line">swap&#x3D;8GB</span><br><span class="line">localhostForwarding&#x3D;true</span><br></pre></td></tr></table></figure></p></li>
-<li><p>重启WSL<code>wsl --shutdown</code></p></li>
+</ul>
+</li>
+<li>
+<p>写入WSL配置：</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[wsl2]</span><br><span class="line">memory=2GB</span><br><span class="line">swap=8GB</span><br><span class="line">localhostForwarding=true</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>重启WSL<code>wsl --shutdown</code></p>
+</li>
 </ol>
 
     </div>
@@ -506,7 +512,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -519,7 +525,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -867,13 +873,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">195k</span>
+    <span title="站点总字数">226k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:57</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
 

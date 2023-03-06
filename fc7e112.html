@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">84</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">85</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -147,7 +147,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">45</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -306,7 +306,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -325,133 +325,102 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center>
-码一些经常使用的LeTaX数学公式语法
-</center>
-<p><img data-src="https://download.kezhi.tech/img/8QXOvd.jpg" /></p>
+        <center>码一些经常使用的LeTaX数学公式语法</center>
+<p><img src="https://download.kezhi.tech/img/8QXOvd.jpg" alt=""></p>
 <a id="more"></a>
-<h3 id="上标与下标">1.上标与下标</h3>
+<h3 id="1-上标与下标">1.上标与下标</h3>
 <blockquote>
-<p>上标命令为 "^"， 下标命令为 "_"</p>
+<p>上标命令为 “^”， 下标命令为 “_”</p>
 </blockquote>
-<p><span class="math display">\[x_1\]</span> <span
-class="math display">\[x_1^2\]</span> <span
-class="math display">\[x^2_1\]</span> <span
-class="math display">\[x_{22}^{(n)}\]</span> <span
-class="math display">\[{}^*\!x^*\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$x_1$$</span><br><span class="line">$$x_1^2$$</span><br><span class="line">$$x^2_1$$</span><br><span class="line">$$x_&#123;22&#125;^&#123;(n)&#125;$$</span><br><span class="line">$$&#123;&#125;^*\!x^*$$</span><br></pre></td></tr></table></figure>
-<h3 id="分式">2.分式</h3>
+<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Can't use function '$' in math mode at position 4: x_1$̲$ $$x_1^2$$ $$x…">x_1$$ $$x_1^2$$ $$x^2_1$$ $$x_{22}^{(n)}$$ $${}^*\!x^*
+</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$x_1$$</span><br><span class="line">$$x_1^2$$</span><br><span class="line">$$x^2_1$$</span><br><span class="line">$$x_{22}^{(n)}$$</span><br><span class="line">$${}^*\!x^*$$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-分式">2.分式</h3>
 <blockquote>
-<p>输入较短的分式时，可以使用 "/"来输入
-对于输入带有水平分数线的分式，使用 ""</p>
+<p>输入较短的分式时，可以使用 "/"来输入<br>
+对于输入带有水平分数线的分式，使用 “\frac{分子}{分母}”</p>
 </blockquote>
-<p><span class="math display">\[ (x+y)/2 \]</span><span
-class="math display">\[ \frac{x+y}{2} \]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$$ (x+y)&#x2F;2 $$</span><br><span class="line">$$ \frac&#123;x+y&#125;&#123;2&#125; $$</span><br></pre></td></tr></table></figure>
-<h3 id="根式">3.根式</h3>
+<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Can't use function '$' in math mode at position 9: (x+y)/2 $̲$$$ \frac{x+y}{…">(x+y)/2 $$$$ \frac{x+y}{2} 
+</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$$ (x+y)/2 $$</span><br><span class="line">$$ \frac{x+y}{2} $$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-根式">3.根式</h3>
 <blockquote>
-<p>排版根式的命令是：开平方：；开 n 次方：</p>
+<p>排版根式的命令是：开平方：\sqrt{表达式}；开 n 次方：\sqrt[n]{表达式}</p>
 </blockquote>
-<p><span class="math display">\[\sqrt{2}&lt;\sqrt[3]{3}\]</span><span
-class="math display">\[\sqrt{1+\sqrt[p]{1+a^2}}\]</span><span
-class="math display">\[\sqrt{1+\sqrt[^p\!]{1+a^2}}\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$\sqrt&#123;2&#125;&lt;\sqrt[3]&#123;3&#125;$$</span><br><span class="line">$$\sqrt&#123;1+\sqrt[p]&#123;1+a^2&#125;&#125;$$</span><br><span class="line">$$\sqrt&#123;1+\sqrt[^p\!]&#123;1+a^2&#125;&#125;$$</span><br></pre></td></tr></table></figure>
-<h3 id="求和和积分">4.求和和积分</h3>
+<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Can't use function '$' in math mode at position 21: …{2}<\sqrt[3]{3}$̲$$$\sqrt{1+\sqr…">\sqrt{2}&lt;\sqrt[3]{3}$$$$\sqrt{1+\sqrt[p]{1+a^2}}$$$$\sqrt{1+\sqrt[^p\!]{1+a^2}}
+</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$\sqrt{2}&lt;\sqrt[3]{3}$$</span><br><span class="line">$$\sqrt{1+\sqrt[p]{1+a^2}}$$</span><br><span class="line">$$\sqrt{1+\sqrt[^p\!]{1+a^2}}$$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="4-求和和积分">4.求和和积分</h3>
 <blockquote>
-<p>排版求和符号与积分符号的命令分别为 和
-，它们通常都有上下限，在排版上就是上标和下标。</p>
+<p>排版求和符号与积分符号的命令分别为 \sum 和 \int，它们通常都有上下限，在排版上就是上标和下标。</p>
 </blockquote>
-<p><span class="math display">\[\sum_{k=1}^{n}\frac{1}{k}\]</span><span
-class="math display">\[\sum_{k=1}^n\frac{1}{k}\]</span><span
-class="math display">\[\int_a^b f(x)dx\]</span><span
-class="math display">\[\int_a^b f(x)dx\]</span><span
-class="math display">\[\int_a^b f(x)\mathrm{d}x\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\sum_&#123;k&#x3D;1&#125;^&#123;n&#125;\frac&#123;1&#125;&#123;k&#125;$$</span><br><span class="line">$$\sum_&#123;k&#x3D;1&#125;^n\frac&#123;1&#125;&#123;k&#125;$$</span><br><span class="line">$$\int_a^b f(x)dx$$</span><br><span class="line">$$\int_a^b f(x)dx$$</span><br><span class="line">$$\int_a^b f(x)\mathrm&#123;d&#125;x$$</span><br></pre></td></tr></table></figure>
-<h3 id="空格">5.空格</h3>
+<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Can't use function '$' in math mode at position 26: …^{n}\frac{1}{k}$̲$$$\sum_{k=1}^n…">\sum_{k=1}^{n}\frac{1}{k}$$$$\sum_{k=1}^n\frac{1}{k}$$$$\int_a^b f(x)dx$$$$\int_a^b f(x)dx$$$$\int_a^b f(x)\mathrm{d}x
+</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$\sum_{k=1}^{n}\frac{1}{k}$$</span><br><span class="line">$$\sum_{k=1}^n\frac{1}{k}$$</span><br><span class="line">$$\int_a^b f(x)dx$$</span><br><span class="line">$$\int_a^b f(x)dx$$</span><br><span class="line">$$\int_a^b f(x)\mathrm{d}x$$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="5-空格">5.空格</h3>
 <blockquote>
-<p>LaTeX
-能够自动处理公式中的大多数字符之间的空格，但是有时候需要自己手动进行控制。</p>
+<p>LaTeX 能够自动处理公式中的大多数字符之间的空格，但是有时候需要自己手动进行控制。</p>
 </blockquote>
-<p>紧贴 <span class="math inline">\(a\!b\)</span> 没有空格 <span
-class="math inline">\(ab\)</span> 小空格 <span
-class="math inline">\(a\,b\)</span> 中等空格 <span
-class="math inline">\(a\;b\)</span> 大空格 <span
-class="math inline">\(a\ b\)</span> quad空格 <span
-class="math inline">\(a\quad b\)</span> 两个quad空格 <span
-class="math inline">\(a\qquad b\)</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">紧贴  $a\!b$</span><br><span class="line">没有空格 $ab$</span><br><span class="line">小空格 $a\,b$</span><br><span class="line">中等空格 $a\;b$</span><br><span class="line">大空格 $a\ b$</span><br><span class="line">quad空格 $a\quad b$</span><br><span class="line">两个quad空格 $a\qquad b$</span><br></pre></td></tr></table></figure>
-<h3 id="矩阵">6.矩阵</h3>
+<p>紧贴  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mtext> ⁣</mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">a\!b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:-0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span><br>
+没有空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">ab</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span></span></span></span><br>
+小空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mtext> </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">a\,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span><br>
+中等空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mtext>  </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">a\;b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">b</span></span></span></span><br>
+大空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mtext>&nbsp;</mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">a\ b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace">&nbsp;</span><span class="mord mathdefault">b</span></span></span></span><br>
+quad空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mspace width="1em"></mspace><mi>b</mi></mrow><annotation encoding="application/x-tex">a\quad b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">b</span></span></span></span><br>
+两个quad空格 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mspace width="2em"></mspace><mi>b</mi></mrow><annotation encoding="application/x-tex">a\qquad b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:2em;"></span><span class="mord mathdefault">b</span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">紧贴  $a\!b$</span><br><span class="line">没有空格 $ab$</span><br><span class="line">小空格 $a\,b$</span><br><span class="line">中等空格 $a\;b$</span><br><span class="line">大空格 $a\ b$</span><br><span class="line">quad空格 $a\quad b$</span><br><span class="line">两个quad空格 $a\qquad b$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="6-矩阵">6.矩阵</h3>
 <blockquote>
-<p>对于少于 10 列的矩阵，可使用
-matrix，pmatrix，bmatrix，Bmatrix，vmatrix 和 Vmatrix 等环境。</p>
+<p>对于少于 10 列的矩阵，可使用 matrix，pmatrix，bmatrix，Bmatrix，vmatrix 和 Vmatrix 等环境。</p>
 </blockquote>
-<p><span class="math display">\[\begin{matrix}1 &amp; 2\\3
-&amp;4\end{matrix}\]</span><span class="math display">\[\begin{pmatrix}1
-&amp; 2\\3 &amp;4\end{pmatrix}\]</span><span
-class="math display">\[\begin{bmatrix}1 &amp; 2\\3
-&amp;4\end{bmatrix}\]</span><span
-class="math display">\[\begin{Bmatrix}1 &amp; 2\\3
-&amp;4\end{Bmatrix}\]</span><span
-class="math display">\[\begin{vmatrix}1 &amp; 2\\3
-&amp;4\end{vmatrix}\]</span><span
-class="math display">\[\begin{Vmatrix}1 &amp; 2\\3
-&amp;4\end{Vmatrix}\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;matrix&#125;1 &amp; 2\\3 &amp;4\end&#123;matrix&#125;$$</span><br><span class="line">$$\begin&#123;pmatrix&#125;1 &amp; 2\\3 &amp;4\end&#123;pmatrix&#125;$$</span><br><span class="line">$$\begin&#123;bmatrix&#125;1 &amp; 2\\3 &amp;4\end&#123;bmatrix&#125;$$</span><br><span class="line">$$\begin&#123;Bmatrix&#125;1 &amp; 2\\3 &amp;4\end&#123;Bmatrix&#125;$$</span><br><span class="line">$$\begin&#123;vmatrix&#125;1 &amp; 2\\3 &amp;4\end&#123;vmatrix&#125;$$</span><br><span class="line">$$\begin&#123;Vmatrix&#125;1 &amp; 2\\3 &amp;4\end&#123;Vmatrix&#125;$$</span><br></pre></td></tr></table></figure>
-<h3 id="排版数组">7.排版数组</h3>
+<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Can't use function '$' in math mode at position 38: … &amp;4\end{matrix}$̲$$$\begin{pmatr…">\begin{matrix}1 &amp; 2\\3 &amp;4\end{matrix}$$$$\begin{pmatrix}1 &amp; 2\\3 &amp;4\end{pmatrix}$$$$\begin{bmatrix}1 &amp; 2\\3 &amp;4\end{bmatrix}$$$$\begin{Bmatrix}1 &amp; 2\\3 &amp;4\end{Bmatrix}$$$$\begin{vmatrix}1 &amp; 2\\3 &amp;4\end{vmatrix}$$$$\begin{Vmatrix}1 &amp; 2\\3 &amp;4\end{Vmatrix}
+</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$\begin{matrix}1 &amp; 2\\3 &amp;4\end{matrix}$$</span><br><span class="line">$$\begin{pmatrix}1 &amp; 2\\3 &amp;4\end{pmatrix}$$</span><br><span class="line">$$\begin{bmatrix}1 &amp; 2\\3 &amp;4\end{bmatrix}$$</span><br><span class="line">$$\begin{Bmatrix}1 &amp; 2\\3 &amp;4\end{Bmatrix}$$</span><br><span class="line">$$\begin{vmatrix}1 &amp; 2\\3 &amp;4\end{vmatrix}$$</span><br><span class="line">$$\begin{Vmatrix}1 &amp; 2\\3 &amp;4\end{Vmatrix}$$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="7-排版数组">7.排版数组</h3>
 <blockquote>
-<p>当矩阵规模超过 10 列，或者上述矩阵类型不符需求，可使用 array
-环境。该环境可把一些元素排列成横竖都对齐的矩形阵列。</p>
+<p>当矩阵规模超过 10 列，或者上述矩阵类型不符需求，可使用 array 环境。该环境可把一些元素排列成横竖都对齐的矩形阵列。</p>
 </blockquote>
-<p><span class="math display">\[
-\mathbf{X} =
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">X</mi><mo>=</mo><mrow><mo fence="true">(</mo><mtable rowspacing="0.15999999999999992em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mn>11</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mn>12</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">…</mo></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mn>21</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mn>22</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">…</mo></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="+0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mi><mi mathvariant="normal">⋮</mi><mpadded height="+0em" voffset="0em"><mspace mathbackground="black" width="0em" height="1.5em"></mspace></mpadded></mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mo lspace="0em" rspace="0em">⋱</mo></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{X} =
 \left( \begin{array}{ccc}
 x_{11} &amp; x_{12} &amp; \ldots \\
 x_{21} &amp; x_{22} &amp; \ldots \\
 \vdots &amp; \vdots &amp; \ddots
 \end{array} \right)
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\mathbf&#123;X&#125; &#x3D;</span><br><span class="line">\left( \begin&#123;array&#125;&#123;ccc&#125;</span><br><span class="line">x_&#123;11&#125; &amp; x_&#123;12&#125; &amp; \ldots \\</span><br><span class="line">x_&#123;21&#125; &amp; x_&#123;22&#125; &amp; \ldots \\</span><br><span class="line">\vdots &amp; \vdots &amp; \ddots</span><br><span class="line">\end&#123;array&#125; \right)</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">X</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:4.26em;vertical-align:-1.8800000000000003em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎝</span></span></span><span style="top:-3.1000050000000003em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎜</span></span></span><span style="top:-3.110005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎜</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎛</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.2275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.0275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.1674999999999995em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8800000000000003em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.2275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.0275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.1674999999999995em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8800000000000003em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.38em;"><span style="top:-5.04em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">…</span></span></span><span style="top:-3.8399999999999994em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">…</span></span></span><span style="top:-1.9799999999999998em;"><span class="pstrut" style="height:3.5em;"></span><span class="mord"><span class="minner">⋱</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8800000000000003em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500249999999996em;"><span style="top:-1.9499950000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎠</span></span></span><span style="top:-3.1000050000000003em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎟</span></span></span><span style="top:-3.110005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎟</span></span></span><span style="top:-4.350025em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.850025em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\mathbf{X} =</span><br><span class="line">\left( \begin{array}{ccc}</span><br><span class="line">x_{11} &amp; x_{12} &amp; \ldots \\</span><br><span class="line">x_{21} &amp; x_{22} &amp; \ldots \\</span><br><span class="line">\vdots &amp; \vdots &amp; \ddots</span><br><span class="line">\end{array} \right)</span><br><span class="line">$$</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>，\表示换行，{ccc}表示列样式。array
-环境也可以用来排版这样的表达式，表达式中使用一个“.”
-作为其隐藏的定界符。</p>
+<p>\mathbf大写控制符，\表示换行，{ccc}表示列样式。array 环境也可以用来排版这样的表达式，表达式中使用一个“.” 作为其隐藏的\right 定界符。</p>
 </blockquote>
-<p><span class="math display">\[
-y = \left\{ \begin{array}{ll}
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.15999999999999992em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>a</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext>if&nbsp;</mtext><mstyle scriptlevel="0" displaystyle="false"><mi>d</mi><mo>&gt;</mo><mi>c</mi></mstyle></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>b</mi><mo>+</mo><mi>x</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>in&nbsp;the&nbsp;morning</mtext></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>l</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>all&nbsp;day&nbsp;long</mtext></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">y = \left\{ \begin{array}{ll}
 a &amp; \textrm{if $d&gt;c$}\\
 b+x &amp; \textrm{in the morning}\\
 l &amp; \textrm{all day long}
 \end{array} \right.
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">y &#x3D; \left\&#123; \begin&#123;array&#125;&#123;ll&#125;</span><br><span class="line">a &amp; \textrm&#123;if $d&gt;c$&#125;\\</span><br><span class="line">b+x &amp; \textrm&#123;in the morning&#125;\\</span><br><span class="line">l &amp; \textrm&#123;all day long&#125;</span><br><span class="line">\end&#123;array&#125; \right.</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.60004em;vertical-align:-1.55002em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.49999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-2.20499em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-3.15001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.00501em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-4.30002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">x</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord textrm">if&nbsp;</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">c</span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord textrm">in&nbsp;the&nbsp;morning</span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord textrm">all&nbsp;day&nbsp;long</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">y = \left\{ \begin{array}{ll}</span><br><span class="line">a &amp; \textrm{if $d&gt;c$}\\</span><br><span class="line">b+x &amp; \textrm{in the morning}\\</span><br><span class="line">l &amp; \textrm{all day long}</span><br><span class="line">\end{array} \right.</span><br><span class="line">$$</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>你也可以在array 环境中画线，如分隔矩阵中元素。</p>
 </blockquote>
-<p><span class="math display">\[
-\left(\begin{array}{c|c}
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mtable rowspacing="0.15999999999999992em" columnalign="center center" columnlines="solid" columnspacing="1em" rowlines="solid"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>3</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>4</mn></mstyle></mtd></mtr></mtable><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(\begin{array}{c|c}
 1 &amp; 2 \\
 \hline
 3 &amp; 4
 \end{array}\right)
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\left(\begin&#123;array&#125;&#123;c|c&#125;</span><br><span class="line">1 &amp; 2 \\</span><br><span class="line">\hline</span><br><span class="line">3 &amp; 4</span><br><span class="line">\end&#123;array&#125;\right)</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-<h3 id="极限符号">8.极限符号</h3>
-<p><span class="math display">\[
-{\lim_{x \to +\infty}}
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$&#123;\lim_&#123;x \to +\infty&#125;&#125;$$</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-{\lim_{x \to -\infty}}
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$&#123;\lim_&#123;x \to -\infty&#125;&#125;$$</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-{\lim_{x \to 0}}
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$&#123;\lim_&#123;x \to 0&#125;&#125;$$</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-{\lim_{x \to 0^+}}
-\]</span></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$&#123;\lim_&#123;x \to 0^+&#125;&#125;$$</span><br></pre></td></tr></table></figure>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.45em;"><span class="pstrut" style="height:3.45em;"></span><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="vertical-separator" style="height:2.4em;border-right-width:0.04em;border-right-style:solid;margin:0 -0.02em;vertical-align:-0.95em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span style="top:-3.7em;"><span class="pstrut" style="height:3.45em;"></span><span class="hline" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\left(\begin{array}{c|c}</span><br><span class="line">1 &amp; 2 \\</span><br><span class="line">\hline</span><br><span class="line">3 &amp; 4</span><br><span class="line">\end{array}\right)</span><br><span class="line">$$</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="8-极限符号">8.极限符号</h3>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo><mi>lim</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder></mrow><annotation encoding="application/x-tex">{\lim_{x \to +\infty}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.4em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$${\lim_{x \to +\infty}}$$</span><br></pre></td></tr></tbody></table></figure>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo><mi>lim</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></munder></mrow><annotation encoding="application/x-tex">{\lim_{x \to -\infty}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.4em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$${\lim_{x \to -\infty}}$$</span><br></pre></td></tr></tbody></table></figure>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo><mi>lim</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder></mrow><annotation encoding="application/x-tex">{\lim_{x \to 0}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4115479999999998em;vertical-align:-0.717108em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.382892em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">0</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.717108em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$${\lim_{x \to 0}}$$</span><br></pre></td></tr></tbody></table></figure>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo><mi>lim</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>→</mo><msup><mn>0</mn><mo>+</mo></msup></mrow></munder></mrow><annotation encoding="application/x-tex">{\lim_{x \to 0^+}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.452305em;vertical-align:-0.757865em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.342135em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight"><span class="mord mtight">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7026642857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.757865em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$${\lim_{x \to 0^+}}$$</span><br></pre></td></tr></tbody></table></figure>
 
     </div>
 
@@ -607,7 +576,7 @@ l &amp; \textrm{all day long}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#上标与下标"><span class="nav-text">1.上标与下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分式"><span class="nav-text">2.分式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根式"><span class="nav-text">3.根式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求和和积分"><span class="nav-text">4.求和和积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格"><span class="nav-text">5.空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵"><span class="nav-text">6.矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排版数组"><span class="nav-text">7.排版数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极限符号"><span class="nav-text">8.极限符号</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-上标与下标"><span class="nav-text">1.上标与下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-分式"><span class="nav-text">2.分式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-根式"><span class="nav-text">3.根式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-求和和积分"><span class="nav-text">4.求和和积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-空格"><span class="nav-text">5.空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-矩阵"><span class="nav-text">6.矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-排版数组"><span class="nav-text">7.排版数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-极限符号"><span class="nav-text">8.极限符号</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -623,7 +592,7 @@ l &amp; \textrm{all day long}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -636,7 +605,7 @@ l &amp; \textrm{all day long}
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -984,13 +953,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">195k</span>
+    <span title="站点总字数">226k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:57</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
 

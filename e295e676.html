@@ -33,22 +33,24 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="关于网络的parameters Pytorch中，每一个网络继承于nn.Module类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的： 12345678_parameters_buffers_backward_hooks_forward_hooks_forward_pre_hooks_state_dict_hooks_load_state_dict_pre_hooks_modules">
+  <meta name="description" content="本文主要对于交叉熵的手动计算和PyTorch中的CrossEntropyLoss模块计算结果不一致的问题展开讨论，查阅了PyTorch的官方文档，最终发现是CrossEntropyLoss在计算交叉熵之前会对输入的概率分布进行一次SoftMax操作导致的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pytorch网络构造Tips">
-<meta property="og:url" content="https://www.kezhi.tech/a7298e70.html">
+<meta property="og:title" content="PyTorch中的CrossEntropyLoss与交叉熵计算不一致">
+<meta property="og:url" content="https://www.kezhi.tech/e295e676.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="关于网络的parameters Pytorch中，每一个网络继承于nn.Module类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的： 12345678_parameters_buffers_backward_hooks_forward_hooks_forward_pre_hooks_state_dict_hooks_load_state_dict_pre_hooks_modules">
+<meta property="og:description" content="本文主要对于交叉熵的手动计算和PyTorch中的CrossEntropyLoss模块计算结果不一致的问题展开讨论，查阅了PyTorch的官方文档，最终发现是CrossEntropyLoss在计算交叉熵之前会对输入的概率分布进行一次SoftMax操作导致的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-26T09:25:50.000Z">
-<meta property="article:modified_time" content="2022-10-25T06:53:01.871Z">
+<meta property="og:image" content="https://download.kezhi.tech/img/202303041402037.jpg">
+<meta property="og:image" content="https://download.kezhi.tech/img/202303041333317.png">
+<meta property="article:published_time" content="2023-03-04T05:58:17.000Z">
+<meta property="article:modified_time" content="2023-03-06T07:17:53.760Z">
 <meta property="article:author" content="Yu Zhao">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Pytorch">
-<meta property="article:tag" content="Neural Network">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="Deep Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202303041402037.jpg">
 
-<link rel="canonical" href="https://www.kezhi.tech/a7298e70.html">
+<link rel="canonical" href="https://www.kezhi.tech/e295e676.html">
 
 
 <script id="page-configurations">
@@ -60,7 +62,7 @@
   };
 </script>
 
-  <title>Pytorch网络构造Tips | Kezhi's Blog</title>
+  <title>PyTorch中的CrossEntropyLoss与交叉熵计算不一致 | Kezhi's Blog</title>
   
 
 
@@ -244,7 +246,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/a7298e70.html">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/e295e676.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
@@ -257,7 +259,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          Pytorch网络构造Tips
+          PyTorch中的CrossEntropyLoss与交叉熵计算不一致
         </h2>
 
         <div class="post-meta">
@@ -267,14 +269,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-09-26 17:25:50" itemprop="dateCreated datePublished" datetime="2022-09-26T17:25:50+08:00">2022-09-26</time>
+              <time title="创建时间：2023-03-04 13:58:17" itemprop="dateCreated datePublished" datetime="2023-03-04T13:58:17+08:00">2023-03-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-25 14:53:01" itemprop="dateModified" datetime="2022-10-25T14:53:01+08:00">2022-10-25</time>
+                <time title="修改时间：2023-03-06 15:17:53" itemprop="dateModified" datetime="2023-03-06T15:17:53+08:00">2023-03-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +284,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tips/" itemprop="url" rel="index"><span itemprop="name">Tips</span></a>
+                  <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
                 </span>
             </span>
 
@@ -295,8 +297,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/a7298e70.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/a7298e70.html" itemprop="commentCount"></span>
+    <a title="valine" href="/e295e676.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/e295e676.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -306,14 +308,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>561</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -325,14 +327,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="关于网络的parameters">关于网络的parameters</h2>
-<p>Pytorch中，每一个网络继承于<code>nn.Module</code>类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_parameters</span><br><span class="line">_buffers</span><br><span class="line">_backward_hooks</span><br><span class="line">_forward_hooks</span><br><span class="line">_forward_pre_hooks</span><br><span class="line">_state_dict_hooks</span><br><span class="line">_load_state_dict_pre_hooks</span><br><span class="line">_modules</span><br></pre></td></tr></tbody></table></figure>
+        <p>本文主要对于交叉熵的手动计算和<code>PyTorch</code>中的<code>CrossEntropyLoss</code>模块计算结果不一致的问题展开讨论，查阅了<code>PyTorch</code>的官方文档，最终发现是<code>CrossEntropyLoss</code>在计算交叉熵之前会对输入的概率分布进行一次<code>SoftMax</code>操作导致的。</p>
+<img src="https://download.kezhi.tech/img/202303041402037.jpg" width="61.8%">
 <a id="more"></a>
-<p>在网络初始化<code>__init__</code>过程中，所有类内变量的定义都会通过<code>__setattr__</code>方法在<code>__dict__</code>中进行注册，而<code>nn.Module</code>重写了注册方法，将所有类内变量中，类型派生于<code>Parameter</code>的变量归属到<code>_parameters</code>字典中，这就解释了为什么使用一个<code>list</code>来存放网络的每一层会导致网络中的<code>parameters</code>为空。</p>
-<p>此外，在获取参数时，<code>nn.Module</code>是通过遍历整个<code>_modules</code>字典来实现的，因此在定义时可以使用<code>nn.ModuleList</code>类型来替代<code>list</code>类型存放多个网络层。</p>
+<p>在强化学习中，策略学习常用到一个损失函数为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mo>−</mo><mi>ln</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><mo>⋅</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">l=-\ln\pi_\theta(a|s)\cdot g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>在状态<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>下是关于动作的一个概率分布，而动作<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>是经验中记录的，在状态<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>下选择的确定动作。因此有：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>ln</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mrow><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>∈</mo><mi>A</mi></mrow></munder><mi>p</mi><mo stretchy="false">(</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>⋅</mo><mi>ln</mi><mo>⁡</mo><mi>q</mi><mo stretchy="false">(</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\ln\pi_\theta(a|s) = -\sum_{a'\in A}p(a')\cdot \ln q(a')
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.3717110000000003em;vertical-align:-1.321706em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8556639999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828285714285715em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight">A</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.321706em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.15999999999999992em" columnalign="left right" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mi>a</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">p(a') = \left\{
+             \begin{array}{lr}
+             1 &amp;&amp;&amp; a'=a\\
+             0 &amp;&amp;&amp; otherwise
+             \end{array}
+\right.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">{</span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.4499999999999997em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.2499999999999996em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.4499999999999997em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.2499999999999996em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">a</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>=</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q(a') = \pi_\theta(a'|s)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord mathdefault">s</span><span class="mclose">)</span></span></span></span></span></p>
+<p>因此，该损失函数便被转换为了计算两个概率分布之间交叉熵的计算形式。从而可以想到，在使用<code>PyTorch</code>计算损失函数时，使用内置的<code>torch.nn.functional.cross_entropy</code>函数（下文简称为<code>F.cross_entropy</code>函数）来进行计算。然而，在实践过程中，发现使用该函数计算出的结果与手动计算出的结果不一致，由此展开了一系列调研。</p>
+<h2 id="不一致的计算结果">不一致的计算结果</h2>
+<p>首先，我们使用<code>Python</code>分别以手动计算和使用<code>F.cross_entropy</code>函数计算两组数据的交叉熵，代码如下：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">x = torch.FloatTensor([[<span class="number">0.4</span>, <span class="number">0.6</span>],</span><br><span class="line">                       [<span class="number">0.7</span>, <span class="number">0.3</span>]])</span><br><span class="line">y = torch.LongTensor([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">loss_1 = -torch.log(x.gather(<span class="number">1</span>, y.view(<span class="number">-1</span>,<span class="number">1</span>)))</span><br><span class="line">loss_2 = F.cross_entropy(x, y, reduction = <span class="string">"none"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"手动计算出的交叉熵：\n{}"</span>.format(loss_1.squeeze(<span class="number">1</span>)))</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">"CrossEntropyLoss计算出的交叉熵：\n{}"</span>.format(loss_2))</span><br></pre></td></tr></tbody></table></figure>
+<p>运行上述代码，得到的计算结果如下：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">手动计算出的交叉熵：</span><br><span class="line">tensor([0.9163, 1.2040])</span><br><span class="line"></span><br><span class="line">CrossEntropyLoss计算出的交叉熵：</span><br><span class="line">tensor([0.7981, 0.9130])</span><br></pre></td></tr></tbody></table></figure>
+<p>从运行结果可以看出，两者的计算结果并不一致，由此，我查阅了PyTorch官方文档来了解<code>F.cross_entropy</code>的实现。</p>
+<h2 id="pytorch-文档描述">PyTorch 文档描述</h2>
+<p>文档中关于<code>F.cross_entropy</code>函数的描述中并没有包含具体的计算过程，只对输入数据和输出结果的维度对应关系作了解释[^1]。不过在该函数的介绍中有这么一句话：</p>
+<blockquote>
+<p>See <a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss" target="_blank" rel="noopener"><code>CrossEntropyLoss</code></a> for details.</p>
+</blockquote>
+<p>于是便转而查找<code>CrossEntropyLoss</code>的文档[^2]，终于找到了<code>Pytorch</code>计算交叉熵的计算过程：</p>
+<p><img src="https://download.kezhi.tech/img/202303041333317.png" alt=""></p>
+<p>可以看到，官方文档关于交叉熵的计算方式阐述的十分清楚。概括来说就是，<code>F.cross_entropy</code>至少需要两个参数，一个是预测出的概率分布，一个是目标真实类别索引。比较重要的一点在于，<code>F.cross_entropy</code>这个函数是没有要求的，即不要求和等于1，也不要求每一项大于0。这是因为该函数在计算交叉熵之间，会先对输入的概率分布进行一次<code>SoftMax</code>操作。</p>
+<p>在计算交叉熵之前进行<code>SoftMax</code>操作提高对输入的宽容度，但是若在构建神经网络时，已经在输出之前进行了<code>SoftMax</code>操作就会导致两次<code>SoftMax</code>使<code>loss</code>的计算失真，也就是上一节的计算结果不一致。</p>
+<h2 id="实验验证">实验验证</h2>
+<p>根据<code>PyTorch</code>的官方文档，如果我们在手动计算交叉熵之间，加一个<code>SoftMax</code>操作，那么便可以得到和函数<code>F.cross_entropy</code>一样的计算结果，使用如下代码进行验证：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">x = torch.FloatTensor([[<span class="number">0.4</span>, <span class="number">0.6</span>],</span><br><span class="line">                       [<span class="number">0.7</span>, <span class="number">0.3</span>]])</span><br><span class="line">y = torch.LongTensor([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">loss_1 = -torch.log(F.softmax(x, dim=<span class="number">-1</span>).gather(<span class="number">1</span>, y.view(<span class="number">-1</span>,<span class="number">1</span>)))</span><br><span class="line">loss_2 = F.cross_entropy(x, y, reduction = <span class="string">"none"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"手动计算出的交叉熵：\n{}"</span>.format(loss_1.squeeze(<span class="number">1</span>)))</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">"CrossEntropyLoss计算出的交叉熵：\n{}"</span>.format(loss_2))</span><br></pre></td></tr></tbody></table></figure>
+<p>运行上述代码，得到的输出结果如下：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">手动计算出的交叉熵：</span><br><span class="line">tensor([0.7981, 0.9130])</span><br><span class="line"></span><br><span class="line">CrossEntropyLoss计算出的交叉熵：</span><br><span class="line">tensor([0.7981, 0.9130])</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="reference">Reference</h2>
-<p>[1]Gemfield, “详解Pytorch中的网络构造,” <em>知乎专栏</em>, Jan. 04, 2019. <a href="https://zhuanlan.zhihu.com/p/53927068" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/53927068</a> (accessed Sep. 26, 2022).</p>
+<p>[^1]:<a href="https://pytorch.org/docs/stable/generated/torch.nn.functional.cross_entropy.html" target="_blank" rel="noopener">torch.nn.functional.cross_entropy — PyTorch 1.13 documentation</a><br>
+[^2]: <a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss" target="_blank" rel="noopener">CrossEntropyLoss — PyTorch 1.13 documentation</a></p>
 
     </div>
 
@@ -354,19 +387,7 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\411c70cb.html" rel="bookmark">Python高性能编程</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\3300cce2.html" rel="bookmark">NLP工具NLTK的安装及使用</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\68a55fd7.html" rel="bookmark">Scrapy爬虫相关</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\66f3a0f6.html" rel="bookmark">创新港体育场馆自动预定</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(Python)</a></div>
+      <div class="popular-posts-title"><a href="\b69f94c6.html" rel="bookmark">Vanilla Policy Gradient关于loss mean与sum的探讨</a></div>
     </li>
   </ul>
 
@@ -399,7 +420,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://https//www.kezhi.tech/a7298e70.html" title="Pytorch网络构造Tips" rel="noopener" target="_blank">https://www.kezhi.tech/a7298e70.html</a>
+    <a href="http://https//www.kezhi.tech/e295e676.html" title="PyTorch中的CrossEntropyLoss与交叉熵计算不一致" rel="noopener" target="_blank">https://www.kezhi.tech/e295e676.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -430,9 +451,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
-              <a href="/tags/Pytorch/" rel="tag"><i class="fa fa-tag"></i> Pytorch</a>
-              <a href="/tags/Neural-Network/" rel="tag"><i class="fa fa-tag"></i> Neural Network</a>
+              <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
           </div>
 
         
@@ -441,12 +461,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/ebd84d05.html" rel="prev" title="云南施甸二中支教小记">
-      <i class="fa fa-chevron-left"></i> 云南施甸二中支教小记
+    <a href="/b25d1fca.html" rel="prev" title="三年疫情小记">
+      <i class="fa fa-chevron-left"></i> 三年疫情小记
     </a></div>
       <div class="post-nav-item">
-    <a href="/a587561c.html" rel="next" title="限制WSL内存使用">
-      限制WSL内存使用 <i class="fa fa-chevron-right"></i>
+    <a href="/aaafe79.html" rel="next" title="强化学习算法实现中的细节">
+      强化学习算法实现中的细节 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -508,7 +528,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于网络的parameters"><span class="nav-text">关于网络的parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不一致的计算结果"><span class="nav-text">不一致的计算结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch-文档描述"><span class="nav-text">PyTorch 文档描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验验证"><span class="nav-text">实验验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

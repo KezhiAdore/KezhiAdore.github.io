@@ -33,18 +33,22 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="知识因被记录而产生价值">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kezhi&#39;s Blog">
-<meta property="og:url" content="https://www.kezhi.tech/archives/2022/index.html">
+  <meta name="description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新… 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习算法实现中的细节">
+<meta property="og:url" content="https://www.kezhi.tech/aaafe79.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="知识因被记录而产生价值">
+<meta property="og:description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新… 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202303061042992.jpg">
+<meta property="article:published_time" content="2023-03-06T02:44:18.000Z">
+<meta property="article:modified_time" content="2023-03-06T07:17:53.763Z">
 <meta property="article:author" content="Yu Zhao">
-<meta property="article:tag" content="笔记，计算机，自动化">
+<meta property="article:tag" content="Reinforcement Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202303061042992.jpg">
 
-<link rel="canonical" href="https://www.kezhi.tech/archives/2022/">
+<link rel="canonical" href="https://www.kezhi.tech/aaafe79.html">
 
 
 <script id="page-configurations">
@@ -52,11 +56,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>归档 | Kezhi's Blog</title>
+  <title>强化学习算法实现中的细节 | Kezhi's Blog</title>
   
 
 
@@ -235,237 +239,219 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/aaafe79.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          强化学习算法实现中的细节
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-06 10:44:18 / 修改时间：15:17:53" itemprop="dateCreated datePublished" datetime="2023-03-06T10:44:18+08:00">2023-03-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+            </span>
+
+          
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 45 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/aaafe79.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/aaafe79.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>602</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2022</h2>
+        <p>强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新…</p>
+<p>以及附上我自己实现的RL算法库：<a href="https://github.com/KezhiAdore/RL-Algorithm" target="_blank" rel="noopener">https://github.com/KezhiAdore/RL-Algorithm</a></p>
+<img src="https://download.kezhi.tech/img/202303061042992.jpg" width="45%">
+<a id="more"></a>
+<h2 id="common">Common</h2>
+<ul>
+<li><code>PyTorch</code>中的交叉熵损失函数<code>torch.nn.functional.cross_entropy</code>里面会先计算一次<code>softmax</code>，在使用策略梯度时要注意[^1]。</li>
+</ul>
+<h2 id="reinforce">REINFORCE</h2>
+<ul>
+<li>计算<code>loss</code>时，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>ln</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\ln\pi_\theta(a|s)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mord mathdefault">s</span><span class="mclose">)</span></span></span></span>与discount reward相乘时要注意维度一致。</li>
+<li>计算完交叉熵之后使用<code>torch.sum</code>求和比<code>torch.mean</code>求平均效果要好[^2]。</li>
+</ul>
+<h2 id="dqn系列">DQN系列</h2>
+<ul>
+<li>计算<code>q_target</code>时要注意<code>done=1</code>的情形：即<code>q_target = reward + self._gamma * max_next_q_value * (1 - done) </code>，否则容易导致训练过程中<code>reward</code>一直上下大幅震荡。</li>
+<li>一定要有间隔同步的<code>target_newok</code>，否则很难收敛。</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<p>[^1]: <a href="https://www.kezhi.tech/e295e676.html">PyTorch中的CrossEntropyLoss与交叉熵计算不一致 | Kezhi’s Blog</a><br>
+[^2]: <a href="https://www.kezhi.tech/b69f94c6.html">Vanilla Policy Gradient关于loss mean与sum的探讨 | Kezhi’s Blog</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-29T17:15:13+08:00"
-              content="2022-11-29">
-          11-29
-        </time>
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\b69f94c6.html" rel="bookmark">Vanilla Policy Gradient关于loss mean与sum的探讨</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/10ee70e7.html" itemprop="url">
-            <span itemprop="name">线性滤波与非线性滤波实验</span>
-          </a>
-      </h3>
+  </div>
+</div>
 
-    </header>
-  </article>
+        
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/aaafe79.html" title="强化学习算法实现中的细节" rel="noopener" target="_blank">https://www.kezhi.tech/aaafe79.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-29T17:01:37+08:00"
-              content="2022-11-29">
-          11-29
-        </time>
-      </div>
+        
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/86b4b2c0.html" itemprop="url">
-            <span itemprop="name">王者荣耀目标检测--Yolov5实现</span>
-          </a>
-      </h3>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-    </header>
-  </article>
+    <div class="social-list">
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-29T16:39:37+08:00"
-              content="2022-11-29">
-          11-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/a7067052.html" itemprop="url">
-            <span itemprop="name">XJTU System Optimization and Scheduling Final Report</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-29T16:31:55+08:00"
-              content="2022-11-29">
-          11-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/f95f8ff4.html" itemprop="url">
-            <span itemprop="name">XJTU System Optimization and Scheduling Midterm Report</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-29T16:08:38+08:00"
-              content="2022-11-29">
-          11-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/7d0182be.html" itemprop="url">
-            <span itemprop="name">XJTU System Optimization and Scheduling Course Assignments</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-26T19:23:38+08:00"
-              content="2022-11-26">
-          11-26
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/48242c23.html" itemprop="url">
-            <span itemprop="name">程序中的命名与作用域</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-10-15T11:54:01+08:00"
-              content="2022-10-15">
-          10-15
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/a587561c.html" itemprop="url">
-            <span itemprop="name">限制WSL内存使用</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-09-26T17:25:50+08:00"
-              content="2022-09-26">
-          09-26
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/a7298e70.html" itemprop="url">
-            <span itemprop="name">Pytorch网络构造Tips</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-07-29T01:30:26+08:00"
-              content="2022-07-29">
-          07-29
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/ebd84d05.html" itemprop="url">
-            <span itemprop="name">云南施甸二中支教小记</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-07-20T02:00:14+08:00"
-              content="2022-07-20">
-          07-20
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/4efb358.html" itemprop="url">
-            <span itemprop="name">科研问题记录</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-
+                <span class="label">RSS</span>
+              </a>
+            </div>
     </div>
   </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Reinforcement-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforcement Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/e295e676.html" rel="prev" title="PyTorch中的CrossEntropyLoss与交叉熵计算不一致">
+      <i class="fa fa-chevron-left"></i> PyTorch中的CrossEntropyLoss与交叉熵计算不一致
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="page-number" href="/archives/2022/page/3/">3</a><a class="extend next" rel="next" href="/archives/2022/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -512,6 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#common"><span class="nav-text">Common</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reinforce"><span class="nav-text">REINFORCE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dqn系列"><span class="nav-text">DQN系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

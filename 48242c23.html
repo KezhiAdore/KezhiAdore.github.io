@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">84</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">85</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -147,7 +147,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">45</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -326,26 +326,26 @@
 
       
         <p>最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。</p>
-<p><img data-src="https://download.kezhi.tech/img/202211261934570.png" alt="转自:米游社@战小医仙" style="width:50%;" /></p>
+<img src="https://download.kezhi.tech/img/202211261934570.png" alt="转自:米游社@战小医仙" style="width:50%;">
 <a id="more"></a>
 <h2 id="命名">命名</h2>
 <p>计算机在执行程序时是根据内存地址中的信息来执行的，其无需得知每个变量的名字是什么。因此早期的编程中是没有命名这一概念的。后来为了方便人在编程时对变量所代表的含义和类型进行记忆，才开始给变量和函数进行取名。例如，相比于"经度：108.654519、纬度：34.255314"来说，中国西部科技创新港更容易理解和记忆，又比如相比"8.7.198.46"来说，"某个不存在的网站"这种描述更令人印象深刻。</p>
 <p>那么计算机是如何将名字和变量及函数对应起来的呢，答案是使用对照表。这类似与我们在图书馆里找一本书，通过在数据库中检索，便可以将书名转换为分类编号，再通过分类编号既可以找到想要借阅的书在哪里。以创新港的图书馆为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《代码之髓》&#x3D;&gt;TP312&#x2F;159,《古今数学思想第一册》&#x3D;&gt;O11&#x2F;510-1&#x2F;C.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《代码之髓》=&gt;TP312/159,《古今数学思想第一册》=&gt;O11/510-1/C.1</span><br></pre></td></tr></tbody></table></figure>
 <p>有了这样的对照表，计算机在处理"找到《代码之髓》"这个命令时，便可以转换成"找到编号为TP312/159的图书"来进行执行。</p>
 <p>以python为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">'python'</span></span><br><span class="line">y = <span class="string">'hello'</span></span><br><span class="line">z = x</span><br><span class="line"></span><br><span class="line">id(x)	<span class="comment"># =&gt; 2256008235312</span></span><br><span class="line">id(y)	<span class="comment"># =&gt; 2256008254512</span></span><br><span class="line">id(z)	<span class="comment"># =&gt; 2256008235312</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">'python'</span></span><br><span class="line">y = <span class="string">'hello'</span></span><br><span class="line">z = x</span><br><span class="line"></span><br><span class="line">id(x)	<span class="comment"># =&gt; 2256008235312</span></span><br><span class="line">id(y)	<span class="comment"># =&gt; 2256008254512</span></span><br><span class="line">id(z)	<span class="comment"># =&gt; 2256008235312</span></span><br></pre></td></tr></tbody></table></figure>
 <p>在上述程序中，计算机建立了如下的对照表：</p>
 <pre class="mermaid">graph LR
-x[x]-->a[2256008235312]
-y[y]-->b[2256008254512]
-z[z]-->a</pre>
-<p>在上面的对照表中，变量x和变量z指向了同一个内存地址，因此，当变量z发生改变时，变量x也会相应的发生改变。<del>只不过python中str不可变罢了</del></p>
+x[x]--&gt;a[2256008235312]
+y[y]--&gt;b[2256008254512]
+z[z]--&gt;a</pre>
+<p>在上面的对照表中，变量x和变量z指向了同一个内存地址，因此，当变量z发生改变时，变量x也会相应的发生改变。<s>只不过python中str不可变罢了</s></p>
 <h2 id="命名冲突">命名冲突</h2>
 <p>在早期的程序设计中，对照表是整个程序所共有的。这就会产生一些问题，例如下面这段C++代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">		<span class="built_in">print</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++){</span><br><span class="line">		<span class="built_in">print</span>();</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>这个循环理应运行10次结束，然而，如果在函数<code>print</code>中对<code>i</code>进行了操作呢：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"ok"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	i--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"ok"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	i--;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>由于变量<code>i</code>在函数内部和函数外部中都被使用了，使得其无法在预期的10次<code>for</code>循环之后直接结束。将会无限次循环。</p>
 <p>如何避免这种命名冲突呢，一种方法是取更长的名字，在名字中说明这个变量是用于哪里的。例如<code>i_in_print</code>和<code>i_in_main</code>，在多人合作开发时采用变量名申请制来进行管理。</p>
 <p>然另一种方法就是引入作用域。下文将主要围绕作用域展开。</p>
@@ -353,23 +353,21 @@ z[z]-->a</pre>
 <p>作用域是指名字的有效范围，为了不让<code>print</code>函数中对<code>i</code>的操作影响到外部，那么在函数执行之前将其值存储起来，在函数执行结束之后再取出来便可以解决这个问题。这种机制被称为动态作用域</p>
 <h3 id="动态作用域">动态作用域</h3>
 <p>以<code>Perl</code>语言为例，在函数执行入口保存变量值，在结束时重新写回变量</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">shori</span></span>&#123;</span><br><span class="line">	$old_i = $i;</span><br><span class="line">	<span class="comment"># do something</span></span><br><span class="line">	$i = $old_i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">shori</span></span>{</span><br><span class="line">	$old_i = $i;</span><br><span class="line">	<span class="comment"># do something</span></span><br><span class="line">	$i = $old_i</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>然而，这样的作法存在一个问题，那就是函数在嵌套调用时，对变量的修改会作用到被调用的函数中，以下面这两个函数为例：</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="string">"global"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">yobu</span> </span>&#123;</span><br><span class="line">	<span class="keyword">local</span> $x = <span class="string">"yobu"</span>;</span><br><span class="line">	&amp;yobarebu();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">yobarebu</span> </span>&#123;</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"$x\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="string">"global"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">yobu</span> </span>{</span><br><span class="line">	<span class="keyword">local</span> $x = <span class="string">"yobu"</span>;</span><br><span class="line">	&amp;yobarebu();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">yobarebu</span> </span>{</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"$x\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>调用函数<code>yobu</code>时，变量<code>x</code>被改写为<code>yobu</code>，在函数运行结束重新写回之前，调用<code>yobarebu</code>函数时显示使用的变量<code>x</code>的值为<code>yobu</code>。这说明函数<code>yobu</code>中对变量的更改对于在其中调用的函数运行有影响。</p>
 <p>产生这种现象的原因时，在动态作用域中，所有变量共享一张全局对照表，而在进入函数时，会创建一张动态对照表，这张表是所有函数共享的，所有的函数都可以读取到，这就造成了上述现象的发生。</p>
 <p>总结来说，在动态作用域中，每个变量在查找对应的地址时，按照由近到远的顺序来查找。这造成了函数嵌套调用时相互影响的现象，为了解决这种现象，我们可以给每个函数使用单独的对照表进行存储变量，这就是静态作用域。</p>
 <h3 id="静态作用域">静态作用域</h3>
 <p>静态作用域每个函数单独使用一张变量表。计算机在寻找变量时，首先从函数内部的变量表中进行查找，如果找不到则到全局变量表中进行查找。这很好的解决了动态作用域下函数嵌套调用时产生的问题。</p>
 <p>然而，静态作用域在使用时也存在一些问题。一是嵌套函数的问题，以Python为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">        print(x)</span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-<p>在该嵌套函数中，<code>bar</code>函数中输出的<code>x</code>乍一看应该是<code>foo</code>，然而，在Python
-2中，函数<code>bar</code>在查找变量<code>x</code>时，首先查找局部对照表，没找到时直接在全局对照表中进行查找，因此输出结果是<code>global</code>。这种设计给程序带来了很多误解。直到Python
-3中才解决了这个问题。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">        print(x)</span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></tbody></table></figure>
+<p>在该嵌套函数中，<code>bar</code>函数中输出的<code>x</code>乍一看应该是<code>foo</code>，然而，在Python 2中，函数<code>bar</code>在查找变量<code>x</code>时，首先查找局部对照表，没找到时直接在全局对照表中进行查找，因此输出结果是<code>global</code>。这种设计给程序带来了很多误解。直到Python 3中才解决了这个问题。</p>
 <p>第二个问题是外部作用域的再绑定问题。当我们想要在函数中修改一个外部作用域的值时，反而会创建一个新的变量，从而无法修改外部作用域的值。例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">        x = <span class="string">"bar"</span></span><br><span class="line">        <span class="comment"># 创建了一个新的x</span></span><br><span class="line">        <span class="comment"># 无法修改外面的x</span></span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">        x = <span class="string">"bar"</span></span><br><span class="line">        <span class="comment"># 创建了一个新的x</span></span><br><span class="line">        <span class="comment"># 无法修改外面的x</span></span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></tbody></table></figure>
 <p>在Python 3.0中，引入了<code>nonlocal</code>关键字来解决这个问题：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    	<span class="keyword">nonlocal</span> x</span><br><span class="line">        x = <span class="string">"bar"</span></span><br><span class="line">        <span class="comment"># 创建了一个新的x</span></span><br><span class="line">        <span class="comment"># 无法修改外面的x</span></span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">"global"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="string">"foo"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    	<span class="keyword">nonlocal</span> x</span><br><span class="line">        x = <span class="string">"bar"</span></span><br><span class="line">        <span class="comment"># 创建了一个新的x</span></span><br><span class="line">        <span class="comment"># 无法修改外面的x</span></span><br><span class="line">    bar()</span><br><span class="line">foo()</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="小结">小结</h2>
 <p>计算机技术的发展带来了更强大的计算能力，从而出现了越来越复杂的程序。命名与作用域的发展凸显了当程序规模很大时，为变量和函数命名时人与计算机之间的矛盾。编程语言中的任何特性都并非凭空产生，而是为了解决某些问题而出现的。</p>
 
@@ -543,7 +541,7 @@ z[z]-->a</pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -556,7 +554,7 @@ z[z]-->a</pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -904,13 +902,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">195k</span>
+    <span title="站点总字数">226k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:57</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
 
