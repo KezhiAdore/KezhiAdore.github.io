@@ -325,48 +325,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>Python 高性能编程</h1>
+        <h1 id="python-高性能编程">Python 高性能编程</h1>
 <a id="more"></a>
 <h2 id="性能分析">性能分析</h2>
 <h3 id="时间分析">时间分析</h3>
-<ol>
-<li>
-<p>使用修饰器来自动测量时间</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timefn</span><span class="params">(fn)</span>:</span></span><br><span class="line"><span class="meta">    @wraps(fn)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">measure_time</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        t1=time.time()</span><br><span class="line">        result=fn(*args, **kwargs)</span><br><span class="line">        t2=time.time()</span><br><span class="line">        print(<span class="string">"@timefn:"</span>+fn.__name__+<span class="string">" took "</span>+str(t2-t1)+<span class="string">" seconds"</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> measure_time</span><br></pre></td></tr></tbody></table></figure>
+<ol type="1">
+<li><p>使用修饰器来自动测量时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timefn</span><span class="params">(fn)</span>:</span></span><br><span class="line"><span class="meta">    @wraps(fn)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">measure_time</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        t1=time.time()</span><br><span class="line">        result=fn(*args, **kwargs)</span><br><span class="line">        t2=time.time()</span><br><span class="line">        print(<span class="string">"@timefn:"</span>+fn.__name__+<span class="string">" took "</span>+str(t2-t1)+<span class="string">" seconds"</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> measure_time</span><br></pre></td></tr></table></figure>
 <p>在 IPython 内部，可以使用 %timeit 魔法函数来对函数运行进行计时</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%timeit &lt;function&gt;</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>使用 UNIX 的 time 命令进行计时</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/time -p (--verbose) python &lt;script-name&gt;</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>使用 cProfile 模块</p>
-<p>cProfile 是一个标准库内建的分析工具。它钩入 CPython 的虚拟机来测量每一个函数运行花费的时间。在要分析的函数前加上 <code>@profile</code>装饰器，运行以下命令进行性能分析</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -s cumulative &lt;script-name&gt; &lt;options&gt;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%timeit &lt;function&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 UNIX 的 time 命令进行计时</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/time -p (--verbose) python &lt;script-name&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 cProfile 模块</p>
+<p>cProfile 是一个标准库内建的分析工具。它钩入 CPython
+的虚拟机来测量每一个函数运行花费的时间。在要分析的函数前加上
+<code>@profile</code>装饰器，运行以下命令进行性能分析</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -s cumulative &lt;script-name&gt; &lt;options&gt;</span><br></pre></td></tr></table></figure>
 <p>也可以将分析结果保存到一个统计文件中使用其他工具进行分析</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -o &lt;outputfilename&gt; &lt;script-name&gt; &lt;options&gt;</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>使用 line_profiler 进行逐行分析</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -o &lt;outputfilename&gt; &lt;script-name&gt; &lt;options&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 line_profiler 进行逐行分析</p>
 <p>安装：<code>pip install line_profiler</code></p>
-<p>在要分析的函数前加上 <code>@profile</code>装饰器，运行以下命令进行性能分析</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernprof -l -v &lt;script-name&gt;</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<p>在要分析的函数前加上
+<code>@profile</code>装饰器，运行以下命令进行性能分析</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernprof -l -v &lt;script-name&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h3 id="空间分析">空间分析</h3>
-<ol>
-<li>
-<p>使用memory_profiler 分析内存使用量</p>
+<ol type="1">
+<li><p>使用memory_profiler 分析内存使用量</p>
 <p>安装：<code>pip install memory_profiler</code></p>
-<p>在要分析的函数前加上 <code>@profile</code>装饰器，运行以下命令进行性能分析</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m memory_profiler &lt;script-name&gt;</span><br></pre></td></tr></tbody></table></figure>
-<p>使用 <code>mprof</code> 可以绘图查看内存使用量，分为以下两个步骤：</p>
-<p>使用 <code>mprof</code> 运行程序，运行后在目录下会生成一个 <code>mprof*.dat</code> 文件</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mprof run &lt;script-name&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>在要分析的函数前加上
+<code>@profile</code>装饰器，运行以下命令进行性能分析</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m memory_profiler &lt;script-name&gt;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>mprof</code>
+可以绘图查看内存使用量，分为以下两个步骤：</p>
+<p>使用 <code>mprof</code> 运行程序，运行后在目录下会生成一个
+<code>mprof*.dat</code> 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mprof run &lt;script-name&gt;</span><br></pre></td></tr></table></figure>
 <p>绘图</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mprof plot</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mprof plot</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="列表和元组">列表和元组</h2>
 <p>列表和元组之类的数据结构被称为数组，一个数组是数据在某种内在次序下的扁平列表。</p>
@@ -378,76 +374,82 @@
 </ul>
 <h3 id="列表">列表</h3>
 <p>列表的查询操作是 O(1) 的。</p>
-<p>列表的搜索操作默认方法 (<code>list.index()</code>) 为线性操作，最差情况下为 O(n)。通过对列表进行排序可以将搜索时间降至 O(log n) (采用二分查找)。</p>
-<p>Python 列表有一个内建的排序算法使用了 Tim 排序。Tim 排序在最佳的情况下以 O(n) (最差情况下为 O(n log n)) 的复杂度进行排序。其混用了插入排序和归并排序来达到这样的性能(对于给定数据通过探测法来猜测哪个算法性能更优)。</p>
-<p><code>bisect</code> 模块可以在列表进行插入操作时，保持列表的顺序不变 (默认从小到大)。<code>bisect</code> 的部分文档说明如下[2]：</p>
+<p>列表的搜索操作默认方法 (<code>list.index()</code>)
+为线性操作，最差情况下为 O(n)。通过对列表进行排序可以将搜索时间降至
+O(log n) (采用二分查找)。</p>
+<p>Python 列表有一个内建的排序算法使用了 Tim 排序。Tim
+排序在最佳的情况下以 O(n) (最差情况下为 O(n log n))
+的复杂度进行排序。其混用了插入排序和归并排序来达到这样的性能(对于给定数据通过探测法来猜测哪个算法性能更优)。</p>
+<p><code>bisect</code> 模块可以在列表进行插入操作时，保持列表的顺序不变
+(默认从小到大)。<code>bisect</code> 的部分文档说明如下[2]：</p>
 <blockquote>
 <ul>
-<li>
-<p><code>bisect.bisect_left(a, x, lo=0, hi=len(a), *, key=None)</code></p>
-<p>在列表 a 中找到 x 的左侧插入点</p>
-</li>
-<li>
-<p><code>bisect.bisect_right(a, x, lo=0, hi=len(a), *, key=None)</code></p>
-<p>在列表 a 中找到 x 的右侧插入点</p>
-</li>
-<li>
-<p><code>bisect.bisect(a, x, lo=0, hi=len(a), *, key=None)</code></p>
-<p>同 <code>bisect.bisect_left</code></p>
-</li>
-<li>
-<p><code>bisect.insort_left(a, x, lo=0, hi=len(a), *, key=None)</code></p>
-<p>按照排序顺序将 x 插入到列表 a 中，插入位置由<code>bisect.bisect_left</code>决定</p>
-</li>
-<li>
-<p><code>bisect.insort_right(a, x, lo=0, hi=len(a), *, key=None)</code></p>
-<p>按照排序顺序将 x 插入到列表 a 中，插入位置由<code>bisect.bisect_right</code>决定</p>
-</li>
-<li>
-<p><code>bisect.insort(a, x, lo=0, hi=len(a), ***, key=None)</code></p>
-<p>同<code>bisect.insort_right</code></p>
-</li>
+<li><p><code>bisect.bisect_left(a, x, lo=0, hi=len(a), *, key=None)</code></p>
+<p>在列表 a 中找到 x 的左侧插入点</p></li>
+<li><p><code>bisect.bisect_right(a, x, lo=0, hi=len(a), *, key=None)</code></p>
+<p>在列表 a 中找到 x 的右侧插入点</p></li>
+<li><p><code>bisect.bisect(a, x, lo=0, hi=len(a), *, key=None)</code></p>
+<p>同 <code>bisect.bisect_left</code></p></li>
+<li><p><code>bisect.insort_left(a, x, lo=0, hi=len(a), *, key=None)</code></p>
+<p>按照排序顺序将 x 插入到列表 a
+中，插入位置由<code>bisect.bisect_left</code>决定</p></li>
+<li><p><code>bisect.insort_right(a, x, lo=0, hi=len(a), *, key=None)</code></p>
+<p>按照排序顺序将 x 插入到列表 a
+中，插入位置由<code>bisect.bisect_right</code>决定</p></li>
+<li><p><code>bisect.insort(a, x, lo=0, hi=len(a), ***, key=None)</code></p>
+<p>同<code>bisect.insort_right</code></p></li>
 </ul>
 <p><strong>性能说明</strong></p>
-<p>当使用 <code>bisect()</code> 和 <code>insort()</code> 编写时间敏感的代码时，请记住以下概念。</p>
+<p>当使用 <code>bisect()</code> 和 <code>insort()</code>
+编写时间敏感的代码时，请记住以下概念。</p>
 <ul>
-<li>二分法对于搜索一定范围的值是很高效的。 对于定位特定的值，则字典的性能更好。</li>
-<li><code>insort()</code> 函数的时间复杂度为 O(n) 因为对数时间的搜索步骤被线性时间的插入步骤所主导。</li>
-<li>这些搜索函数都是无状态的并且会在它们被使用后丢弃键函数的结果。 因此，如果在一个循环中使用搜索函数，则键函数可能会在同一个数据元素上被反复调用。 如果键函数速度不快，请考虑用 <a href="https://docs.python.org/zh-cn/3/library/functools.html#functools.cache" target="_blank" rel="noopener"><code>functools.cache()</code></a> 来包装它以避免重复计算。 另外，也可以考虑搜索一个预先计算好的键数组来定位插入点（如下面的示例节所演示的）。</li>
+<li>二分法对于搜索一定范围的值是很高效的。
+对于定位特定的值，则字典的性能更好。</li>
+<li><code>insort()</code> 函数的时间复杂度为 O(n)
+因为对数时间的搜索步骤被线性时间的插入步骤所主导。</li>
+<li>这些搜索函数都是无状态的并且会在它们被使用后丢弃键函数的结果。
+因此，如果在一个循环中使用搜索函数，则键函数可能会在同一个数据元素上被反复调用。
+如果键函数速度不快，请考虑用 <a
+href="https://docs.python.org/zh-cn/3/library/functools.html#functools.cache"><code>functools.cache()</code></a>
+来包装它以避免重复计算。
+另外，也可以考虑搜索一个预先计算好的键数组来定位插入点（如下面的示例节所演示的）。</li>
 </ul>
 </blockquote>
-<p>列表在分配内存时会添加一定的预留空间。当一个大小为 N 的列表需要添加新的元素时，Python 会创建一个新的列表，足够存放原来的N个元素以及额外添加的元素。在实际分配时，分配的大小并不是 N+1，而是 N+M 个。其中，M 的计算公式如下：</p>
+<p>列表在分配内存时会添加一定的预留空间。当一个大小为 N
+的列表需要添加新的元素时，Python
+会创建一个新的列表，足够存放原来的N个元素以及额外添加的元素。在实际分配时，分配的大小并不是
+N+1，而是 N+M 个。其中，M 的计算公式如下：</p>
 <p>M = (N &gt;&gt; 3) + (N &lt; 9 ? 3 : 6) + 1</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">N</th>
-<th style="text-align:center">0</th>
-<th style="text-align:center">1-4</th>
-<th style="text-align:center">5-8</th>
-<th style="text-align:center">9-16</th>
-<th style="text-align:center">17-25</th>
-<th style="text-align:center">26-35</th>
-<th style="text-align:center">…</th>
-<th style="text-align:center">991-1120</th>
+<tr class="header">
+<th style="text-align: center;">N</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1-4</th>
+<th style="text-align: center;">5-8</th>
+<th style="text-align: center;">9-16</th>
+<th style="text-align: center;">17-25</th>
+<th style="text-align: center;">26-35</th>
+<th style="text-align: center;">...</th>
+<th style="text-align: center;">991-1120</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">N+M</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">16</td>
-<td style="text-align:center">25</td>
-<td style="text-align:center">35</td>
-<td style="text-align:center">…</td>
-<td style="text-align:center">1120</td>
+<tr class="odd">
+<td style="text-align: center;">N+M</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">1120</td>
 </tr>
 </tbody>
 </table>
 <p>当一个list长度为8时，发生append操作后：</p>
-<ol>
+<ol type="1">
 <li>new_size = 原有的size ＋ append一个对象 = 8 + 1 = 9</li>
 <li>new_size为9，二进制是1001，9 &gt;&gt; 3 = 1</li>
 <li>new_allocated = 9 &gt;&gt; 3 + 6 = 7</li>
@@ -457,28 +459,44 @@
 <h3 id="元组">元组</h3>
 <p>元组固定且不可变，其一旦被创建，内容便无法被修改，大小也不可被改变。</p>
 <p>元组的静态特性的一个好处是占用了更少的内存。</p>
-<p>元组的静态特性的另一个好处体现在一些会发生在 Python 后台的事：资源缓存。Python 是一门垃圾收集语言，这意味着当一个变量不再被使用时，Python 会将该变量使用的内存释放回操作系统。然而，对于长度为1-20的元组，即使它们不再被使用，其空间也不会立即返回给系统，而是留待未来使用。这意味着新建元组时可以直接在预留内存中存放数据，避免与操作系统进行交互。</p>
+<p>元组的静态特性的另一个好处体现在一些会发生在 Python
+后台的事：资源缓存。Python
+是一门垃圾收集语言，这意味着当一个变量不再被使用时，Python
+会将该变量使用的内存释放回操作系统。然而，对于长度为1-20的元组，即使它们不再被使用，其空间也不会立即返回给系统，而是留待未来使用。这意味着新建元组时可以直接在预留内存中存放数据，避免与操作系统进行交互。</p>
 <h2 id="字典与集合">字典与集合</h2>
 <p>字典是 key 和 value 的组合</p>
 <p>集合是 key 的组合</p>
 <ul>
-<li>字典和集合基于 key 的查询速度是 O(1) 的，但是相应的，字典和集合会占用更多的内存。</li>
+<li>字典和集合基于 key 的查询速度是 O(1)
+的，但是相应的，字典和集合会占用更多的内存。</li>
 <li>字典和集合的插入和查询操作依赖于散列函数，因此实际的计算速度取决于其使用的散列函数</li>
 <li>字典和集合的默认最小长度为8，每次改变大小时，桶的个数增加到原来的4倍，直到5000个元素之后，每次增加到原来的2倍。</li>
 </ul>
-<p>Python 的命名空间使用字典来进行管理。当Python 访问一个变量，函数或模块时，有一个体系决定去哪里寻找。</p>
+<p>Python 的命名空间使用字典来进行管理。当Python
+访问一个变量，函数或模块时，有一个体系决定去哪里寻找。</p>
 <ul>
-<li>首先，Python 查找 <code>locals()</code> 数组，其内部保存了所有本地变量的条目。Python 对本地变量的查询做了很多优化，同时这也是整个查询过程中唯一不需要进行字典查询的部分。</li>
-<li>如果不在本地数组里，那么就会查找 <code>globals()</code> 字典。如果找不到则会搜索 <code>__buildin__</code>对象（模块对象，在搜索 <code>__buildin__</code>的一个属性时，其实是在搜索它的 <code>locals()</code>字典）</li>
+<li>首先，Python 查找 <code>locals()</code>
+数组，其内部保存了所有本地变量的条目。Python
+对本地变量的查询做了很多优化，同时这也是整个查询过程中唯一不需要进行字典查询的部分。</li>
+<li>如果不在本地数组里，那么就会查找 <code>globals()</code>
+字典。如果找不到则会搜索 <code>__buildin__</code>对象（模块对象，在搜索
+<code>__buildin__</code>的一个属性时，其实是在搜索它的
+<code>locals()</code>字典）</li>
 </ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f1(10)</span></span><br><span class="line"><span class="string">    154 ns ± 3.93 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> math.sin(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f2(10)</span></span><br><span class="line"><span class="string">    126 ns ± 0.974 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> sin(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">(x,sin=sin)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f3(10)</span></span><br><span class="line"><span class="string">    138 ns ± 1.85 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> sin(x)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f1(10)</span></span><br><span class="line"><span class="string">    154 ns ± 3.93 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> math.sin(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f2(10)</span></span><br><span class="line"><span class="string">    126 ns ± 0.974 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> sin(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">(x,sin=sin)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    %timeit f3(10)</span></span><br><span class="line"><span class="string">    138 ns ± 1.85 ns per loop</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> sin(x)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>将 sin 函数作为本地函数慢于直接调用 global 中的 sin。此处存疑！</p>
 </blockquote>
 <h2 id="迭代器和生成器">迭代器和生成器</h2>
-<p>Python 中的 for 循环要求被循环的对象支持迭代。使用 Python 内建的 <code>iter()</code> 函数便可以生成迭代器。对于列表，元组，字典这些对象，其会返回一个由元素或者 key 组成的迭代器。对于复杂的对象，则返回对象内部的 <code>__iter__</code> 属性。</p>
-<p>对于一个迭代器，可以调用 <code>__next__()</code> 来获取新值，直到 <code>StopIteration</code> 异常被抛出。</p>
-<p>迭代器只有在被调用时才会进行计算，因此在对大量数据流处理时可以显著节省内存。标准库中的 <code>itertools</code> 库提供了很多便于迭代器使用的工具：</p>
+<p>Python 中的 for 循环要求被循环的对象支持迭代。使用 Python 内建的
+<code>iter()</code>
+函数便可以生成迭代器。对于列表，元组，字典这些对象，其会返回一个由元素或者
+key 组成的迭代器。对于复杂的对象，则返回对象内部的 <code>__iter__</code>
+属性。</p>
+<p>对于一个迭代器，可以调用 <code>__next__()</code> 来获取新值，直到
+<code>StopIteration</code> 异常被抛出。</p>
+<p>迭代器只有在被调用时才会进行计算，因此在对大量数据流处理时可以显著节省内存。标准库中的
+<code>itertools</code> 库提供了很多便于迭代器使用的工具：</p>
 <ul>
 <li><code>imap, ireduce, ifilter, izip</code></li>
 <li><code>islice</code> 允许对一个无穷生成器切片</li>
@@ -487,8 +505,13 @@
 <li><code>cycle</code> 通过不断重复将一个有穷生成器变为无穷</li>
 </ul>
 <h2 id="参考文献">参考文献</h2>
-<p>[1]M. Micha, I. Ozsvald, S. Hu, and X. Xu, <em>Python高性能编程 / Python gao xing neng bian cheng</em>. 人民邮电出版社, Beijing: Ren Min You Dian Chu Ban She, 2017.</p>
-<p>[2]“bisect — 数组二分查找算法 — Python 3.10.4 文档,” <em><a href="http://docs.python.org" target="_blank" rel="noopener">docs.python.org</a></em>. <a href="https://docs.python.org/zh-cn/3/library/bisect.html" target="_blank" rel="noopener">https://docs.python.org/zh-cn/3/library/bisect.html</a> (accessed Apr. 07, 2022).</p>
+<p>[1]M. Micha, I. Ozsvald, S. Hu, and X. Xu, <em>Python高性能编程 /
+Python gao xing neng bian cheng</em>. 人民邮电出版社, Beijing: Ren Min
+You Dian Chu Ban She, 2017.</p>
+<p>[2]“bisect --- 数组二分查找算法 — Python 3.10.4 文档,”
+<em>docs.python.org</em>.
+https://docs.python.org/zh-cn/3/library/bisect.html (accessed Apr. 07,
+2022).</p>
 
     </div>
 
@@ -522,7 +545,7 @@
       <div class="popular-posts-title"><a href="\66f3a0f6.html" rel="bookmark">创新港体育场馆自动预定</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(Python)</a></div>
+      <div class="popular-posts-title"><a href="\a6c8a314.html" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
     </li>
   </ul>
 
@@ -664,7 +687,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Python 高性能编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-text">性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间分析"><span class="nav-text">时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间分析"><span class="nav-text">空间分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表和元组"><span class="nav-text">列表和元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组"><span class="nav-text">元组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典与集合"><span class="nav-text">字典与集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器和生成器"><span class="nav-text">迭代器和生成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-高性能编程"><span class="nav-text">Python 高性能编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-text">性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间分析"><span class="nav-text">时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间分析"><span class="nav-text">空间分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表和元组"><span class="nav-text">列表和元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组"><span class="nav-text">元组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典与集合"><span class="nav-text">字典与集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器和生成器"><span class="nav-text">迭代器和生成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1041,13 +1064,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1171,7 +1194,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

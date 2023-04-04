@@ -33,12 +33,12 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="智能体对战目标检测 手动标注数据集及视频分割程序下载见文章末。">
+  <meta name="description" content="智能体对战目标检测 手动标注数据集及视频分割程序下载见文章末。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="王者荣耀目标检测--Yolov5实现">
 <meta property="og:url" content="https://www.kezhi.tech/86b4b2c0.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="智能体对战目标检测 手动标注数据集及视频分割程序下载见文章末。">
+<meta property="og:description" content="智能体对战目标检测 手动标注数据集及视频分割程序下载见文章末。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.kezhi.tech/img/202211291652294.jpg">
 <meta property="og:image" content="https://download.kezhi.tech/img/202201231231485.png">
@@ -337,85 +337,149 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>智能体对战目标检测</h1>
+        <h1 id="智能体对战目标检测">智能体对战目标检测</h1>
 <p>手动标注数据集及视频分割程序下载见文章末。</p>
-<img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;">
+<p><img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;" /></p>
 <a id="more"></a>
 <p>识别演示视频：</p>
-<iframe src="//player.bilibili.com/player.html?aid=210959614&amp;bvid=BV1Ya411m7mx&amp;cid=490755155&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-<h2 id="1-引言">1. 引言</h2>
-<h3 id="1-1-问题背景">1.1 问题背景</h3>
-<p>强化学习过去在博弈领域取得了很高的成就。如在围棋上打败人类的Alpha Go (Silver, D. <a href="http://et.al" target="_blank" rel="noopener">et.al</a>., 2016)，经过数天自博弈即可在多种棋类游戏上战胜顶尖人类的Alpha Zero (Silver, D. <a href="http://et.al" target="_blank" rel="noopener">et.al</a>., 2018)，以及在星际争霸游戏中打败人类的Alpha Star (Vinyals, O. <a href="http://et.al" target="_blank" rel="noopener">et.al</a>., 2019)。王者荣耀中达到职业选手水平的觉悟Ai (Wu, B., 2019)。强化学习的发展使得人工智能在游戏对战领域取得了越来越好的成绩。</p>
-<p>但同时，上述智能体解决的问题中，要么环境较为简单（如围棋，象棋等棋牌类游戏），要么在智能体决策的过程时的输入经过了特定的处理。如Alpha Star的输入中包含了很多无法直接从屏幕上观测到的数据 (Vinyals, O. <a href="http://et.al" target="_blank" rel="noopener">et.al</a>., 2019)。而要训练出更加具有通用性的智能体，就需要环境的输入更加一般，通用。计算机视觉成为了一种很好的选择。</p>
+<iframe src="//player.bilibili.com/player.html?aid=210959614&amp;bvid=BV1Ya411m7mx&amp;cid=490755155&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="引言">1. 引言</h2>
+<h3 id="问题背景">1.1 问题背景</h3>
+<p>强化学习过去在博弈领域取得了很高的成就。如在围棋上打败人类的Alpha Go
+(Silver, D. et.al.,
+2016)，经过数天自博弈即可在多种棋类游戏上战胜顶尖人类的Alpha Zero
+(Silver, D. et.al., 2018)，以及在星际争霸游戏中打败人类的Alpha Star
+(Vinyals, O. et.al., 2019)。王者荣耀中达到职业选手水平的觉悟Ai (Wu, B.,
+2019)。强化学习的发展使得人工智能在游戏对战领域取得了越来越好的成绩。</p>
+<p>但同时，上述智能体解决的问题中，要么环境较为简单（如围棋，象棋等棋牌类游戏），要么在智能体决策的过程时的输入经过了特定的处理。如Alpha
+Star的输入中包含了很多无法直接从屏幕上观测到的数据 (Vinyals, O. et.al.,
+2019)。而要训练出更加具有通用性的智能体，就需要环境的输入更加一般，通用。计算机视觉成为了一种很好的选择。</p>
 <p>在大量的智能体对战场景中，视觉信息是最重要，包含信息量最丰富的信息。如在游戏中，画面信息是玩家获取到的主要信息；在棋牌博弈中，场上的局势和对手的表情信息等都是视觉信息；在军事对战环境中，大量传感器捕获到的都是类视觉信息。因此，如何将视觉信息转换为环境描述信息发送给智能体进行决策具有很强的现实意义。</p>
 <p>其中，目标检测是视觉信息转换中很重要的一环。不论是在虚拟游戏环境中，还是在现实环境中，确认地形，友方位置，地方位置都是重中之重。这对智能体之后的动作决策至关重要。因此，本文从游戏对战场景中的目标检测出发，训练一个可以在游戏环境中检测敌我双方智能体单位，中立单位以及环境特征的神经网络模型，实现对场景中的重要主体的检测。</p>
-<h2 id="2-方法原理">2. 方法原理</h2>
-<p>本文使用 YoloV5(Ultralytics) 来构建目标检测网络，对游戏场景中的主体进行识别。</p>
+<h2 id="方法原理">2. 方法原理</h2>
+<p>本文使用 YoloV5(Ultralytics)
+来构建目标检测网络，对游戏场景中的主体进行识别。</p>
 <p>Yolov5 的网络结构如下图所示：</p>
-<p><img src="https://download.kezhi.tech/img/202201231231485.png" alt="图2-1 Yolov5网络结构"></p>
-<p>从Yolov5的网络结构图，可以看出，还是分为<strong>输入端 Input、主干 Backbone、脖颈 Neck、预测 Prediction</strong>四个部分。接下来从这四个部分分别介绍该网络</p>
-<h3 id="2-1-输入端-input">2.1 输入端 Input</h3>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231231485.png"
+alt="图2-1 Yolov5网络结构" />
+<figcaption aria-hidden="true">图2-1 Yolov5网络结构</figcaption>
+</figure>
+<p>从Yolov5的网络结构图，可以看出，还是分为<strong>输入端 Input、主干
+Backbone、脖颈 Neck、预测
+Prediction</strong>四个部分。接下来从这四个部分分别介绍该网络</p>
+<h3 id="输入端-input">2.1 输入端 Input</h3>
 <p>Yolov5的输入端采用了和Yolov4一样的Mosaic数据增强的方式。Mosaic数据增强提出的作者也是来自Yolov5团队的成员，不过，随机缩放、随机裁剪、随机排布的方式进行拼接，对于小目标的检测效果还是很不错的。</p>
 <p>在Yolo算法中，针对不同的数据集，都会有初始设定长宽的锚框。在网络训练中，网络在初始锚框的基础上输出预测框，进而和真实框进行比对，计算两者差距，再反向更新，迭代网络参数。在Yolov3、Yolov4中，训练不同的数据集时，计算初始锚框的值是通过单独的程序运行的。但Yolov5中将此功能嵌入到代码中，每次训练时，自适应的计算不同训练集中的最佳锚框值。</p>
-<h3 id="2-2-主干-backbone">2.2 主干 Backbone</h3>
-<h4 id="2-2-1-focus结构">2.2.1 Focus结构</h4>
+<h3 id="主干-backbone">2.2 主干 Backbone</h3>
+<h4 id="focus结构">2.2.1 Focus结构</h4>
 <p>Focus模块在v5中是图片进入backbone前，对图片进行切片操作，具体操作是在一张图片中每隔一个像素拿到一个值，类似于邻近下采样，这样就拿到了四张图片，四张图片互补，长的差不多，但是没有信息丢失，这样一来，将W、H信息就集中到了通道空间，输入通道扩充了4倍，即拼接起来的图片相对于原先的RGB三通道模式变成了12个通道，最后将得到的新图片再经过卷积操作，最终得到了没有信息丢失情况下的二倍下采样特征图。其网络结构如下：</p>
-<p><img src="https://download.kezhi.tech/img/202201231315193.png" alt="图2-2 Yolov5中Focus结构"></p>
-<p>以yolov5s为例，原始的640 × 640 × 3的图像输入Focus结构，采用切片操作，先变成320 × 320 × 12的特征图，再经过一次卷积操作，最终变成320 × 320 × 32的特征图。切片操作如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/2021011616173324.png" alt="图2-3 切片操作"></p>
-<h4 id="2-2-2-csp结构">2.2.2 CSP结构</h4>
-<p>Yolov4网络结构中，借鉴了CSPNet的设计思路，在主干网络中设计了CSP结构。Yolov5与Yolov4不同点在于，Yolov4中只有主干网络使用了CSP结构。而Yolov5中设计了两种CSP结构，以Yolov5s网络为例，CSP1_X结构应用于Backbone主干网络，另一种CSP2_X结构则应用于Neck中。其在保证准确 度的前提下有效减少了计算量。其网络结构如下图所示</p>
-<p><img src="https://download.kezhi.tech/img/202201231322235.png" alt="图2-4 Yolov5中的CSP结构"></p>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231315193.png"
+alt="图2-2 Yolov5中Focus结构" />
+<figcaption aria-hidden="true">图2-2 Yolov5中Focus结构</figcaption>
+</figure>
+<p>以yolov5s为例，原始的640 × 640 ×
+3的图像输入Focus结构，采用切片操作，先变成320 × 320 ×
+12的特征图，再经过一次卷积操作，最终变成320 × 320 ×
+32的特征图。切片操作如下：</p>
+<figure>
+<img src="https://img-blog.csdnimg.cn/2021011616173324.png"
+alt="图2-3 切片操作" />
+<figcaption aria-hidden="true">图2-3 切片操作</figcaption>
+</figure>
+<h4 id="csp结构">2.2.2 CSP结构</h4>
+<p>Yolov4网络结构中，借鉴了CSPNet的设计思路，在主干网络中设计了CSP结构。Yolov5与Yolov4不同点在于，Yolov4中只有主干网络使用了CSP结构。而Yolov5中设计了两种CSP结构，以Yolov5s网络为例，CSP1_X结构应用于Backbone主干网络，另一种CSP2_X结构则应用于Neck中。其在保证准确
+度的前提下有效减少了计算量。其网络结构如下图所示</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231322235.png"
+alt="图2-4 Yolov5中的CSP结构" />
+<figcaption aria-hidden="true">图2-4 Yolov5中的CSP结构</figcaption>
+</figure>
 <p>其中，CBL结构和Resunit 结构如下图所示：</p>
-<p><img src="https://download.kezhi.tech/img/202201231322633.png" alt="图2-5 CBL结构和Resunit"></p>
-<h4 id="2-2-3-spp结构">2.2.3 SPP结构</h4>
-<p>SPP 模块借鉴了 SPPNet(Spatial Pyramid Pooling Network)，由四个并行的分 支组成，采用多种不同大小的卷积核对图片进行卷积，然后将卷积结果进行融合， 有效扩大了模型的感受野，使得模型可以处理图片大小差距较大的情况。其网络结构如下图所示：</p>
-<p><img src="https://download.kezhi.tech/img/202201231326040.png" alt="图2-6 Yolov5中SPP结构"></p>
-<h3 id="2-3-脖颈-neck">2.3 脖颈 Neck</h3>
-<p>Yolov5 的 Neck 部分采用了 PANet 结构，Neck 主要用于生成特征金字塔。特征金字塔会增强模型对于不同缩放尺度对象的检测，从而能够识别不同大小和尺度的同一个物体。</p>
-<p>PANet 结构是在FPN的基础上引入了 Bottom-up path augmentation 结构。FPN主要是通过融合高低层特征提升目标检测的效果，尤其可以提高小尺寸目标的检测效果。Bottom-up path augmentation结构可以充分利用网络浅特征进行分割，网络浅层特征信息对于目标检测非常重要，因为目标检测是像素级别的分类浅层特征多是边缘形状等特征。PANet 在 FPN 的基础上加了一个自底向上方向的增强，使得顶层 feature map 也可以享受到底层带来的丰富的位置信息，从而提升了大物体的检测效果。</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231322633.png"
+alt="图2-5 CBL结构和Resunit" />
+<figcaption aria-hidden="true">图2-5 CBL结构和Resunit</figcaption>
+</figure>
+<h4 id="spp结构">2.2.3 SPP结构</h4>
+<p>SPP 模块借鉴了 SPPNet(Spatial Pyramid Pooling
+Network)，由四个并行的分
+支组成，采用多种不同大小的卷积核对图片进行卷积，然后将卷积结果进行融合，
+有效扩大了模型的感受野，使得模型可以处理图片大小差距较大的情况。其网络结构如下图所示：</p>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231326040.png"
+alt="图2-6 Yolov5中SPP结构" />
+<figcaption aria-hidden="true">图2-6 Yolov5中SPP结构</figcaption>
+</figure>
+<h3 id="脖颈-neck">2.3 脖颈 Neck</h3>
+<p>Yolov5 的 Neck 部分采用了 PANet 结构，Neck
+主要用于生成特征金字塔。特征金字塔会增强模型对于不同缩放尺度对象的检测，从而能够识别不同大小和尺度的同一个物体。</p>
+<p>PANet 结构是在FPN的基础上引入了 Bottom-up path augmentation
+结构。FPN主要是通过融合高低层特征提升目标检测的效果，尤其可以提高小尺寸目标的检测效果。Bottom-up
+path
+augmentation结构可以充分利用网络浅特征进行分割，网络浅层特征信息对于目标检测非常重要，因为目标检测是像素级别的分类浅层特征多是边缘形状等特征。PANet
+在 FPN 的基础上加了一个自底向上方向的增强，使得顶层 feature map
+也可以享受到底层带来的丰富的位置信息，从而提升了大物体的检测效果。</p>
 <p>此外，Yolov5的Neck结构中，采用借鉴CSPnet设计的CSP2结构，加强网络特征融合的能力。</p>
-<h3 id="2-4-预测-prediction">2.4 预测 Prediction</h3>
-<h4 id="2-4-1-bounding-box损失函数">2.4.1 Bounding box损失函数</h4>
-<p>Yolov5中采用GIOU_Loss做Bounding box的损失函数。GIOU不仅关注重叠区域，还关注其他的非重合区域，能更好的反映两者的重合 度。</p>
-<h4 id="2-4-2-加权非极大抑制nms">2.4.2 加权非极大抑制NMS</h4>
-<p>在目标检测的后处理过程中，针对很多目标框的筛选，通常需要NMS操作。Yolov5中采用加权NMS的方式来剔除边框，与传统的非极大值抑制相 比，加权非极大值抑制并非直接将边框与阈值相比较来进行筛选，而是根据网络预测结果的置信度进行加权得到最终的目标检测矩形框。</p>
-<h2 id="3-数据集及评测指标">3. 数据集及评测指标</h2>
-<h3 id="3-1-数据集准备">3.1 数据集准备</h3>
+<h3 id="预测-prediction">2.4 预测 Prediction</h3>
+<h4 id="bounding-box损失函数">2.4.1 Bounding box损失函数</h4>
+<p>Yolov5中采用GIOU_Loss做Bounding
+box的损失函数。GIOU不仅关注重叠区域，还关注其他的非重合区域，能更好的反映两者的重合
+度。</p>
+<h4 id="加权非极大抑制nms">2.4.2 加权非极大抑制NMS</h4>
+<p>在目标检测的后处理过程中，针对很多目标框的筛选，通常需要NMS操作。Yolov5中采用加权NMS的方式来剔除边框，与传统的非极大值抑制相
+比，加权非极大值抑制并非直接将边框与阈值相比较来进行筛选，而是根据网络预测结果的置信度进行加权得到最终的目标检测矩形框。</p>
+<h2 id="数据集及评测指标">3. 数据集及评测指标</h2>
+<h3 id="数据集准备">3.1 数据集准备</h3>
 <p>本文采用手动标注的游戏画面数据集，游戏画面采用王者荣耀匹配赛的一局游戏中的随机抽帧获得，一共标注8类主体，其类别和标签如下表所示：</p>
-<center>表3-1 王者荣耀画面标注数据集类别</center>
+<center>
+表3-1 王者荣耀画面标注数据集类别
+</center>
 <table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:center">类别</th>
-<th style="text-align:center">英雄</th>
-<th style="text-align:center">小兵</th>
-<th style="text-align:center">野怪</th>
-<th style="text-align:center">防御塔</th>
-<th style="text-align:center">草丛</th>
-<th style="text-align:center">龙</th>
-<th style="text-align:center">红蓝buff</th>
-<th style="text-align:center">血包</th>
+<tr class="header">
+<th style="text-align: center;">类别</th>
+<th style="text-align: center;">英雄</th>
+<th style="text-align: center;">小兵</th>
+<th style="text-align: center;">野怪</th>
+<th style="text-align: center;">防御塔</th>
+<th style="text-align: center;">草丛</th>
+<th style="text-align: center;">龙</th>
+<th style="text-align: center;">红蓝buff</th>
+<th style="text-align: center;">血包</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">标注</td>
-<td style="text-align:center">hero</td>
-<td style="text-align:center">dogface</td>
-<td style="text-align:center">monster</td>
-<td style="text-align:center">tower</td>
-<td style="text-align:center">grass</td>
-<td style="text-align:center">dragon</td>
-<td style="text-align:center">buff</td>
-<td style="text-align:center">blood</td>
+<tr class="odd">
+<td style="text-align: center;">标注</td>
+<td style="text-align: center;">hero</td>
+<td style="text-align: center;">dogface</td>
+<td style="text-align: center;">monster</td>
+<td style="text-align: center;">tower</td>
+<td style="text-align: center;">grass</td>
+<td style="text-align: center;">dragon</td>
+<td style="text-align: center;">buff</td>
+<td style="text-align: center;">blood</td>
 </tr>
 </tbody>
 </table>
 <p>其中，每一种类别的标注样本数量如下表所示：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>类别</th>
 <th>英雄</th>
 <th>小兵</th>
@@ -428,7 +492,7 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>训练集</td>
 <td>319</td>
 <td>101</td>
@@ -439,7 +503,7 @@
 <td>30</td>
 <td>6</td>
 </tr>
-<tr>
+<tr class="even">
 <td>验证集</td>
 <td>90</td>
 <td>32</td>
@@ -452,118 +516,169 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-2-评测指标">3.2 评测指标</h3>
-<p>模型的评价指标主要由两部分构成，预测准确率（Prediction）和召回率（Recall）。其中：</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow></mfrac><mspace linebreak="newline"></mspace><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Prediction=\frac{TP}{TP+TN}\\
+<h3 id="评测指标">3.2 评测指标</h3>
+<p>模型的评价指标主要由两部分构成，预测准确率（Prediction）和召回率（Recall）。其中：
+<span class="math display">\[
+Prediction=\frac{TP}{TP+TN}\\
 Recall=\frac{TP}{TP+FP}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>在目标检测中，通常用各类别的平均准确率(Average Precision，AP)来衡量算 法的性能，它的值由查准率(Precision)和查全率(Recall)共同决定，根据式 算出的 Recall 和 Precision 可以作出一条 P-R 曲线，该曲线 与 X 轴围成的面积即为AP 值，公式如下：</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>P</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><msub><mi>l</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><msub><mi>l</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>∗</mo><mi>P</mi><mi>r</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><msub><mi>l</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">AP=\sum_{i=1}^{n-1}(Recall_{i+1}-Recall_{i})*Prediction(Recall_{i+1})
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0787820000000004em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011130000000004em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
-<p>本文实验中使用 AP 值衡量网络对每一类物体的检测性能，AP 值越 高代表网络对该类别的检测能力越好；使用 mAP 指示网络对整体数据集的检测 能力，mAP 越高代表网络在此数据集上的表现越好。</p>
-<h2 id="4-实验结果分析">4. 实验结果分析</h2>
-<h3 id="4-1-实验指标结果分析">4.1 实验指标结果分析</h3>
+\]</span> 在目标检测中，通常用各类别的平均准确率(Average
+Precision，AP)来衡量算
+法的性能，它的值由查准率(Precision)和查全率(Recall)共同决定，根据式
+算出的 Recall 和 Precision 可以作出一条 P-R 曲线，该曲线 与 X
+轴围成的面积即为AP 值，公式如下： <span class="math display">\[
+AP=\sum_{i=1}^{n-1}(Recall_{i+1}-Recall_{i})*Prediction(Recall_{i+1})
+\]</span> 本文实验中使用 AP 值衡量网络对每一类物体的检测性能，AP 值越
+高代表网络对该类别的检测能力越好；使用 mAP 指示网络对整体数据集的检测
+能力，mAP 越高代表网络在此数据集上的表现越好。</p>
+<h2 id="实验结果分析">4. 实验结果分析</h2>
+<h3 id="实验指标结果分析">4.1 实验指标结果分析</h3>
 <p>本文使用上文中的数据集在Yolov5网络上训练300个epoch，最终得到对各个类别的检测性能如下表所示：</p>
-<center>表4-1 测试性能表现</center>
+<center>
+表4-1 测试性能表现
+</center>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">Class</th>
-<th style="text-align:center">Labels</th>
-<th style="text-align:center">P</th>
-<th style="text-align:center">R</th>
-<th style="text-align:center">mAP@.5</th>
+<tr class="header">
+<th style="text-align: center;">Class</th>
+<th style="text-align: center;">Labels</th>
+<th style="text-align: center;">P</th>
+<th style="text-align: center;">R</th>
+<th style="text-align: center;">mAP@.5</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">all</td>
-<td style="text-align:center">256</td>
-<td style="text-align:center">0.928</td>
-<td style="text-align:center">0.758</td>
-<td style="text-align:center">0.887</td>
+<tr class="odd">
+<td style="text-align: center;">all</td>
+<td style="text-align: center;">256</td>
+<td style="text-align: center;">0.928</td>
+<td style="text-align: center;">0.758</td>
+<td style="text-align: center;">0.887</td>
 </tr>
-<tr>
-<td style="text-align:center">hero</td>
-<td style="text-align:center">90</td>
-<td style="text-align:center">0.959</td>
-<td style="text-align:center">0.789</td>
-<td style="text-align:center">0.926</td>
+<tr class="even">
+<td style="text-align: center;">hero</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">0.959</td>
+<td style="text-align: center;">0.789</td>
+<td style="text-align: center;">0.926</td>
 </tr>
-<tr>
-<td style="text-align:center">grass</td>
-<td style="text-align:center">91</td>
-<td style="text-align:center">0.828</td>
-<td style="text-align:center">0.637</td>
-<td style="text-align:center">0.775</td>
+<tr class="odd">
+<td style="text-align: center;">grass</td>
+<td style="text-align: center;">91</td>
+<td style="text-align: center;">0.828</td>
+<td style="text-align: center;">0.637</td>
+<td style="text-align: center;">0.775</td>
 </tr>
-<tr>
-<td style="text-align:center">dogface</td>
-<td style="text-align:center">32</td>
-<td style="text-align:center">0.839</td>
-<td style="text-align:center">0.688</td>
-<td style="text-align:center">0.824</td>
+<tr class="even">
+<td style="text-align: center;">dogface</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">0.839</td>
+<td style="text-align: center;">0.688</td>
+<td style="text-align: center;">0.824</td>
 </tr>
-<tr>
-<td style="text-align:center">tower</td>
-<td style="text-align:center">18</td>
-<td style="text-align:center">0.988</td>
-<td style="text-align:center">0.667</td>
-<td style="text-align:center">0.833</td>
+<tr class="odd">
+<td style="text-align: center;">tower</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">0.988</td>
+<td style="text-align: center;">0.667</td>
+<td style="text-align: center;">0.833</td>
 </tr>
-<tr>
-<td style="text-align:center">buff</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0.916</td>
-<td style="text-align:center">0.995</td>
+<tr class="even">
+<td style="text-align: center;">buff</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.916</td>
+<td style="text-align: center;">0.995</td>
 </tr>
-<tr>
-<td style="text-align:center">monster</td>
-<td style="text-align:center">12</td>
-<td style="text-align:center">0.997</td>
-<td style="text-align:center">0.667</td>
-<td style="text-align:center">0.851</td>
+<tr class="odd">
+<td style="text-align: center;">monster</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">0.997</td>
+<td style="text-align: center;">0.667</td>
+<td style="text-align: center;">0.851</td>
 </tr>
-<tr>
-<td style="text-align:center">blood</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0.935</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0.995</td>
+<tr class="even">
+<td style="text-align: center;">blood</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.935</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.995</td>
 </tr>
-<tr>
-<td style="text-align:center">dragon</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">0.875</td>
-<td style="text-align:center">0.701</td>
-<td style="text-align:center">0.899</td>
+<tr class="odd">
+<td style="text-align: center;">dragon</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">0.875</td>
+<td style="text-align: center;">0.701</td>
+<td style="text-align: center;">0.899</td>
 </tr>
 </tbody>
 </table>
 <p>模型测试结果如下图所示：</p>
-<center><img src="https://download.kezhi.tech/img/202201231714177.png" height="300"></center><br><center>图4-1 模型预测准确率与置信度曲线</center>
-<center><img src="https://download.kezhi.tech/img/202201231717272.png" height="300"></center><br><center>图4-2 模型召回率与置信度曲线</center>
-<center><img src="https://download.kezhi.tech/img/202201231718078.png" height="300"></center><br><center>图4-3 模型P-R曲线</center>
+<center>
+<img src="https://download.kezhi.tech/img/202201231714177.png" height=300>
+</center>
+<br>
+<center>
+图4-1 模型预测准确率与置信度曲线
+</center>
+<center>
+<img src="https://download.kezhi.tech/img/202201231717272.png" height=300>
+</center>
+<br>
+<center>
+图4-2 模型召回率与置信度曲线
+</center>
+<center>
+<img src="https://download.kezhi.tech/img/202201231718078.png" height=300>
+</center>
+<br>
+<center>
+图4-3 模型P-R曲线
+</center>
 <p>由上述实验结果可以看出，模型的总体检测准确率为92.8%，召回率为75.8%，平均准确率为88.7%。性能表现较好。但在具体类别上的目标检测性能差异较大。具体来说，在英雄，防御塔，红蓝buff，野怪等特征较明显，并且数据量相对较大的主体上的识别能力较好。</p>
 <p>此外，从总体上来看，模型的识别准确率较好，而召回率较差。也就是很少将检测目标类型识别错，但并非所有的目标都能够识别出来。结合可视化结果来看，初步推断是由于标记的数据集分布不平稳以及数据量不够充足导致的。后续可以考虑通过补充数据集来提升模型的检测性能。</p>
-<h3 id="4-2-可视化实验结果">4.2 可视化实验结果</h3>
+<h3 id="可视化实验结果">4.2 可视化实验结果</h3>
 <p>模型在验证集上的部分检测结果和标记数据如下图所示：</p>
-<p><img src="https://download.kezhi.tech/img/202201231725232.jpg" alt="图4-4 模型在验证集上的预测结果"></p>
-<p><img src="https://download.kezhi.tech/img/202201231725560.jpg" alt="图4-5 验证集上的手动标记数据"></p>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231725232.jpg"
+alt="图4-4 模型在验证集上的预测结果" />
+<figcaption aria-hidden="true">图4-4
+模型在验证集上的预测结果</figcaption>
+</figure>
+<figure>
+<img src="https://download.kezhi.tech/img/202201231725560.jpg"
+alt="图4-5 验证集上的手动标记数据" />
+<figcaption aria-hidden="true">图4-5 验证集上的手动标记数据</figcaption>
+</figure>
 <p>此外，本文还将训练好的模型在另一场英雄不同的游戏视频中进行了测试，最终的测试结果视频链接如下：</p>
-<p><a href="https://www.bilibili.com/video/BV1Ya411m7mx?share_source=copy_web" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Ya411m7mx?share_source=copy_web</a></p>
+<p>https://www.bilibili.com/video/BV1Ya411m7mx?share_source=copy_web</p>
 <p>从视频中可以看出，虽然本场游戏视频中的英雄未在训练集中出现，但模型依然可以很好的定位和判别出相应主体为英雄类别。说明模型在游戏美术素材上的泛化性能较好，即使对于未曾训练的贴图，也可以很好的判别出相应的主体。</p>
-<h2 id="5-结论">5. 结论</h2>
+<h2 id="结论">5. 结论</h2>
 <p>本文使用Yolov5网络构建游戏场景中主体的目标检测，通过图像识别的方式成功对游戏画面中的重要主体进行了定位了判别，使用少量数据训练出的模型最终平均准确率在80%以上。如果可以收集更多的数据，那么最终的检测效果还可以继续提升。而随着目标检测技术的不断发展，图像目标检测的准确率也在不断地提升，检测用时也不断缩短。这为智能体智能决策和作战提供了新的数据处理方法和思考。未来的智能体也许可以基于该技术，主要依靠直接的图像输入而非人工转换数据便可以达到很高的智能水平。</p>
 <h2 id="参考文献">参考文献</h2>
-<ol>
-<li>Silver, D., Huang, A., Maddison, C.J., Guez, A., Sifre, L., Van Den Driessche, G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V., Lanctot, M. and Dieleman, S., 2016. Mastering the game of Go with deep neural networks and tree search. <em>nature</em>, <em>529</em>(7587), pp.484-489.</li>
-<li>Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A., Lanctot, M., Sifre, L., Kumaran, D., Graepel, T. and Lillicrap, T., 2018. A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play. <em>Science</em>, <em>362</em>(6419), pp.1140-1144.</li>
-<li>Vinyals, O., Babuschkin, I., Czarnecki, W.M., Mathieu, M., Dudzik, A., Chung, J., Choi, D.H., Powell, R., Ewalds, T., Georgiev, P. and Oh, J., 2019. Grandmaster level in StarCraft II using multi-agent reinforcement learning. <em>Nature</em>, <em>575</em>(7782), pp.350-354.</li>
-<li>Wu, B., 2019, July. Hierarchical macro strategy model for moba game ai. In <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> (Vol. 33, No. 01, pp. 1206-1213).</li>
-<li>Ultralytics. (n.d.). <em>Ultralytics</em>. [online] Available at: <a href="https://ultralytics.com/yolov5" target="_blank" rel="noopener">https://ultralytics.com/yolov5</a>.</li>
-<li>Bochkovskiy, A., Wang, C.Y. and Liao, H.Y.M., 2020. Yolov4: Optimal speed and accuracy of object detection. <em>arXiv preprint arXiv:2004.10934</em>.</li>
+<ol type="1">
+<li>Silver, D., Huang, A., Maddison, C.J., Guez, A., Sifre, L., Van Den
+Driessche, G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V.,
+Lanctot, M. and Dieleman, S., 2016. Mastering the game of Go with deep
+neural networks and tree search. <em>nature</em>, <em>529</em>(7587),
+pp.484-489.</li>
+<li>Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M.,
+Guez, A., Lanctot, M., Sifre, L., Kumaran, D., Graepel, T. and
+Lillicrap, T., 2018. A general reinforcement learning algorithm that
+masters chess, shogi, and Go through self-play. <em>Science</em>,
+<em>362</em>(6419), pp.1140-1144.</li>
+<li>Vinyals, O., Babuschkin, I., Czarnecki, W.M., Mathieu, M., Dudzik,
+A., Chung, J., Choi, D.H., Powell, R., Ewalds, T., Georgiev, P. and Oh,
+J., 2019. Grandmaster level in StarCraft II using multi-agent
+reinforcement learning. <em>Nature</em>, <em>575</em>(7782),
+pp.350-354.</li>
+<li>Wu, B., 2019, July. Hierarchical macro strategy model for moba game
+ai. In <em>Proceedings of the AAAI Conference on Artificial
+Intelligence</em> (Vol. 33, No. 01, pp. 1206-1213).</li>
+<li>Ultralytics. (n.d.). <em>Ultralytics</em>. [online] Available at:
+https://ultralytics.com/yolov5.</li>
+<li>Bochkovskiy, A., Wang, C.Y. and Liao, H.Y.M., 2020. Yolov4: Optimal
+speed and accuracy of object detection. <em>arXiv preprint
+arXiv:2004.10934</em>.</li>
 </ol>
 <h2 id="附件下载">附件下载</h2>
 <p>手动标注数据集及视频分割程序：<a class="btn" href="https://server.kezhi.tech:9160/f/9c47b7368cde4dcdbae5/?dl=1" target="_blank" rel="noopener">
@@ -725,7 +840,7 @@ Recall=\frac{TP}{TP+FP}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">智能体对战目标检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-引言"><span class="nav-text">1. 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-问题背景"><span class="nav-text">1.1 问题背景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-方法原理"><span class="nav-text">2. 方法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-输入端-input"><span class="nav-text">2.1 输入端 Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-主干-backbone"><span class="nav-text">2.2 主干 Backbone</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-focus结构"><span class="nav-text">2.2.1 Focus结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-csp结构"><span class="nav-text">2.2.2 CSP结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-spp结构"><span class="nav-text">2.2.3 SPP结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-脖颈-neck"><span class="nav-text">2.3 脖颈 Neck</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-预测-prediction"><span class="nav-text">2.4 预测 Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-bounding-box损失函数"><span class="nav-text">2.4.1 Bounding box损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-加权非极大抑制nms"><span class="nav-text">2.4.2 加权非极大抑制NMS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据集及评测指标"><span class="nav-text">3. 数据集及评测指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-数据集准备"><span class="nav-text">3.1 数据集准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-评测指标"><span class="nav-text">3.2 评测指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-实验结果分析"><span class="nav-text">4. 实验结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-实验指标结果分析"><span class="nav-text">4.1 实验指标结果分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-可视化实验结果"><span class="nav-text">4.2 可视化实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-结论"><span class="nav-text">5. 结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件下载"><span class="nav-text">附件下载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#智能体对战目标检测"><span class="nav-text">智能体对战目标检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">1. 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题背景"><span class="nav-text">1.1 问题背景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法原理"><span class="nav-text">2. 方法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入端-input"><span class="nav-text">2.1 输入端 Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主干-backbone"><span class="nav-text">2.2 主干 Backbone</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#focus结构"><span class="nav-text">2.2.1 Focus结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csp结构"><span class="nav-text">2.2.2 CSP结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spp结构"><span class="nav-text">2.2.3 SPP结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脖颈-neck"><span class="nav-text">2.3 脖颈 Neck</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测-prediction"><span class="nav-text">2.4 预测 Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bounding-box损失函数"><span class="nav-text">2.4.1 Bounding box损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加权非极大抑制nms"><span class="nav-text">2.4.2 加权非极大抑制NMS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据集及评测指标"><span class="nav-text">3. 数据集及评测指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集准备"><span class="nav-text">3.1 数据集准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评测指标"><span class="nav-text">3.2 评测指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果分析"><span class="nav-text">4. 实验结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验指标结果分析"><span class="nav-text">4.1 实验指标结果分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化实验结果"><span class="nav-text">4.2 可视化实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-text">5. 结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件下载"><span class="nav-text">附件下载</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1102,13 +1217,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1232,7 +1347,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

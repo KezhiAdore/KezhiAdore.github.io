@@ -33,12 +33,12 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新… 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
+  <meta name="description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新...... 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="强化学习算法实现中的细节">
 <meta property="og:url" content="https://www.kezhi.tech/aaafe79.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新… 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
+<meta property="og:description" content="强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新...... 以及附上我自己实现的RL算法库：https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore&#x2F;RL-Algorithm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.kezhi.tech/img/202303061042992.jpg">
 <meta property="article:published_time" content="2023-03-06T02:44:18.000Z">
@@ -300,7 +300,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>602</span>
+              <span>577</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -319,27 +319,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新…</p>
-<p>以及附上我自己实现的RL算法库：<a href="https://github.com/KezhiAdore/RL-Algorithm" target="_blank" rel="noopener">https://github.com/KezhiAdore/RL-Algorithm</a></p>
-<img src="https://download.kezhi.tech/img/202303061042992.jpg" width="45%">
+        <p>强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新......</p>
+<p>以及附上我自己实现的RL算法库：<a
+href="https://github.com/KezhiAdore/RL-Algorithm">https://github.com/KezhiAdore/RL-Algorithm</a></p>
+<p><img src="https://download.kezhi.tech/img/202303061042992.jpg" width = "45%" /></p>
 <a id="more"></a>
 <h2 id="common">Common</h2>
 <ul>
-<li><code>PyTorch</code>中的交叉熵损失函数<code>torch.nn.functional.cross_entropy</code>里面会先计算一次<code>softmax</code>，在使用策略梯度时要注意[^1]。</li>
+<li><code>PyTorch</code>中的交叉熵损失函数<code>torch.nn.functional.cross_entropy</code>里面会先计算一次<code>softmax</code>，在使用策略梯度时要注意<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>。</li>
 </ul>
 <h2 id="reinforce">REINFORCE</h2>
 <ul>
-<li>计算<code>loss</code>时，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>ln</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\ln\pi_\theta(a|s)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mord mathdefault">s</span><span class="mclose">)</span></span></span></span>与discount reward相乘时要注意维度一致。</li>
-<li>计算完交叉熵之后使用<code>torch.sum</code>求和比<code>torch.mean</code>求平均效果要好[^2]。</li>
+<li>计算<code>loss</code>时，<span
+class="math inline">\(-\ln\pi_\theta(a|s)\)</span>与discount
+reward相乘时要注意维度一致。</li>
+<li>计算完交叉熵之后使用<code>torch.sum</code>求和比<code>torch.mean</code>求平均效果要好<a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>。</li>
 </ul>
 <h2 id="dqn系列">DQN系列</h2>
 <ul>
-<li>计算<code>q_target</code>时要注意<code>done=1</code>的情形：即<code>q_target = reward + self._gamma * max_next_q_value * (1 - done) </code>，否则容易导致训练过程中<code>reward</code>一直上下大幅震荡。</li>
+<li>计算<code>q_target</code>时要注意<code>done=1</code>的情形：即<code>q_target = reward + self._gamma * max_next_q_value * (1 - done)</code>，否则容易导致训练过程中<code>reward</code>一直上下大幅震荡。</li>
 <li>一定要有间隔同步的<code>target_newok</code>，否则很难收敛。</li>
 </ul>
 <h2 id="reference">Reference</h2>
-<p>[^1]: <a href="https://www.kezhi.tech/e295e676.html">PyTorch中的CrossEntropyLoss与交叉熵计算不一致 | Kezhi’s Blog</a><br>
-[^2]: <a href="https://www.kezhi.tech/b69f94c6.html">Vanilla Policy Gradient关于loss mean与sum的探讨 | Kezhi’s Blog</a></p>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p><a
+href="https://www.kezhi.tech/e295e676.html">PyTorch中的CrossEntropyLoss与交叉熵计算不一致
+| Kezhi's Blog</a><a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p><a
+href="https://www.kezhi.tech/b69f94c6.html">Vanilla Policy
+Gradient关于loss mean与sum的探讨 | Kezhi's Blog</a><a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
     </div>
 
@@ -875,13 +894,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1005,7 +1024,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

@@ -33,12 +33,12 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文引自Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)">
+  <meta name="description" content="本文引自Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NexT标签云配置">
 <meta property="og:url" content="https://www.kezhi.tech/47930864.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="本文引自Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)">
+<meta property="og:description" content="本文引自Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.kezhi.tech/img/20220322172925.jpg">
 <meta property="og:image" content="https://download.kezhi.tech/img/20220322171837.png">
@@ -308,7 +308,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -327,33 +327,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文引自<a href="https://alex-mcavoy.github.io/hexo/7be258c0.html" target="_blank" rel="noopener">Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)</a></p>
-<p><img src="https://download.kezhi.tech/img/20220322172925.jpg" alt=""></p>
+        <p>本文引自<a
+href="https://alex-mcavoy.github.io/hexo/7be258c0.html">Next 7.0+
+TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)</a></p>
+<p><img src="https://download.kezhi.tech/img/20220322172925.jpg" /></p>
 <a id="more"></a>
-<p>Next 7.0+ 可以对标签进行自定义设置，在此基础上，可以使用球形标签云的 <code>tagcanvas.js</code> 插件进行样式修改，具体修改步骤如下</p>
-<ol>
-<li>
-<p>下载插件</p>
-<p>关于球形标签云 <code>tagcanvas.js</code> 插件的详细介绍：<a href="http://www.goat1000.com/tagcanvas.php" target="_blank" rel="noopener">点击这里</a></p>
-<p>将该插件下载后，放入 <code>/theme/next/source/js</code> 目录下</p>
-</li>
-<li>
-<p>新建标签云 swig 文件</p>
-<p>在 <code>/theme/next/layout/_partials</code> 目录下，建一个名为 <code>tagcanvas.swig</code> 的文件，并写入如下内容：</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"myTags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">id</span>=<span class="string">"my3DTags"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Anything in here will be replaced on browsers that support the canvas element<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">"display: none"</span>&gt;</span></span><br><span class="line">    {{ tagcloud({</span><br><span class="line">        min_font   : theme.tagcloud.min,</span><br><span class="line">        max_font   : theme.tagcloud.max,</span><br><span class="line">        amount     : theme.tagcloud.amount,</span><br><span class="line">        color      : true,</span><br><span class="line">        start_color: theme.tagcloud.start,</span><br><span class="line">        end_color  : theme.tagcloud.end})</span><br><span class="line">    }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/tagcanvas.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> &gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">try</span> {</span></span><br><span class="line"><span class="actionscript">      TagCanvas.Start(<span class="string">'my3DTags'</span>,<span class="string">'tags'</span>,{</span></span><br><span class="line"><span class="actionscript">        textFont: <span class="string">'Georgia,Optima'</span>,</span></span><br><span class="line"><span class="actionscript">        textColour: <span class="literal">null</span>,</span></span><br><span class="line"><span class="actionscript">        outlineColour: <span class="string">'black'</span>,</span></span><br><span class="line"><span class="actionscript">        weight: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        reverse: <span class="literal">true</span>,</span></span><br><span class="line">        depth: 0.8,</span><br><span class="line">        maxSpeed: 0.05,</span><br><span class="line">        bgRadius: 1,</span><br><span class="line"><span class="actionscript">        freezeDecel: <span class="literal">true</span></span></span><br><span class="line">      });</span><br><span class="line"><span class="actionscript">    } <span class="keyword">catch</span>(e) {</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.getElementById(<span class="string">'myTags'</span>).style.display = <span class="string">'none'</span>;</span></span><br><span class="line">    }</span><br><span class="line">  };</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>修改页面配置文件</p>
-<p>对 <code>/theme/next/layout/</code> 中的 <code>page.swig</code> 文件按照下图所示进行进行修改</p>
-<p><img src="https://download.kezhi.tech/img/20220322171837.png" alt=""></p>
+<p>Next 7.0+ 可以对标签进行自定义设置，在此基础上，可以使用球形标签云的
+<code>tagcanvas.js</code> 插件进行样式修改，具体修改步骤如下</p>
+<ol type="1">
+<li><p>下载插件</p>
+<p>关于球形标签云 <code>tagcanvas.js</code> 插件的详细介绍：<a
+href="http://www.goat1000.com/tagcanvas.php">点击这里</a></p>
+<p>将该插件下载后，放入 <code>/theme/next/source/js</code>
+目录下</p></li>
+<li><p>新建标签云 swig 文件</p>
+<p>在 <code>/theme/next/layout/_partials</code> 目录下，建一个名为
+<code>tagcanvas.swig</code> 的文件，并写入如下内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"myTags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">id</span>=<span class="string">"my3DTags"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Anything in here will be replaced on browsers that support the canvas element<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">"display: none"</span>&gt;</span></span><br><span class="line">    &#123;&#123; tagcloud(&#123;</span><br><span class="line">        min_font   : theme.tagcloud.min,</span><br><span class="line">        max_font   : theme.tagcloud.max,</span><br><span class="line">        amount     : theme.tagcloud.amount,</span><br><span class="line">        color      : true,</span><br><span class="line">        start_color: theme.tagcloud.start,</span><br><span class="line">        end_color  : theme.tagcloud.end&#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/tagcanvas.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> &gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="actionscript">      TagCanvas.Start(<span class="string">'my3DTags'</span>,<span class="string">'tags'</span>,&#123;</span></span><br><span class="line"><span class="actionscript">        textFont: <span class="string">'Georgia,Optima'</span>,</span></span><br><span class="line"><span class="actionscript">        textColour: <span class="literal">null</span>,</span></span><br><span class="line"><span class="actionscript">        outlineColour: <span class="string">'black'</span>,</span></span><br><span class="line"><span class="actionscript">        weight: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        reverse: <span class="literal">true</span>,</span></span><br><span class="line">        depth: 0.8,</span><br><span class="line">        maxSpeed: 0.05,</span><br><span class="line">        bgRadius: 1,</span><br><span class="line"><span class="actionscript">        freezeDecel: <span class="literal">true</span></span></span><br><span class="line">      &#125;);</span><br><span class="line"><span class="actionscript">    &#125; <span class="keyword">catch</span>(e) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.getElementById(<span class="string">'myTags'</span>).style.display = <span class="string">'none'</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改页面配置文件</p>
+<p>对 <code>/theme/next/layout/</code> 中的 <code>page.swig</code>
+文件按照下图所示进行进行修改</p>
+<p><img src="https://download.kezhi.tech/img/20220322171837.png" /></p>
 <p>添加代码为：</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">{# tagcanvas plugin 球型云标签 #}</span><br><span class="line">{% include '_partials/tagcanvas.swig' %}</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>修改主题配置文件</p>
-<p>打开 <code>/theme/config.yml</code>，找到 <code>tagcloud</code> 字段，根据实际需要进行修改即可：</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TagCloud settings for tags page.</span></span><br><span class="line"><span class="attr">tagcloud:</span></span><br><span class="line">  <span class="comment"># All values below are same as default, change them by yourself.</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">20</span> <span class="comment"># Minimun font size in px</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">30</span> <span class="comment"># Maxium font size in px</span></span><br><span class="line">  <span class="attr">start:</span> <span class="string">"#19CAAD"</span> <span class="comment"># Start color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">end:</span> <span class="string">"#F4606C"</span> <span class="comment"># End color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">amount:</span> <span class="number">200</span> <span class="comment"># Amount of tags, change it if you have more than 200 tags</span></span><br></pre></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;# tagcanvas plugin 球型云标签 #&#125;</span><br><span class="line">&#123;% include '_partials/tagcanvas.swig' %&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改主题配置文件</p>
+<p>打开 <code>/theme/config.yml</code>，找到 <code>tagcloud</code>
+字段，根据实际需要进行修改即可：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TagCloud settings for tags page.</span></span><br><span class="line"><span class="attr">tagcloud:</span></span><br><span class="line">  <span class="comment"># All values below are same as default, change them by yourself.</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">20</span> <span class="comment"># Minimun font size in px</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">30</span> <span class="comment"># Maxium font size in px</span></span><br><span class="line">  <span class="attr">start:</span> <span class="string">"#19CAAD"</span> <span class="comment"># Start color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">end:</span> <span class="string">"#F4606C"</span> <span class="comment"># End color (hex, rgba, hsla or color keywords)</span></span><br><span class="line">  <span class="attr">amount:</span> <span class="number">200</span> <span class="comment"># Amount of tags, change it if you have more than 200 tags</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 
     </div>
@@ -896,13 +896,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1026,7 +1026,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

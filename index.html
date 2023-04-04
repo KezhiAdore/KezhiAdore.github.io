@@ -297,7 +297,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>602</span>
+              <span>577</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -316,9 +316,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新…</p>
-<p>以及附上我自己实现的RL算法库：<a href="https://github.com/KezhiAdore/RL-Algorithm" target="_blank" rel="noopener">https://github.com/KezhiAdore/RL-Algorithm</a></p>
-<img src="https://download.kezhi.tech/img/202303061042992.jpg" width="45%">
+          <p>强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新......</p>
+<p>以及附上我自己实现的RL算法库：<a
+href="https://github.com/KezhiAdore/RL-Algorithm">https://github.com/KezhiAdore/RL-Algorithm</a></p>
+<p><img src="https://download.kezhi.tech/img/202303061042992.jpg" width = "45%" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/aaafe79.html#more" rel="contents">
@@ -412,7 +413,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -432,7 +433,7 @@
 
       
           <p>本文主要对于交叉熵的手动计算和<code>PyTorch</code>中的<code>CrossEntropyLoss</code>模块计算结果不一致的问题展开讨论，查阅了<code>PyTorch</code>的官方文档，最终发现是<code>CrossEntropyLoss</code>在计算交叉熵之前会对输入的概率分布进行一次<code>SoftMax</code>操作导致的。</p>
-<img src="https://download.kezhi.tech/img/202303041402037.jpg" width="61.8%">
+<p><img src="https://download.kezhi.tech/img/202303041402037.jpg" width=61.8% /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/e295e676.html#more" rel="contents">
@@ -540,7 +541,7 @@
 
       
           <p>本文始写于2023年2月7日，以个人回忆和部分手头记录为依据总结而成。</p>
-<img src="https://download.kezhi.tech/img/202303030923612.jpg" style="zoom:50%;">
+<p><img src="https://download.kezhi.tech/img/202303030923612.jpg" style="zoom:50%;" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/b25d1fca.html#more" rel="contents">
@@ -634,7 +635,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -653,7 +654,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。</p>
+          <p>最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy
+Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。</p>
 <p>先说结论：</p>
 <blockquote>
 <p>在进行策略梯度下降优化策略时，可以对每个动作的loss逐一（for操作）进行反向传播后进行梯度下降，也可以对每个动作的loss求和（sum操作）之后进行反向传播后梯度下降，但尽量避免对所有动作的loss求平均（mean操作）之后进行反向传播后梯度下降，这会导致收敛速度较慢，甚至无法收敛。</p>
@@ -752,7 +754,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>638</span>
+              <span>658</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -771,14 +773,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Zotero 是一款非常好用的开源文献管理软件，在对比了Endnote，Mendeley，Zotero之后最终我选择了Zotero作为我自己的文献管理软件，选择其的主要原因有：</p>
+          <p>Zotero
+是一款非常好用的开源文献管理软件，在对比了Endnote，Mendeley，Zotero之后最终我选择了Zotero作为我自己的文献管理软件，选择其的主要原因有：</p>
 <ul>
 <li>支持webdav同步文献记录及pdf附件</li>
 <li>丰富的扩展插件</li>
 <li>支持markdown笔记</li>
 </ul>
 <p>本文主要介绍部分常用的Zotero插件，并附上其下载链接，同时谈谈使用感受。顺序按照我个人认为的好用程度排序。</p>
-<img src="https://download.kezhi.tech/img/202303021529700.png" width="33%">
+<p><img src="https://download.kezhi.tech/img/202303021529700.png" width=33% /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/b2344ef.html#more" rel="contents">
@@ -866,14 +869,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>16k</span>
+              <span>15k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -885,9 +888,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。<br>
+          <p>本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
 该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。</p>
-<p><img src="https://download.kezhi.tech/img/202211291710418.jpg" alt="Map of Control Theory"></p>
+<figure>
+<img src="https://download.kezhi.tech/img/202211291710418.jpg"
+alt="Map of Control Theory" />
+<figcaption aria-hidden="true">Map of Control Theory</figcaption>
+</figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/10ee70e7.html#more" rel="contents">
@@ -1000,9 +1007,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>智能体对战目标检测</h1>
+          <h1 id="智能体对战目标检测">智能体对战目标检测</h1>
 <p>手动标注数据集及视频分割程序下载见文章末。</p>
-<img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;">
+<p><img src="https://download.kezhi.tech/img/202211291652294.jpg" style="width:80%;" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/86b4b2c0.html#more" rel="contents">
@@ -1090,7 +1097,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.7k</span>
+              <span>7.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1109,9 +1116,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>分支定界法在背包问题中的应用</h1>
+          <h1 id="分支定界法在背包问题中的应用">分支定界法在背包问题中的应用</h1>
 <p>西安交通大学《系统优化与调度》课程期末报告</p>
-<img src="https://download.kezhi.tech/img/202211291638345.jpg" style="width:30%;">
+<p><img src="https://download.kezhi.tech/img/202211291638345.jpg" style="width:30%;" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/a7067052.html#more" rel="contents">
@@ -1205,7 +1212,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.5k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1224,9 +1231,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>Midterm Report</h1>
+          <h1 id="midterm-report">Midterm Report</h1>
 <p>西安交通大学《系统优化与调度》课程中期报告</p>
-<img src="https://download.kezhi.tech/img/202211291631791.jpg" alt="" style="width:50%;">
+<p><img src="https://download.kezhi.tech/img/202211291631791.jpg" alt="" style="width:50%;" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/f95f8ff4.html#more" rel="contents">
@@ -1314,14 +1321,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>40k</span>
+              <span>27k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>37 分钟</span>
+              <span>25 分钟</span>
             </span>
 
         </div>
@@ -1334,7 +1341,7 @@
 
       
           <p>西安交通大学研究生《系统优化与调度》课程作业</p>
-<img src="https://download.kezhi.tech/img/202211291608420.png" style="width:30%;">
+<p><img src="https://download.kezhi.tech/img/202211291608420.png" style="width:30%;" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/7d0182be.html#more" rel="contents">
@@ -1794,13 +1801,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1924,7 +1931,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

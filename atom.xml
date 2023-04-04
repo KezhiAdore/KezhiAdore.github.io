@@ -25,9 +25,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新…&lt;/p&gt;
-&lt;p&gt;以及附上我自己实现的RL算法库：&lt;a href=&quot;https://github.com/KezhiAdore/RL-Algorithm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/KezhiAdore/RL-Algorithm&lt;/a&gt;&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202303061042992.jpg&quot; width=&quot;45%&quot;&gt;
+      &lt;p&gt;强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新......&lt;/p&gt;
+&lt;p&gt;以及附上我自己实现的RL算法库：&lt;a
+href=&quot;https://github.com/KezhiAdore/RL-Algorithm&quot;&gt;https://github.com/KezhiAdore/RL-Algorithm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303061042992.jpg&quot; width = &quot;45%&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -49,7 +50,7 @@
     <summary type="html">
     
       &lt;p&gt;本文主要对于交叉熵的手动计算和&lt;code&gt;PyTorch&lt;/code&gt;中的&lt;code&gt;CrossEntropyLoss&lt;/code&gt;模块计算结果不一致的问题展开讨论，查阅了&lt;code&gt;PyTorch&lt;/code&gt;的官方文档，最终发现是&lt;code&gt;CrossEntropyLoss&lt;/code&gt;在计算交叉熵之前会对输入的概率分布进行一次&lt;code&gt;SoftMax&lt;/code&gt;操作导致的。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202303041402037.jpg&quot; width=&quot;61.8%&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303041402037.jpg&quot; width=61.8% /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -73,7 +74,7 @@
     <summary type="html">
     
       &lt;p&gt;本文始写于2023年2月7日，以个人回忆和部分手头记录为依据总结而成。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202303030923612.jpg&quot; style=&quot;zoom:50%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303030923612.jpg&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -81,11 +82,11 @@
       <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
     
     
+      <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
+    
       <category term="生活" scheme="https://www.kezhi.tech/tags/%E7%94%9F%E6%B4%BB/"/>
     
       <category term="疫情" scheme="https://www.kezhi.tech/tags/%E7%96%AB%E6%83%85/"/>
-    
-      <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
@@ -98,7 +99,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。&lt;/p&gt;
+      &lt;p&gt;最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy
+Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。&lt;/p&gt;
 &lt;p&gt;先说结论：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在进行策略梯度下降优化策略时，可以对每个动作的loss逐一（for操作）进行反向传播后进行梯度下降，也可以对每个动作的loss求和（sum操作）之后进行反向传播后梯度下降，但尽量避免对所有动作的loss求平均（mean操作）之后进行反向传播后梯度下降，这会导致收敛速度较慢，甚至无法收敛。&lt;/p&gt;
@@ -128,14 +130,15 @@
     
     <summary type="html">
     
-      &lt;p&gt;Zotero 是一款非常好用的开源文献管理软件，在对比了Endnote，Mendeley，Zotero之后最终我选择了Zotero作为我自己的文献管理软件，选择其的主要原因有：&lt;/p&gt;
+      &lt;p&gt;Zotero
+是一款非常好用的开源文献管理软件，在对比了Endnote，Mendeley，Zotero之后最终我选择了Zotero作为我自己的文献管理软件，选择其的主要原因有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;支持webdav同步文献记录及pdf附件&lt;/li&gt;
 &lt;li&gt;丰富的扩展插件&lt;/li&gt;
 &lt;li&gt;支持markdown笔记&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;本文主要介绍部分常用的Zotero插件，并附上其下载链接，同时谈谈使用感受。顺序按照我个人认为的好用程度排序。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202303021529700.png&quot; width=&quot;33%&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303021529700.png&quot; width=33% /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -158,9 +161,13 @@
     
     <summary type="html">
     
-      &lt;p&gt;本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。&lt;br&gt;
+      &lt;p&gt;本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
 该课程主要围绕估计，平滑与预测三方面讲解各类滤波方法。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291710418.jpg&quot; alt=&quot;Map of Control Theory&quot;&gt;&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/202211291710418.jpg&quot;
+alt=&quot;Map of Control Theory&quot; /&gt;
+&lt;figcaption aria-hidden=&quot;true&quot;&gt;Map of Control Theory&lt;/figcaption&gt;
+&lt;/figure&gt;
     
     </summary>
     
@@ -185,9 +192,9 @@
     
     <summary type="html">
     
-      &lt;h1&gt;智能体对战目标检测&lt;/h1&gt;
+      &lt;h1 id=&quot;智能体对战目标检测&quot;&gt;智能体对战目标检测&lt;/h1&gt;
 &lt;p&gt;手动标注数据集及视频分割程序下载见文章末。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211291652294.jpg&quot; style=&quot;width:80%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291652294.jpg&quot; style=&quot;width:80%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -210,9 +217,9 @@
     
     <summary type="html">
     
-      &lt;h1&gt;分支定界法在背包问题中的应用&lt;/h1&gt;
+      &lt;h1 id=&quot;分支定界法在背包问题中的应用&quot;&gt;分支定界法在背包问题中的应用&lt;/h1&gt;
 &lt;p&gt;西安交通大学《系统优化与调度》课程期末报告&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211291638345.jpg&quot; style=&quot;width:30%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291638345.jpg&quot; style=&quot;width:30%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -237,9 +244,9 @@
     
     <summary type="html">
     
-      &lt;h1&gt;Midterm Report&lt;/h1&gt;
+      &lt;h1 id=&quot;midterm-report&quot;&gt;Midterm Report&lt;/h1&gt;
 &lt;p&gt;西安交通大学《系统优化与调度》课程中期报告&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211291631791.jpg&quot; alt=&quot;&quot; style=&quot;width:50%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291631791.jpg&quot; alt=&quot;&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -261,7 +268,7 @@
     <summary type="html">
     
       &lt;p&gt;西安交通大学研究生《系统优化与调度》课程作业&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211291608420.png&quot; style=&quot;width:30%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211291608420.png&quot; style=&quot;width:30%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -285,7 +292,7 @@
     <summary type="html">
     
       &lt;p&gt;最近在读《代码之髓》，里面讲解了很多编程语言中的concepts是为何产生的。本篇笔记主要参考了书中的第7章：名字与作用域。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202211261934570.png&quot; alt=&quot;转自:米游社@战小医仙&quot; style=&quot;width:50%;&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202211261934570.png&quot; alt=&quot;转自:米游社@战小医仙&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -329,7 +336,7 @@
     
       &lt;h2 id=&quot;关于网络的parameters&quot;&gt;关于网络的parameters&lt;/h2&gt;
 &lt;p&gt;Pytorch中，每一个网络继承于&lt;code&gt;nn.Module&lt;/code&gt;类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;_parameters&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_buffers&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_backward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_state_dict_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_load_state_dict_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_modules&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;_parameters&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_buffers&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_backward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_forward_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_state_dict_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_load_state_dict_pre_hooks&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_modules&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -357,7 +364,11 @@
       &lt;h2 id=&quot;day-0&quot;&gt;Day 0&lt;/h2&gt;
 &lt;p&gt;硕士研究生时期，需要参与一项社会实践。遂与好友相约前往云南施甸县支教。原本的安排是县里中学一所，村里中学一所以及山里中学一所。起初计划前往山里中学实行采蘑菇计划，然天有不测风云，支教团计划变更，改为前往施甸二中和施甸三中支教。我们二人被安排在施甸二中。&lt;/p&gt;
 &lt;p&gt;去程，西安途径昆明转机到保山，校方从保山机场接我们到学校。途中经过秦岭山脉，云贵高原。从北方到南方，从平原到山地再到高原。无论是空中的气候，还是地貌，均变化多样。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202208010008630.jpg&quot; alt=&quot;(摄影师: 蔡育倍)&quot;&gt;&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/202208010008630.jpg&quot;
+alt=&quot;(摄影师: 蔡育倍)&quot; /&gt;
+&lt;figcaption aria-hidden=&quot;true&quot;&gt;(摄影师: 蔡育倍)&lt;/figcaption&gt;
+&lt;/figure&gt;
     
     </summary>
     
@@ -384,7 +395,7 @@
     
       &lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
 &lt;p&gt;在科研和工程实践的过程中，问题的解决往往伴随着新问题的发生。往往这些问题都是在特定场景下才会出现，但是其问题的抽象又具有一定的普适性，从而这些问题能够构成一个个科学研究的起点。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202207200159235.jpg&quot; width=&quot;30%&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202207200159235.jpg&quot; width=30%&gt;&lt;/p&gt;
     
     </summary>
     
@@ -410,7 +421,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;翟老师的&amp;lt;泛函分析&amp;gt;课程带我重新认识了实数。实数中有一些基本定理，但具体有几个存在着很多不同的观点。本文以六大定理为准，这六大定理分别为&lt;/p&gt;
+&lt;p&gt;翟老师的&lt;泛函分析&gt;课程带我重新认识了实数。实数中有一些基本定理，但具体有几个存在着很多不同的观点。本文以六大定理为准，这六大定理分别为&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;确界原理&lt;/li&gt;
 &lt;li&gt;单调有界原理&lt;/li&gt;
@@ -420,7 +431,7 @@
 &lt;li&gt;有限覆盖定理&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;本文对这六大定理之间进行了循环证明，共计30个证明，如有不正之处，可在评论区指出，我会及时进行修正。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206301525923.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206301525923.jpg&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -446,7 +457,7 @@
     <summary type="html">
     
       &lt;p&gt;由于某些不可名状的原因，导致了有修改操作系统安装时间的需求，在此小记。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202206231950445.png&quot; width=&quot;30%&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206231950445.png&quot; width=30%&gt;&lt;/p&gt;
     
     </summary>
     
@@ -473,7 +484,7 @@
     
       &lt;h2 id=&quot;序&quot;&gt;序&lt;/h2&gt;
 &lt;p&gt;《字节跳动》创作于2022年5月下旬至6月上旬，历时半个月。是截至目前为止本人参与的短片拍摄最高水平。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206071619140.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202206071619140.jpg&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -505,7 +516,8 @@
 
           &lt;/blockquote&gt;
 &lt;h2 id=&quot;影视创作的基本流程&quot;&gt;影视创作的基本流程&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img
+src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -532,7 +544,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;img
+src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -557,7 +570,8 @@
     
     <summary type="html">
     
-      &lt;iframe src=&quot;//www.kezhi.tech/avatar/&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt; &lt;/iframe&gt;
+      &lt;iframe src=&quot;//www.kezhi.tech/avatar/&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;
+&lt;/iframe&gt;
     
     </summary>
     
@@ -580,7 +594,7 @@
     
       &lt;h2 id=&quot;引子&quot;&gt;引子&lt;/h2&gt;
 &lt;p&gt;有时候，生活会带给人一些惊喜。或许是一次翘课偶然碰到的晚霞，亦或是一觉醒来突然开放的花苞。在这个不断向前的工业化时代里，我们每个人都身不由己，裹挟其中。这在我上了研究生，进一步了解这个世界之后，最深的感触。&lt;/p&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202205102220466.jpg&quot; width=&quot;30%&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202205102220466.jpg&quot; width=30%&gt;&lt;/p&gt;
     
     </summary>
     
@@ -603,7 +617,7 @@
     
       &lt;h2 id=&quot;git-commit-message-规范&quot;&gt;Git commit message 规范&lt;/h2&gt;
 &lt;h3 id=&quot;commit-message-格式&quot;&gt;commit message 格式&lt;/h3&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -626,7 +640,7 @@
     
     <summary type="html">
     
-      &lt;h1&gt;Python 高性能编程&lt;/h1&gt;
+      &lt;h1 id=&quot;python-高性能编程&quot;&gt;Python 高性能编程&lt;/h1&gt;
     
     </summary>
     
@@ -651,8 +665,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;本文引自&lt;a href=&quot;https://alex-mcavoy.github.io/hexo/7be258c0.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Next 7.0+ TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20220322172925.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;本文引自&lt;a
+href=&quot;https://alex-mcavoy.github.io/hexo/7be258c0.html&quot;&gt;Next 7.0+
+TagCanvas 标签云 | Alex_McAvoy (alex-mcavoy.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20220322172925.jpg&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -676,8 +692,9 @@
     <summary type="html">
     
       &lt;h2 id=&quot;项目由来&quot;&gt;项目由来&lt;/h2&gt;
-&lt;p&gt;创新港羽毛球场馆每天的预定需求较大。在线预定系统每天早上 8:40 左右开放，并且开放时间不定。这些因素给手动预定场馆带来了很大的麻烦，因此考虑由脚本自动化实现场馆预定过程。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202203212104191.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;创新港羽毛球场馆每天的预定需求较大。在线预定系统每天早上 8:40
+左右开放，并且开放时间不定。这些因素给手动预定场馆带来了很大的麻烦，因此考虑由脚本自动化实现场馆预定过程。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202203212104191.jpg&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -727,7 +744,8 @@
     <summary type="html">
     
       &lt;h2 id=&quot;nltk简介&quot;&gt;nltk简介&lt;/h2&gt;
-&lt;p&gt;NLTK是构建Python程序以使用人类语言数据的领先平台。它为50多种语料库和词汇资源（如WordNet）提供了易于使用的界面，还提供了一套用于分类，标记化，词干化，标记，解析和语义推理的文本处理库。NLTK是Python上著名的⾃然语⾔处理库 ⾃带语料库，具有词性分类库 ⾃带分类，分词，等等功能。&lt;/p&gt;
+&lt;p&gt;NLTK是构建Python程序以使用人类语言数据的领先平台。它为50多种语料库和词汇资源（如WordNet）提供了易于使用的界面，还提供了一套用于分类，标记化，词干化，标记，解析和语义推理的文本处理库。NLTK是Python上著名的⾃然语⾔处理库
+⾃带语料库，具有词性分类库 ⾃带分类，分词，等等功能。&lt;/p&gt;
     
     </summary>
     
@@ -753,7 +771,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;社会中的自我&quot;&gt;社会中的自我&lt;/h2&gt;
-&lt;h3 id=&quot;自我概念：我是谁&quot;&gt;自我概念：我是谁&lt;/h3&gt;
+&lt;h3 id=&quot;自我概念我是谁&quot;&gt;自我概念：我是谁&lt;/h3&gt;
     
     </summary>
     
@@ -774,10 +792,10 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;2021-04&quot;&gt;2021.04&lt;/h2&gt;
+      &lt;h2 id=&quot;section&quot;&gt;2021.04&lt;/h2&gt;
 &lt;blockquote class=&quot;blockquote-center&quot;&gt;
             &lt;p&gt;矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;– 《银河帝国2：基地与帝国》&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;-- 《银河帝国2：基地与帝国》&lt;/b&gt;&lt;/p&gt;
 
           &lt;/blockquote&gt;
     
@@ -810,7 +828,7 @@
 &lt;ul&gt;
 &lt;li&gt;Flask&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure
+&lt;
       
     
     </summary>
@@ -836,7 +854,7 @@
     
       &lt;h2 id=&quot;请求伪装&quot;&gt;请求伪装&lt;/h2&gt;
 &lt;p&gt;在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20201024223544.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20201024223544.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：&lt;/p&gt;
     
     </summary>
@@ -864,8 +882,10 @@
     
       &lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
 &lt;p&gt;Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的&lt;span class=&quot;label primary&quot;&gt;播放量&lt;/span&gt;，&lt;span class=&quot;label success&quot;&gt;追番量&lt;/span&gt;，&lt;span class=&quot;label info&quot;&gt;弹幕数量&lt;/span&gt;等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。&lt;/p&gt;
-&lt;p&gt;GitHub地址：&lt;a href=&quot;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;码云地址：&lt;a href=&quot;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GitHub地址：&lt;a
+href=&quot;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;码云地址：&lt;a
+href=&quot;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -894,12 +914,18 @@
     
     <summary type="html">
     
-      &lt;p&gt;GitHub地址：&lt;a href=&quot;https://github.com/KezhiAdore/MultiRobots_CoverMap&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;码云地址：&lt;a href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;一-问题提出&quot;&gt;一、问题提出&lt;/h2&gt;
-&lt;h3 id=&quot;1-背景&quot;&gt;1. 背景&lt;/h3&gt;
-&lt;p&gt;机器人在工业、国防和科学技术中的应用日益广泛， 它能够在枯燥和危险的复杂非结构化环境下工作。使用机器人大大提高了人们的工作效率， 改变了人们的生活方式， 带来了巨大的经济和社会效益， 有力地推动了有关学科和技术领域的发展。&lt;/p&gt;
-&lt;p&gt;区域覆盖是指携带有一定探测范围的传感器如激光、声纳等的机器人探索访问整个区域， 并完成相应任务的过程。区域覆盖是自主移动机器人的一项基本任务。&lt;/p&gt;
+      &lt;p&gt;GitHub地址：&lt;a
+href=&quot;https://github.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://github.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;码云地址：&lt;a
+href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一问题提出&quot;&gt;一、问题提出&lt;/h2&gt;
+&lt;h3 id=&quot;背景&quot;&gt;1. 背景&lt;/h3&gt;
+&lt;p&gt;机器人在工业、国防和科学技术中的应用日益广泛，
+它能够在枯燥和危险的复杂非结构化环境下工作。使用机器人大大提高了人们的工作效率，
+改变了人们的生活方式， 带来了巨大的经济和社会效益，
+有力地推动了有关学科和技术领域的发展。&lt;/p&gt;
+&lt;p&gt;区域覆盖是指携带有一定探测范围的传感器如激光、声纳等的机器人探索访问整个区域，
+并完成相应任务的过程。区域覆盖是自主移动机器人的一项基本任务。&lt;/p&gt;
     
     </summary>
     
@@ -962,7 +988,8 @@
     
       &lt;h2 id=&quot;bp神经网络概述&quot;&gt;BP神经网络概述&lt;/h2&gt;
 &lt;p&gt;BP神经网络是神经网络中最基础也是应用最多的神经网络，它由三层节点组成，分别为输入层，隐含层和输出层。BP神经网络的实现比较简单，主要分为正向传递输出和反向传递误差两部分。&lt;/p&gt;
-&lt;p&gt;神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert Hecht-Nielsen）这为神经网络的应用提供了理论依据。&lt;/p&gt;
+&lt;p&gt;神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert
+Hecht-Nielsen）这为神经网络的应用提供了理论依据。&lt;/p&gt;
     
     </summary>
     
@@ -989,9 +1016,10 @@
     
       &lt;h2 id=&quot;git文件管理系统&quot;&gt;Git文件管理系统&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本博客为转载，原文地址&lt;a href=&quot;https://www.cnblogs.com/chenwolong/p/GIT.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.cnblogs.com/chenwolong/p/GIT.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本博客为转载，原文地址&lt;a
+href=&quot;https://www.cnblogs.com/chenwolong/p/GIT.html&quot;&gt;https://www.cnblogs.com/chenwolong/p/GIT.html&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20200424230007.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/20200424230007.png&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1024,9 +1052,9 @@
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
     
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
       <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
       <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -1051,9 +1079,9 @@
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
     
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
       <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
       <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -1102,9 +1130,9 @@
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
     
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
       <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
       <category term="直方图均衡" scheme="https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
     
@@ -1119,8 +1147,10 @@
     
     <summary type="html">
     
-      &lt;center&gt;码一些经常使用的LeTaX数学公式语法&lt;/center&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;center&gt;
+码一些经常使用的LeTaX数学公式语法
+&lt;/center&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg&quot; /&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1152,9 +1182,9 @@
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
     
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
       <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
       <category term="图像配准" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
     
@@ -1171,9 +1201,10 @@
     
       &lt;p&gt;一些markdown之外的语法规则，让文章更美观&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本文摘录自 &lt;span class=&quot;label success&quot;&gt;周宇峰的博客&lt;/span&gt; &lt;a href=&quot;https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/8MAadJ.md.jpg&quot; alt=&quot;8MAadJ.md&quot;&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;本文摘录自 &lt;span class=&quot;label success&quot;&gt;周宇峰的博客&lt;/span&gt; &lt;a
+href=&quot;https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/&quot;&gt;原文链接&lt;/a&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/8MAadJ.md.jpg&quot;
+alt=&quot;8MAadJ.md&quot; /&gt;
     
     </summary>
     
@@ -1202,8 +1233,7 @@
 &lt;ul&gt;
 &lt;li&gt;最近邻插值&lt;/li&gt;
 &lt;li&gt;双线性插值&lt;/li&gt;
-&lt;li&gt;双三次插值&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;双三次插值
     
     </summary>
     
@@ -1213,9 +1243,9 @@
     
       <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
     
-      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
       <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+      <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
       <category term="插值" scheme="https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
     

@@ -33,12 +33,12 @@
     var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
+  <meta name="description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XJTU System Optimization and Scheduling Midterm Report">
 <meta property="og:url" content="https://www.kezhi.tech/f95f8ff4.html">
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
-<meta property="og:description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
+<meta property="og:description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.kezhi.tech/img/202211291631791.jpg">
 <meta property="og:image" content="https://download.kezhi.tech/img/202112211558169.png">
@@ -309,7 +309,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.5k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -328,247 +328,299 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>Midterm Report</h1>
+        <h1 id="midterm-report">Midterm Report</h1>
 <p>西安交通大学《系统优化与调度》课程中期报告</p>
-<img src="https://download.kezhi.tech/img/202211291631791.jpg" alt="" style="width:50%;">
+<p><img src="https://download.kezhi.tech/img/202211291631791.jpg" alt="" style="width:50%;" /></p>
 <a id="more"></a>
 <h2 id="problem">Problem</h2>
-<p class="katex-block katex-error" title="ParseError: KaTeX parse error: Unknown column alignment: * at position 87: …	\begin{array}{*̲*lr**}
-	-x_1+x_…">min\ \ x_1^3+x_2^3-2x_1^2x_2+5x_1x_2^2+10x_1x_2+7x_1-x_2\\
+<p><span class="math display">\[
+min\ \ x_1^3+x_2^3-2x_1^2x_2+5x_1x_2^2+10x_1x_2+7x_1-x_2\\
 s.t.\left\{
-	\begin{array}{**lr**}
-	-x_1+x_2\leq0\\
-	-2x_1-5x_2-10\leq0\\
-	x_1-100\leq 0
-	\end{array}
+    \begin{array}{**lr**}
+    -x_1+x_2\leq0\\
+    -2x_1-5x_2-10\leq0\\
+    x_1-100\leq 0
+    \end{array}
 \right.
-</p>
+\]</span></p>
 <p>The graph of the object function is shown below:</p>
-<p><img src="https://download.kezhi.tech/img/202112211558169.png" alt="object function"></p>
+<figure>
+<img src="https://download.kezhi.tech/img/202112211558169.png"
+alt="object function" />
+<figcaption aria-hidden="true">object function</figcaption>
+</figure>
 <p>The feasible region by the constraint is shown blow:</p>
-<p><img src="https://download.kezhi.tech/img/202112211600017.png" alt="constraint"></p>
+<figure>
+<img src="https://download.kezhi.tech/img/202112211600017.png"
+alt="constraint" />
+<figcaption aria-hidden="true">constraint</figcaption>
+</figure>
 <h2 id="method">Method</h2>
-<p>For this problem, we can see that the feasible region is a convex set, and the object function is not convex. Considering the feasible region, the constraint works only when searching out the boundary. Using projection method could let the searched point outing the boundary move to the boundary. So the method I using is below:</p>
+<p>For this problem, we can see that the feasible region is a convex
+set, and the object function is not convex. Considering the feasible
+region, the constraint works only when searching out the boundary. Using
+projection method could let the searched point outing the boundary move
+to the boundary. So the method I using is below:</p>
 <blockquote>
-<ol>
-<li>choose the start point <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">x^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>replace point with the projection<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><msup><mi>x</mi><mn>0</mn></msup><msup><mo stretchy="false">]</mo><mo>+</mo></msup></mrow><annotation encoding="application/x-tex">[x^0]^+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>get the projection of next direction point <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>x</mi><mo>ˉ</mo></mover><mi>k</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msup><mi>x</mi><mi>k</mi></msup><mo>−</mo><mi mathvariant="normal">∇</mi><mi>f</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mi>k</mi></msup><mo stretchy="false">)</mo><msup><mo stretchy="false">]</mo><mo>+</mo></msup></mrow><annotation encoding="application/x-tex">\bar x_k=[x^k-\nabla f(x^k)]^+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.71778em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.22222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">∇</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>get the search direction <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>d</mi><mi>k</mi></msup><mo>=</mo><msup><mover accent="true"><mi>x</mi><mo>ˉ</mo></mover><mi>k</mi></msup><mo>−</mo><msup><mi>x</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">d^k=\bar x^k-x^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.22222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>calculate the next point <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>x</mi><mi>k</mi></msup><mo>+</mo><msup><mi>α</mi><mi>k</mi></msup><msup><mi>d</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">x^{k+1}=x^k+\alpha^kd^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></li>
-<li>if the terminal condition is satisficed,  stop the search and output the result, else go to the step 3</li>
+<ol type="1">
+<li>choose the start point <span class="math inline">\(x^0\)</span></li>
+<li>replace point with the projection<span
+class="math inline">\([x^0]^+\)</span></li>
+<li>get the projection of next direction point <span
+class="math inline">\(\bar x_k=[x^k-\nabla f(x^k)]^+\)</span></li>
+<li>get the search direction <span class="math inline">\(d^k=\bar
+x^k-x^k\)</span></li>
+<li>calculate the next point <span
+class="math inline">\(x^{k+1}=x^k+\alpha^kd^k\)</span></li>
+<li>if the terminal condition is satisficed, stop the search and output
+the result, else go to the step 3</li>
 </ol>
 </blockquote>
 <p>In this project, I choose Armjio rule to control the step size.</p>
-<p>The parameters of the method is following:</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mn>1</mn><mtext>&nbsp;&nbsp;</mtext><mi>β</mi><mo>=</mo><mn>0.5</mn><mtext>&nbsp;&nbsp;</mtext><mi>σ</mi><mo>=</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">s=1\ \ \beta=0.5\ \ \sigma=1e-5
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mspace">&nbsp;</span><span class="mspace">&nbsp;</span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span><span class="mspace">&nbsp;</span><span class="mspace">&nbsp;</span><span class="mord mathdefault" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span></span></p>
+<p>The parameters of the method is following: <span
+class="math display">\[
+s=1\ \ \beta=0.5\ \ \sigma=1e-5
+\]</span></p>
 <h2 id="solution">Solution</h2>
-<p>Considering the floating error of computers, stipulate <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a=b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> when <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>a</mi><mo>−</mo><mi>b</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">|a-b|&lt;\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span></span></span></span>, and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">|a|&lt;\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span></span></span></span>. In this project, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>=</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>19</mn></mrow><annotation encoding="application/x-tex">\varepsilon=1e-19</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">9</span></span></span></span>.</p>
+<p>Considering the floating error of computers, stipulate <span
+class="math inline">\(a=b\)</span> when <span
+class="math inline">\(|a-b|&lt;\varepsilon\)</span>, and <span
+class="math inline">\(a=0\)</span> if <span
+class="math inline">\(|a|&lt;\varepsilon\)</span>. In this project,
+<span class="math inline">\(\varepsilon=1e-19\)</span>.</p>
 <p>choose the start point (0,0), we could get the following answer:</p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
+<col style="width: 31%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">x^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mi>k</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x^k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>α</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">\alpha^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>d</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">d^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">（0,0）</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(-1.42857,-1.42857)</td>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">（0,0）</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
 </tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(-1.42857,-1.42857)</td>
-<td style="text-align:center">-2.74052</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(1.71358,-0.68543)</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
 </tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">(0.28501,-2.11400)</td>
-<td style="text-align:center">-4.62839</td>
-<td style="text-align:center">0.5</td>
-<td style="text-align:center">(-1.71358,0.68543)</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
 </tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">(-0.57178,-1.77129)</td>
-<td style="text-align:center">-5.65909</td>
-<td style="text-align:center">0.25</td>
-<td style="text-align:center">(2.55462,-1.02185)</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
 </tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">(0.06688,-2.02675)</td>
-<td style="text-align:center">-5.79388</td>
-<td style="text-align:center">0.25</td>
-<td style="text-align:center">(-1.49545,0.59818)</td>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
 </tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">(-0.30699,-1.87721)</td>
-<td style="text-align:center">-6.20808</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.86671,-0.34668)</td>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
 </tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">(-0.19865,-1.92054)</td>
-<td style="text-align:center">-6.25856</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.08902,0.03561)</td>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
 </tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">(-0.20977,-1.91609)</td>
-<td style="text-align:center">-6.25903</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.01624,-0.00649)</td>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
 </tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">(-0.20775,-1.91690)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.00284,0.00114)</td>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
 </tr>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center">(-0.20810,-1.91676)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.00050,-0.00020)</td>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
 </tr>
-<tr>
-<td style="text-align:center">11</td>
-<td style="text-align:center">(-0.20804,-1.91679)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.00009,0.00004)</td>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
 </tr>
-<tr>
-<td style="text-align:center">12</td>
-<td style="text-align:center">(-0.20805,-1.91678)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.00002,-0.00001)</td>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
 </tr>
 </tbody>
 </table>
-<p>The final result is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mo>∗</mo></msup><mo>=</mo><mo stretchy="false">[</mo><mo>−</mo><mn>0.20805</mn><mo separator="true">,</mo><mo>−</mo><mn>1.91678</mn><mo stretchy="false">]</mo><mo separator="true">,</mo><mi>f</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mo>∗</mo></msup><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>6.25904</mn></mrow><annotation encoding="application/x-tex">x^*=[-0.20805, -1.91678],f(x^*)=-6.25904</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">0</span><span class="mord">.</span><span class="mord">2</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mord">.</span><span class="mord">9</span><span class="mord">1</span><span class="mord">6</span><span class="mord">7</span><span class="mord">8</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">6</span><span class="mord">.</span><span class="mord">2</span><span class="mord">5</span><span class="mord">9</span><span class="mord">0</span><span class="mord">4</span></span></span></span>.</p>
-<p>same as the result solved by the python package <code>scipy.optimize.minimize</code>:</p>
-<p><img src="https://download.kezhi.tech/img/20211222010041.png" alt="image-20211222010030267"></p>
+<p>The final result is <span class="math inline">\(x^*=[-0.20805,
+-1.91678],f(x^*)=-6.25904\)</span>.</p>
+<p>same as the result solved by the python package
+<code>scipy.optimize.minimize</code>:</p>
+<figure>
+<img src="https://download.kezhi.tech/img/20211222010041.png"
+alt="image-20211222010030267" />
+<figcaption aria-hidden="true">image-20211222010030267</figcaption>
+</figure>
 <p>Change the start point to (5,-8), and the answer following:</p>
 <table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 15%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">x^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mi>k</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x^k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>α</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">\alpha^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
-<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>d</mi><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">d^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></th>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(6.37931,-4.55172)</td>
-<td style="text-align:center">955.45385</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(-7.80788,3.12315)</td>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(6.37931,-4.55172)</td>
+<td style="text-align: center;">955.45385</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-7.80788,3.12315)</td>
 </tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">(-1.42857,-1.42857)</td>
-<td style="text-align:center">-2.74052</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">(1.71358,-0.68543)</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
 </tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">(0.28501,-2.11400)</td>
-<td style="text-align:center">-4.62839</td>
-<td style="text-align:center">0.5</td>
-<td style="text-align:center">(-1.71358,0.68543)</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
 </tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">(-0.57178,-1.77129)</td>
-<td style="text-align:center">-5.65909</td>
-<td style="text-align:center">0.25</td>
-<td style="text-align:center">(2.55462,-1.02185)</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
 </tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">(0.06688,-2.02675)</td>
-<td style="text-align:center">-5.79388</td>
-<td style="text-align:center">0.25</td>
-<td style="text-align:center">(-1.49545,0.59818)</td>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
 </tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">(-0.30699,-1.87721)</td>
-<td style="text-align:center">-6.20808</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.86671,-0.34668)</td>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
 </tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">(-0.19865,-1.92054)</td>
-<td style="text-align:center">-6.25856</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.08902,0.03561)</td>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
 </tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">(-0.20977,-1.91609)</td>
-<td style="text-align:center">-6.25903</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.01624,-0.00649)</td>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
 </tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">(-0.20775,-1.91690)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.00284,0.00114)</td>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
 </tr>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center">(-0.20810,-1.91676)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.00050,-0.00020)</td>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
 </tr>
-<tr>
-<td style="text-align:center">11</td>
-<td style="text-align:center">(-0.20804,-1.91679)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(-0.00009,0.00004)</td>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
 </tr>
-<tr>
-<td style="text-align:center">12</td>
-<td style="text-align:center">(-0.20805,-1.91678)</td>
-<td style="text-align:center">-6.25904</td>
-<td style="text-align:center">0.125</td>
-<td style="text-align:center">(0.00002,-0.00001)</td>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
 </tr>
 </tbody>
 </table>
-<p>We can see that the searching point went to the boundary quickly, and then the trajectory of the searching is same as ahead.</p>
+<p>We can see that the searching point went to the boundary quickly, and
+then the trajectory of the searching is same as ahead.</p>
 <h2 id="appendix">Appendix</h2>
-<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">language: python</span><br><span class="line">package: numpy, matplotlib, scipy</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">language: python</span><br><span class="line">package: numpy, matplotlib, scipy</span><br></pre></td></tr></table></figure>
 <p>The source code is following:</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小于该数则判断为0</span></span><br><span class="line">epsilon=<span class="number">1e-19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求梯度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">autograd</span><span class="params">(f,*args)</span>:</span></span><br><span class="line">    delta=<span class="number">1e-9</span></span><br><span class="line">    var_num=len(args)</span><br><span class="line">    grads=[]</span><br><span class="line">    <span class="comment"># 计算当前函数值</span></span><br><span class="line">    func_value=f(args)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(var_num):</span><br><span class="line">        <span class="comment"># 计算偏移后的变量</span></span><br><span class="line">        args_new=list(args)</span><br><span class="line">        args_new[i]+=delta</span><br><span class="line">        args_new=tuple(args_new)</span><br><span class="line">        <span class="comment"># 计算偏移后函数值</span></span><br><span class="line">        delta_func_value=f(args_new)</span><br><span class="line">        <span class="comment"># 求偏导</span></span><br><span class="line">        partial=(delta_func_value-func_value)/delta</span><br><span class="line">        grads.append(partial)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> tuple(grads)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数</span></span><br><span class="line">f=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]**<span class="number">3</span>+x[<span class="number">1</span>]**<span class="number">3</span><span class="number">-2</span>*x[<span class="number">0</span>]**<span class="number">2</span>*x[<span class="number">1</span>]+<span class="number">5</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]**<span class="number">2</span>+<span class="number">10</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]+<span class="number">7</span>*x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g1=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g2=<span class="keyword">lambda</span> x: <span class="number">2</span>*x[<span class="number">0</span>]+<span class="number">5</span>*x[<span class="number">1</span>]+<span class="number">10</span></span><br><span class="line">g3=<span class="keyword">lambda</span> x: -x[<span class="number">0</span>]+<span class="number">10</span></span><br><span class="line"></span><br><span class="line">line1=[(<span class="number">10</span>,<span class="number">-6</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line2=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line3=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">-6</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算凸包上的最近距离点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_closest_point</span><span class="params">(x,y,line)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> line[<span class="number">0</span>][<span class="number">0</span>]==line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">        px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        py=y</span><br><span class="line">        <span class="keyword">if</span> py&gt;line[<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> py&lt;line[<span class="number">0</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        k=(line[<span class="number">0</span>][<span class="number">1</span>]-line[<span class="number">1</span>][<span class="number">1</span>])/(line[<span class="number">0</span>][<span class="number">0</span>]-line[<span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">        b=line[<span class="number">0</span>][<span class="number">1</span>]-k*line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        px=(y+x/k-b)/(k+<span class="number">1</span>/k)</span><br><span class="line">        py=k*px+b</span><br><span class="line">        <span class="keyword">if</span> px&lt;line[<span class="number">0</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> px&gt;line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    distance=sqrt((x-px)**<span class="number">2</span>+(y-py)**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> distance,(px,py)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算点(x,y)在凸包上的投影</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> g1([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g2([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g3([x,y])&gt;=<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (x,y)</span><br><span class="line">    d1,p1=get_closest_point(x,y,line1)</span><br><span class="line">    d2,p2=get_closest_point(x,y,line2)</span><br><span class="line">    d3,p3=get_closest_point(x,y,line3)</span><br><span class="line">    <span class="keyword">if</span> d1==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p1</span><br><span class="line">    <span class="keyword">if</span> d2==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p2</span><br><span class="line">    <span class="keyword">if</span> d3==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影最速下降法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">steepest_method</span><span class="params">(f,*start_point)</span>:</span></span><br><span class="line">    s=<span class="number">1</span></span><br><span class="line">    beta=<span class="number">0.5</span></span><br><span class="line">    m=<span class="number">0</span></span><br><span class="line">    sigma=<span class="number">1e-5</span></span><br><span class="line">    point=np.array(project(*start_point))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        last_point=point</span><br><span class="line">        <span class="comment"># 计算函数值</span></span><br><span class="line">        value=f(point)</span><br><span class="line">        <span class="comment"># 计算梯度</span></span><br><span class="line">        grad_f=autograd(f,*point)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 检查是否达到终止条件</span></span><br><span class="line">        is_solve=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> grad <span class="keyword">in</span> grad_f:</span><br><span class="line">            <span class="keyword">if</span> abs(grad)&gt;epsilon:</span><br><span class="line">                is_solve=<span class="literal">False</span></span><br><span class="line">        <span class="comment"># 如果精度达到终止条件，则停止并返回当前点</span></span><br><span class="line">        <span class="keyword">if</span> is_solve:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># 否则继续向下运算</span></span><br><span class="line">        point=point-grad_f</span><br><span class="line">        <span class="comment"># 对点进行投影</span></span><br><span class="line">        point=project(*point)</span><br><span class="line">        <span class="comment"># 计算更新方向</span></span><br><span class="line">        direction=point-last_point</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算下一个搜索点</span></span><br><span class="line">        point=last_point</span><br><span class="line">        <span class="comment"># Armijo准则选择步长</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            alpha=beta**m*s</span><br><span class="line">            new_point=point+alpha*direction</span><br><span class="line">            d_sum=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(direction):</span><br><span class="line">                d_sum+=grad_f[i]*d</span><br><span class="line">            <span class="keyword">if</span> f(point)-f(new_point)&gt;=-sigma*alpha*d_sum:</span><br><span class="line">                point=new_point</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            m+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 打印日志</span></span><br><span class="line">        print(<span class="string">'x_k:({:.5f},{:.5f}) f: {:.5f} a: {:.5f} d: ({:.5f},{:.5f})'</span>.format(last_point[<span class="number">0</span>],last_point[<span class="number">1</span>],f(last_point),alpha,direction[<span class="number">0</span>],direction[<span class="number">1</span>]))</span><br><span class="line">        point=last_point+alpha*direction</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果迭代步长很小，则停止迭代</span></span><br><span class="line">        err=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(point)):</span><br><span class="line">            err+=abs(point[i]-last_point[i])</span><br><span class="line">        <span class="keyword">if</span> err&lt;<span class="number">1e-5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 对结果保留5位小数</span></span><br><span class="line">    ans=[]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> point:</span><br><span class="line">        ans.append(round(p,<span class="number">5</span>))</span><br><span class="line">    <span class="keyword">return</span> ans,f(ans)</span><br><span class="line">    </span><br><span class="line">print(steepest_method(f,<span class="number">5</span>,<span class="number">-8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">######################</span></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">x=np.arange(<span class="number">-5</span>,<span class="number">15</span>,<span class="number">0.1</span>)</span><br><span class="line">y1=x</span><br><span class="line">y2=<span class="number">-0.4</span>*x<span class="number">-2</span></span><br><span class="line"></span><br><span class="line">plt.plot(x,y1)</span><br><span class="line">plt.plot(x,y2)</span><br><span class="line">plt.plot([<span class="number">10</span>,<span class="number">10</span>],[<span class="number">-10</span>,<span class="number">15</span>])</span><br><span class="line">plt.fill_between(x,y1,y2,where=(x&lt;<span class="number">10</span>)&amp;(y1&gt;y2),alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.savefig(<span class="string">'constraint.png'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">figure = plt.figure()</span><br><span class="line">ax = Axes3D(figure)<span class="comment">#设置图像为三维格式</span></span><br><span class="line">X = np.arange(<span class="number">-1.5</span>,<span class="number">10</span>,<span class="number">0.1</span>)</span><br><span class="line">Y = np.arange(<span class="number">-6</span>,<span class="number">10</span>,<span class="number">0.1</span>)<span class="comment">#X,Y的范围</span></span><br><span class="line">X,Y = np.meshgrid(X,Y)<span class="comment">#绘制网格</span></span><br><span class="line">Z=f([X,Y])</span><br><span class="line">ax.plot_surface(X,Y,Z,rstride=<span class="number">1</span>,cstride=<span class="number">1</span>,cmap=<span class="string">'rainbow'</span>)</span><br><span class="line"><span class="comment">#绘制3D图，后面的参数为调节图像的格式</span></span><br><span class="line">plt.savefig(<span class="string">'obj_func.png'</span>)</span><br><span class="line"><span class="comment">#######################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># scipy求解验证结果正确性</span></span><br><span class="line"></span><br><span class="line">cons=({<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g1},</span><br><span class="line">      {<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g2},</span><br><span class="line">      {<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g3})</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x0 = np.asarray((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">res=minimize(f,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line">print(res)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小于该数则判断为0</span></span><br><span class="line">epsilon=<span class="number">1e-19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求梯度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">autograd</span><span class="params">(f,*args)</span>:</span></span><br><span class="line">    delta=<span class="number">1e-9</span></span><br><span class="line">    var_num=len(args)</span><br><span class="line">    grads=[]</span><br><span class="line">    <span class="comment"># 计算当前函数值</span></span><br><span class="line">    func_value=f(args)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(var_num):</span><br><span class="line">        <span class="comment"># 计算偏移后的变量</span></span><br><span class="line">        args_new=list(args)</span><br><span class="line">        args_new[i]+=delta</span><br><span class="line">        args_new=tuple(args_new)</span><br><span class="line">        <span class="comment"># 计算偏移后函数值</span></span><br><span class="line">        delta_func_value=f(args_new)</span><br><span class="line">        <span class="comment"># 求偏导</span></span><br><span class="line">        partial=(delta_func_value-func_value)/delta</span><br><span class="line">        grads.append(partial)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> tuple(grads)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数</span></span><br><span class="line">f=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]**<span class="number">3</span>+x[<span class="number">1</span>]**<span class="number">3</span><span class="number">-2</span>*x[<span class="number">0</span>]**<span class="number">2</span>*x[<span class="number">1</span>]+<span class="number">5</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]**<span class="number">2</span>+<span class="number">10</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]+<span class="number">7</span>*x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g1=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g2=<span class="keyword">lambda</span> x: <span class="number">2</span>*x[<span class="number">0</span>]+<span class="number">5</span>*x[<span class="number">1</span>]+<span class="number">10</span></span><br><span class="line">g3=<span class="keyword">lambda</span> x: -x[<span class="number">0</span>]+<span class="number">10</span></span><br><span class="line"></span><br><span class="line">line1=[(<span class="number">10</span>,<span class="number">-6</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line2=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line3=[(<span class="number">-2</span>/<span class="number">1.4</span>,<span class="number">-2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">-6</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算凸包上的最近距离点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_closest_point</span><span class="params">(x,y,line)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> line[<span class="number">0</span>][<span class="number">0</span>]==line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">        px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        py=y</span><br><span class="line">        <span class="keyword">if</span> py&gt;line[<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> py&lt;line[<span class="number">0</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        k=(line[<span class="number">0</span>][<span class="number">1</span>]-line[<span class="number">1</span>][<span class="number">1</span>])/(line[<span class="number">0</span>][<span class="number">0</span>]-line[<span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">        b=line[<span class="number">0</span>][<span class="number">1</span>]-k*line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        px=(y+x/k-b)/(k+<span class="number">1</span>/k)</span><br><span class="line">        py=k*px+b</span><br><span class="line">        <span class="keyword">if</span> px&lt;line[<span class="number">0</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> px&gt;line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    distance=sqrt((x-px)**<span class="number">2</span>+(y-py)**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> distance,(px,py)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算点(x,y)在凸包上的投影</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> g1([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g2([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g3([x,y])&gt;=<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (x,y)</span><br><span class="line">    d1,p1=get_closest_point(x,y,line1)</span><br><span class="line">    d2,p2=get_closest_point(x,y,line2)</span><br><span class="line">    d3,p3=get_closest_point(x,y,line3)</span><br><span class="line">    <span class="keyword">if</span> d1==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p1</span><br><span class="line">    <span class="keyword">if</span> d2==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p2</span><br><span class="line">    <span class="keyword">if</span> d3==min(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影最速下降法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">steepest_method</span><span class="params">(f,*start_point)</span>:</span></span><br><span class="line">    s=<span class="number">1</span></span><br><span class="line">    beta=<span class="number">0.5</span></span><br><span class="line">    m=<span class="number">0</span></span><br><span class="line">    sigma=<span class="number">1e-5</span></span><br><span class="line">    point=np.array(project(*start_point))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        last_point=point</span><br><span class="line">        <span class="comment"># 计算函数值</span></span><br><span class="line">        value=f(point)</span><br><span class="line">        <span class="comment"># 计算梯度</span></span><br><span class="line">        grad_f=autograd(f,*point)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 检查是否达到终止条件</span></span><br><span class="line">        is_solve=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> grad <span class="keyword">in</span> grad_f:</span><br><span class="line">            <span class="keyword">if</span> abs(grad)&gt;epsilon:</span><br><span class="line">                is_solve=<span class="literal">False</span></span><br><span class="line">        <span class="comment"># 如果精度达到终止条件，则停止并返回当前点</span></span><br><span class="line">        <span class="keyword">if</span> is_solve:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># 否则继续向下运算</span></span><br><span class="line">        point=point-grad_f</span><br><span class="line">        <span class="comment"># 对点进行投影</span></span><br><span class="line">        point=project(*point)</span><br><span class="line">        <span class="comment"># 计算更新方向</span></span><br><span class="line">        direction=point-last_point</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算下一个搜索点</span></span><br><span class="line">        point=last_point</span><br><span class="line">        <span class="comment"># Armijo准则选择步长</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            alpha=beta**m*s</span><br><span class="line">            new_point=point+alpha*direction</span><br><span class="line">            d_sum=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(direction):</span><br><span class="line">                d_sum+=grad_f[i]*d</span><br><span class="line">            <span class="keyword">if</span> f(point)-f(new_point)&gt;=-sigma*alpha*d_sum:</span><br><span class="line">                point=new_point</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            m+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 打印日志</span></span><br><span class="line">        print(<span class="string">'x_k:(&#123;:.5f&#125;,&#123;:.5f&#125;) f: &#123;:.5f&#125; a: &#123;:.5f&#125; d: (&#123;:.5f&#125;,&#123;:.5f&#125;)'</span>.format(last_point[<span class="number">0</span>],last_point[<span class="number">1</span>],f(last_point),alpha,direction[<span class="number">0</span>],direction[<span class="number">1</span>]))</span><br><span class="line">        point=last_point+alpha*direction</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果迭代步长很小，则停止迭代</span></span><br><span class="line">        err=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(point)):</span><br><span class="line">            err+=abs(point[i]-last_point[i])</span><br><span class="line">        <span class="keyword">if</span> err&lt;<span class="number">1e-5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 对结果保留5位小数</span></span><br><span class="line">    ans=[]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> point:</span><br><span class="line">        ans.append(round(p,<span class="number">5</span>))</span><br><span class="line">    <span class="keyword">return</span> ans,f(ans)</span><br><span class="line">    </span><br><span class="line">print(steepest_method(f,<span class="number">5</span>,<span class="number">-8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">######################</span></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">x=np.arange(<span class="number">-5</span>,<span class="number">15</span>,<span class="number">0.1</span>)</span><br><span class="line">y1=x</span><br><span class="line">y2=<span class="number">-0.4</span>*x<span class="number">-2</span></span><br><span class="line"></span><br><span class="line">plt.plot(x,y1)</span><br><span class="line">plt.plot(x,y2)</span><br><span class="line">plt.plot([<span class="number">10</span>,<span class="number">10</span>],[<span class="number">-10</span>,<span class="number">15</span>])</span><br><span class="line">plt.fill_between(x,y1,y2,where=(x&lt;<span class="number">10</span>)&amp;(y1&gt;y2),alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.savefig(<span class="string">'constraint.png'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">figure = plt.figure()</span><br><span class="line">ax = Axes3D(figure)<span class="comment">#设置图像为三维格式</span></span><br><span class="line">X = np.arange(<span class="number">-1.5</span>,<span class="number">10</span>,<span class="number">0.1</span>)</span><br><span class="line">Y = np.arange(<span class="number">-6</span>,<span class="number">10</span>,<span class="number">0.1</span>)<span class="comment">#X,Y的范围</span></span><br><span class="line">X,Y = np.meshgrid(X,Y)<span class="comment">#绘制网格</span></span><br><span class="line">Z=f([X,Y])</span><br><span class="line">ax.plot_surface(X,Y,Z,rstride=<span class="number">1</span>,cstride=<span class="number">1</span>,cmap=<span class="string">'rainbow'</span>)</span><br><span class="line"><span class="comment">#绘制3D图，后面的参数为调节图像的格式</span></span><br><span class="line">plt.savefig(<span class="string">'obj_func.png'</span>)</span><br><span class="line"><span class="comment">#######################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># scipy求解验证结果正确性</span></span><br><span class="line"></span><br><span class="line">cons=(&#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g1&#125;,</span><br><span class="line">      &#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g2&#125;,</span><br><span class="line">      &#123;<span class="string">'type'</span>:<span class="string">'ineq'</span>,<span class="string">'fun'</span>:g3&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x0 = np.asarray((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">res=minimize(f,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -590,10 +642,10 @@ s.t.\left\{
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\a7067052.html" rel="bookmark">XJTU System Optimization and Scheduling Final Report</a></div>
+      <div class="popular-posts-title"><a href="\7d0182be.html" rel="bookmark">XJTU System Optimization and Scheduling Course Assignments</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\7d0182be.html" rel="bookmark">XJTU System Optimization and Scheduling Course Assignments</a></div>
+      <div class="popular-posts-title"><a href="\a7067052.html" rel="bookmark">XJTU System Optimization and Scheduling Final Report</a></div>
     </li>
   </ul>
 
@@ -733,7 +785,7 @@ s.t.\left\{
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Midterm Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#problem"><span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendix"><span class="nav-text">Appendix</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#midterm-report"><span class="nav-text">Midterm Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#problem"><span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendix"><span class="nav-text">Appendix</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1110,13 +1162,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1240,7 +1292,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

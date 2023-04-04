@@ -58,8 +58,8 @@
 <meta property="article:modified_time" content="2022-07-28T16:19:56.922Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="数字图像">
 <meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="数字图像">
 <meta property="article:tag" content="空域滤波器">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://download.kezhi.tech/img/tmp.bmp">
@@ -353,20 +353,37 @@
 <p>依次分别为原图像，3*3中值滤波，5*5中值滤波，7*7中值滤波。</p>
 </blockquote>
 <table>
-    <tbody><tr>
-<td><center><img src="https://download.kezhi.tech/img/tmp.bmp">原始图片</center></td>
-<td><center><img src="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp">3*3中值</center></td>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-3.bmp" >3*3中值
+</center>
+</td>
 </tr>
-</tbody></table>
+</table>
 <table>
-    <tbody><tr>
-        <td><center><img src="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">5*5中值</center></td>
-      <td><center><img src="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">7*7中值</center></td>
-    </tr>
-</tbody></table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-5.bmp">5*5中值
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/test1.pgmcenter-7.bmp">7*7中值
+</center>
+</td>
+</tr>
+</table>
 <p>原图中有很多分布不规律的噪声，其中有一部分是盐噪声，但大部分是一些突然的脉冲噪声。在使用3*3的中值滤波时，盐噪声已经很好的去除掉了，但脉冲噪声依然很明显。使用5*5的中值时，脉冲噪声情况有了很大的改善。7*7的滤波器几乎完全去除了噪声，但图像的模糊也很严重。</p>
 <h2 id="高斯滤波">高斯滤波</h2>
-<p>高斯滤波是一些图形处理软件中经常使用的模糊方法，由二维正态分布函数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><msup><mi>e</mi><mrow><mo>−</mo><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac></mrow></msup></mrow><annotation encoding="application/x-tex">p(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.6463099999999997em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">π</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.3013099999999997em;"><span style="top:-3.4534200000000004em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2112714285714286em;"><span style="top:-2.5061857142857145em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9384399999999999em;"><span style="top:-2.93844em;margin-right:0.1em;"><span class="pstrut" style="height:2.64444em;"></span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.4623857142857144em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.04844em;"><span style="top:-3.04844em;margin-right:0.1em;"><span class="pstrut" style="height:2.64444em;"></span><span class="mord mtight">2</span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.04844em;"><span style="top:-3.04844em;margin-right:0.1em;"><span class="pstrut" style="height:2.64444em;"></span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.49381428571428565em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span></span></span></span>产生，具体做法如下：</p>
+<p>高斯滤波是一些图形处理软件中经常使用的模糊方法，由二维正态分布函数：<span
+class="math inline">\(p(x,y)=\frac1{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}\)</span>产生，具体做法如下：</p>
 <ul>
 <li>若要产生n*n的高斯滤波器，将该n阶仿真的中心置为(0,0)，生成矩阵中其他位置的坐标；</li>
 <li>将该n*n矩阵中的每个位置的坐标带入二维正态分布函数得到每个位置的数值；</li>
@@ -375,23 +392,47 @@
 </ul>
 <blockquote>
 <p>生成高斯滤波器的函数如下</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br></pre></td></tr></table></figure>
 <p>3*3，5*5，7*7的高斯滤波器如下：</p>
 <table>
-    <tbody><tr>
-    	<td><center><img src="https://download.kezhi.tech/img/20200327170522.png"></center></td>
-        <td><center><img src="https://download.kezhi.tech/img/20200327170620.png"></center></td>
-        <td><center><img src="https://download.kezhi.tech/img/20200327170658.png"></center></td>
-    </tr>
-</tbody></table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170522.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170620.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170658.png">
+</center>
+</td>
+</tr>
+</table>
 <p>其在二维坐标系中的图像如下：</p>
 <table>
-    <tbody><tr>
-    	<td><center><img src="https://download.kezhi.tech/img/20200327170756.png"></center></td>
-        <td><center><img src="https://download.kezhi.tech/img/20200327170817.png"></center></td>
-        <td><center><img src="https://download.kezhi.tech/img/20200327170835.png"></center></td>
-    </tr>
-</tbody></table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170756.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170817.png">
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327170835.png">
+</center>
+</td>
+</tr>
+</table>
 </blockquote>
 <p>在得到了高斯滤波器的算子之后，使用该算子与输入图像进行卷积即可得到高斯滤波器滤波后的结果。</p>
 <p>其效果如下：</p>
@@ -399,25 +440,45 @@
 <p>依次为原图，3*3，5*5，7*7高斯滤波的结果：</p>
 </blockquote>
 <table>
-    <tbody><tr>
-        <td><center><img src="https://download.kezhi.tech/img/tmp.bmp">原始图片</center></td>
-        <td><center><img src="https://download.kezhi.tech/img/20200327172117.bmp">3*3高斯</center></td>
-    </tr>
-</tbody></table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/tmp.bmp">原始图片
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172117.bmp" >3*3高斯
+</center>
+</td>
+</tr>
+</table>
 <table>
-    <tbody><tr>
-    <td><center><img src="https://download.kezhi.tech/img/20200327172156.bmp">5*5高斯</center></td>
-    <td><center><img src="https://download.kezhi.tech/img/20200327172217.bmp">7*7高斯</center></td>
-    </tr>
-</tbody></table>
+<tr>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172156.bmp">5*5高斯
+</center>
+</td>
+<td>
+<center>
+<img src="https://download.kezhi.tech/img/20200327172217.bmp">7*7高斯
+</center>
+</td>
+</tr>
+</table>
 <p>高斯模糊对于图像中的盐噪声去除效果较好，但对于脉冲噪声的去除显得颇为吃力，7*7的高斯滤波依然无法滤除掉图像中的脉冲噪声。另一方面，高斯模糊相较于终止模糊图像的信息保留较为完全，细节保留较多。</p>
 <h2 id="附录">附录</h2>
 <h3 id="参考文献">参考文献</h3>
-<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael C.Gonzalez），（美）理查德·E·伍兹（Richard E. Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
-<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16 [2020-03-23].<a href="https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0" target="_blank" rel="noopener">https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</a></p>
-<p>[3]予你心安.Numpy求均值、中位数、众数的方法[G/OL].博客园: 2018-11-04 [2020-03-23].<a href="https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html" target="_blank" rel="noopener">https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html</a></p>
+<p>[1]数字图像处理[M]：第三版/（美）拉斐尔·C·冈萨雷斯（Rafael
+C.Gonzalez），（美）理查德·E·伍兹（Richard E.
+Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
+<p>[2]Brook_icv.图像处理基础(4)：高斯滤波器详解[G/OL].博客园: 2017-02-16
+[2020-03-23].https://www.cnblogs.com/wangguchangqing/p/6407717.html#autoid-4-1-0</p>
+<p>[3]予你心安.Numpy求均值、中位数、众数的方法[G/OL].博客园: 2018-11-04
+[2020-03-23].https://www.cnblogs.com/lijinze-tsinghua/p/9905882.html</p>
 <h3 id="源代码">源代码</h3>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">img=cv.imread(<span class="string">"test1.pgm"</span>)</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像img进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))   <span class="comment">#对边缘进行补0操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_filter</span><span class="params">(img, n)</span>:</span>  <span class="comment">#使用n*n的中值滤波器对图像进行低通滤波</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    tmp=np.zeros(n*n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp[k*n+l]=temp[i+k][j+l]</span><br><span class="line">            result[i][j]=np.median(tmp)</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test1.pgm"</span>,<span class="string">"test2.tif"</span>]</span><br><span class="line">size=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> size:</span><br><span class="line">        cv.imwrite(i+<span class="string">'gauss-'</span>+str(j)+<span class="string">'.bmp'</span>,gauss_filter(img,j))</span><br><span class="line">        cv.imwrite(i+<span class="string">'center-'</span>+str(j)+<span class="string">'.bmp'</span>,center_filter(img,j))</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">img=cv.imread(<span class="string">"test1.pgm"</span>)</span><br><span class="line"></span><br><span class="line">sigma=<span class="number">1.5</span>   <span class="comment">#高斯滤波器的参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span>     <span class="comment">#定义二维正态分布函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(math.pi*sigma**<span class="number">2</span>)*math.exp(-(x**<span class="number">2</span>+y**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss</span><span class="params">(n)</span>:</span>   <span class="comment">#生成n*n的高斯滤波器</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    filt=np.zeros((n,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            filt[i][j]=f(i-mid,j-mid)/f(-mid,-mid)</span><br><span class="line">    <span class="keyword">return</span> filt.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gauss_filter</span><span class="params">(img,n)</span>:</span>    <span class="comment">#对图像img进行n*n卷积块的高斯滤波</span></span><br><span class="line">    filt=gauss(n)</span><br><span class="line">    con=<span class="number">1</span>/np.sum(filt)</span><br><span class="line">    shape=img.shape</span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))   <span class="comment">#对边缘进行补0操作</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            tmp=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp+=filt[k][l]*temp[i+k][j+l]</span><br><span class="line">            result[i][j]=con*tmp</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center_filter</span><span class="params">(img, n)</span>:</span>  <span class="comment">#使用n*n的中值滤波器对图像进行低通滤波</span></span><br><span class="line">    mid=n//<span class="number">2</span></span><br><span class="line">    shape=img.shape</span><br><span class="line">    temp=np.zeros((shape[<span class="number">0</span>]+n<span class="number">-1</span>,shape[<span class="number">1</span>]+n<span class="number">-1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            temp[i+mid][j+mid]=img[i][j][<span class="number">0</span>]</span><br><span class="line">    result=np.zeros((shape[<span class="number">0</span>],shape[<span class="number">1</span>]))</span><br><span class="line">    tmp=np.zeros(n*n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> range(n):</span><br><span class="line">                    tmp[k*n+l]=temp[i+k][j+l]</span><br><span class="line">            result[i][j]=np.median(tmp)</span><br><span class="line">    <span class="keyword">return</span> result.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">filename=[<span class="string">"test1.pgm"</span>,<span class="string">"test2.tif"</span>]</span><br><span class="line">size=[<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> filename:</span><br><span class="line">    img=cv.imread(i)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> size:</span><br><span class="line">        cv.imwrite(i+<span class="string">'gauss-'</span>+str(j)+<span class="string">'.bmp'</span>,gauss_filter(img,j))</span><br><span class="line">        cv.imwrite(i+<span class="string">'center-'</span>+str(j)+<span class="string">'.bmp'</span>,center_filter(img,j))</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -442,10 +503,10 @@
       <div class="popular-posts-title"><a href="\bbc72bae.html" rel="bookmark">数字图像处理（五）空域高通滤波器</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(Python)</a></div>
+      <div class="popular-posts-title"><a href="\a6c8a314.html" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\a6c8a314.html" rel="bookmark">数字图像处理（三）直方图均衡</a></div>
+      <div class="popular-posts-title"><a href="\2b8fba10.html" rel="bookmark">数字图像处理（一）图像插值(Python)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\3cac2a44.html" rel="bookmark">数字图像处理（二）图像配准</a></div>
@@ -516,8 +577,8 @@
           
           <div class="post-tags">
               <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
-              <a href="/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/" rel="tag"><i class="fa fa-tag"></i> 数字图像</a>
               <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+              <a href="/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/" rel="tag"><i class="fa fa-tag"></i> 数字图像</a>
               <a href="/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 空域滤波器</a>
           </div>
 
@@ -971,13 +1032,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -1101,7 +1162,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();

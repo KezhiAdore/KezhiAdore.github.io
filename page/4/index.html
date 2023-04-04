@@ -328,118 +328,143 @@
 <ul>
 <li>Flask</li>
 </ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.jinja_env.variable_start_string = <span class="string">'[['</span></span><br><span class="line">    app.jinja_env.variable_end_string = <span class="string">']]'</span></span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.jinja_env.variable_start_string = <span class="string">'[['</span></span><br><span class="line">    app.jinja_env.variable_end_string = <span class="string">']]'</span></span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Vue</li>
 </ul>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue({</span><br><span class="line">    delimiters: [<span class="string">'[['</span>,<span class="string">']]'</span>]</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    delimiters: [<span class="string">'[['</span>,<span class="string">']]'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="指令">指令</h3>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>指令</th>
 <th>作用</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>v-model</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>v-once</td>
 <td>一次性插入数据，当数据改变时，插值处内容不会改变</td>
 </tr>
-<tr>
+<tr class="even">
 <td>v-html</td>
 <td>以HTML代码的形式插入数据</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>v-bind (:)</td>
 <td>用于在HTML <code>attribute</code>中绑定<code>property</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>v-on (@)</td>
 <td>将DOM事件与方法绑定</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>v-for</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>v-if</td>
 <td>根据表达式的值的真假来插入/移除对应的HTML元素。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <h2 id="javascript">JavaScript</h2>
-<h3 id="truthy-真值-和falsy-虚值"><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy" target="_blank" rel="noopener">Truthy</a>（真值）和<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy" target="_blank" rel="noopener">Falsy</a>（虚值）</h3>
-<p>在 <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript" target="_blank" rel="noopener">JavaScript</a> 中，<strong>truthy</strong>（真值）指的是在<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean" target="_blank" rel="noopener">布尔值</a>上下文中，转换后的值为 <code>true</code> 的值。被定义为<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy" target="_blank" rel="noopener">假值</a>以外的任何值都为真值。（即所有除 <code>false</code>、<code>0</code>、<code>-0</code>、<code>0n</code>、<code>""</code>、<code>null</code>、<code>undefined</code> 和 <code>NaN</code> 以外的皆为真值）。</p>
+<h3 id="truthy真值和falsy虚值"><a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy">Truthy</a>（真值）和<a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy">Falsy</a>（虚值）</h3>
+<p>在 <a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript">JavaScript</a>
+中，<strong>truthy</strong>（真值）指的是在<a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean">布尔值</a>上下文中，转换后的值为
+<code>true</code> 的值。被定义为<a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy">假值</a>以外的任何值都为真值。（即所有除
+<code>false</code>、<code>0</code>、<code>-0</code>、<code>0n</code>、<code>""</code>、<code>null</code>、<code>undefined</code>
+和 <code>NaN</code> 以外的皆为真值）。</p>
 <p>JavaScript 中的<em>真值</em>示例如下</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">if</span> ({})</span><br><span class="line"><span class="keyword">if</span> ([])</span><br><span class="line"><span class="keyword">if</span> (<span class="number">42</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"0"</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"false"</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line"><span class="keyword">if</span> (<span class="number">-42</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">12n</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">3.14</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">-3.14</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">Infinity</span>)</span><br><span class="line"><span class="keyword">if</span> (-<span class="literal">Infinity</span>)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">if</span> (&#123;&#125;)</span><br><span class="line"><span class="keyword">if</span> ([])</span><br><span class="line"><span class="keyword">if</span> (<span class="number">42</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"0"</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"false"</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line"><span class="keyword">if</span> (<span class="number">-42</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">12n</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">3.14</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="number">-3.14</span>)</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">Infinity</span>)</span><br><span class="line"><span class="keyword">if</span> (-<span class="literal">Infinity</span>)</span><br></pre></td></tr></table></figure>
 <p>JavaScript的逻辑与运算中，如果第一个操作数为真值，则逻辑与运算返回第二个操作数</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> &amp;&amp; <span class="string">"dog"</span></span><br><span class="line"><span class="comment">// returns "dog"</span></span><br><span class="line"></span><br><span class="line">[] &amp;&amp; <span class="string">"dog"</span></span><br><span class="line"><span class="comment">// returns "dog"</span></span><br></pre></td></tr></tbody></table></figure>
-<p><strong>falsy</strong> 值（虚值）是在 <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean" target="_blank" rel="noopener">Boolean</a> 上下文中认定为 false 的值。</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript" target="_blank" rel="noopener">JavaScript</a> 在需要用到布尔类型值的上下文中使用强制类型转换 (<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Type_Conversion" target="_blank" rel="noopener">Type Conversion</a> ) 将值转换为布尔值，例如<a href="https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/Building_blocks/conditionals" target="_blank" rel="noopener">条件语句</a>和循环语句。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> &amp;&amp; <span class="string">"dog"</span></span><br><span class="line"><span class="comment">// returns "dog"</span></span><br><span class="line"></span><br><span class="line">[] &amp;&amp; <span class="string">"dog"</span></span><br><span class="line"><span class="comment">// returns "dog"</span></span><br></pre></td></tr></table></figure>
+<p><strong>falsy</strong> 值（虚值）是在 <a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean">Boolean</a>
+上下文中认定为 false 的值。</p>
+<p><a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript">JavaScript</a>
+在需要用到布尔类型值的上下文中使用强制类型转换 (<a
+href="https://developer.mozilla.org/zh-CN/docs/Glossary/Type_Conversion">Type
+Conversion</a> ) 将值转换为布尔值，例如<a
+href="https://developer.mozilla.org/zh-CN/docs/learn/JavaScript/Building_blocks/conditionals">条件语句</a>和循环语句。</p>
 <p>在 JavaScript 中只有 8 个 <strong>falsy</strong> 值。</p>
 <table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 85%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:center">值</th>
+<tr class="header">
+<th style="text-align: center;">值</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center"><code>false</code></td>
+<tr class="odd">
+<td style="text-align: center;"><code>false</code></td>
 <td>false 关键字</td>
 </tr>
-<tr>
-<td style="text-align:center">0</td>
+<tr class="even">
+<td style="text-align: center;">0</td>
 <td>数值 zero</td>
 </tr>
-<tr>
-<td style="text-align:center">-0</td>
+<tr class="odd">
+<td style="text-align: center;">-0</td>
 <td>数值 负 zero</td>
 </tr>
-<tr>
-<td style="text-align:center">0n</td>
-<td>当 BigInt 作为布尔值使用时，遵从其作为数值的规则. <code>0n</code> 是 <em>falsy</em> 值。</td>
+<tr class="even">
+<td style="text-align: center;">0n</td>
+<td>当 BigInt 作为布尔值使用时，遵从其作为数值的规则. <code>0n</code> 是
+<em>falsy</em> 值。</td>
 </tr>
-<tr>
-<td style="text-align:center">“”, ‘’, ``</td>
-<td>这是一个空字符串 (字符串的长度为零). JavaScript 中的字符串可用双引号 <strong><code>""</code></strong>, 单引号 <code>''</code>, 或 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_literals" target="_blank" rel="noopener">模板字面量</a> <strong>````</strong> 定义。</td>
+<tr class="odd">
+<td style="text-align: center;">"", '',
+`<code>| 这是一个空字符串 (字符串的长度为零). JavaScript 中的字符串可用双引号 **</code>""<code>**, 单引号</code>''`,
+或 <a
+href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_literals">模板字面量</a>
+<strong>````</strong> 定义。</td>
+<td></td>
 </tr>
-<tr>
-<td style="text-align:center">null</td>
+<tr class="even">
+<td style="text-align: center;">null</td>
 <td>null - 缺少值</td>
 </tr>
-<tr>
-<td style="text-align:center">undefined</td>
+<tr class="odd">
+<td style="text-align: center;">undefined</td>
 <td>undefined - 原始值</td>
 </tr>
-<tr>
-<td style="text-align:center">NaN</td>
+<tr class="even">
+<td style="text-align: center;">NaN</td>
 <td>NaN - 非数值</td>
 </tr>
 </tbody>
@@ -551,7 +576,7 @@
       
           <h2 id="请求伪装">请求伪装</h2>
 <p>在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：</p>
-<p><img src="https://download.kezhi.tech/img/20201024223544.png" alt=""></p>
+<p><img src="https://download.kezhi.tech/img/20201024223544.png" /></p>
 <p>这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：</p>
           <!--noindex-->
             <div class="post-button">
@@ -667,8 +692,10 @@
       
           <h2 id="简介">简介</h2>
 <p>Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的<span class="label primary">播放量</span>，<span class="label success">追番量</span>，<span class="label info">弹幕数量</span>等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。</p>
-<p>GitHub地址：<a href="https://github.com/KezhiAdore/BilibiliAnimeData_Analysis" target="_blank" rel="noopener">https://github.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
-<p>码云地址：<a href="https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis" target="_blank" rel="noopener">https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
+<p>GitHub地址：<a
+href="https://github.com/KezhiAdore/BilibiliAnimeData_Analysis">https://github.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
+<p>码云地址：<a
+href="https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis">https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/6b2dc3cb.html#more" rel="contents">
@@ -762,7 +789,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.6k</span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -781,12 +808,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>GitHub地址：<a href="https://github.com/KezhiAdore/MultiRobots_CoverMap" target="_blank" rel="noopener">https://github.com/KezhiAdore/MultiRobots_CoverMap</a></p>
-<p>码云地址：<a href="https://gitee.com/KezhiAdore/MultiRobots_CoverMap" target="_blank" rel="noopener">https://gitee.com/KezhiAdore/MultiRobots_CoverMap</a></p>
-<h2 id="一-问题提出">一、问题提出</h2>
-<h3 id="1-背景">1. 背景</h3>
-<p>机器人在工业、国防和科学技术中的应用日益广泛， 它能够在枯燥和危险的复杂非结构化环境下工作。使用机器人大大提高了人们的工作效率， 改变了人们的生活方式， 带来了巨大的经济和社会效益， 有力地推动了有关学科和技术领域的发展。</p>
-<p>区域覆盖是指携带有一定探测范围的传感器如激光、声纳等的机器人探索访问整个区域， 并完成相应任务的过程。区域覆盖是自主移动机器人的一项基本任务。</p>
+          <p>GitHub地址：<a
+href="https://github.com/KezhiAdore/MultiRobots_CoverMap">https://github.com/KezhiAdore/MultiRobots_CoverMap</a></p>
+<p>码云地址：<a
+href="https://gitee.com/KezhiAdore/MultiRobots_CoverMap">https://gitee.com/KezhiAdore/MultiRobots_CoverMap</a></p>
+<h2 id="一问题提出">一、问题提出</h2>
+<h3 id="背景">1. 背景</h3>
+<p>机器人在工业、国防和科学技术中的应用日益广泛，
+它能够在枯燥和危险的复杂非结构化环境下工作。使用机器人大大提高了人们的工作效率，
+改变了人们的生活方式， 带来了巨大的经济和社会效益，
+有力地推动了有关学科和技术领域的发展。</p>
+<p>区域覆盖是指携带有一定探测范围的传感器如激光、声纳等的机器人探索访问整个区域，
+并完成相应任务的过程。区域覆盖是自主移动机器人的一项基本任务。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/623a6b90.html#more" rel="contents">
@@ -880,7 +913,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
+              <span>3.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1000,7 +1033,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1021,7 +1054,8 @@
       
           <h2 id="bp神经网络概述">BP神经网络概述</h2>
 <p>BP神经网络是神经网络中最基础也是应用最多的神经网络，它由三层节点组成，分别为输入层，隐含层和输出层。BP神经网络的实现比较简单，主要分为正向传递输出和反向传递误差两部分。</p>
-<p>神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert Hecht-Nielsen）这为神经网络的应用提供了理论依据。</p>
+<p>神经网络的万能逼近定律：一维阶梯函数的线性组合可以逼近任何一维连续函数；sigmoid函数可以逼近阶梯函数，因此一维sigmoid函数的线性组合能够逼近任何连续函数。（1989年，Robert
+Hecht-Nielsen）这为神经网络的应用提供了理论依据。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/4f98a72.html#more" rel="contents">
@@ -1136,9 +1170,10 @@
       
           <h2 id="git文件管理系统">Git文件管理系统</h2>
 <blockquote>
-<p>本博客为转载，原文地址<a href="https://www.cnblogs.com/chenwolong/p/GIT.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenwolong/p/GIT.html</a></p>
+<p>本博客为转载，原文地址<a
+href="https://www.cnblogs.com/chenwolong/p/GIT.html">https://www.cnblogs.com/chenwolong/p/GIT.html</a></p>
 </blockquote>
-<p><img src="https://download.kezhi.tech/img/20200424230007.png" alt=""></p>
+<p><img src="https://download.kezhi.tech/img/20200424230007.png" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/caff8000.html#more" rel="contents">
@@ -1232,14 +1267,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.3k</span>
+              <span>7.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -1458,7 +1493,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.7k</span>
+              <span>5.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1938,13 +1973,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">197k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">2:59</span>
 </div>
 
 
@@ -2068,7 +2103,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
       script.defer = true;
       document.head.appendChild(script);
     })();
