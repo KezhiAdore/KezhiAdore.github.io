@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-05-23T07:46:31.861Z</updated>
+  <updated>2023-06-07T02:31:01.351Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GITM:LLM和RL的一次交融</title>
+    <link href="https://www.kezhi.tech/b222cfe2.html"/>
+    <id>https://www.kezhi.tech/b222cfe2.html</id>
+    <published>2023-06-07T02:30:53.000Z</published>
+    <updated>2023-06-07T02:31:01.351Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近，清华大学和商汤发表了一篇名为《Ghost in the Minecraft: Generally
+Capable Agents for Open-World Environments via Large Language Models
+with Text-based Knowledge and
+Memory》的文章，简称GITM。很有意思，感兴趣的朋友可以读一下原文。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202306041618232.png&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    
+    
+      <category term="GPT" scheme="https://www.kezhi.tech/tags/GPT/"/>
+    
+      <category term="RL" scheme="https://www.kezhi.tech/tags/RL/"/>
+    
+      <category term="Minecraft" scheme="https://www.kezhi.tech/tags/Minecraft/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习中的Terminated 和 Truncated</title>
+    <link href="https://www.kezhi.tech/5be4b154.html"/>
+    <id>https://www.kezhi.tech/5be4b154.html</id>
+    <published>2023-05-24T13:25:19.000Z</published>
+    <updated>2023-06-07T02:33:43.098Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;深度强化学习的流程可以抽象为以下步骤的重复：&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;智能体与环境交互产生并存储经验&lt;/li&gt;
+&lt;li&gt;智能体从经验中进行学习&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;本文主要探讨在收集经验过程中，环境自然结束（Terminated，包括目标成功，失败等）和人为截断（Truncated，主要为达到一定步数结束）对经验收集和训练产生的影响，以及如何对其进行处理。并对其进行了部分实验来比较性能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202305242122684.png&quot; style=&quot;width:60%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    
+    
+      <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Q-Learning" scheme="https://www.kezhi.tech/tags/Q-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>转折</title>
@@ -49,7 +107,7 @@
     <link href="https://www.kezhi.tech/aaafe79.html"/>
     <id>https://www.kezhi.tech/aaafe79.html</id>
     <published>2023-03-06T02:44:18.000Z</published>
-    <updated>2023-03-06T07:17:53.763Z</updated>
+    <updated>2023-06-07T02:33:43.099Z</updated>
     
     <summary type="html">
     
