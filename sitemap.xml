@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.kezhi.tech/links/linklist.json</loc>
+    
+    <lastmod>2023-06-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/48e66169.html</loc>
     
     <lastmod>2023-06-14</lastmod>
@@ -89,13 +96,6 @@
     <loc>https://www.kezhi.tech/b25d1fca.html</loc>
     
     <lastmod>2023-03-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/links/linklist.json</loc>
-    
-    <lastmod>2023-02-07</lastmod>
     
   </url>
   
