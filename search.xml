@@ -8165,4 +8165,100 @@ class="math inline">\(\epsilon\)</span> decay
         <tag>毕业</tag>
       </tags>
   </entry>
+  <entry>
+    <title>聚会互认问题小记</title>
+    <url>/244334e3.html</url>
+    <content><![CDATA[<p>前两天，由4位轮值主席组织的第一届游在长安活动正式落幕。在活动组织过程中，有一个小游戏的分组问题很有一次，在此记录。</p>
+<p><img src="https://download.kezhi.tech/img/202307011126365.png" style="width:50%;" /></p>
+<a id="more"></a>
+<h2 id="聚会互认问题背景">聚会互认问题背景</h2>
+<p>事情是这样的，该次活动由4位轮值主席组织，由轮值主席邀请其一级朋友圈（即直接朋友）和二级朋友圈（即朋友的朋友）参加。因此，对于每一个参与活动的人来说，活动中总是有一部分人是不认识的。并且每个人不认识的人数是不等的。活动参与总人数约为14人</p>
+<p>因此，我们采用了这样一个流程来帮助大家互相记住他人的名字：</p>
+<ol type="1">
+<li>所有参与活动的人均等分为两组</li>
+<li>两组内部分别进行<em>直呼其名</em>小游戏</li>
+<li>所有参与活动的人重新均等分为两组</li>
+<li>两组内部分别进行<em>直呼其名</em>小游戏</li>
+</ol>
+<blockquote>
+<p>直呼其名<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>：</p>
+<ol type="1">
+<li>选一块宽阔平整的游戏场地。</li>
+<li>队员们以小组为单位站成一圈。每人相距约一臂长。作为培训专员的你也不例外。</li>
+<li>告诉小组游戏将从你手里开始。你大喊出自己的名字，然后将手中的球传给自己左边的队
+友。接到传球的队友也要如法炮制，喊出自己的名字，然后把球传给自己左边的人。这样一直
+继续下去，直到球又重新回到你的手中。</li>
+<li>你重新拿到球后，告诉大家现在我们要改变游戏规则了。现在接到球的队员必须要喊出另
+一个队员的名字，然后把球扔给该队员。</li>
+<li>游戏结束后，在解散小组之前，邀请一个志愿者，让他在小组内走一圈，报出每个人的名字。</li>
+</ol>
+</blockquote>
+<p>最开始我们希望通过优化这两次分组的设置即可让所有人相互认识，但在优化的过程中发现这个问题并不像我们预想中那么简单。因此在实践过程中，我们又加了一个步骤：所有参与活动的人一起进行<em>直呼其名</em>的游戏，从而达到预想的让大家都认识的目的。</p>
+<h2 id="聚会互认问题">聚会互认问题</h2>
+<p>上文中阐述的问题我将之称为聚会互认问题，其可以抽象为一个数学中的图论问题，描述如下：</p>
+<blockquote>
+<p>任意给定一个包含<span
+class="math inline">\(n\)</span>个点的初始图，可以对其进行<span
+class="math inline">\(\Gamma\)</span>操作：把<span
+class="math inline">\(n\)</span>个点均分为两个部分，让这两个部分中的<span
+class="math inline">\(n/2\)</span>个点全连接。若要求进行2次<span
+class="math inline">\(\Gamma\)</span>操作后，<span
+class="math inline">\(n\)</span>个节点之间全连接，求这2次<span
+class="math inline">\(\Gamma\)</span>操作中，应当如何分组？</p>
+</blockquote>
+<p>当然，上面的描述是对我们遇到的问题的数学描述。显然，这个问题是否有解取决于这<span
+class="math inline">\(n\)</span>个点构成的初始图。因此，需要对解的存在性进行探讨：</p>
+<blockquote>
+<p>一个包含<span
+class="math inline">\(n\)</span>个点的初始图，可以对其进行<span
+class="math inline">\(\Gamma\)</span>操作：把<span
+class="math inline">\(n\)</span>个点均分为两个部分，让这两个部分中的<span
+class="math inline">\(n/2\)</span>个点全连接。若存在2次<span
+class="math inline">\(\Gamma\)</span>操作，使得在2次<span
+class="math inline">\(\Gamma\)</span>操作后，<span
+class="math inline">\(n\)</span>个节点之间全连接。求初始图应该满足的条件。</p>
+</blockquote>
+<p>此外，在本场景中，由于时间限制，只能进行少量的游戏来在图中建立边，假如没有时间限制，那么对于一个任意的图，最少需要多少次这样的游戏能够建立全连接也是一个值得探讨的问题：</p>
+<blockquote>
+<p>任意给定一个包含<span
+class="math inline">\(n\)</span>个点的初始图，可以对其进行<span
+class="math inline">\(\Gamma\)</span>操作：把<span
+class="math inline">\(n\)</span>个点均分为两个部分，让这两个部分中的<span
+class="math inline">\(n/2\)</span>个点全连接。求至少进行多少次<span
+class="math inline">\(\Gamma\)</span>操作可以在这<span
+class="math inline">\(n\)</span>个点之间建立全连接。</p>
+</blockquote>
+<p>最后，就是根本的求解算法问题：</p>
+<blockquote>
+<p>任意给定一个包含<span
+class="math inline">\(n\)</span>个点的初始图，可以对其进行<span
+class="math inline">\(\Gamma\)</span>操作：把<span
+class="math inline">\(n\)</span>个点均分为两个部分，让这两个部分中的<span
+class="math inline">\(n/2\)</span>个点全连接。求至少进行多少次<span
+class="math inline">\(\Gamma\)</span>操作可以在这<span
+class="math inline">\(n\)</span>个点之间建立全连接。并给出所有的<span
+class="math inline">\(\Gamma\)</span>操作中的分组。</p>
+</blockquote>
+<h2 id="聚会互认问题求解">聚会互认问题求解</h2>
+<p>To be Continued ......</p>
+<h2 id="reference">Reference</h2>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p><a
+href="https://www.xiaohongshu.com/explore/637068d80000000015017520?app_platform=android&amp;app_version=7.85.0&amp;author_share=2&amp;share_from_user_hidden=true&amp;type=normal&amp;xhsshare=WeixinSession&amp;appuid=5a17ada911be1028e2ac1c42&amp;apptime=1687706419">心理团体破冰游戏之直呼其名
+(xiaohongshu.com)</a><a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>Research</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+      </tags>
+  </entry>
 </search>

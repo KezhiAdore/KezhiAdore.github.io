@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-06-14T09:01:29.880Z</updated>
+  <updated>2023-07-01T03:27:39.375Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>聚会互认问题小记</title>
+    <link href="https://www.kezhi.tech/244334e3.html"/>
+    <id>https://www.kezhi.tech/244334e3.html</id>
+    <published>2023-07-01T03:27:39.000Z</published>
+    <updated>2023-07-01T03:27:39.375Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前两天，由4位轮值主席组织的第一届游在长安活动正式落幕。在活动组织过程中，有一个小游戏的分组问题很有一次，在此记录。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202307011126365.png&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    
+    
+      <category term="图论" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>2023毕业快乐</title>
