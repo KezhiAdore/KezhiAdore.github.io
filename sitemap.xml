@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.kezhi.tech/gallery/2023%E6%96%B0%E7%96%86%E4%B9%8B%E8%A1%8C/index.html</loc>
+    <loc>https://www.kezhi.tech/gallery/%E7%BC%98%E3%81%AE%E7%A9%BA/index.html</loc>
+    
+    <lastmod>2023-09-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/gallery/%E5%B4%A9%E5%B4%A9%E5%B4%A9/index.html</loc>
     
     <lastmod>2023-09-08</lastmod>
     
@@ -16,14 +23,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/gallery/%E7%BC%98%E3%81%AE%E7%A9%BA/index.html</loc>
-    
-    <lastmod>2023-09-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/gallery/%E5%B4%A9%E5%B4%A9%E5%B4%A9/index.html</loc>
+    <loc>https://www.kezhi.tech/gallery/2023%E6%96%B0%E7%96%86%E4%B9%8B%E8%A1%8C/index.html</loc>
     
     <lastmod>2023-09-08</lastmod>
     
