@@ -459,6 +459,27 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Reinforcement-Learning/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%AF%95%E4%B8%9A/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/GPT/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -480,7 +501,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%AF%95%E4%B8%9A/</loc>
+    <loc>https://www.kezhi.tech/tags/git/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -508,21 +536,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/git/</loc>
+    <loc>https://www.kezhi.tech/tags/Git/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/LetaX/</loc>
+    <loc>https://www.kezhi.tech/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -543,42 +564,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/NexT/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Markdown/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Git/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Pytorch/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Neural-Network/</loc>
+    <loc>https://www.kezhi.tech/tags/LetaX/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -599,6 +585,20 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/NexT/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Markdown/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/Cython/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -613,7 +613,21 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Reinforcement-Learning/</loc>
+    <loc>https://www.kezhi.tech/tags/Pytorch/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Neural-Network/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Optimal/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -634,20 +648,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Optimal/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Schedule/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -662,20 +662,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Zotero/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%8F%92%E4%BB%B6/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/NLP/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -684,6 +670,27 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/NLTK/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Schedule/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Zotero/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -739,20 +746,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -768,6 +761,20 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -837,20 +844,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
@@ -872,7 +865,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/</loc>
+    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -886,7 +886,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/</loc>
+    <loc>https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -900,7 +900,28 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/JavaScript/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -921,7 +942,28 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/JavaScript/</loc>
+    <loc>https://www.kezhi.tech/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Computer-Vision/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Target-Detection/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -949,77 +991,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Computer-Vision/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Target-Detection/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%BF%83%E7%90%86%E5%AD%A6/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/Programming/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E7%BD%91%E7%AB%99/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%94%B6%E8%97%8F/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1047,7 +1019,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E5%9B%BE%E8%AE%BA/</loc>
+    <loc>https://www.kezhi.tech/tags/%E5%BF%83%E7%90%86%E5%AD%A6/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1068,7 +1040,35 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%94%B6%E8%97%8F/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/WSL/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E5%9B%BE%E8%AE%BA/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1105,7 +1105,7 @@
 
   
   <url>
-    <loc>https://www.kezhi.tech/categories/Note/</loc>
+    <loc>https://www.kezhi.tech/categories/Research/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1119,7 +1119,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/categories/Study/</loc>
+    <loc>https://www.kezhi.tech/categories/Note/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1133,7 +1133,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/categories/Research/</loc>
+    <loc>https://www.kezhi.tech/categories/Study/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
