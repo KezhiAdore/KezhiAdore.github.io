@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-10-23T07:52:38.170Z</updated>
+  <updated>2023-10-27T01:17:32.147Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>沉痛悼念李克强同志</title>
+    <link href="https://www.kezhi.tech/a1c7590d.html"/>
+    <id>https://www.kezhi.tech/a1c7590d.html</id>
+    <published>2023-10-27T01:17:22.000Z</published>
+    <updated>2023-10-27T01:17:32.147Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;img
+src=&quot;http://www.people.com.cn/mediafile/pic/20121115/49/5629053774125498497.jpg&quot; /&gt;
+&lt;center&gt;
+🕯🕯🕯
+&lt;/center&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>DDPG算法中AC学习率设置对训练效果的影响</title>
