@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">93</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">94</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">51</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -241,6 +241,125 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/b69f94c6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/b69f94c6.html" class="post-title-link" itemprop="url">Vanilla Policy Gradient关于loss mean与sum的探讨</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-01 22:05:22" itemprop="dateCreated datePublished" datetime="2023-03-01T22:05:22+08:00">2023-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-03 09:26:58" itemprop="dateModified" datetime="2023-03-03T09:26:58+08:00">2023-03-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research/" itemprop="url" rel="index"><span itemprop="name">Research</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/b69f94c6.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/b69f94c6.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近在逐一复现RL算法过程中，策略梯度算法的收敛性一直有问题。经过一番探究和对比实验，学习了网上和书本上的很多实验代码之后，发现了代码实现中的一个小问题，即Policy
+Gradient在计算最终loss时求平均和求和对于网络训练的影响，本文将对此进行展开讨论。</p>
+<p>先说结论：</p>
+<blockquote>
+<p>在进行策略梯度下降优化策略时，可以对每个动作的loss逐一（for操作）进行反向传播后进行梯度下降，也可以对每个动作的loss求和（sum操作）之后进行反向传播后梯度下降，但尽量避免对所有动作的loss求平均（mean操作）之后进行反向传播后梯度下降，这会导致收敛速度较慢，甚至无法收敛。</p>
+</blockquote>
+<p>具体的论证和实验过程见下文。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/b69f94c6.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1264,126 +1383,6 @@ alt="Map of Control Theory" />
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/ebd84d05.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
-      <meta itemprop="name" content="Yu Zhao">
-      <meta itemprop="description" content="知识因被记录而产生价值">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kezhi's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ebd84d05.html" class="post-title-link" itemprop="url">云南施甸二中支教小记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-29 01:30:26" itemprop="dateCreated datePublished" datetime="2022-07-29T01:30:26+08:00">2022-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-29 20:26:10" itemprop="dateModified" datetime="2022-08-29T20:26:10+08:00">2022-08-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Journal/" itemprop="url" rel="index"><span itemprop="name">Journal</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/ebd84d05.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/ebd84d05.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="day-0">Day 0</h2>
-<p>硕士研究生时期，需要参与一项社会实践。遂与好友相约前往云南施甸县支教。原本的安排是县里中学一所，村里中学一所以及山里中学一所。起初计划前往山里中学实行采蘑菇计划，然天有不测风云，支教团计划变更，改为前往施甸二中和施甸三中支教。我们二人被安排在施甸二中。</p>
-<p>去程，西安途径昆明转机到保山，校方从保山机场接我们到学校。途中经过秦岭山脉，云贵高原。从北方到南方，从平原到山地再到高原。无论是空中的气候，还是地貌，均变化多样。</p>
-<figure>
-<img src="https://download.kezhi.tech/img/202208010008630.jpg"
-alt="(摄影师: 蔡育倍)" />
-<figcaption aria-hidden="true">(摄影师: 蔡育倍)</figcaption>
-</figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ebd84d05.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-     <!-- 文章结束表示语-->
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1456,7 +1455,7 @@ alt="(摄影师: 蔡育倍)" />
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1469,7 +1468,7 @@ alt="(摄影师: 蔡育倍)" />
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1818,13 +1817,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">216k</span>
+    <span title="站点总字数">218k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:17</span>
+    <span title="站点阅读时长">3:18</span>
 </div>
 
 

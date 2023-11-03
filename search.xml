@@ -8349,4 +8349,64 @@ OpenWeatherMap</a></li>
         <tag>心情</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Docker-VNC桌面配置</title>
+    <url>/d97606bd.html</url>
+    <content><![CDATA[<p>在使用公共服务器时，通常用户只有普通权限账户，无法按照自己的想法任意对服务器进行配置。为满足这种需求，常使用docker来实现在容器内使用root权限来自由配置环境。VNC是一种常用的远程桌面，可以通过端口通信实现服务器渲染画面的回传。这在进行一些有界面的实验（如mujoco，habitat,
+igibson环境）时非常有用。本文将主要介绍如何在docker中配置vnc桌面，并给出了一个打包好的镜像：<a
+href="https://hub.docker.com/r/kezhiadore/ubuntu-vnc">kezhiadore/ubuntu-vnc
+- Docker Image | Docker Hub</a></p>
+<p><img src="https://download.kezhi.tech/img/202311032138787.jpg" style="width:50%;" /></p>
+<center>
+是可爱的垃圾呀
+</center>
+<a id="more"></a>
+<p>首先，从一个初始的Ubuntu18.04镜像开始，下载，启动并进入容器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull ubuntu:bionic</span><br><span class="line">docker run -itd --name ubuntu-vnc ubuntu:bionic</span><br><span class="line">docker exec -it ubuntu-vnc</span><br></pre></td></tr></table></figure>
+<p>这个容器是没有桌面，因此先安装一个xfce4桌面</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils</span><br></pre></td></tr></table></figure>
+<p>进入之后下载安装vncserver</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install tigervnc-standalone-server tigervnc-common</span><br></pre></td></tr></table></figure>
+<p>在用户目录下配置启动文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt insall vim</span><br><span class="line">vim ~/.vnc/xstartup</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 添加以下脚本</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">unset SESSION_MANAGER </span><br><span class="line">unset DBUS_SESSION_BUS_ADDRESS </span><br><span class="line">startxfce4 &amp;</span><br><span class="line">[ -x /etc/vnc/xstartup ] &amp;&amp; exec /etc/vnc/xstartup </span><br><span class="line">[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources </span><br><span class="line">xsetroot -solid grey</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 保存并关闭文件。无论何时启动或者重启TigerVNC服务器，都将会自动执行上述命令</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改文件权限</span></span><br><span class="line">chmod +x ~/.vnc/xstartup</span><br></pre></td></tr></table></figure>
+<p>启动vncserver</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vncserver :1</span><br></pre></td></tr></table></figure>
+<p>vncserver初次启动需要配置密码，密码配置完成后，使用vnc客户端访问端口5091即可连接到远程桌面。</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li>进入桌面后，部分应用如google
+chrome是无法在root用户模式下运行的，可以创建一个用户以该用户身份启动远程桌面即可</li>
+<li>出现终端打不开情况时，更改<code>application-&gt;settings-&gt;preference</code>中的<code>terminal</code>即可</li>
+<li>中文显示乱码的问题是字体和编码问题导致的，可参考以下教程解决：
+<ul>
+<li><a
+href="https://blog.csdn.net/qq_40927409/article/details/120030704">xfce桌面汉化（命令）_xfce4设置中文-CSDN博客</a></li>
+<li><a
+href="https://blog.csdn.net/weixin_42937217/article/details/121970539">xfce中文字符方块乱码问题解决_xfce
+中文乱码-CSDN博客</a></li>
+<li><a
+href="https://learningsky.io/xfce-desktop-environment-display-chinese/">【
+Tools 】於 Xfce 桌面環境顯示中文 (learningsky.io)</a></li>
+</ul></li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ol type="1">
+<li><a
+href="https://blog.csdn.net/qq_31638535/article/details/131016239">docker容器内部配置VNC和novnc，主机或者外部可访问_docker
+novnc-CSDN博客</a></li>
+<li><a
+href="https://blog.csdn.net/Robert_Q/article/details/127376171">使用VNC可视化Docker容器_docker
+vnc-CSDN博客</a></li>
+<li><a
+href="https://www.pimspeak.com/ubuntu-docker-vnc-desktop.html">Ubuntu
+Docker容器开启VNC桌面-小果冻之家 (pimspeak.com)</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
 </search>

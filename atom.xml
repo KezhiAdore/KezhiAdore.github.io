@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-10-23T07:59:19.845Z</updated>
+  <updated>2023-11-03T13:40:33.114Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker-VNC桌面配置</title>
+    <link href="https://www.kezhi.tech/d97606bd.html"/>
+    <id>https://www.kezhi.tech/d97606bd.html</id>
+    <published>2023-11-03T13:40:24.000Z</published>
+    <updated>2023-11-03T13:40:33.114Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用公共服务器时，通常用户只有普通权限账户，无法按照自己的想法任意对服务器进行配置。为满足这种需求，常使用docker来实现在容器内使用root权限来自由配置环境。VNC是一种常用的远程桌面，可以通过端口通信实现服务器渲染画面的回传。这在进行一些有界面的实验（如mujoco，habitat,
+igibson环境）时非常有用。本文将主要介绍如何在docker中配置vnc桌面，并给出了一个打包好的镜像：&lt;a
+href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ubuntu-vnc
+- Docker Image | Docker Hub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202311032138787.jpg&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
+&lt;center&gt;
+是可爱的垃圾呀
+&lt;/center&gt;
+    
+    </summary>
+    
+    
+      <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    
+    
+      <category term="docker" scheme="https://www.kezhi.tech/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>DDPG算法中AC学习率设置对训练效果的影响</title>
