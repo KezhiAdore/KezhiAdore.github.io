@@ -40,13 +40,16 @@
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
 <meta property="og:description" content="关于网络的parameters Pytorch中，每一个网络继承于nn.Module类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的： 12345678_parameters_buffers_backward_hooks_forward_hooks_forward_pre_hooks_state_dict_hooks_load_state_dict_pre_hooks_module">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202311041104052.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/202311041108163.png">
 <meta property="article:published_time" content="2022-09-26T09:25:50.000Z">
-<meta property="article:modified_time" content="2022-10-25T06:53:01.871Z">
+<meta property="article:modified_time" content="2023-11-04T03:09:13.351Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Pytorch">
 <meta property="article:tag" content="Neural Network">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202311041104052.png">
 
 <link rel="canonical" href="https://www.kezhi.tech/a7298e70.html">
 
@@ -279,7 +282,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-25 14:53:01" itemprop="dateModified" datetime="2022-10-25T14:53:01+08:00">2022-10-25</time>
+                <time title="修改时间：2023-11-04 11:09:13" itemprop="dateModified" datetime="2023-11-04T11:09:13+08:00">2023-11-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,7 +314,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>561</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -336,6 +339,19 @@
 <a id="more"></a>
 <p>在网络初始化<code>__init__</code>过程中，所有类内变量的定义都会通过<code>__setattr__</code>方法在<code>__dict__</code>中进行注册，而<code>nn.Module</code>重写了注册方法，将所有类内变量中，类型派生于<code>Parameter</code>的变量归属到<code>_parameters</code>字典中，这就解释了为什么使用一个<code>list</code>来存放网络的每一层会导致网络中的<code>parameters</code>为空。</p>
 <p>此外，在获取参数时，<code>nn.Module</code>是通过遍历整个<code>_modules</code>字典来实现的，因此在定义时可以使用<code>nn.ModuleList</code>类型来替代<code>list</code>类型存放多个网络层。</p>
+<h2 id="修改一个实例化后的网络">修改一个实例化后的网络</h2>
+<p>在拿到别人预训练好的模型后，有时需要对网络进行修改，例如重置参数或替换网络中的某些模块重新训练，就需要对一个已经实例化之后的网络进行修改。一个很直接的思路就是，在类中找到对应的属性直接进行赋值替换即可。</p>
+<p>首先是修改参数，这里有两种思路，由于修改参数不改变网络结构，所以可以直接利用<code>pytorch</code>提供的网络参数字典和导入方法来完成，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">state_dict = model.state_dict()</span><br><span class="line"><span class="comment"># change some parameters in state_dict</span></span><br><span class="line">model.load_state_dict(state_dict)</span><br></pre></td></tr></table></figure>
+<p>还有一种思路就是通过<code>named_parameters()</code>来进行对应修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, params <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">"需要修改参数的层的名字"</span>:</span><br><span class="line">    	params.data=torch.zeros(params.data.shape)</span><br></pre></td></tr></table></figure>
+<p>以上是修改参数的方法，相对来说，修改参数比较简单，<code>pytorch</code>也提供了一些方法来进行便捷的参数替换。而对于修改模型，实现思路就比较直接了，在<code>model</code>中找到层所在的位置，对其进行替换即可，这里使用到了<code>named_modules()</code>方法。以开源大语言模型<code>llama-2-13b</code>为例，在模型加载完成后，先查看各层的命名：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name,layer <span class="keyword">in</span> model.named_modules():</span><br><span class="line">    print(name, layer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果对网络结构熟悉的话也可以只看名字</span></span><br><span class="line">print([name <span class="keyword">for</span> (name,module) <span class="keyword">in</span> model.named_modules()])</span><br></pre></td></tr></table></figure>
+<p><img src="https://download.kezhi.tech/img/202311041104052.png" /></p>
+<p>然后在其中找到需要替换的层的名字，对其进行替换即可，以<code>embeding</code>层为例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line">model.model.embed_tokens = nn.Linear(<span class="number">32000</span>, <span class="number">5120</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://download.kezhi.tech/img/202311041108163.png" /></p>
+<p>可以看出，<code>embedding</code>层被成功替换为了一个全连接层。其他层的修改以此类推。</p>
 <h2 id="reference">Reference</h2>
 <p>[1]Gemfield, “详解Pytorch中的网络构造,” <em>知乎专栏</em>, Jan. 04,
 2019. https://zhuanlan.zhihu.com/p/53927068 (accessed Sep. 26,
@@ -515,7 +531,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于网络的parameters"><span class="nav-text">关于网络的parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于网络的parameters"><span class="nav-text">关于网络的parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改一个实例化后的网络"><span class="nav-text">修改一个实例化后的网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -899,7 +915,7 @@ if(canvas.getContext){
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:18</span>
+    <span title="站点阅读时长">3:19</span>
 </div>
 
 
