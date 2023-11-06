@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-11-03T13:40:33.114Z</updated>
+  <updated>2023-11-06T09:22:36.342Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>电脑软件配置单</title>
+    <link href="https://www.kezhi.tech/f9af8ec4.html"/>
+    <id>https://www.kezhi.tech/f9af8ec4.html</id>
+    <published>2023-11-06T09:20:23.000Z</published>
+    <updated>2023-11-06T09:22:36.342Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我过去经常帮身边的朋友指导电脑硬件配置。然而，对于个人电脑来说，如果胡乱装软件，或者用了不合适的软件，会让电脑的使用效率事倍功半。同时，在我个人拿到一台新电脑时，也需要根据我的习惯初始化配置很多软件到新电脑上。由此，便有了写一份软件配置清单的想法，一来可以给大家做一些软件推荐，二来我自己也留一份作为参考。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202311061722807.png&quot; style=&quot;width:67%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    
+    
+      <category term="List" scheme="https://www.kezhi.tech/tags/List/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker-VNC桌面配置</title>
