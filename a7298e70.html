@@ -40,16 +40,13 @@
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
 <meta property="og:description" content="关于网络的parameters Pytorch中，每一个网络继承于nn.Module类，当实例化之后，是通过维护一下8个字典来实现各种网络功能的： 12345678_parameters_buffers_backward_hooks_forward_hooks_forward_pre_hooks_state_dict_hooks_load_state_dict_pre_hooks_module">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://download.kezhi.tech/img/202311041104052.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/202311041108163.png">
 <meta property="article:published_time" content="2022-09-26T09:25:50.000Z">
-<meta property="article:modified_time" content="2023-11-04T03:09:13.351Z">
+<meta property="article:modified_time" content="2023-11-10T02:16:20.299Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Pytorch">
 <meta property="article:tag" content="Neural Network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://download.kezhi.tech/img/202311041104052.png">
 
 <link rel="canonical" href="https://www.kezhi.tech/a7298e70.html">
 
@@ -282,7 +279,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-04 11:09:13" itemprop="dateModified" datetime="2023-11-04T11:09:13+08:00">2023-11-04</time>
+                <time title="修改时间：2023-11-10 10:16:20" itemprop="dateModified" datetime="2023-11-10T10:16:20+08:00">2023-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -347,10 +344,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, params <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">"需要修改参数的层的名字"</span>:</span><br><span class="line">    	params.data=torch.zeros(params.data.shape)</span><br></pre></td></tr></table></figure>
 <p>以上是修改参数的方法，相对来说，修改参数比较简单，<code>pytorch</code>也提供了一些方法来进行便捷的参数替换。而对于修改模型，实现思路就比较直接了，在<code>model</code>中找到层所在的位置，对其进行替换即可，这里使用到了<code>named_modules()</code>方法。以开源大语言模型<code>llama-2-13b</code>为例，在模型加载完成后，先查看各层的命名：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name,layer <span class="keyword">in</span> model.named_modules():</span><br><span class="line">    print(name, layer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果对网络结构熟悉的话也可以只看名字</span></span><br><span class="line">print([name <span class="keyword">for</span> (name,module) <span class="keyword">in</span> model.named_modules()])</span><br></pre></td></tr></table></figure>
-<p><img src="https://download.kezhi.tech/img/202311041104052.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202311041104052.png?x-oss-process=style/webp" /></p>
 <p>然后在其中找到需要替换的层的名字，对其进行替换即可，以<code>embeding</code>层为例</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line">model.model.embed_tokens = nn.Linear(<span class="number">32000</span>, <span class="number">5120</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://download.kezhi.tech/img/202311041108163.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202311041108163.png?x-oss-process=style/webp" /></p>
 <p>可以看出，<code>embedding</code>层被成功替换为了一个全连接层。其他层的修改以此类推。</p>
 <h2 id="reference">Reference</h2>
 <p>[1]Gemfield, “详解Pytorch中的网络构造,” <em>知乎专栏</em>, Jan. 04,
@@ -909,13 +908,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">220k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:20</span>
 </div>
 
 

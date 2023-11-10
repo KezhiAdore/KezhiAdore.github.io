@@ -40,20 +40,13 @@
 <meta property="og:site_name" content="Kezhi&#39;s Blog">
 <meta property="og:description" content="简介 Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的播放量，追番量，弹幕数量等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。 GitHub地址：https:&#x2F;&#x2F;github.com&#x2F;Ke">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014232257.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014232605.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014233531.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014235022.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014235127.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201014235500.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201015000820.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201124160340.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201124160804.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201124160900.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201124162738.png">
-<meta property="og:image" content="https://download.kezhi.tech/img/20201124163322.png">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160340.png?x-oss-process=style/webp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160804.png?x-oss-process=style/webp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124160900.png?x-oss-process=style/webp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124162738.png?x-oss-process=style/webp">
+<meta property="og:image" content="https://download.kezhi.tech/img/20201124163322.png?x-oss-process=style/webp">
 <meta property="article:published_time" content="2020-10-14T16:24:39.000Z">
-<meta property="article:modified_time" content="2022-07-28T16:18:11.757Z">
+<meta property="article:modified_time" content="2023-11-10T02:16:20.289Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Crawler">
@@ -61,7 +54,7 @@
 <meta property="article:tag" content="Aprior Algorithm">
 <meta property="article:tag" content="K-Means">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://download.kezhi.tech/img/20201014232257.png">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/20201124160340.png?x-oss-process=style/webp">
 
 <link rel="canonical" href="https://www.kezhi.tech/6b2dc3cb.html">
 
@@ -294,7 +287,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-29 00:18:11" itemprop="dateModified" datetime="2022-07-29T00:18:11+08:00">2022-07-29</time>
+                <time title="修改时间：2023-11-10 10:16:20" itemprop="dateModified" datetime="2023-11-10T10:16:20+08:00">2023-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -356,24 +349,30 @@ href="https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis">https://gitee.com
 <p>首先要获取到需要的所有数据，即B站所有番剧播放信息和标签信息。使用爬虫对数据进行爬取，这里使用的是python的<code>scrapy</code>编写爬虫对数据进行爬取。</p>
 <h3 id="页面分析">页面分析</h3>
 <p>首先来到番剧索引页面<img
-src="https://download.kezhi.tech/img/20201014232024.png" /></p>
+src="https://download.kezhi.tech/img/20201014232024.png?x-oss-process=style/webp" /></p>
 <p>从该页面点击某部番剧进入其详情页</p>
-<p><img src="https://download.kezhi.tech/img/20201014232257.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014232257.png?x-oss-process=style/webp" /></p>
 <p>可以看到该页面中就有需要的番剧播放数据以及番剧的标签。</p>
 <p>对该页面的HTML进行分析得到数据所在的xpath路径，以tag为例：</p>
-<p><img src="https://download.kezhi.tech/img/20201014232605.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014232605.png?x-oss-process=style/webp" /></p>
 <p>所有数据对应的xpath路径分别为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标签: &#x2F;&#x2F;span[@class&#x3D;&quot;media-tag&quot;]</span><br><span class="line">总播放: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-play&quot;]&#x2F;em</span><br><span class="line">追番人数: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-fans&quot;]&#x2F;em</span><br><span class="line">弹幕总数: &#x2F;&#x2F;span[@class&#x3D;&quot;media-info-count-item media-info-count-item-review&quot;]&#x2F;em</span><br></pre></td></tr></table></figure>
 <p>那么到现在来说循环进入所有的番剧列表页，从该页面进入番剧详情页并对每个番剧详情页进行解析，数据保存就可以了，但此时出现了问题。对番剧列表页进行爬取之后的网页数据相应的地方为：</p>
-<p><img src="https://download.kezhi.tech/img/20201014233531.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014233531.png?x-oss-process=style/webp" /></p>
 <p>直接对该页面进行访问无法获取到详细的番剧列表信息。由此，转而对页面接受到的文件进行分析，找到了该页面获取的番剧列表信息文件。</p>
-<p><img src="https://download.kezhi.tech/img/20201014235022.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014235022.png?x-oss-process=style/webp" /></p>
 <p>访问该url得到的信息为：</p>
-<p><img src="https://download.kezhi.tech/img/20201014235127.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014235127.png?x-oss-process=style/webp" /></p>
 <p>对该api网址进行分析，易得<code>page=1</code>控制着页数信息，通过改变该信息即可访问不同的番剧列表页面。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;api.bilibili.com&#x2F;pgc&#x2F;season&#x2F;index&#x2F;result?season_version&#x3D;-1&amp;area&#x3D;-1&amp;is_finish&#x3D;-1&amp;copyright&#x3D;-1&amp;season_status&#x3D;-1&amp;season_month&#x3D;-1&amp;year&#x3D;-1&amp;style_id&#x3D;-1&amp;order&#x3D;3&amp;st&#x3D;1&amp;sort&#x3D;0&amp;page&#x3D;1&amp;season_type&#x3D;1&amp;pagesize&#x3D;20&amp;type&#x3D;1</span><br></pre></td></tr></table></figure>
 <p>该页面获取到的信息为json文件，内含信息格式如下：</p>
-<p><img src="https://download.kezhi.tech/img/20201014235500.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201014235500.png?x-oss-process=style/webp" /></p>
 <p>与番剧详情页的网址<a
 href="https://www.bilibili.com/bangumi/media/md22718131">https://www.bilibili.com/bangumi/media/md22718131</a>进行比对可以发现，json文件中的<code>media_id</code>数据即为每个番剧详情页的标识，由此，爬取信息的逻辑基本建立了。</p>
 <ol type="1">
@@ -385,7 +384,8 @@ href="https://www.bilibili.com/bangumi/media/md22718131">https://www.bilibili.co
 <p>首先初始化爬虫</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject anime_data</span><br><span class="line">scrapy genspider anime ""</span><br></pre></td></tr></table></figure>
 <p>文件树如下</p>
-<p><img src="https://download.kezhi.tech/img/20201015000820.png" /></p>
+<p><img
+src="https://download.kezhi.tech/img/20201015000820.png?x-oss-process=style/webp" /></p>
 <p>打开<code>items.py</code>，建立需要保存的数据对象</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimeDataItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    name = scrapy.Field()   <span class="comment">#番剧名称</span></span><br><span class="line">    play=scrapy.Field()     <span class="comment">#总播放量</span></span><br><span class="line">    fllow=scrapy.Field()    <span class="comment">#追番人数</span></span><br><span class="line">    barrage=scrapy.Field()  <span class="comment">#弹幕数量</span></span><br><span class="line">    tags=scrapy.Field()     <span class="comment">#番剧标签，列表形式</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <p>再打开刚建立的<code>anime.py</code>，访问页面，解析以及数据保存的代码如下</p>
@@ -526,17 +526,17 @@ k=10
 <tr>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20201124160340.png" width='300'>
+<img src="https://download.kezhi.tech/img/20201124160340.png?x-oss-process=style/webp" width='300'>
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20201124160804.png" width='300'>
+<img src="https://download.kezhi.tech/img/20201124160804.png?x-oss-process=style/webp" width='300'>
 </center>
 </td>
 <td>
 <center>
-<img src="https://download.kezhi.tech/img/20201124160900.png" width='300'>
+<img src="https://download.kezhi.tech/img/20201124160900.png?x-oss-process=style/webp" width='300'>
 </center>
 </td>
 </tr>
@@ -604,11 +604,11 @@ j}(\frac{\mu_i+\mu_j}{d(u_i,u_j)})
 </tbody>
 </table>
 <center>
-<img src="https://download.kezhi.tech/img/20201124162738.png" height='300'>
+<img src="https://download.kezhi.tech/img/20201124162738.png?x-oss-process=style/webp" height='300'>
 </center>
 <p>k从2-50变化时的分类评估结果如下：</p>
 <center>
-<img src="https://download.kezhi.tech/img/20201124163322.png" height='300'>
+<img src="https://download.kezhi.tech/img/20201124163322.png?x-oss-process=style/webp" height='300'>
 </center>
 <p>从上述结果可以看出，在k=2或3时的分类效果最好，从使用的数据和k-means算法的特点进行分析，k-means算法采用欧氏距离进行分类，分出的区域为一个个球形。从三维图像上看，采用的数据并没有一个很明显的界限将数据分开，当k=2或3时，每个簇聚集在一个个球中，表现出较好的分类结果。当k继续增长时，由于数据周围孤立点的影响，使分类效果逐渐变差。</p>
 
@@ -1166,13 +1166,13 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">220k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:20</span>
 </div>
 
 
