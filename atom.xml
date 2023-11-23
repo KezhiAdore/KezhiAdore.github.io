@@ -271,32 +271,6 @@ href=&quot;https://github.com/KezhiAdore/RL-Algorithm&quot;&gt;https://github.co
   </entry>
   
   <entry>
-    <title>三年疫情小记</title>
-    <link href="https://www.kezhi.tech/b25d1fca.html"/>
-    <id>https://www.kezhi.tech/b25d1fca.html</id>
-    <published>2023-03-03T01:24:48.000Z</published>
-    <updated>2023-11-10T02:14:51.200Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文始写于2023年2月7日，以个人回忆和部分手头记录为依据总结而成。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202303030923612.jpg?x-oss-process=style/webp&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
-    
-    
-      <category term="生活" scheme="https://www.kezhi.tech/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-      <category term="疫情" scheme="https://www.kezhi.tech/tags/%E7%96%AB%E6%83%85/"/>
-    
-      <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vanilla Policy Gradient关于loss mean与sum的探讨</title>
     <link href="https://www.kezhi.tech/b69f94c6.html"/>
     <id>https://www.kezhi.tech/b69f94c6.html</id>
