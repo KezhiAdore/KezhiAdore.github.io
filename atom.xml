@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-11-10T02:16:20.217Z</updated>
+  <updated>2023-12-05T08:56:58.325Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高斯分布熵的推导</title>
+    <link href="https://www.kezhi.tech/80e25821.html"/>
+    <id>https://www.kezhi.tech/80e25821.html</id>
+    <published>2023-12-05T08:56:58.000Z</published>
+    <updated>2023-12-05T08:56:58.325Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一元高斯分布熵的推导： &lt;span class=&quot;math display&quot;&gt;\[
+p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma}}
+\]&lt;/span&gt;
+&lt;img src=&quot;https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp&quot; alt=&quot;113646456_p0&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    
+    
+      <category term="Math" scheme="https://www.kezhi.tech/tags/Math/"/>
+    
+  </entry>
   
   <entry>
     <title>电脑软件配置单</title>

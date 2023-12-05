@@ -8587,4 +8587,54 @@ src="https://download.kezhi.tech/img/20200623012410.png?x-oss-process=style/webp
         <tag>算法改进</tag>
       </tags>
   </entry>
+  <entry>
+    <title>高斯分布熵的推导</title>
+    <url>/80e25821.html</url>
+    <content><![CDATA[<p>一元高斯分布熵的推导： <span class="math display">\[
+p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma}}
+\]</span>
+<img src="https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp" alt="113646456_p0" style="width:50%;" /></p>
+<a id="more"></a>
+<p><span class="math display">\[
+\begin{align}
+H(x) &amp; = -\int p(x) \ln p(x) \mathrm{d}x \\
+&amp; = -\int
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot \ln
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\mathrm{d}x \\
+&amp; = -\int
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot
+(-\ln {\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}) \mathrm{d}x \\
+&amp; = \int \frac{\ln
+{\sqrt{2\pi\sigma^2}}}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\cdot
+\mathrm{d}x+\int\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\cdot\frac{(x-\mu)^2}{2\sigma^2} \mathrm{d}x \\
+&amp; = \ln\sqrt{2\pi\sigma^2}+\frac {1}{\sqrt{\pi}}\int e^{-t^2}\cdot
+t^2\mathrm{d}t \\
+&amp; = \ln\sqrt{2\pi\sigma^2}+\frac 12 \\
+&amp; = \frac 12(\ln(2\pi\sigma^2)+1) \\
+\end{align}
+\]</span> 其中： <span class="math display">\[
+\int e^{-x^2}\mathrm{d}x = \sqrt\pi
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\int x^2\cdot e^{-x^2}\mathrm{d}x &amp; = -\frac12 \int
+x(-2x)e^{-x^2}\mathrm{d}x \\
+&amp;=-\frac12 \int x\mathrm{d}e^{-x^2} \\
+&amp;=-\frac12 (x\cdot e^{-x^2}\Big|_{-\infty}^{+\infty}-\int
+e^{-x^2}\mathrm{d}x) \\
+&amp;=\frac12 \int e^{-x^2}\mathrm{d}x) \\
+&amp;=\frac {\sqrt{\pi}}{2}
+\end{align}
+\]</span></p>
+]]></content>
+      <categories>
+        <category>Study</category>
+      </categories>
+      <tags>
+        <tag>Math</tag>
+      </tags>
+  </entry>
 </search>
