@@ -595,18 +595,16 @@ if(canvas.getContext){
     
     
     <div class="post-body" itemprop="articleBody"><p>深度强化学习算法相比于深度学习，有更多的超参数需要调节，本文主要对DDPG算法中的actor网络和critic网络学习率的设置对学习效果的影响进行了探讨。</p>
-<p><img src="https://pic.kezhi.tech/image/64fc6b860ebf4.png?x-oss-process=style/webp" width="33%"></p>
+<p><img data-src="https://pic.kezhi.tech/image/64fc6b860ebf4.png?x-oss-process=style/webp" width="33%"></p>
 <span id="more"></span>
 <p>最近在复现DDPG算法时，首先根据论文的算法流程进行复现，完成后在连续环境<code>Pendulum-v1</code>上进行测试，但是总是训练效果不好，算法的收敛结构很差，如图1所示。</p>
-<p><img
-src="https://download.kezhi.tech/img/202309202043247.png?x-oss-process=style/webp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202309202043247.png?x-oss-process=style/webp" /></p>
 <center>
 图1 actor和critic的lr均为3e-4的训练结果，左图为critic loss,
 右图为reward曲线
 </center>
 <p>于是找了很多该算法的复现来对比到底是哪里出了问题。花了大量的时间确认了复现的DDPG算法的决策和更新流程都没有问题之后，我把目光转向了超参数的设定上，最终发现<code>critic</code>的学习率通常需要设置的比<code>actor</code>大一点。在将<code>critic net</code>的学习率改大之后，DDPG算法终于表现出很好的性能，得到了漂亮的<code>reward</code>曲线，如图2所示。</p>
-<p><img
-src="https://download.kezhi.tech/img/202309202044469.png?x-oss-process=style/webp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202309202044469.png?x-oss-process=style/webp" /></p>
 <center>
 图2 修改critic lr之后的学习效果，左图为critic loss，右图为reward曲线
 </center>
@@ -616,8 +614,7 @@ src="https://download.kezhi.tech/img/202309202044469.png?x-oss-process=style/web
 <li>如果<code>actor</code>比<code>critic</code>更新的更快，那么估计的Q值不能够真实反映动作的价值，因为<code>critic</code>的Q值函数是基于过去的策略估计出的</li>
 <li>因为<code>actor</code>输出的是具体动作，通常是<code>bounded</code>，因此学习率可以小一点，而<code>critic</code>学习的目标是折扣奖励的期望，通常是无界的，需要学习率大一点。</li>
 </ul>
-<p><img
-src="https://download.kezhi.tech/img/202309202032388.png?x-oss-process=style/webp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202309202032388.png?x-oss-process=style/webp" /></p>
 <p>source: <a
 target="_blank" rel="noopener" href="https://www.reddit.com/r/reinforcementlearning/comments/lsza9m/why_different_learning_rates_for_actor_and_critic/">Why
 different learning rates for actor and critic : r/reinforcementlearning
@@ -625,14 +622,11 @@ different learning rates for actor and critic : r/reinforcementlearning
 <p>为了进一步探究这两个参数的设置对于学习的影响，我用DDPG算法在<code>Pendulum-v1</code>进行了一系列的实验。</p>
 <ol type="1">
 <li><p>固定<code>actor</code>的学习率为<code>3e-4</code>，改变<code>critic</code>的学习率，得到实验结果如下图：</p>
-<p><img
-src="https://download.kezhi.tech/img/202309202109275.png?x-oss-process=style/webp" /></p></li>
+<p><img data-src="https://download.kezhi.tech/img/202309202109275.png?x-oss-process=style/webp" /></p></li>
 <li><p>固定<code>critic</code>的学习率为<code>3e-4</code>，改变<code>actor</code>的学习率，得到实验结果如下图：</p>
-<p><img
-src="https://download.kezhi.tech/img/202309202115148.png?x-oss-process=style/webp" /></p></li>
+<p><img data-src="https://download.kezhi.tech/img/202309202115148.png?x-oss-process=style/webp" /></p></li>
 <li><p>保持<code>actor</code>和<code>critic</code>的学习率相同，同时改变两者的学习率，得到实验结果如下图：</p>
-<p><img
-src="https://download.kezhi.tech/img/202309202117300.png?x-oss-process=style/webp" /></p></li>
+<p><img data-src="https://download.kezhi.tech/img/202309202117300.png?x-oss-process=style/webp" /></p></li>
 </ol>
 <p>由以上实验结果可以得出以下结论：</p>
 <ul>

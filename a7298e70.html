@@ -608,12 +608,10 @@ if(canvas.getContext){
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, params <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">&quot;需要修改参数的层的名字&quot;</span>:</span><br><span class="line">    	params.data=torch.zeros(params.data.shape)</span><br></pre></td></tr></table></figure>
 <p>以上是修改参数的方法，相对来说，修改参数比较简单，<code>pytorch</code>也提供了一些方法来进行便捷的参数替换。而对于修改模型，实现思路就比较直接了，在<code>model</code>中找到层所在的位置，对其进行替换即可，这里使用到了<code>named_modules()</code>方法。以开源大语言模型<code>llama-2-13b</code>为例，在模型加载完成后，先查看各层的命名：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name,layer <span class="keyword">in</span> model.named_modules():</span><br><span class="line">    <span class="built_in">print</span>(name, layer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果对网络结构熟悉的话也可以只看名字</span></span><br><span class="line"><span class="built_in">print</span>([name <span class="keyword">for</span> (name,module) <span class="keyword">in</span> model.named_modules()])</span><br></pre></td></tr></table></figure>
-<p><img
-src="https://download.kezhi.tech/img/202311041104052.png?x-oss-process=style/webp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202311041104052.png?x-oss-process=style/webp" /></p>
 <p>然后在其中找到需要替换的层的名字，对其进行替换即可，以<code>embeding</code>层为例</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line">model.model.embed_tokens = nn.Linear(<span class="number">32000</span>, <span class="number">5120</span>)</span><br></pre></td></tr></table></figure>
-<p><img
-src="https://download.kezhi.tech/img/202311041108163.png?x-oss-process=style/webp" /></p>
+<p><img data-src="https://download.kezhi.tech/img/202311041108163.png?x-oss-process=style/webp" /></p>
 <p>可以看出，<code>embedding</code>层被成功替换为了一个全连接层。其他层的修改以此类推。</p>
 <h2 id="reference">Reference</h2>
 <p>[1]Gemfield, “详解Pytorch中的网络构造,” <em>知乎专栏</em>, Jan. 04,
