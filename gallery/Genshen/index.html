@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Genshen">
+<meta property="og:url" content="https://www.kezhi.tech/gallery/Genshen/index.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-08T13:02:42.000Z">
+<meta property="article:modified_time" content="2023-09-08T15:09:31.952Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="笔记，计算机，自动化">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.kezhi.tech/gallery/Genshen/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false
+  };
+</script>
+
+  <title></title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">94</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-fw fa-book"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-gallery">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-fw fa-camera"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <!--本地搜索-->
+      <div class="site-search">
+        <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      </div>
+    
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+    <div class="posts-expand">
+        <div class="post-block" lang="zh-CN">
+            <header class="post-header">
+
+<h2 class="post-title" itemprop="name headline">Genshen
+</h2>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/gallery/">GALLERY</a></li>
+          <li>GENSHEN</li>
+        
+  </ul>
+
+</div>
+
+</header>
+
+			<div class="container">
+				<div class="photo-wrapper">
+					<div class="waterfall" id="mygallery">
+							
+							
+								
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636f15c9b.jpg" ><img alt="63e4636f15c9b.jpg" src="https://server.kezhi.tech:8090/thumbnails/ad9062cec9bacdf0d1e49fc89bed8f6c.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dca8316b.png" ><img alt="64fc6dca8316b.png" src="https://server.kezhi.tech:8090/thumbnails/8fa67770c2fca8616e0154cf08ee8418.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc906d81.png" ><img alt="64fc6dc906d81.png" src="https://server.kezhi.tech:8090/thumbnails/3e673fb0dc408a2c058932bd831b15b2.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc94355e.jpg" ><img alt="64fc6dc94355e.jpg" src="https://server.kezhi.tech:8090/thumbnails/c42c53a6eb875acb5d5fef607de6d2f0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc9b093f.png" ><img alt="64fc6dc9b093f.png" src="https://server.kezhi.tech:8090/thumbnails/d1bab65edacb310e438061332f75bbf4.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc8964ad.jpg" ><img alt="64fc6dc8964ad.jpg" src="https://server.kezhi.tech:8090/thumbnails/c32963c979fd846fc1e975849472dca5.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc7458f2.jpg" ><img alt="64fc6dc7458f2.jpg" src="https://server.kezhi.tech:8090/thumbnails/a9abacb1a4ff2e8e88303cef69379c76.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc7b9803.png" ><img alt="64fc6dc7b9803.png" src="https://server.kezhi.tech:8090/thumbnails/1fc9c306ca5dd7962169c3ba7e845e1a.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc67468e.jpg" ><img alt="64fc6dc67468e.jpg" src="https://server.kezhi.tech:8090/thumbnails/d7e3ff3fa2a5ee1b4cb6e1afa6c880ca.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc6d81d6.png" ><img alt="64fc6dc6d81d6.png" src="https://server.kezhi.tech:8090/thumbnails/ddc2f821225d10748facb1d3ee5ea3e8.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc547476.jpg" ><img alt="64fc6dc547476.jpg" src="https://server.kezhi.tech:8090/thumbnails/50d5933caa9efa6473151e8c16e46c09.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc5a07e9.jpg" ><img alt="64fc6dc5a07e9.jpg" src="https://server.kezhi.tech:8090/thumbnails/6dbe40c98d597939341331036a3444e0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc5f0f69.jpg" ><img alt="64fc6dc5f0f69.jpg" src="https://server.kezhi.tech:8090/thumbnails/b916ded83d1c9c1eea075a7c146ec2a8.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc4076d4.png" ><img alt="64fc6dc4076d4.png" src="https://server.kezhi.tech:8090/thumbnails/0ae1c16cfe2997d33aa0f5de48bee5df.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc45eefe.png" ><img alt="64fc6dc45eefe.png" src="https://server.kezhi.tech:8090/thumbnails/891ab4c29784ef31e5c75fac3a42cd83.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6dc4e77bb.jpg" ><img alt="64fc6dc4e77bb.jpg" src="https://server.kezhi.tech:8090/thumbnails/7c247bbeecd21cd8d5afa397161ce9fd.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b6c42a1e.jpg" ><img alt="64fc6b6c42a1e.jpg" src="https://server.kezhi.tech:8090/thumbnails/45d24ea6757166c60d0b8f64555392e0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b6b3b21e.jpg" ><img alt="64fc6b6b3b21e.jpg" src="https://server.kezhi.tech:8090/thumbnails/6ff4d99d8448ed51f920178993511898.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b6ad5f79.jpg" ><img alt="64fc6b6ad5f79.jpg" src="https://server.kezhi.tech:8090/thumbnails/dcbd5a34a5129244ed2362eb994cc36a.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b0b317ea.jpg" ><img alt="64fc6b0b317ea.jpg" src="https://server.kezhi.tech:8090/thumbnails/d6dfa676a11684468fee8dfa15bde8f8.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b0b81b07.jpg" ><img alt="64fc6b0b81b07.jpg" src="https://server.kezhi.tech:8090/thumbnails/cf7f37b41564da1263d16e42517efdb2.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b0be3af0.jpg" ><img alt="64fc6b0be3af0.jpg" src="https://server.kezhi.tech:8090/thumbnails/f204cef10713970cc6d3c5586f78c0a9.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b0a14915.png" ><img alt="64fc6b0a14915.png" src="https://server.kezhi.tech:8090/thumbnails/91bec895002874f7e64470475e760faa.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b090e3fa.jpg" ><img alt="64fc6b090e3fa.jpg" src="https://server.kezhi.tech:8090/thumbnails/c25f63270d819f1fd8536d5068e2c0de.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b09819c8.jpg" ><img alt="64fc6b09819c8.jpg" src="https://server.kezhi.tech:8090/thumbnails/ccec1ca36037d6c6059f3ce6fc626b67.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b0864408.jpg" ><img alt="64fc6b0864408.jpg" src="https://server.kezhi.tech:8090/thumbnails/2431b18fa374abce46b31438b5a76f62.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6b08afb3a.jpg" ><img alt="64fc6b08afb3a.jpg" src="https://server.kezhi.tech:8090/thumbnails/0e355b9dc461de55b65725bdc0458a71.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aed09d07.jpg" ><img alt="64fc6aed09d07.jpg" src="https://server.kezhi.tech:8090/thumbnails/db59856a6601d6fbb9030c66c5552984.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aed58c09.jpg" ><img alt="64fc6aed58c09.jpg" src="https://server.kezhi.tech:8090/thumbnails/487b90e26fe11e5605d9f115871f7f2c.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aedd44fc.jpg" ><img alt="64fc6aedd44fc.jpg" src="https://server.kezhi.tech:8090/thumbnails/2e5ac26483f295a4fad6878bfc1f1cd0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aebf39a3.jpg" ><img alt="64fc6aebf39a3.jpg" src="https://server.kezhi.tech:8090/thumbnails/7c738d1014d8d1ef4b5e0fe546ef190e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aec4c1e4.jpg" ><img alt="64fc6aec4c1e4.jpg" src="https://server.kezhi.tech:8090/thumbnails/f9a1bb349243610391d3d93d9a0ab7dc.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aecaabe3.jpg" ><img alt="64fc6aecaabe3.jpg" src="https://server.kezhi.tech:8090/thumbnails/5878508abdd106b7bd1e260afc01bcc7.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aeba661f.png" ><img alt="64fc6aeba661f.png" src="https://server.kezhi.tech:8090/thumbnails/f7428043d9b83588c7519dfa9cb2a573.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad2ed132.jpg" ><img alt="64fc6ad2ed132.jpg" src="https://server.kezhi.tech:8090/thumbnails/276f08a2c5ea6f9ae43cd91d92b6a479.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad215474.jpg" ><img alt="64fc6ad215474.jpg" src="https://server.kezhi.tech:8090/thumbnails/9d236855cc799c55255bb92a5c60cc68.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad27e117.jpg" ><img alt="64fc6ad27e117.jpg" src="https://server.kezhi.tech:8090/thumbnails/e43437f6b1d11c9fcbbf3b5c3ec98208.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad14d77d.jpg" ><img alt="64fc6ad14d77d.jpg" src="https://server.kezhi.tech:8090/thumbnails/e5180d1adb9f35b2a995482a3de7e1f6.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad1aa764.jpg" ><img alt="64fc6ad1aa764.jpg" src="https://server.kezhi.tech:8090/thumbnails/5e713309dae2c6435461d9e85baa440e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad0b925f.png" ><img alt="64fc6ad0b925f.png" src="https://server.kezhi.tech:8090/thumbnails/3098bb3f00486ce086f51e90a1508b8e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ad0db857.jpg" ><img alt="64fc6ad0db857.jpg" src="https://server.kezhi.tech:8090/thumbnails/6614798a723e64cc102a12022674d598.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6abbebb3f.jpg" ><img alt="64fc6abbebb3f.jpg" src="https://server.kezhi.tech:8090/thumbnails/b9e2303c62700b0c6d9f68d4ab491c82.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6abc91cb7.jpg" ><img alt="64fc6abc91cb7.jpg" src="https://server.kezhi.tech:8090/thumbnails/f417ca3812a542d6f862a5b73ca8b9f3.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6abb37d20.png" ><img alt="64fc6abb37d20.png" src="https://server.kezhi.tech:8090/thumbnails/bc19f1c39a8d201aa1e81e6b8e8c93e9.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6abb756ab.jpg" ><img alt="64fc6abb756ab.jpg" src="https://server.kezhi.tech:8090/thumbnails/38cac309abbbd82b15cb2a961be506b3.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aba0bc48.jpg" ><img alt="64fc6aba0bc48.jpg" src="https://server.kezhi.tech:8090/thumbnails/162a6af435374dde7a9c981454f8227f.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aba542b9.jpg" ><img alt="64fc6aba542b9.jpg" src="https://server.kezhi.tech:8090/thumbnails/89a12ed339810c4cb0ad02f8bacd4d39.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6ab9548fc.jpg" ><img alt="64fc6ab9548fc.jpg" src="https://server.kezhi.tech:8090/thumbnails/cef20cb30e38c37883b87fe74954b6c6.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa321fc8.jpg" ><img alt="64fc6aa321fc8.jpg" src="https://server.kezhi.tech:8090/thumbnails/43e2a9716d8d3060e411f2b939cd9e38.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa37b838.jpg" ><img alt="64fc6aa37b838.jpg" src="https://server.kezhi.tech:8090/thumbnails/7747f3583c064e0d6e69dec8489a5b38.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa23d6b9.png" ><img alt="64fc6aa23d6b9.png" src="https://server.kezhi.tech:8090/thumbnails/aa6504c45f26898f9073dd31fa767707.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa2613d0.jpg" ><img alt="64fc6aa2613d0.jpg" src="https://server.kezhi.tech:8090/thumbnails/583906b8054fccb5fc427117a328a13b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa2d31f8.png" ><img alt="64fc6aa2d31f8.png" src="https://server.kezhi.tech:8090/thumbnails/5b95d999cb90ebaf40da20863de723ff.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/64fc6aa1b5d9c.jpg" ><img alt="64fc6aa1b5d9c.jpg" src="https://server.kezhi.tech:8090/thumbnails/3a84e25e08d25b1e870e8fa6d36c6049.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4cf5edb8c2.gif" ><img alt="63e4cf5edb8c2.gif" src="https://server.kezhi.tech:8090/thumbnails/b92273c636fe39734002be351913f0c1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46496b9f90.png" ><img alt="63e46496b9f90.png" src="https://server.kezhi.tech:8090/thumbnails/661fa6d75a52e13edddb1e25103e4e56.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46495bb204.png" ><img alt="63e46495bb204.png" src="https://server.kezhi.tech:8090/thumbnails/c3d83f29bbf0b6446f53f570b19b7eb2.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4648824695.png" ><img alt="63e4648824695.png" src="https://server.kezhi.tech:8090/thumbnails/f49fc4a80ac810bf10849337c9a353d1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e464844755a.png" ><img alt="63e464844755a.png" src="https://server.kezhi.tech:8090/thumbnails/cfe78aca287cdaf355db85028fba85eb.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463d37763a.png" ><img alt="63e463d37763a.png" src="https://server.kezhi.tech:8090/thumbnails/522679c4b3bd5233773e0738a4a591d4.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463cf0534c.png" ><img alt="63e463cf0534c.png" src="https://server.kezhi.tech:8090/thumbnails/b7ab9af41d775b28710bf0e1e664aa6f.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c92f788.jpg" ><img alt="63e463c92f788.jpg" src="https://server.kezhi.tech:8090/thumbnails/33b87844a362afd82f4b7e9e3399e3dd.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c7460d0.jpg" ><img alt="63e463c7460d0.jpg" src="https://server.kezhi.tech:8090/thumbnails/701aad07247eab15696ce4a509f63db5.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c6c6e36.jpg" ><img alt="63e463c6c6e36.jpg" src="https://server.kezhi.tech:8090/thumbnails/732a3004572cfd5233f16bdcd97c7d19.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c4a36d8.jpg" ><img alt="63e463c4a36d8.jpg" src="https://server.kezhi.tech:8090/thumbnails/5d597ed2f56dad173c494e5e6d1e12cb.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c25ea3a.jpg" ><img alt="63e463c25ea3a.jpg" src="https://server.kezhi.tech:8090/thumbnails/51aec28462705160aee3e6da031a29e0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463c051997.jpg" ><img alt="63e463c051997.jpg" src="https://server.kezhi.tech:8090/thumbnails/a582efa6fa6c9fdc45eb24189059e443.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463bf66c4e.jpg" ><img alt="63e463bf66c4e.jpg" src="https://server.kezhi.tech:8090/thumbnails/d5cd232de4c9ed0c8fdff7c59f30b6aa.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463bae0250.jpg" ><img alt="63e463bae0250.jpg" src="https://server.kezhi.tech:8090/thumbnails/f80fed0b988962ae6ce956d6bd46a9d9.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b921013.jpg" ><img alt="63e463b921013.jpg" src="https://server.kezhi.tech:8090/thumbnails/be32d4914aba9df54fb4c4eacc480118.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b7eaea0.jpg" ><img alt="63e463b7eaea0.jpg" src="https://server.kezhi.tech:8090/thumbnails/f38a5954f2585f01f8d329596f9d600b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b41ee50.jpg" ><img alt="63e463b41ee50.jpg" src="https://server.kezhi.tech:8090/thumbnails/d719c4243bc269ce7fe2f732bd59c4af.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b3382cf.jpg" ><img alt="63e463b3382cf.jpg" src="https://server.kezhi.tech:8090/thumbnails/a872069c373697f725758c55efa7e137.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b388aaa.jpg" ><img alt="63e463b388aaa.jpg" src="https://server.kezhi.tech:8090/thumbnails/868a917fb76cba923c45e05083109013.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463b3c8441.png" ><img alt="63e463b3c8441.png" src="https://server.kezhi.tech:8090/thumbnails/f3c22c14522765febe0f85bad75ab37d.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463ae51430.jpg" ><img alt="63e463ae51430.jpg" src="https://server.kezhi.tech:8090/thumbnails/7759dc3baef9a8163be8c71879e8b47d.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463ac05cf1.jpg" ><img alt="63e463ac05cf1.jpg" src="https://server.kezhi.tech:8090/thumbnails/2a0fe7a1e2f3e85c7d41d2d312490da7.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463aca651d.jpg" ><img alt="63e463aca651d.jpg" src="https://server.kezhi.tech:8090/thumbnails/ce194f18bdd8fd1c4afb31dec69f6088.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463aa85689.png" ><img alt="63e463aa85689.png" src="https://server.kezhi.tech:8090/thumbnails/e11133be72164c92e39316255a0a3ad0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a8d3684.png" ><img alt="63e463a8d3684.png" src="https://server.kezhi.tech:8090/thumbnails/24ff90e983845dc260f238538de2a882.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a67b0e0.jpg" ><img alt="63e463a67b0e0.jpg" src="https://server.kezhi.tech:8090/thumbnails/9953fe261ef336cc79651ad1ae957841.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a5bea46.jpg" ><img alt="63e463a5bea46.jpg" src="https://server.kezhi.tech:8090/thumbnails/cfb650b2fb17cc6b66c6cd23d6332e60.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a04471e.jpg" ><img alt="63e463a04471e.jpg" src="https://server.kezhi.tech:8090/thumbnails/4594277436c080c2e1e736ca4d5e0545.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a095b3e.jpeg" ><img alt="63e463a095b3e.jpeg" src="https://server.kezhi.tech:8090/thumbnails/d171ce87467640ffb37f2b4809efcebe.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463a0e16fb.jpg" ><img alt="63e463a0e16fb.jpg" src="https://server.kezhi.tech:8090/thumbnails/7eca4ceb7938239127019a08b4277260.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639d2d7ea.png" ><img alt="63e4639d2d7ea.png" src="https://server.kezhi.tech:8090/thumbnails/9f2cd317a6d02db874c71cbd30db7873.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639c1e99e.jpg" ><img alt="63e4639c1e99e.jpg" src="https://server.kezhi.tech:8090/thumbnails/371fd5e631c93e6203cee1e038a7eb19.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639c5b4ea.jpg" ><img alt="63e4639c5b4ea.jpg" src="https://server.kezhi.tech:8090/thumbnails/878b62195fb0864d18bac0245ebab3a5.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639b813c3.jpg" ><img alt="63e4639b813c3.jpg" src="https://server.kezhi.tech:8090/thumbnails/27e3b8f837f176b2bd5cc74974ae81e4.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46399731e3.png" ><img alt="63e46399731e3.png" src="https://server.kezhi.tech:8090/thumbnails/96c65649d52b057d3461333f8d0416c1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639833ba1.png" ><img alt="63e4639833ba1.png" src="https://server.kezhi.tech:8090/thumbnails/3815ef176cdd969964dd946ca571e569.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4639714f26.png" ><img alt="63e4639714f26.png" src="https://server.kezhi.tech:8090/thumbnails/fac792dfb2e75282e4e12e296fbcc014.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46392f2487.jpg" ><img alt="63e46392f2487.jpg" src="https://server.kezhi.tech:8090/thumbnails/9929d1dc1b298c77ed2974001bb0949d.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463924a66c.jpg" ><img alt="63e463924a66c.jpg" src="https://server.kezhi.tech:8090/thumbnails/3c42b22862b1f080217ff56cb87fb654.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46391dd2e7.jpg" ><img alt="63e46391dd2e7.jpg" src="https://server.kezhi.tech:8090/thumbnails/6cfa039f9d7f5bddd4feb09eb65ea977.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463903e120.jpg" ><img alt="63e463903e120.jpg" src="https://server.kezhi.tech:8090/thumbnails/4dd9c0bc1017e4d15a41502e24745ed9.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638def4c3.jpg" ><img alt="63e4638def4c3.jpg" src="https://server.kezhi.tech:8090/thumbnails/af06d94f27313b250f3c54077cc7b588.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638e2be3e.jpg" ><img alt="63e4638e2be3e.jpg" src="https://server.kezhi.tech:8090/thumbnails/0419ea9b9da98349071292845994a376.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638d3ce12.jpg" ><img alt="63e4638d3ce12.jpg" src="https://server.kezhi.tech:8090/thumbnails/c5238de78e2b072ca97100014bd28f93.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638b0506f.jpg" ><img alt="63e4638b0506f.jpg" src="https://server.kezhi.tech:8090/thumbnails/fc6468734b91bb4f752312bb457a60de.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638a86b63.png" ><img alt="63e4638a86b63.png" src="https://server.kezhi.tech:8090/thumbnails/173aea980f5847f170dd453abe003f74.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46389b6f01.jpg" ><img alt="63e46389b6f01.jpg" src="https://server.kezhi.tech:8090/thumbnails/a20c687f8a4b9860a1abad4d815b4e2b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638636297.jpg" ><img alt="63e4638636297.jpg" src="https://server.kezhi.tech:8090/thumbnails/f8abb37a6ae3835820d90c02f250b50e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463856d8cd.jpg" ><img alt="63e463856d8cd.jpg" src="https://server.kezhi.tech:8090/thumbnails/64c86bfd3469844d715fcdcc490c400b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46385a209b.jpg" ><img alt="63e46385a209b.jpg" src="https://server.kezhi.tech:8090/thumbnails/3ccdffcafb12e365d00d948a4ea02581.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46385d91f8.jpg" ><img alt="63e46385d91f8.jpg" src="https://server.kezhi.tech:8090/thumbnails/599b360df85690dca5d8767defc0bf1c.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463832fd45.jpg" ><img alt="63e463832fd45.jpg" src="https://server.kezhi.tech:8090/thumbnails/7ae846e457c53339a0da46b5a078a561.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4638227f4d.png" ><img alt="63e4638227f4d.png" src="https://server.kezhi.tech:8090/thumbnails/0173f1d37332b9008500c73208590d26.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463811b14f.jpg" ><img alt="63e463811b14f.jpg" src="https://server.kezhi.tech:8090/thumbnails/8d8fe33fdbeec998f77bfcb9fa7b0093.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463814d496.jpg" ><img alt="63e463814d496.jpg" src="https://server.kezhi.tech:8090/thumbnails/d895270ded75090f5b5d7991ca738a97.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46381c6e07.jpg" ><img alt="63e46381c6e07.jpg" src="https://server.kezhi.tech:8090/thumbnails/fe1a2a21b239b7cadfdf5fa2684369a9.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637e37d46.jpg" ><img alt="63e4637e37d46.jpg" src="https://server.kezhi.tech:8090/thumbnails/322344ce89e956a20bb66a60cf1e9aed.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637e785aa.jpg" ><img alt="63e4637e785aa.jpg" src="https://server.kezhi.tech:8090/thumbnails/3810cd4c421d0429f1d98ad31533a4a1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637ea5c0c.png" ><img alt="63e4637ea5c0c.png" src="https://server.kezhi.tech:8090/thumbnails/0f0c592bc597150b132070d1ea0dd50b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637ed8162.jpg" ><img alt="63e4637ed8162.jpg" src="https://server.kezhi.tech:8090/thumbnails/1eaf0cfdca10486f6fbff94952811f03.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637c6bfa4.jpg" ><img alt="63e4637c6bfa4.jpg" src="https://server.kezhi.tech:8090/thumbnails/37154ecc233492eedc2abab611a437a1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637b0692a.png" ><img alt="63e4637b0692a.png" src="https://server.kezhi.tech:8090/thumbnails/749e874c45ab111090aff6b596683c0f.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637b48622.jpg" ><img alt="63e4637b48622.jpg" src="https://server.kezhi.tech:8090/thumbnails/8cd711733544fd7db8ba43a125210f7e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637b9f510.png" ><img alt="63e4637b9f510.png" src="https://server.kezhi.tech:8090/thumbnails/f81c177be7244b83f3a8b01bee114c1d.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463771a257.jpg" ><img alt="63e463771a257.jpg" src="https://server.kezhi.tech:8090/thumbnails/68368c7047034ba7ac87db8036ec30b0.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e46377b1e35.jpg" ><img alt="63e46377b1e35.jpg" src="https://server.kezhi.tech:8090/thumbnails/f71fa35441fd38eeded1748c1521a553.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637663414.png" ><img alt="63e4637663414.png" src="https://server.kezhi.tech:8090/thumbnails/f08e08a3812007561db6f75725eceb57.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637584b62.jpg" ><img alt="63e4637584b62.jpg" src="https://server.kezhi.tech:8090/thumbnails/550fcc3a082180d2b6c2f3015f3d4804.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463743c9e3.png" ><img alt="63e463743c9e3.png" src="https://server.kezhi.tech:8090/thumbnails/1b9b01eb116b6e7cae2b4925f8d9e038.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4637226de4.jpg" ><img alt="63e4637226de4.jpg" src="https://server.kezhi.tech:8090/thumbnails/023513ae62456158e3fadda854523d4e.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463728d2fe.jpg" ><img alt="63e463728d2fe.jpg" src="https://server.kezhi.tech:8090/thumbnails/9a7e40f926ac36bfa18b4d51594b81fd.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463710a893.jpg" ><img alt="63e463710a893.jpg" src="https://server.kezhi.tech:8090/thumbnails/268d05bc4a3e222b7e110134254a0acb.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463701e250.jpg" ><img alt="63e463701e250.jpg" src="https://server.kezhi.tech:8090/thumbnails/69b309fe79b83ac9576b63f53d96e095.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636f15c9b.jpg" ><img alt="63e4636f15c9b.jpg" src="https://server.kezhi.tech:8090/thumbnails/ad9062cec9bacdf0d1e49fc89bed8f6c.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636f408e0.jpg" ><img alt="63e4636f408e0.jpg" src="https://server.kezhi.tech:8090/thumbnails/9477cbf6f9f308b0d26049867811da75.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636fbc282.jpg" ><img alt="63e4636fbc282.jpg" src="https://server.kezhi.tech:8090/thumbnails/c3ec6a89eeec295eea67ffb7fd1b2f5b.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636e3d3ac.jpg" ><img alt="63e4636e3d3ac.jpg" src="https://server.kezhi.tech:8090/thumbnails/e74f96a4ca40484cb8f41e7df4eba7ad.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636ec8119.jpg" ><img alt="63e4636ec8119.jpg" src="https://server.kezhi.tech:8090/thumbnails/0f31258d65cbd36fee521077ae71a016.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636d0d2f3.jpg" ><img alt="63e4636d0d2f3.jpg" src="https://server.kezhi.tech:8090/thumbnails/83eb6d44cd32516e21eb8dc8e57fb279.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636c420da.jpg" ><img alt="63e4636c420da.jpg" src="https://server.kezhi.tech:8090/thumbnails/9975165ecd7b9bb91ca1748a5a0736e8.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636c9d776.jpg" ><img alt="63e4636c9d776.jpg" src="https://server.kezhi.tech:8090/thumbnails/8288eaa804c5a0b5986a0692a30a6268.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636b32d3f.jpg" ><img alt="63e4636b32d3f.jpg" src="https://server.kezhi.tech:8090/thumbnails/6320e39dec61bd389ab5a24657894e13.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636b77325.jpg" ><img alt="63e4636b77325.jpg" src="https://server.kezhi.tech:8090/thumbnails/fd49ea24395a54e1ccd9aa03c5290162.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636bb84bc.jpg" ><img alt="63e4636bb84bc.jpg" src="https://server.kezhi.tech:8090/thumbnails/2d689d85f1a7b54f3bc5e799aa7dcaee.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636a15dd8.jpg" ><img alt="63e4636a15dd8.jpg" src="https://server.kezhi.tech:8090/thumbnails/9625e09937250880249ad7e492116e21.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636919239.jpg" ><img alt="63e4636919239.jpg" src="https://server.kezhi.tech:8090/thumbnails/2ed5a8043d841e52f90b2a906b8bc8f5.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636999167.jpg" ><img alt="63e4636999167.jpg" src="https://server.kezhi.tech:8090/thumbnails/7173e4eebb320c1ae0bab535204972a6.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463687af16.png" ><img alt="63e463687af16.png" src="https://server.kezhi.tech:8090/thumbnails/b8f19bcdc5b88a2d54ec2809d12f5809.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636763138.png" ><img alt="63e4636763138.png" src="https://server.kezhi.tech:8090/thumbnails/c64eb862b2a1d12aa060496f96cb2d75.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463666e4a8.png" ><img alt="63e463666e4a8.png" src="https://server.kezhi.tech:8090/thumbnails/f89ac116af7ddfc04a8dec8094bee7c4.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463657739a.jpg" ><img alt="63e463657739a.jpg" src="https://server.kezhi.tech:8090/thumbnails/6fe2694fe0ca2a8fc24c860316dcb9d2.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463645ea72.jpg" ><img alt="63e463645ea72.jpg" src="https://server.kezhi.tech:8090/thumbnails/edc1b489a3737f7f1432343e6403fcf1.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e4636366523.jpg" ><img alt="63e4636366523.jpg" src="https://server.kezhi.tech:8090/thumbnails/df4cd059b9ffb5f11c1f956e351a9813.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463622cbe4.jpg" ><img alt="63e463622cbe4.jpg" src="https://server.kezhi.tech:8090/thumbnails/5cf6fb1640cbb151c67feea9ed2f2660.png" /> </a>
+									<a class="photo-item" rel="example_group noopener" data-fancybox="images" target="_blank" href="https://pic.kezhi.tech/image/63e463629b657.jpg" ><img alt="63e463629b657.jpg" src="https://server.kezhi.tech:8090/thumbnails/93f38db67f311e5cfa73f7780f9d34b4.png" /> </a>		
+								
+								
+								
+							
+
+					</div>	
+				</div>
+			</div>
+		</div>	
+	</div>
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://uptime.kezhi.tech/status/web" title="https:&#x2F;&#x2F;uptime.kezhi.tech&#x2F;status&#x2F;web" rel="noopener" target="_blank">网站监控</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=Yrta9qQDj8isri1_KNjhT7WenyEDA1dzZcv9bkzWhMw"></script>
+      
+      <!--音乐播放器
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      -->
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">224k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:24</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : '[object Object]',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收回复^_^",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '15' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>

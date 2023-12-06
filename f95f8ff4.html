@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+<script>
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163934312-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163934312-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.kezhi.tech","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideRightBigIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XJTU System Optimization and Scheduling Midterm Report">
+<meta property="og:url" content="https://www.kezhi.tech/f95f8ff4.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="Midterm Report 西安交通大学《系统优化与调度》课程中期报告">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202211291631791.jpg?x-oss-process=style/webp">
+<meta property="article:published_time" content="2022-11-29T08:31:55.000Z">
+<meta property="article:modified_time" content="2023-11-10T02:16:20.289Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="Optimal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202211291631791.jpg?x-oss-process=style/webp">
+
+<link rel="canonical" href="https://www.kezhi.tech/f95f8ff4.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>XJTU System Optimization and Scheduling Midterm Report | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kezhi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">94</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-fw fa-book"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-gallery">
+
+    <a href="/gallery/" rel="section"><i class="fa fa-fw fa-camera"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-fw fa-rss"></i>rss</a>
+
+  </li>
+        <li class="menu-item menu-item-anime">
+
+    <a href="/bangumis/" rel="section"><i class="fa fa-fw fa-tv"></i>anime</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <!--本地搜索-->
+      <div class="site-search">
+        <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+      </div>
+    
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/f95f8ff4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          XJTU System Optimization and Scheduling Midterm Report
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-29 16:31:55" itemprop="dateCreated datePublished" datetime="2022-11-29T16:31:55+08:00">2022-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-10 10:16:20" itemprop="dateModified" datetime="2023-11-10T10:16:20+08:00">2023-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/f95f8ff4.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/f95f8ff4.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="midterm-report">Midterm Report</h1>
+<p>西安交通大学《系统优化与调度》课程中期报告</p>
+<p><img src="https://download.kezhi.tech/img/202211291631791.jpg?x-oss-process=style/webp" alt="" style="width:50%;" /></p>
+<span id="more"></span>
+<h2 id="problem">Problem</h2>
+<p><span class="math display">\[
+min\ \ x_1^3+x_2^3-2x_1^2x_2+5x_1x_2^2+10x_1x_2+7x_1-x_2\\
+s.t.\left\{
+    \begin{array}{**lr**}
+    -x_1+x_2\leq0\\
+    -2x_1-5x_2-10\leq0\\
+    x_1-100\leq 0
+    \end{array}
+\right.
+\]</span></p>
+<p>The graph of the object function is shown below:</p>
+<figure>
+<img
+src="https://download.kezhi.tech/img/202112211558169.png?x-oss-process=style/webp"
+alt="object function" />
+<figcaption aria-hidden="true">object function</figcaption>
+</figure>
+<p>The feasible region by the constraint is shown blow:</p>
+<figure>
+<img
+src="https://download.kezhi.tech/img/202112211600017.png?x-oss-process=style/webp"
+alt="constraint" />
+<figcaption aria-hidden="true">constraint</figcaption>
+</figure>
+<h2 id="method">Method</h2>
+<p>For this problem, we can see that the feasible region is a convex
+set, and the object function is not convex. Considering the feasible
+region, the constraint works only when searching out the boundary. Using
+projection method could let the searched point outing the boundary move
+to the boundary. So the method I using is below:</p>
+<blockquote>
+<ol type="1">
+<li>choose the start point <span class="math inline">\(x^0\)</span></li>
+<li>replace point with the projection<span
+class="math inline">\([x^0]^+\)</span></li>
+<li>get the projection of next direction point <span
+class="math inline">\(\bar x_k=[x^k-\nabla f(x^k)]^+\)</span></li>
+<li>get the search direction <span class="math inline">\(d^k=\bar
+x^k-x^k\)</span></li>
+<li>calculate the next point <span
+class="math inline">\(x^{k+1}=x^k+\alpha^kd^k\)</span></li>
+<li>if the terminal condition is satisficed, stop the search and output
+the result, else go to the step 3</li>
+</ol>
+</blockquote>
+<p>In this project, I choose Armjio rule to control the step size.</p>
+<p>The parameters of the method is following: <span
+class="math display">\[
+s=1\ \ \beta=0.5\ \ \sigma=1e-5
+\]</span></p>
+<h2 id="solution">Solution</h2>
+<p>Considering the floating error of computers, stipulate <span
+class="math inline">\(a=b\)</span> when <span
+class="math inline">\(|a-b|&lt;\varepsilon\)</span>, and <span
+class="math inline">\(a=0\)</span> if <span
+class="math inline">\(|a|&lt;\varepsilon\)</span>. In this project,
+<span class="math inline">\(\varepsilon=1e-19\)</span>.</p>
+<p>choose the start point (0,0), we could get the following answer:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">（0,0）</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
+</tr>
+</tbody>
+</table>
+<p>The final result is <span class="math inline">\(x^*=[-0.20805,
+-1.91678],f(x^*)=-6.25904\)</span>.</p>
+<p>same as the result solved by the python package
+<code>scipy.optimize.minimize</code>:</p>
+<figure>
+<img
+src="https://download.kezhi.tech/img/20211222010041.png?x-oss-process=style/webp"
+alt="image-20211222010030267" />
+<figcaption aria-hidden="true">image-20211222010030267</figcaption>
+</figure>
+<p>Change the start point to (5,-8), and the answer following:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 15%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span
+class="math inline">\(x^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(f(x^k)\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\alpha^k\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(d^k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(6.37931,-4.55172)</td>
+<td style="text-align: center;">955.45385</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(-7.80788,3.12315)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(-1.42857,-1.42857)</td>
+<td style="text-align: center;">-2.74052</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1.71358,-0.68543)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0.28501,-2.11400)</td>
+<td style="text-align: center;">-4.62839</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">(-1.71358,0.68543)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(-0.57178,-1.77129)</td>
+<td style="text-align: center;">-5.65909</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(2.55462,-1.02185)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(0.06688,-2.02675)</td>
+<td style="text-align: center;">-5.79388</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">(-1.49545,0.59818)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">(-0.30699,-1.87721)</td>
+<td style="text-align: center;">-6.20808</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.86671,-0.34668)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">(-0.19865,-1.92054)</td>
+<td style="text-align: center;">-6.25856</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.08902,0.03561)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">(-0.20977,-1.91609)</td>
+<td style="text-align: center;">-6.25903</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.01624,-0.00649)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">(-0.20775,-1.91690)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00284,0.00114)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">(-0.20810,-1.91676)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00050,-0.00020)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">(-0.20804,-1.91679)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(-0.00009,0.00004)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">(-0.20805,-1.91678)</td>
+<td style="text-align: center;">-6.25904</td>
+<td style="text-align: center;">0.125</td>
+<td style="text-align: center;">(0.00002,-0.00001)</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that the searching point went to the boundary quickly, and
+then the trajectory of the searching is same as ahead.</p>
+<h2 id="appendix">Appendix</h2>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">language<span class="punctuation">:</span> python</span><br><span class="line">package<span class="punctuation">:</span> numpy<span class="punctuation">,</span> matplotlib<span class="punctuation">,</span> scipy</span><br></pre></td></tr></table></figure>
+<p>The source code is following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小于该数则判断为0</span></span><br><span class="line">epsilon=<span class="number">1e-19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求梯度</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">autograd</span>(<span class="params">f,*args</span>):</span><br><span class="line">    delta=<span class="number">1e-9</span></span><br><span class="line">    var_num=<span class="built_in">len</span>(args)</span><br><span class="line">    grads=[]</span><br><span class="line">    <span class="comment"># 计算当前函数值</span></span><br><span class="line">    func_value=f(args)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(var_num):</span><br><span class="line">        <span class="comment"># 计算偏移后的变量</span></span><br><span class="line">        args_new=<span class="built_in">list</span>(args)</span><br><span class="line">        args_new[i]+=delta</span><br><span class="line">        args_new=<span class="built_in">tuple</span>(args_new)</span><br><span class="line">        <span class="comment"># 计算偏移后函数值</span></span><br><span class="line">        delta_func_value=f(args_new)</span><br><span class="line">        <span class="comment"># 求偏导</span></span><br><span class="line">        partial=(delta_func_value-func_value)/delta</span><br><span class="line">        grads.append(partial)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(grads)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数</span></span><br><span class="line">f=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]**<span class="number">3</span>+x[<span class="number">1</span>]**<span class="number">3</span>-<span class="number">2</span>*x[<span class="number">0</span>]**<span class="number">2</span>*x[<span class="number">1</span>]+<span class="number">5</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]**<span class="number">2</span>+<span class="number">10</span>*x[<span class="number">0</span>]*x[<span class="number">1</span>]+<span class="number">7</span>*x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g1=<span class="keyword">lambda</span> x: x[<span class="number">0</span>]-x[<span class="number">1</span>]</span><br><span class="line">g2=<span class="keyword">lambda</span> x: <span class="number">2</span>*x[<span class="number">0</span>]+<span class="number">5</span>*x[<span class="number">1</span>]+<span class="number">10</span></span><br><span class="line">g3=<span class="keyword">lambda</span> x: -x[<span class="number">0</span>]+<span class="number">10</span></span><br><span class="line"></span><br><span class="line">line1=[(<span class="number">10</span>,-<span class="number">6</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line2=[(-<span class="number">2</span>/<span class="number">1.4</span>,-<span class="number">2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,<span class="number">10</span>)]</span><br><span class="line">line3=[(-<span class="number">2</span>/<span class="number">1.4</span>,-<span class="number">2</span>/<span class="number">1.4</span>),(<span class="number">10</span>,-<span class="number">6</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算凸包上的最近距离点</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_closest_point</span>(<span class="params">x,y,line</span>):</span><br><span class="line">    <span class="keyword">if</span> line[<span class="number">0</span>][<span class="number">0</span>]==line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">        px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        py=y</span><br><span class="line">        <span class="keyword">if</span> py&gt;line[<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> py&lt;line[<span class="number">0</span>][<span class="number">1</span>]:</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        k=(line[<span class="number">0</span>][<span class="number">1</span>]-line[<span class="number">1</span>][<span class="number">1</span>])/(line[<span class="number">0</span>][<span class="number">0</span>]-line[<span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">        b=line[<span class="number">0</span>][<span class="number">1</span>]-k*line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        px=(y+x/k-b)/(k+<span class="number">1</span>/k)</span><br><span class="line">        py=k*px+b</span><br><span class="line">        <span class="keyword">if</span> px&lt;line[<span class="number">0</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> px&gt;line[<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            px=line[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            py=line[<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    distance=sqrt((x-px)**<span class="number">2</span>+(y-py)**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> distance,(px,py)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算点(x,y)在凸包上的投影</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">project</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="keyword">if</span> g1([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g2([x,y])&gt;=<span class="number">0</span> <span class="keyword">and</span> g3([x,y])&gt;=<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (x,y)</span><br><span class="line">    d1,p1=get_closest_point(x,y,line1)</span><br><span class="line">    d2,p2=get_closest_point(x,y,line2)</span><br><span class="line">    d3,p3=get_closest_point(x,y,line3)</span><br><span class="line">    <span class="keyword">if</span> d1==<span class="built_in">min</span>(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p1</span><br><span class="line">    <span class="keyword">if</span> d2==<span class="built_in">min</span>(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p2</span><br><span class="line">    <span class="keyword">if</span> d3==<span class="built_in">min</span>(d1,d2,d3):</span><br><span class="line">        <span class="keyword">return</span> p3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 投影最速下降法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">steepest_method</span>(<span class="params">f,*start_point</span>):</span><br><span class="line">    s=<span class="number">1</span></span><br><span class="line">    beta=<span class="number">0.5</span></span><br><span class="line">    m=<span class="number">0</span></span><br><span class="line">    sigma=<span class="number">1e-5</span></span><br><span class="line">    point=np.array(project(*start_point))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        last_point=point</span><br><span class="line">        <span class="comment"># 计算函数值</span></span><br><span class="line">        value=f(point)</span><br><span class="line">        <span class="comment"># 计算梯度</span></span><br><span class="line">        grad_f=autograd(f,*point)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 检查是否达到终止条件</span></span><br><span class="line">        is_solve=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> grad <span class="keyword">in</span> grad_f:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">abs</span>(grad)&gt;epsilon:</span><br><span class="line">                is_solve=<span class="literal">False</span></span><br><span class="line">        <span class="comment"># 如果精度达到终止条件，则停止并返回当前点</span></span><br><span class="line">        <span class="keyword">if</span> is_solve:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># 否则继续向下运算</span></span><br><span class="line">        point=point-grad_f</span><br><span class="line">        <span class="comment"># 对点进行投影</span></span><br><span class="line">        point=project(*point)</span><br><span class="line">        <span class="comment"># 计算更新方向</span></span><br><span class="line">        direction=point-last_point</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算下一个搜索点</span></span><br><span class="line">        point=last_point</span><br><span class="line">        <span class="comment"># Armijo准则选择步长</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            alpha=beta**m*s</span><br><span class="line">            new_point=point+alpha*direction</span><br><span class="line">            d_sum=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i,d <span class="keyword">in</span> <span class="built_in">enumerate</span>(direction):</span><br><span class="line">                d_sum+=grad_f[i]*d</span><br><span class="line">            <span class="keyword">if</span> f(point)-f(new_point)&gt;=-sigma*alpha*d_sum:</span><br><span class="line">                point=new_point</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            m+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 打印日志</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;x_k:(&#123;:.5f&#125;,&#123;:.5f&#125;) f: &#123;:.5f&#125; a: &#123;:.5f&#125; d: (&#123;:.5f&#125;,&#123;:.5f&#125;)&#x27;</span>.<span class="built_in">format</span>(last_point[<span class="number">0</span>],last_point[<span class="number">1</span>],f(last_point),alpha,direction[<span class="number">0</span>],direction[<span class="number">1</span>]))</span><br><span class="line">        point=last_point+alpha*direction</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果迭代步长很小，则停止迭代</span></span><br><span class="line">        err=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(point)):</span><br><span class="line">            err+=<span class="built_in">abs</span>(point[i]-last_point[i])</span><br><span class="line">        <span class="keyword">if</span> err&lt;<span class="number">1e-5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 对结果保留5位小数</span></span><br><span class="line">    ans=[]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> point:</span><br><span class="line">        ans.append(<span class="built_in">round</span>(p,<span class="number">5</span>))</span><br><span class="line">    <span class="keyword">return</span> ans,f(ans)</span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(steepest_method(f,<span class="number">5</span>,-<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">######################</span></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">x=np.arange(-<span class="number">5</span>,<span class="number">15</span>,<span class="number">0.1</span>)</span><br><span class="line">y1=x</span><br><span class="line">y2=-<span class="number">0.4</span>*x-<span class="number">2</span></span><br><span class="line"></span><br><span class="line">plt.plot(x,y1)</span><br><span class="line">plt.plot(x,y2)</span><br><span class="line">plt.plot([<span class="number">10</span>,<span class="number">10</span>],[-<span class="number">10</span>,<span class="number">15</span>])</span><br><span class="line">plt.fill_between(x,y1,y2,where=(x&lt;<span class="number">10</span>)&amp;(y1&gt;y2),alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;constraint.png?x-oss-process=style/webp&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">figure = plt.figure()</span><br><span class="line">ax = Axes3D(figure)<span class="comment">#设置图像为三维格式</span></span><br><span class="line">X = np.arange(-<span class="number">1.5</span>,<span class="number">10</span>,<span class="number">0.1</span>)</span><br><span class="line">Y = np.arange(-<span class="number">6</span>,<span class="number">10</span>,<span class="number">0.1</span>)<span class="comment">#X,Y的范围</span></span><br><span class="line">X,Y = np.meshgrid(X,Y)<span class="comment">#绘制网格</span></span><br><span class="line">Z=f([X,Y])</span><br><span class="line">ax.plot_surface(X,Y,Z,rstride=<span class="number">1</span>,cstride=<span class="number">1</span>,cmap=<span class="string">&#x27;rainbow&#x27;</span>)</span><br><span class="line"><span class="comment">#绘制3D图，后面的参数为调节图像的格式</span></span><br><span class="line">plt.savefig(<span class="string">&#x27;obj_func.png?x-oss-process=style/webp&#x27;</span>)</span><br><span class="line"><span class="comment">#######################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># scipy求解验证结果正确性</span></span><br><span class="line"></span><br><span class="line">cons=(&#123;<span class="string">&#x27;type&#x27;</span>:<span class="string">&#x27;ineq&#x27;</span>,<span class="string">&#x27;fun&#x27;</span>:g1&#125;,</span><br><span class="line">      &#123;<span class="string">&#x27;type&#x27;</span>:<span class="string">&#x27;ineq&#x27;</span>,<span class="string">&#x27;fun&#x27;</span>:g2&#125;,</span><br><span class="line">      &#123;<span class="string">&#x27;type&#x27;</span>:<span class="string">&#x27;ineq&#x27;</span>,<span class="string">&#x27;fun&#x27;</span>:g3&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x0 = np.asarray((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">res=minimize(f,x0,method=<span class="string">&#x27;SLSQP&#x27;</span>,constraints=cons)</span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+     <!-- 文章结束表示语-->
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本 文 结 束 啦 <i class="fa fa-paw"></i> 感 谢 您 的 阅 读-------------</div>
+    
+</div>
+
+      
+    </div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\7d0182be.html" rel="bookmark">XJTU System Optimization and Scheduling Course Assignments</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\a7067052.html" rel="bookmark">XJTU System Optimization and Scheduling Final Report</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div>如果喜欢我的文章  不妨请我喝杯咖啡~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://https//www.kezhi.tech/f95f8ff4.html" title="XJTU System Optimization and Scheduling Midterm Report" rel="noopener" target="_blank">https://www.kezhi.tech/f95f8ff4.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Optimal/" rel="tag"><i class="fa fa-tag"></i> Optimal</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/7d0182be.html" rel="prev" title="XJTU System Optimization and Scheduling Course Assignments">
+      <i class="fa fa-chevron-left"></i> XJTU System Optimization and Scheduling Course Assignments
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/a7067052.html" rel="next" title="XJTU System Optimization and Scheduling Final Report">
+      XJTU System Optimization and Scheduling Final Report <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#midterm-report"><span class="nav-text">Midterm Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#problem"><span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendix"><span class="nav-text">Appendix</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhaokz@163.com" title="E-Mail → mailto:yuzhaokz@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://uptime.kezhi.tech/status/web" title="https:&#x2F;&#x2F;uptime.kezhi.tech&#x2F;status&#x2F;web" rel="noopener" target="_blank">网站监控</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+      <!--数字时钟-->
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+      <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=Yrta9qQDj8isri1_KNjhT7WenyEDA1dzZcv9bkzWhMw"></script>
+      
+      <!--音乐播放器
+      <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+        src="https://music.163.com/outchain/player?type=2&id=1412266089&auto=1&height=66"></iframe>
+      </div>
+      -->
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/备案图标.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">224k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:24</span>
+</div>
+
+
+
+
+    <script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+    本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    本站访客数<span id="busuanzi_value_site_uv"></span>人
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : '[object Object]',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'FnNdu3eMMy5MBI9uBtoGkOq8-gzGzoHsz',
+      appKey     : 'eaqzpiD8qTAmamfDoRSzQqnA',
+      placeholder: "在这里输入评论内容，请不要忘记留下邮箱地址以便接收回复^_^",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '15' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('#header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        
+          $('#sidebar').wobbleWindow({
+            radius: 50,
+            movementLeft: false,
+            movementTop: false,
+            movementBottom: false,
+            position: 'fixed',
+            debug: false,
+          });
+        
+
+        
+          $('#footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            offsetX: ,
+            position: 'absolute',
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+
+ 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>

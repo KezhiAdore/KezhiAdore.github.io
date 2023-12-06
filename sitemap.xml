@@ -797,20 +797,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/branch-and-bound/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/Zotero/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -825,14 +811,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/NLP/</loc>
+    <loc>https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/NLTK/</loc>
+    <loc>https://www.kezhi.tech/tags/branch-and-bound/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -861,6 +847,20 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E5%8D%95%E7%89%87%E6%9C%BA/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/NLP/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/NLTK/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -909,20 +909,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Script/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Automation/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E6%8B%8D%E6%91%84/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -938,6 +924,27 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Script/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Automation/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Q-Learning/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -965,13 +972,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Q-Learning/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -993,20 +993,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
-    <lastmod>2023-12-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -1022,6 +1008,20 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
     <lastmod>2023-12-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
