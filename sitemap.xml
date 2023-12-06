@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/links/linklist.json</loc>
+    
+    <lastmod>2023-12-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/80e25821.html</loc>
     
     <lastmod>2023-12-06</lastmod>
@@ -41,15 +50,6 @@
     <loc>https://www.kezhi.tech/about/index.html</loc>
     
     <lastmod>2023-11-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/links/linklist.json</loc>
-    
-    <lastmod>2023-11-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
