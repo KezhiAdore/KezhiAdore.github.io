@@ -603,7 +603,7 @@ if(canvas.getContext){
 <li>智能体从经验中进行学习</li>
 </ol>
 <p>本文主要探讨在收集经验过程中，环境自然结束（Terminated，包括目标成功，失败等）和人为截断（Truncated，主要为达到一定步数结束）对经验收集和训练产生的影响，以及如何对其进行处理。并对其进行了部分实验来比较性能。</p>
-<p><img data-src="https://download.kezhi.tech/img/202305242122684.png?x-oss-process=style/webp" style="width:60%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202305242122684.png?x-oss-process=style/webp" style="width:60%;" /></p>
 <span id="more"></span>
 <h2 id="q-learning-简介">Q-Learning 简介</h2>
 <p>在Q-Learning系列算法中，智能体要学习估计每个状态<span
@@ -648,22 +648,26 @@ class="math inline">\(\epsilon\)</span> decay
 步数为200步，奖励函数为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cart_pole_v1</span>(<span class="params">params</span>):</span><br><span class="line">    reward = params[<span class="string">&quot;reward&quot;</span>]</span><br><span class="line">    step = params[<span class="string">&quot;step&quot;</span>]</span><br><span class="line">    done = params[<span class="string">&quot;done&quot;</span>]</span><br><span class="line">    truncated = params[<span class="string">&quot;truncated&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> done <span class="keyword">and</span> (<span class="keyword">not</span> truncated):</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">100</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>/((step+<span class="number">1</span>)**<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <p>在DQN算法中实验结果如图1所示：</p>
-<p><img data-src="https://download.kezhi.tech/img/202305242121154.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202305242121154.png?x-oss-process=style/webp" /></p>
 <center>
 图1 DQN对比
 </center>
 <p>在Double DQN算法中实验结果如图2所示：</p>
-<p><img data-src="https://download.kezhi.tech/img/202305242121791.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202305242121791.png?x-oss-process=style/webp" /></p>
 <center>
 图2 DoubleDQN对比
 </center>
 <p>在Dueling DQN算法中实验结果如图3所示：</p>
-<p><img data-src="https://download.kezhi.tech/img/202305242121630.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202305242121630.png?x-oss-process=style/webp" /></p>
 <center>
 图3 DuelingDQN对比
 </center>
 <p>在D3QN算法中实验结果如图4所示：</p>
-<p><img data-src="https://download.kezhi.tech/img/202305242122501.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202305242122501.png?x-oss-process=style/webp" /></p>
 <center>
 图3 DoubleDuelingDQN对比
 </center>

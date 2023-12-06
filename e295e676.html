@@ -598,7 +598,7 @@ if(canvas.getContext){
     
     
     <div class="post-body" itemprop="articleBody"><p>本文主要对于交叉熵的手动计算和<code>PyTorch</code>中的<code>CrossEntropyLoss</code>模块计算结果不一致的问题展开讨论，查阅了<code>PyTorch</code>的官方文档，最终发现是<code>CrossEntropyLoss</code>在计算交叉熵之前会对输入的概率分布进行一次<code>SoftMax</code>操作导致的。</p>
-<p><img data-src="https://download.kezhi.tech/img/202303041402037.jpg?x-oss-process=style/webp" width=61.8% /></p>
+<p><img src="https://download.kezhi.tech/img/202303041402037.jpg?x-oss-process=style/webp" width=61.8% /></p>
 <span id="more"></span>
 <p>在强化学习中，策略学习常用到一个损失函数为<span
 class="math inline">\(l=-\ln\pi_\theta(a|s)\cdot g\)</span>，其中<span
@@ -638,7 +638,8 @@ for details.</p>
 <p>于是便转而查找<code>CrossEntropyLoss</code>的文档<a href="#fn2"
 class="footnote-ref" id="fnref2"
 role="doc-noteref"><sup>2</sup></a>，终于找到了<code>Pytorch</code>计算交叉熵的计算过程：</p>
-<p><img data-src="https://download.kezhi.tech/img/202303041333317.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202303041333317.png?x-oss-process=style/webp" /></p>
 <p>可以看到，官方文档关于交叉熵的计算方式阐述的十分清楚。概括来说就是，<code>F.cross_entropy</code>至少需要两个参数，一个是预测出的概率分布，一个是目标真实类别索引。比较重要的一点在于，<code>F.cross_entropy</code>这个函数是没有要求的，即不要求和等于1，也不要求每一项大于0。这是因为该函数在计算交叉熵之间，会先对输入的概率分布进行一次<code>SoftMax</code>操作。</p>
 <p>在计算交叉熵之前进行<code>SoftMax</code>操作提高对输入的宽容度，但是若在构建神经网络时，已经在输出之前进行了<code>SoftMax</code>操作就会导致两次<code>SoftMax</code>使<code>loss</code>的计算失真，也就是上一节的计算结果不一致。</p>
 <h2 id="实验验证">实验验证</h2>
