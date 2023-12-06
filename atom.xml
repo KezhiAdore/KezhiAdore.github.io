@@ -214,10 +214,10 @@ src=&quot;https://download.kezhi.tech/img/202306041618232.png?x-oss-process=styl
     
     <summary type="html">&lt;p&gt;现在是2023年5月17日凌晨00时57分，不知道是下午喝了那杯拿铁的缘故，还是因为这两天发生的事情，到现在依旧没有困意。此外，脑中也有很多想法在不断涌现和争辩。思来想去，与其在床上胡思乱想，亦或是借酒助眠，不如来工位写一篇文章，梳理一下脑中所想，将不断涌现的混乱的想法整理为有条理与逻辑的文本内容。&lt;/p&gt;
 &lt;blockquote class=&quot;blockquote-center&quot;&gt;
-            &lt;p&gt;红豆生南国，春来发几枝？&lt;/p&gt;
+&lt;p&gt;红豆生南国，春来发几枝？&lt;/p&gt;
 &lt;p&gt;愿君多采撷，此物最相思。&lt;/p&gt;
 
-          &lt;/blockquote&gt;</summary>
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -540,11 +540,11 @@ alt=&quot;(摄影师: 蔡育倍)&quot; /&gt;
     <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
     
     
-    <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
-    
     <category term="支教" scheme="https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/"/>
     
     <category term="感悟" scheme="https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
+    
+    <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
@@ -669,9 +669,9 @@ src=&quot;https://download.kezhi.tech/img/202206071619140.jpg?x-oss-process=styl
     
     
     <summary type="html">&lt;blockquote class=&quot;blockquote-center&quot;&gt;
-            &lt;p&gt;电影是经由极度刻意而达到的自然&lt;/p&gt;
+&lt;p&gt;电影是经由极度刻意而达到的自然&lt;/p&gt;
 
-          &lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&quot;影视创作的基本流程&quot;&gt;影视创作的基本流程&lt;/h2&gt;
 &lt;p&gt;&lt;img
 src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; /&gt;&lt;/p&gt;</summary>
@@ -931,10 +931,10 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     <summary type="html">&lt;h2 id=&quot;section&quot;&gt;2021.04&lt;/h2&gt;
 &lt;blockquote class=&quot;blockquote-center&quot;&gt;
-            &lt;p&gt;矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。&lt;/p&gt;
+&lt;p&gt;矫揉做作地喜好各种规矩就是“有系统”，孜孜不倦且兴致勃勃地处理鸡毛蒜皮的公事就是“勤勉”；该做的事优柔寡断就是“谨慎”；不该做的事盲目地坚持到底就是“决心”。&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;-- 《银河帝国2：基地与帝国》&lt;/b&gt;&lt;/p&gt;
 
-          &lt;/blockquote&gt;</summary>
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -1013,7 +1013,7 @@ src=&quot;https://download.kezhi.tech/img/20201024223544.png?x-oss-process=style
     
     
     <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的&lt;span class=&quot;label primary&quot;&gt;播放量&lt;/span&gt;，&lt;span class=&quot;label success&quot;&gt;追番量&lt;/span&gt;，&lt;span class=&quot;label info&quot;&gt;弹幕数量&lt;/span&gt;等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。&lt;/p&gt;
+&lt;p&gt;Bilibili（以下简称B站）中有大量的番剧版权，截止目前一共有3161部。每一部番剧都可以找到它的&lt;mark class=&quot;label primary&quot;&gt;播放量&lt;/mark&gt;，&lt;mark class=&quot;label success&quot;&gt;追番量&lt;/mark&gt;，&lt;mark class=&quot;label info&quot;&gt;弹幕数量&lt;/mark&gt;等播放数据，除此之外，每部番剧还有其相应的标签（如“漫画改”，“热血”，“搞笑”）。本项目旨在分析番剧播放数据与番剧标签之间的关系，同时也是一项数据分析的大作业，采用APriori频繁项集挖掘进行分析。&lt;/p&gt;
 &lt;p&gt;GitHub地址：&lt;a
 href=&quot;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;https://github.com/KezhiAdore/BilibiliAnimeData_Analysis&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;码云地址：&lt;a
@@ -1313,7 +1313,7 @@ src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg?x-oss-process=style/webp&qu
     
     <summary type="html">&lt;p&gt;一些markdown之外的语法规则，让文章更美观&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本文摘录自 &lt;span class=&quot;label success&quot;&gt;周宇峰的博客&lt;/span&gt; &lt;a
+&lt;p&gt;本文摘录自 &lt;mark class=&quot;label success&quot;&gt;周宇峰的博客&lt;/mark&gt; &lt;a
 href=&quot;https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/&quot;&gt;原文链接&lt;/a&gt;
 &lt;img
 src=&quot;https://download.kezhi.tech/img/8MAadJ.md.jpg?x-oss-process=style/webp&quot;
