@@ -6,7 +6,7 @@
   <link href="https://www.kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-12-07T09:13:39.674Z</updated>
+  <updated>2023-12-07T09:18:12.494Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -21,12 +21,14 @@
     <link href="https://www.kezhi.tech/4d54863.html"/>
     <id>https://www.kezhi.tech/4d54863.html</id>
     <published>2023-12-07T09:13:39.000Z</published>
-    <updated>2023-12-07T09:13:39.674Z</updated>
+    <updated>2023-12-07T09:18:12.494Z</updated>
     
     
-    <summary type="html">&lt;p&gt;深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：
-- 过一段时间检查一下实验结果，无法专心干别的事情。 -
-撇下不管，实验跑g了也不知道，跑完了也不知道。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;过一段时间检查一下实验结果，无法专心干别的事情。&lt;/li&gt;
+&lt;li&gt;撇下不管，实验跑g了也不知道，跑完了也不知道。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard
 数据提取，企业微信机器人通知。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;</summary>
@@ -117,11 +119,11 @@ href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ub
     <link href="https://www.kezhi.tech/46493a5d.html"/>
     <id>https://www.kezhi.tech/46493a5d.html</id>
     <published>2023-10-23T07:59:19.845Z</published>
-    <updated>2023-12-05T08:59:04.150Z</updated>
+    <updated>2023-12-07T09:24:25.408Z</updated>
     
     
     <summary type="html">&lt;p&gt;深度强化学习算法相比于深度学习，有更多的超参数需要调节，本文主要对DDPG算法中的actor网络和critic网络学习率的设置对学习效果的影响进行了探讨。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://pic.kezhi.tech/image/64fc6b860ebf4.png?x-oss-process=style/webp&quot; width=&quot;33%&quot;&gt;&lt;/p&gt;</summary>
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202312071724061.png?x-oss-process=style/webp&quot; width=&quot;33%&quot;&gt;&lt;/p&gt;</summary>
     
     
     

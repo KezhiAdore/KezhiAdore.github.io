@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.kezhi.tech/46493a5d.html</loc>
+    
+    <lastmod>2023-12-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/4d54863.html</loc>
     
     <lastmod>2023-12-07</lastmod>
@@ -32,15 +41,6 @@
     <loc>https://www.kezhi.tech/links/linklist.json</loc>
     
     <lastmod>2023-12-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/46493a5d.html</loc>
-    
-    <lastmod>2023-12-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

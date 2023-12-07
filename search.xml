@@ -255,7 +255,7 @@ https://blog.csdn.net/daaikuaichuan/article/details/81135802</p>
     <title>DDPG算法中AC学习率设置对训练效果的影响</title>
     <url>/46493a5d.html</url>
     <content><![CDATA[<p>深度强化学习算法相比于深度学习，有更多的超参数需要调节，本文主要对DDPG算法中的actor网络和critic网络学习率的设置对学习效果的影响进行了探讨。</p>
-<p><img src="https://pic.kezhi.tech/image/64fc6b860ebf4.png?x-oss-process=style/webp" width="33%"></p>
+<p><img src="https://download.kezhi.tech/img/202312071724061.png?x-oss-process=style/webp" width="33%"></p>
 <span id="more"></span>
 <p>最近在复现DDPG算法时，首先根据论文的算法流程进行复现，完成后在连续环境<code>Pendulum-v1</code>上进行测试，但是总是训练效果不好，算法的收敛结构很差，如图1所示。</p>
 <p><img
@@ -8625,9 +8625,11 @@ src="https://download.kezhi.tech/img/20200623012410.png?x-oss-process=style/webp
   <entry>
     <title>Python脚本+企业微信通知实验结果</title>
     <url>/4d54863.html</url>
-    <content><![CDATA[<p>深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：
-- 过一段时间检查一下实验结果，无法专心干别的事情。 -
-撇下不管，实验跑g了也不知道，跑完了也不知道。</p>
+    <content><![CDATA[<p>深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：</p>
+<ul>
+<li>过一段时间检查一下实验结果，无法专心干别的事情。</li>
+<li>撇下不管，实验跑g了也不知道，跑完了也不知道。</li>
+</ul>
 <p>为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard
 数据提取，企业微信机器人通知。</p>
 <p><img src="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp" style="width:50%;" /></p>
