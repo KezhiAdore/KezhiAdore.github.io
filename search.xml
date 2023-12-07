@@ -560,126 +560,6 @@ src="https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style/webp
       </tags>
   </entry>
   <entry>
-    <title>Hexo本地写作环境配置</title>
-    <url>/315fc17e.html</url>
-    <content><![CDATA[<h2 id="写作缘由">写作缘由</h2>
-<p>由于经常换电脑设备，每次更换设备时都需要重新配置Hexo环境，故对配置流程进行记录，以供后续使用。</p>
-<span id="more"></span>
-<h2 id="本地环境搭建">本地环境搭建</h2>
-<ol type="1">
-<li><p>安装node.js （这里最好安装版本 v12
-否则可能出现部署不成功的情况）</p>
-<p>window 安装：<a href="https://nodejs.org/en/download/">Download |
-Node.js (nodejs.org)</a></p>
-<p>Linux 安装：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-<p>安装完成后输入以下命令检查是否安装成功：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure></li>
-<li><p>安装Hexo</p>
-<p>首先修改 npm 到国内源：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>输入以下命令进行确认：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> get registry</span><br></pre></td></tr></table></figure>
-<p>在 Blog 所在文件夹根目录打开命令行，输入以下命令强制安装Hexo：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo-cli --force</span><br></pre></td></tr></table></figure>
-<p>安装完成后输入以下命令检查是否安装成功：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure>
-<p>如果使用的是已有环境，则可以通过以下命令来自动安装环境所需包：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install --force</span><br></pre></td></tr></table></figure></li>
-<li><p>安装pandoc
-<code>typora</code>写作导出和<code>hexo</code>使用<code>pandoc</code>渲染时均需要使用<code>pandoc</code>（使用默认渲染引擎可以跳过这一步</p>
-<p><code>pandoc</code>下载地址为：https://pandoc.org/installing.html</p></li>
-</ol>
-<h2 id="插件">插件</h2>
-<h3 id="steam-展示">steam 展示</h3>
-<p>项目链接：https://github.com/HCLonely/hexo-steam-games</p>
-<ol type="1">
-<li><p>安装插件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-steam-games --save</span><br></pre></td></tr></table></figure></li>
-<li><p>配置<code>hexo</code>的<code>_config.yml</code>文件</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">steam:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">steamId:</span> <span class="string">&#x27;*****&#x27;</span> <span class="comment">#steam 64位Id</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Steam游戏库</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;人人都是头号玩家&#x27;</span></span><br><span class="line">  <span class="attr">tab:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">length:</span> <span class="number">1000</span></span><br><span class="line">  <span class="attr">imgUrl:</span> <span class="string">&#x27;*****&#x27;</span></span><br><span class="line">  <span class="attr">proxy:</span></span><br><span class="line">    <span class="attr">host:</span></span><br><span class="line">    <span class="attr">port:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>enable</strong>: 是否启用</li>
-<li><strong>steamId</strong>: steam
-64位Id(需要放在引号里面，不然会有BUG),
-<strong><em>需要将steam库设置为公开！</em></strong></li>
-<li><strong>path</strong>:
-页面路径，默认<code>steamgames/index.html</code></li>
-<li><strong>title</strong>: 该页面的标题</li>
-<li><strong>quote</strong>: 写在页面开头的一段话,支持html语法</li>
-<li><strong>tab</strong>: <code>all</code>或<code>recent</code>,
-<code>all: 所有游戏</code>, <code>recent: 最近游玩的游戏</code></li>
-<li><strong>length</strong>:
-要显示游戏的数量，游戏太多的话可以限制一下</li>
-<li><strong>imgUrl</strong>:
-图片链接，在<code>quote</code>下面放一张图片，图片链接到Steam个人资料，可留空</li>
-<li>proxy: 如果无法访问steam社区的话请使用代理
-<ul>
-<li><strong>host</strong>: 代理ip或域名</li>
-<li><strong>port</strong>: 代理端口</li>
-</ul></li>
-<li><strong>extra_options</strong>:
-此配置会扩展到Hexo的<code>page</code>变量中</li>
-</ul></li>
-<li><p>使用</p>
-<ol type="1">
-<li>在<code>hexo generate</code>或<code>hexo deploy</code>之前使用<code>hexo steam -u</code>命令更新steam游戏库数据！</li>
-<li>删除游戏库数据指令:<code>hexo steam -d</code></li>
-</ol></li>
-</ol>
-<h3 id="添加-bilibili-追番追剧列表">添加 Bilibili 追番/追剧列表</h3>
-<p>参考自：https://opensourcelibs.com/lib/hexo-bilibili-bangumi</p>
-<ol type="1">
-<li><p>安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-bilibili-bangumi --save</span><br></pre></td></tr></table></figure></li>
-<li><p>配置<code>hexo</code>的<code>_config.yml</code>文件</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 追番设置</span></span><br><span class="line"><span class="attr">bangumi:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">vmid:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;追番列表&#x27;</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;生命不息，追番不止！&#x27;</span></span><br><span class="line">  <span class="attr">show:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">loading:</span></span><br><span class="line">  <span class="attr">metaColor:</span></span><br><span class="line">  <span class="attr">color:</span></span><br><span class="line">  <span class="attr">webp:</span></span><br><span class="line">  <span class="attr">progress:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 追剧设置</span></span><br><span class="line"><span class="attr">cinema:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">vmid:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;追剧列表&#x27;</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;生命不息，追剧不止！&#x27;</span></span><br><span class="line">  <span class="attr">show:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">loading:</span></span><br><span class="line">  <span class="attr">metaColor:</span></span><br><span class="line">  <span class="attr">color:</span></span><br><span class="line">  <span class="attr">webp:</span></span><br><span class="line">  <span class="attr">progress:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>enable</strong>: 是否启用</li>
-<li><strong>path</strong>:
-页面路径，默认<code>bangumis/index.html</code>,
-<code>cinemas/index.html</code></li>
-<li><strong>vmid</strong>: 哔哩哔哩的 <code>vmid(uid)</code>,<a
-href="https://opensourcelibs.com/lib/hexo-bilibili-bangumi#获取uid">如何获取？</a></li>
-<li><strong>title</strong>: 该页面的标题</li>
-<li><strong>quote</strong>: 写在页面开头的一段话，支持 html
-语法，可留空。</li>
-<li><strong>show</strong>: 初始显示页面：<code>0: 想看</code>,
-<code>1: 在看</code>, <code>2: 看过</code>，默认为<code>1</code></li>
-<li><strong>lazyload</strong>:
-是否启用图片懒加载，如果与主题的懒加载冲突请关闭，默认<code>true</code></li>
-<li><strong>loading</strong>: 图片加载完成前的 loading
-图片，需启用图片懒加载</li>
-<li><strong>metaColor</strong>: meta 部分(简介上方)字体颜色</li>
-<li><strong>color</strong>: 简介字体颜色</li>
-<li><strong>webp</strong>:
-番剧封面使用<code>webp</code>格式(此格式在<code>safari</code>浏览器下不显示，但是图片大小可以缩小
-100 倍左右), 默认<code>true</code></li>
-<li><strong>progress</strong>:
-获取番剧数据时是否显示进度条，默认<code>true</code></li>
-<li><strong>extra_options</strong>:
-此配置会扩展到Hexo<code>page</code>变量中</li>
-</ul></li>
-<li><p>使用</p>
-<ol type="1">
-<li>在<code>hexo generate</code>或<code>hexo deploy</code>之前使用<code>hexo bangumi -u</code>命令更新追番数据，使用<code>hexo cinema -u</code>命令更新追剧数据！</li>
-<li>删除数据命令:<code>hexo bangumi -d</code>/<code>hexo cinema -d</code></li>
-</ol></li>
-</ol>
-<h2 id="小结">小结</h2>
-<p>以上步骤结束后一般即可以进行写作和部署，若依然存在问题可以访问<a
-href="https://hexo.io/docs/troubleshooting.html">Troubleshooting |
-Hexo</a>进行错误排查。</p>
-]]></content>
-      <categories>
-        <category>Tips</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>node.js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeTaX数学公式常用语法</title>
     <url>/fc7e112.html</url>
     <content><![CDATA[<center>
@@ -816,6 +696,126 @@ l &amp; \textrm{all day long}
       </categories>
       <tags>
         <tag>LetaX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo本地写作环境配置</title>
+    <url>/315fc17e.html</url>
+    <content><![CDATA[<h2 id="写作缘由">写作缘由</h2>
+<p>由于经常换电脑设备，每次更换设备时都需要重新配置Hexo环境，故对配置流程进行记录，以供后续使用。</p>
+<span id="more"></span>
+<h2 id="本地环境搭建">本地环境搭建</h2>
+<ol type="1">
+<li><p>安装node.js （这里最好安装版本 v12
+否则可能出现部署不成功的情况）</p>
+<p>window 安装：<a href="https://nodejs.org/en/download/">Download |
+Node.js (nodejs.org)</a></p>
+<p>Linux 安装：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<p>安装完成后输入以下命令检查是否安装成功：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Hexo</p>
+<p>首先修改 npm 到国内源：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>输入以下命令进行确认：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> get registry</span><br></pre></td></tr></table></figure>
+<p>在 Blog 所在文件夹根目录打开命令行，输入以下命令强制安装Hexo：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo-cli --force</span><br></pre></td></tr></table></figure>
+<p>安装完成后输入以下命令检查是否安装成功：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure>
+<p>如果使用的是已有环境，则可以通过以下命令来自动安装环境所需包：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="variable">$npm</span> install --force</span><br></pre></td></tr></table></figure></li>
+<li><p>安装pandoc
+<code>typora</code>写作导出和<code>hexo</code>使用<code>pandoc</code>渲染时均需要使用<code>pandoc</code>（使用默认渲染引擎可以跳过这一步</p>
+<p><code>pandoc</code>下载地址为：https://pandoc.org/installing.html</p></li>
+</ol>
+<h2 id="插件">插件</h2>
+<h3 id="steam-展示">steam 展示</h3>
+<p>项目链接：https://github.com/HCLonely/hexo-steam-games</p>
+<ol type="1">
+<li><p>安装插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-steam-games --save</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>hexo</code>的<code>_config.yml</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">steam:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">steamId:</span> <span class="string">&#x27;*****&#x27;</span> <span class="comment">#steam 64位Id</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Steam游戏库</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;人人都是头号玩家&#x27;</span></span><br><span class="line">  <span class="attr">tab:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">length:</span> <span class="number">1000</span></span><br><span class="line">  <span class="attr">imgUrl:</span> <span class="string">&#x27;*****&#x27;</span></span><br><span class="line">  <span class="attr">proxy:</span></span><br><span class="line">    <span class="attr">host:</span></span><br><span class="line">    <span class="attr">port:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>enable</strong>: 是否启用</li>
+<li><strong>steamId</strong>: steam
+64位Id(需要放在引号里面，不然会有BUG),
+<strong><em>需要将steam库设置为公开！</em></strong></li>
+<li><strong>path</strong>:
+页面路径，默认<code>steamgames/index.html</code></li>
+<li><strong>title</strong>: 该页面的标题</li>
+<li><strong>quote</strong>: 写在页面开头的一段话,支持html语法</li>
+<li><strong>tab</strong>: <code>all</code>或<code>recent</code>,
+<code>all: 所有游戏</code>, <code>recent: 最近游玩的游戏</code></li>
+<li><strong>length</strong>:
+要显示游戏的数量，游戏太多的话可以限制一下</li>
+<li><strong>imgUrl</strong>:
+图片链接，在<code>quote</code>下面放一张图片，图片链接到Steam个人资料，可留空</li>
+<li>proxy: 如果无法访问steam社区的话请使用代理
+<ul>
+<li><strong>host</strong>: 代理ip或域名</li>
+<li><strong>port</strong>: 代理端口</li>
+</ul></li>
+<li><strong>extra_options</strong>:
+此配置会扩展到Hexo的<code>page</code>变量中</li>
+</ul></li>
+<li><p>使用</p>
+<ol type="1">
+<li>在<code>hexo generate</code>或<code>hexo deploy</code>之前使用<code>hexo steam -u</code>命令更新steam游戏库数据！</li>
+<li>删除游戏库数据指令:<code>hexo steam -d</code></li>
+</ol></li>
+</ol>
+<h3 id="添加-bilibili-追番追剧列表">添加 Bilibili 追番/追剧列表</h3>
+<p>参考自：https://opensourcelibs.com/lib/hexo-bilibili-bangumi</p>
+<ol type="1">
+<li><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-bilibili-bangumi --save</span><br></pre></td></tr></table></figure></li>
+<li><p>配置<code>hexo</code>的<code>_config.yml</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 追番设置</span></span><br><span class="line"><span class="attr">bangumi:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">vmid:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;追番列表&#x27;</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;生命不息，追番不止！&#x27;</span></span><br><span class="line">  <span class="attr">show:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">loading:</span></span><br><span class="line">  <span class="attr">metaColor:</span></span><br><span class="line">  <span class="attr">color:</span></span><br><span class="line">  <span class="attr">webp:</span></span><br><span class="line">  <span class="attr">progress:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 追剧设置</span></span><br><span class="line"><span class="attr">cinema:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span></span><br><span class="line">  <span class="attr">vmid:</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;追剧列表&#x27;</span></span><br><span class="line">  <span class="attr">quote:</span> <span class="string">&#x27;生命不息，追剧不止！&#x27;</span></span><br><span class="line">  <span class="attr">show:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">lazyload:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">loading:</span></span><br><span class="line">  <span class="attr">metaColor:</span></span><br><span class="line">  <span class="attr">color:</span></span><br><span class="line">  <span class="attr">webp:</span></span><br><span class="line">  <span class="attr">progress:</span></span><br><span class="line">  <span class="attr">extra_options:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">value</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>enable</strong>: 是否启用</li>
+<li><strong>path</strong>:
+页面路径，默认<code>bangumis/index.html</code>,
+<code>cinemas/index.html</code></li>
+<li><strong>vmid</strong>: 哔哩哔哩的 <code>vmid(uid)</code>,<a
+href="https://opensourcelibs.com/lib/hexo-bilibili-bangumi#获取uid">如何获取？</a></li>
+<li><strong>title</strong>: 该页面的标题</li>
+<li><strong>quote</strong>: 写在页面开头的一段话，支持 html
+语法，可留空。</li>
+<li><strong>show</strong>: 初始显示页面：<code>0: 想看</code>,
+<code>1: 在看</code>, <code>2: 看过</code>，默认为<code>1</code></li>
+<li><strong>lazyload</strong>:
+是否启用图片懒加载，如果与主题的懒加载冲突请关闭，默认<code>true</code></li>
+<li><strong>loading</strong>: 图片加载完成前的 loading
+图片，需启用图片懒加载</li>
+<li><strong>metaColor</strong>: meta 部分(简介上方)字体颜色</li>
+<li><strong>color</strong>: 简介字体颜色</li>
+<li><strong>webp</strong>:
+番剧封面使用<code>webp</code>格式(此格式在<code>safari</code>浏览器下不显示，但是图片大小可以缩小
+100 倍左右), 默认<code>true</code></li>
+<li><strong>progress</strong>:
+获取番剧数据时是否显示进度条，默认<code>true</code></li>
+<li><strong>extra_options</strong>:
+此配置会扩展到Hexo<code>page</code>变量中</li>
+</ul></li>
+<li><p>使用</p>
+<ol type="1">
+<li>在<code>hexo generate</code>或<code>hexo deploy</code>之前使用<code>hexo bangumi -u</code>命令更新追番数据，使用<code>hexo cinema -u</code>命令更新追剧数据！</li>
+<li>删除数据命令:<code>hexo bangumi -d</code>/<code>hexo cinema -d</code></li>
+</ol></li>
+</ol>
+<h2 id="小结">小结</h2>
+<p>以上步骤结束后一般即可以进行写作和部署，若依然存在问题可以访问<a
+href="https://hexo.io/docs/troubleshooting.html">Troubleshooting |
+Hexo</a>进行错误排查。</p>
+]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>node.js</tag>
       </tags>
   </entry>
   <entry>
@@ -1028,6 +1028,82 @@ role="doc-backlink">↩︎</a></p></li>
       <tags>
         <tag>PyTorch</tag>
         <tag>Deep Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python脚本+企业微信通知实验结果</title>
+    <url>/4d54863.html</url>
+    <content><![CDATA[<p>深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：</p>
+<ul>
+<li>过一段时间检查一下实验结果，无法专心干别的事情。</li>
+<li>撇下不管，实验跑g了也不知道，跑完了也不知道。</li>
+</ul>
+<p>为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard
+数据提取，企业微信机器人通知。</p>
+<p><img src="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<span id="more"></span>
+<h2 id="进程监控">进程监控</h2>
+<p>通常来说，实验放在后台跑会比较安全，不会因为<code>terminal</code>关闭而停止，放后台跑的命令为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nohup your_command &gt;log_name.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>进程监控的作用有两个：</p>
+<ul>
+<li>当实验异常结束时及时通知</li>
+<li>当实验正常结束时通知结果</li>
+</ul>
+<p>实现起来比较简单，只要监控进程是否结束就行，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> utils.wechat_bot <span class="keyword">import</span> research_bot</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_num</span>(<span class="params">key_words=<span class="string">&quot;&quot;</span></span>):</span><br><span class="line">    num_process = <span class="built_in">int</span>(os.popen(<span class="string">f&quot;ps -ef |grep -v grep|grep <span class="subst">&#123;key_words&#125;</span>|wc -l&quot;</span>).read())</span><br><span class="line">    <span class="keyword">return</span> num_process</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> process_num() == <span class="number">0</span>:</span><br><span class="line">        now = datetime.datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">        send_report_text(<span class="string">&quot;实验结束，正在分析结果...&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    time.sleep(<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># do something</span></span><br></pre></td></tr></table></figure>
+<h2 id="tensorboard-数据提取">Tensorboard 数据提取</h2>
+<p>深度学习的学习过程数据通常由 <code>tensorboard</code>
+记录到日志文件中，使用 <code>tensorboard</code>
+可以很方便的查看训练数据，但这也降低了对训练数据进行其他操作的便捷性。下面这个脚本可以用来提取
+<code>tensorboard</code> 产生的日志数据，并将其写入到 <code>excel</code>
+文件中 。</p>
+<p>使用时只需调用 <code>tb_to_excel</code> 函数即可，输入格式为：</p>
+<ul>
+<li>path_list：字符串构成的列表，每一项为一个日志的路径，如
+<code>['logs/0','logs/1']</code></li>
+<li>excel_path：导出的 <code>excel</code> 路径，如
+<code>'export.xlsx'</code></li>
+<li>one_sheet(default: False)：是否将所有数据合并到一个 excel sheet
+中</li>
+</ul>
+<p>执行结果：path_list 中的日志文件导出到目标 excel 文件中，path_list
+中的每一项对应 excel 文件中的每个 sheet。若
+<code>on_sheet=True</code>，则所有数据将通过 <code>pd.concat</code>
+合并到一个 sheet中。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> tensorboard.backend.event_processing <span class="keyword">import</span> event_accumulator</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Dict</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_data</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = event_accumulator.EventAccumulator(path)</span><br><span class="line">    tb_data.Reload()</span><br><span class="line">    <span class="keyword">return</span> tb_data</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_df</span>(<span class="params">tb_data: event_accumulator.EventAccumulator</span>):</span><br><span class="line">    keys = tb_data.scalars.Keys()</span><br><span class="line">    df = pd.DataFrame(columns=keys)</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> keys:</span><br><span class="line">        data = tb_data.scalars.Items(key)</span><br><span class="line">        df[key] = pd.Series([item.value <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;step&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;step&#x27;</span>] = pd.Series([item.step <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;wall_time&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;wall_time&#x27;</span>] = pd.Series([item.wall_time <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line"></span><br><span class="line">    order = [<span class="string">&#x27;step&#x27;</span>, <span class="string">&#x27;wall_time&#x27;</span>] + keys</span><br><span class="line">    df = df[order]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_df</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = get_tb_data(path)</span><br><span class="line">    df = tb_to_df(tb_data)</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_all_data</span>(<span class="params">path_list:<span class="built_in">list</span></span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, pd.DataFrame]:</span><br><span class="line">    data_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> filepath <span class="keyword">in</span> path_list:</span><br><span class="line">        fn = filepath.split(<span class="string">&#x27;/&#x27;</span>)[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(filepath):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;读取并处理：&quot;</span>, filepath)</span><br><span class="line">            sheet_name = fn</span><br><span class="line">            df = get_tb_df(filepath)</span><br><span class="line">            data_dict[sheet_name] = df</span><br><span class="line">    <span class="keyword">return</span> data_dict</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">df_to_excel</span>(<span class="params">df_dict, path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="keyword">if</span> one_sheet:</span><br><span class="line">        df_all = pd.DataFrame()</span><br><span class="line">        <span class="keyword">for</span> df <span class="keyword">in</span> df_dict.values():</span><br><span class="line">            df_all = pd.concat([df_all, df], ignore_index=<span class="literal">True</span>)</span><br><span class="line">        df_all.to_excel(path, index=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">with</span> pd.ExcelWriter(path) <span class="keyword">as</span> writer:</span><br><span class="line">            <span class="keyword">for</span> sheet_name, df <span class="keyword">in</span> df_dict.items():</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;写入表：&quot;</span>, sheet_name)</span><br><span class="line">                df.to_excel(writer, sheet_name, index=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_excel</span>(<span class="params">path_list, excel_path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    df_dict = extract_all_data(path_list)</span><br><span class="line">    df_to_excel(df_dict, excel_path, one_sheet)</span><br></pre></td></tr></table></figure>
+<h2 id="企业微信机器人通知">企业微信机器人通知</h2>
+<p>主动推送有很多方式可以选择，我个人之前了解过的包括但不限于：</p>
+<ul>
+<li>SMTP 发送邮件</li>
+<li>Server 酱之类的 Push 服务</li>
+<li>QQ 机器人</li>
+<li>微信机器人</li>
+<li>企业微信应用</li>
+<li>企业微信群机器人</li>
+</ul>
+<p>这些方式各有其优缺点。实验结果推送的需求为：</p>
+<ul>
+<li>实时性好：发送后能立即接受并通知</li>
+<li>无响应：只需单向通知，无需设置回复</li>
+</ul>
+<p>因此，在衡量了上述需求，以及考虑实现的便捷性，选用企业微信群机器人来作为信息推送的方式。</p>
+<p>首先，创建一个企业微信群机器人：</p>
+<ol type="1">
+<li>创建一个企业微信群聊（&gt;=3人即可）</li>
+<li>把无关的人都踢了</li>
+<li>添加一个群机器人</li>
+<li>查看机器人信息，在<code>Webhook</code>地址中找到<code>key</code>值并记录</li>
+</ol>
+<p>然后把<code>key</code>填入下面脚本中即可使用</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib3.util.retry <span class="keyword">import</span> Retry</span><br><span class="line"><span class="keyword">from</span> requests.adapters <span class="keyword">import</span> HTTPAdapter</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SLEEP_INTERVAL = <span class="number">0.1</span> <span class="comment"># sleep time between retries</span></span><br><span class="line">MAX_RETRIES = <span class="number">1</span> <span class="comment"># Number of times to retry a request</span></span><br><span class="line"></span><br><span class="line">retries=Retry(</span><br><span class="line">    total=MAX_RETRIES,</span><br><span class="line">    backoff_factor=SLEEP_INTERVAL,</span><br><span class="line">    status_forcelist=[<span class="number">403</span>, <span class="number">500</span>, <span class="number">502</span>, <span class="number">503</span>, <span class="number">504</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">default_headers=&#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client = requests.Session()</span><br><span class="line">client.mount(<span class="string">&quot;http://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.mount(<span class="string">&quot;https://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.headers=default_headers</span><br><span class="line"></span><br><span class="line">BotList = &#123;</span><br><span class="line">    <span class="string">&quot;实验小助手&quot;</span>:<span class="string">&quot;XXX&quot;</span> <span class="comment"># 这里填群聊机器人key</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bot</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, key</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self._base_url = <span class="string">&quot;https://qyapi.weixin.qq.com/cgi-bin/webhook/send&quot;</span></span><br><span class="line">        self._key = key</span><br><span class="line">        self._url = <span class="string">f&quot;<span class="subst">&#123;self._base_url&#125;</span>?key=<span class="subst">&#123;self._key&#125;</span>&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_msg</span>(<span class="params">self, msg</span>):</span><br><span class="line">        response = client.post(self._url, json=msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_text</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">            <span class="string">&quot;text&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_image</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(image_path, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># encode an image to base64</span></span><br><span class="line">            image = f.read()</span><br><span class="line">            base64_bytes = <span class="built_in">str</span>(base64.b64encode(image))[<span class="number">2</span>:-<span class="number">1</span>]</span><br><span class="line">            md5 = hashlib.md5(image).hexdigest()</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;image&quot;</span>,</span><br><span class="line">            <span class="string">&quot;image&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;base64&quot;</span>: base64_bytes,</span><br><span class="line">                <span class="string">&quot;md5&quot;</span>: md5</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_markdown</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">            <span class="string">&quot;markdown&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_news</span>(<span class="params">self, articles</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;news&quot;</span>,</span><br><span class="line">            <span class="string">&quot;news&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;articles&quot;</span>: articles</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line"></span><br><span class="line">research_bot = Bot(BotList[<span class="string">&quot;实验小助手&quot;</span>])</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    research_bot.send_text(<span class="string">&quot;Hello I&#x27;m your research assistant&quot;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Script</tag>
       </tags>
   </entry>
   <entry>
@@ -3568,36 +3644,6 @@ NLTK - 简书 (jianshu.com)</a></p>
       </tags>
   </entry>
   <entry>
-    <title>Scrapy爬虫相关</title>
-    <url>/68a55fd7.html</url>
-    <content><![CDATA[<h2 id="请求伪装">请求伪装</h2>
-<p>在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：</p>
-<p><img
-src="https://download.kezhi.tech/img/20201024223544.png?x-oss-process=style/webp" /></p>
-<p>这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：</p>
-<span id="more"></span>
-<ol type="1">
-<li>在项目目录下新建文件<code>HeaderMidWare.py</code>，写入如下代码：</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="keyword">from</span> scrapy.utils.project <span class="keyword">import</span> get_project_settings</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">settings = get_project_settings()</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProcessHeaderMidware</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;process request add request info&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_request</span>(<span class="params">self, request, spider</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        随机从列表中获得header， 并传给user_agent进行使用</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ua = random.choice(settings.get(<span class="string">&#x27;USER_AGENT_LIST&#x27;</span>))</span><br><span class="line">        spider.logger.info(msg=<span class="string">&#x27;now entring download midware&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> ua:</span><br><span class="line">            request.headers[<span class="string">&#x27;User-Agent&#x27;</span>] = ua</span><br><span class="line">            <span class="comment"># Add desired logging message here.</span></span><br><span class="line">            spider.logger.info(<span class="string">u&#x27;User-Agent is : &#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(request.headers.get(<span class="string">&#x27;User-Agent&#x27;</span>), request))</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>向<code>setting.py</code>添加如下代码</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">USER_AGENT_LIST=[</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">    <span class="string">&#x27;projectname.HeaderMidWare.ProcessHeaderMidware&#x27;</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>添加完毕后重新运行爬虫，其便可以自动选择user_agent进行伪装，成功爬取到网页上的内容。</p>
-<p><img
-src="https://download.kezhi.tech/img/20201024224545.png?x-oss-process=style/webp" /></p>
-]]></content>
-      <categories>
-        <category>Tips</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Scrapy</tag>
-        <tag>Crawler</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一个用单片机放视频的小项目</title>
     <url>/d9a2f421.html</url>
     <content><![CDATA[<h2 id="总体设计思路">总体设计思路</h2>
@@ -3670,6 +3716,36 @@ alt="单片机部分" />
       <tags>
         <tag>Protues</tag>
         <tag>单片机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Scrapy爬虫相关</title>
+    <url>/68a55fd7.html</url>
+    <content><![CDATA[<h2 id="请求伪装">请求伪装</h2>
+<p>在爬取腾讯天气时，发现无法成功爬取到天气数据，经过尝试发现是请求头除了问题。爬虫在爬取网页时的默认请求头为：</p>
+<p><img
+src="https://download.kezhi.tech/img/20201024223544.png?x-oss-process=style/webp" /></p>
+<p>这种默认的请求头在爬取很多网站时会被禁止，无法获取到网页数据，因此需要使用请求头伪装，让网站认为是浏览器在访问。操作步骤如下：</p>
+<span id="more"></span>
+<ol type="1">
+<li>在项目目录下新建文件<code>HeaderMidWare.py</code>，写入如下代码：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="keyword">from</span> scrapy.utils.project <span class="keyword">import</span> get_project_settings</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">settings = get_project_settings()</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProcessHeaderMidware</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;process request add request info&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process_request</span>(<span class="params">self, request, spider</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        随机从列表中获得header， 并传给user_agent进行使用</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        ua = random.choice(settings.get(<span class="string">&#x27;USER_AGENT_LIST&#x27;</span>))</span><br><span class="line">        spider.logger.info(msg=<span class="string">&#x27;now entring download midware&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> ua:</span><br><span class="line">            request.headers[<span class="string">&#x27;User-Agent&#x27;</span>] = ua</span><br><span class="line">            <span class="comment"># Add desired logging message here.</span></span><br><span class="line">            spider.logger.info(<span class="string">u&#x27;User-Agent is : &#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(request.headers.get(<span class="string">&#x27;User-Agent&#x27;</span>), request))</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>向<code>setting.py</code>添加如下代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">USER_AGENT_LIST=[</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">    <span class="string">&#x27;projectname.HeaderMidWare.ProcessHeaderMidware&#x27;</span>: <span class="number">543</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加完毕后重新运行爬虫，其便可以自动选择user_agent进行伪装，成功爬取到网页上的内容。</p>
+<p><img
+src="https://download.kezhi.tech/img/20201024224545.png?x-oss-process=style/webp" /></p>
+]]></content>
+      <categories>
+        <category>Tips</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Scrapy</tag>
+        <tag>Crawler</tag>
       </tags>
   </entry>
   <entry>
@@ -6734,25 +6810,6 @@ Woods）著；阮秋琦等译，—北京：电子工业出版社，2017.5</p>
       </tags>
   </entry>
   <entry>
-    <title>来选头像</title>
-    <url>/ca112d32.html</url>
-    <content><![CDATA[<iframe src="//www.kezhi.tech/avatar/" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
-</iframe>
-<span id="more"></span>
-<h2 id="reference">Reference</h2>
-<ol type="1">
-<li><a href="https://www.pixiv.net/users/6657532">#原神 原神头像 -
-QuAn_的插画 - pixiv</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Collection</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>爬取B站所有番剧数据并进行数据分析</title>
     <url>/6b2dc3cb.html</url>
     <content><![CDATA[<h2 id="简介">简介</h2>
@@ -7038,6 +7095,25 @@ j}(\frac{\mu_i+\mu_j}{d(u_i,u_j)})
         <tag>Big Data</tag>
         <tag>Aprior Algorithm</tag>
         <tag>K-Means</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>来选头像</title>
+    <url>/ca112d32.html</url>
+    <content><![CDATA[<iframe src="//www.kezhi.tech/avatar/" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<span id="more"></span>
+<h2 id="reference">Reference</h2>
+<ol type="1">
+<li><a href="https://www.pixiv.net/users/6657532">#原神 原神头像 -
+QuAn_的插画 - pixiv</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Collection</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -7610,65 +7686,6 @@ z[z]-->a</pre>
       </tags>
   </entry>
   <entry>
-    <title>网站收藏</title>
-    <url>/16fab331.html</url>
-    <content><![CDATA[<p><img
-src="https://download.kezhi.tech/img/202205251650671.webp" /></p>
-<span id="more"></span>
-<h2 id="实用软件">实用软件</h2>
-<ul>
-<li><a href="https://geekuninstaller.com/">Geek Uninstaller - the best
-FREE uninstaller</a></li>
-<li><a href="https://www.bandisoft.com/bandizip/">Windows 版本的
-Bandizip · 业内领先的压缩文件解决方案 (bandisoft.com)</a></li>
-<li><a href="https://www.7-zip.org/">7-Zip</a></li>
-</ul>
-<h2 id="文本转语音">文本转语音</h2>
-<ul>
-<li><p>Free TTS https://freetts.com/</p></li>
-<li><p>Balabolka http://balabolka.site/balabolka.htm</p></li>
-</ul>
-<h2 id="data-source">Data Source</h2>
-<h3 id="defi">Defi</h3>
-<ul>
-<li><p><a
-href="https://www.cryptodatadownload.com/">cryptodatadownload.com</a>
-下载Defi交易所历史数据</p></li>
-<li><p><a href="https://www.coinario.com/">Cryptocurrency -
-Coinario.com</a> 查询交易所基本信息</p></li>
-<li><p><a href="https://nomics.com/">Nomics: Crypto Market Caps -
-Prices, All-Time Highs, Charts</a></p></li>
-</ul>
-<h3 id="transportation">Transportation</h3>
-<ul>
-<li><a href="https://www.transtats.bts.gov/">OST_R | BTS | Transtats</a>
-美国交通运输数据</li>
-</ul>
-<h3 id="weather">Weather</h3>
-<ul>
-<li><a href="https://openweathermap.org/">Сurrent weather and forecast -
-OpenWeatherMap</a></li>
-</ul>
-<h2 id="api">API</h2>
-<ul>
-<li><a href="https://api.muxiaoguo.cn/">木小果API - 提供免费接口调用平台
-(muxiaoguo.cn)</a></li>
-</ul>
-<h2 id="标准信息查找">标准信息查找</h2>
-<ul>
-<li>Mac 厂商对照表 https://standards-oui.ieee.org/oui/oui.txt</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Collection</category>
-      </categories>
-      <tags>
-        <tag>软件</tag>
-        <tag>网站</tag>
-        <tag>收藏</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线性滤波与非线性滤波实验</title>
     <url>/10ee70e7.html</url>
     <content><![CDATA[<p>本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
@@ -8149,6 +8166,65 @@ class="math inline">\(H\)</span>是经过局部线性化得到的，如果量测
       </tags>
   </entry>
   <entry>
+    <title>网站收藏</title>
+    <url>/16fab331.html</url>
+    <content><![CDATA[<p><img
+src="https://download.kezhi.tech/img/202205251650671.webp" /></p>
+<span id="more"></span>
+<h2 id="实用软件">实用软件</h2>
+<ul>
+<li><a href="https://geekuninstaller.com/">Geek Uninstaller - the best
+FREE uninstaller</a></li>
+<li><a href="https://www.bandisoft.com/bandizip/">Windows 版本的
+Bandizip · 业内领先的压缩文件解决方案 (bandisoft.com)</a></li>
+<li><a href="https://www.7-zip.org/">7-Zip</a></li>
+</ul>
+<h2 id="文本转语音">文本转语音</h2>
+<ul>
+<li><p>Free TTS https://freetts.com/</p></li>
+<li><p>Balabolka http://balabolka.site/balabolka.htm</p></li>
+</ul>
+<h2 id="data-source">Data Source</h2>
+<h3 id="defi">Defi</h3>
+<ul>
+<li><p><a
+href="https://www.cryptodatadownload.com/">cryptodatadownload.com</a>
+下载Defi交易所历史数据</p></li>
+<li><p><a href="https://www.coinario.com/">Cryptocurrency -
+Coinario.com</a> 查询交易所基本信息</p></li>
+<li><p><a href="https://nomics.com/">Nomics: Crypto Market Caps -
+Prices, All-Time Highs, Charts</a></p></li>
+</ul>
+<h3 id="transportation">Transportation</h3>
+<ul>
+<li><a href="https://www.transtats.bts.gov/">OST_R | BTS | Transtats</a>
+美国交通运输数据</li>
+</ul>
+<h3 id="weather">Weather</h3>
+<ul>
+<li><a href="https://openweathermap.org/">Сurrent weather and forecast -
+OpenWeatherMap</a></li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li><a href="https://api.muxiaoguo.cn/">木小果API - 提供免费接口调用平台
+(muxiaoguo.cn)</a></li>
+</ul>
+<h2 id="标准信息查找">标准信息查找</h2>
+<ul>
+<li>Mac 厂商对照表 https://standards-oui.ieee.org/oui/oui.txt</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Collection</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>网站</tag>
+        <tag>收藏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>聚会互认问题小记</title>
     <url>/244334e3.html</url>
     <content><![CDATA[<p>前两天，由4位轮值主席组织的第一届游在长安活动正式落幕。在活动组织过程中，有一个小游戏的分组问题很有一次，在此记录。</p>
@@ -8317,61 +8393,6 @@ role="doc-backlink">↩︎</a></p></li>
       </categories>
       <tags>
         <tag>WSL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高斯分布熵的推导</title>
-    <url>/80e25821.html</url>
-    <content><![CDATA[<p>一元高斯分布熵的推导： <span class="math display">\[
-\begin{equation}
-p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma}}
-\end{equation}
-\]</span>
-<img src="https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp" alt="113646456_p0" style="width:33%;" /></p>
-<span id="more"></span>
-<p><span class="math display">\[
-\begin{align}
-H(x) &amp; = -\int p(x) \ln p(x) \mathrm{d}x \notag \\
-&amp; = -\int
-\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot \ln
-\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\mathrm{d}x \notag \\
-&amp; = -\int
-\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot
-(-\ln {\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}) \mathrm{d}x
-\notag \\
-&amp; = \int \frac{\ln
-{\sqrt{2\pi\sigma^2}}}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\cdot
-\mathrm{d}x+\int\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\cdot\frac{(x-\mu)^2}{2\sigma^2} \mathrm{d}x \notag \\
-&amp; = \ln\sqrt{2\pi\sigma^2}+\frac {1}{\sqrt{\pi}}\int e^{-t^2}\cdot
-t^2\mathrm{d}t \notag \\
-&amp; = \ln\sqrt{2\pi\sigma^2}+\frac 12 \notag \\
-&amp; = \frac 12(\ln(2\pi\sigma^2)+1)
-\end{align}
-\]</span> 其中： <span class="math display">\[
-\begin{equation}
-\int e^{-x^2}\mathrm{d}x = \sqrt\pi
-\end{equation}
-\]</span></p>
-<p><span class="math display">\[
-\begin{align}
-\int x^2\cdot e^{-x^2}\mathrm{d}x &amp; = -\frac12 \int
-x(-2x)e^{-x^2}\mathrm{d}x \notag \\
-&amp;=-\frac12 \int x\mathrm{d}e^{-x^2} \notag \\
-&amp;=-\frac12 (x\cdot e^{-x^2}\Big|_{-\infty}^{+\infty}-\int
-e^{-x^2}\mathrm{d}x) \notag \\
-&amp;=\frac12 \int e^{-x^2}\mathrm{d}x) \notag \\
-&amp;=\frac {\sqrt{\pi}}{2}
-\end{align}
-\]</span></p>
-]]></content>
-      <categories>
-        <category>Study</category>
-      </categories>
-      <tags>
-        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
@@ -8623,79 +8644,58 @@ src="https://download.kezhi.tech/img/20200623012410.png?x-oss-process=style/webp
       </tags>
   </entry>
   <entry>
-    <title>Python脚本+企业微信通知实验结果</title>
-    <url>/4d54863.html</url>
-    <content><![CDATA[<p>深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：</p>
-<ul>
-<li>过一段时间检查一下实验结果，无法专心干别的事情。</li>
-<li>撇下不管，实验跑g了也不知道，跑完了也不知道。</li>
-</ul>
-<p>为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard
-数据提取，企业微信机器人通知。</p>
-<p><img src="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp" style="width:50%;" /></p>
+    <title>高斯分布熵的推导</title>
+    <url>/80e25821.html</url>
+    <content><![CDATA[<p>一元高斯分布熵的推导： <span class="math display">\[
+\begin{equation}
+p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma}}
+\end{equation}
+\]</span>
+<img src="https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp" alt="113646456_p0" style="width:33%;" /></p>
 <span id="more"></span>
-<h2 id="进程监控">进程监控</h2>
-<p>通常来说，实验放在后台跑会比较安全，不会因为<code>terminal</code>关闭而停止，放后台跑的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nohup your_command &gt;log_name.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>进程监控的作用有两个：</p>
-<ul>
-<li>当实验异常结束时及时通知</li>
-<li>当实验正常结束时通知结果</li>
-</ul>
-<p>实现起来比较简单，只要监控进程是否结束就行，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> utils.wechat_bot <span class="keyword">import</span> research_bot</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_num</span>(<span class="params">key_words=<span class="string">&quot;&quot;</span></span>):</span><br><span class="line">    num_process = <span class="built_in">int</span>(os.popen(<span class="string">f&quot;ps -ef |grep -v grep|grep <span class="subst">&#123;key_words&#125;</span>|wc -l&quot;</span>).read())</span><br><span class="line">    <span class="keyword">return</span> num_process</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> process_num() == <span class="number">0</span>:</span><br><span class="line">        now = datetime.datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">        send_report_text(<span class="string">&quot;实验结束，正在分析结果...&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    time.sleep(<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># do something</span></span><br></pre></td></tr></table></figure>
-<h2 id="tensorboard-数据提取">Tensorboard 数据提取</h2>
-<p>深度学习的学习过程数据通常由 <code>tensorboard</code>
-记录到日志文件中，使用 <code>tensorboard</code>
-可以很方便的查看训练数据，但这也降低了对训练数据进行其他操作的便捷性。下面这个脚本可以用来提取
-<code>tensorboard</code> 产生的日志数据，并将其写入到 <code>excel</code>
-文件中 。</p>
-<p>使用时只需调用 <code>tb_to_excel</code> 函数即可，输入格式为：</p>
-<ul>
-<li>path_list：字符串构成的列表，每一项为一个日志的路径，如
-<code>['logs/0','logs/1']</code></li>
-<li>excel_path：导出的 <code>excel</code> 路径，如
-<code>'export.xlsx'</code></li>
-<li>one_sheet(default: False)：是否将所有数据合并到一个 excel sheet
-中</li>
-</ul>
-<p>执行结果：path_list 中的日志文件导出到目标 excel 文件中，path_list
-中的每一项对应 excel 文件中的每个 sheet。若
-<code>on_sheet=True</code>，则所有数据将通过 <code>pd.concat</code>
-合并到一个 sheet中。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> tensorboard.backend.event_processing <span class="keyword">import</span> event_accumulator</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Dict</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_data</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = event_accumulator.EventAccumulator(path)</span><br><span class="line">    tb_data.Reload()</span><br><span class="line">    <span class="keyword">return</span> tb_data</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_df</span>(<span class="params">tb_data: event_accumulator.EventAccumulator</span>):</span><br><span class="line">    keys = tb_data.scalars.Keys()</span><br><span class="line">    df = pd.DataFrame(columns=keys)</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> keys:</span><br><span class="line">        data = tb_data.scalars.Items(key)</span><br><span class="line">        df[key] = pd.Series([item.value <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;step&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;step&#x27;</span>] = pd.Series([item.step <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;wall_time&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;wall_time&#x27;</span>] = pd.Series([item.wall_time <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line"></span><br><span class="line">    order = [<span class="string">&#x27;step&#x27;</span>, <span class="string">&#x27;wall_time&#x27;</span>] + keys</span><br><span class="line">    df = df[order]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_df</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = get_tb_data(path)</span><br><span class="line">    df = tb_to_df(tb_data)</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_all_data</span>(<span class="params">path_list:<span class="built_in">list</span></span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, pd.DataFrame]:</span><br><span class="line">    data_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> filepath <span class="keyword">in</span> path_list:</span><br><span class="line">        fn = filepath.split(<span class="string">&#x27;/&#x27;</span>)[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(filepath):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;读取并处理：&quot;</span>, filepath)</span><br><span class="line">            sheet_name = fn</span><br><span class="line">            df = get_tb_df(filepath)</span><br><span class="line">            data_dict[sheet_name] = df</span><br><span class="line">    <span class="keyword">return</span> data_dict</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">df_to_excel</span>(<span class="params">df_dict, path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="keyword">if</span> one_sheet:</span><br><span class="line">        df_all = pd.DataFrame()</span><br><span class="line">        <span class="keyword">for</span> df <span class="keyword">in</span> df_dict.values():</span><br><span class="line">            df_all = pd.concat([df_all, df], ignore_index=<span class="literal">True</span>)</span><br><span class="line">        df_all.to_excel(path, index=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">with</span> pd.ExcelWriter(path) <span class="keyword">as</span> writer:</span><br><span class="line">            <span class="keyword">for</span> sheet_name, df <span class="keyword">in</span> df_dict.items():</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;写入表：&quot;</span>, sheet_name)</span><br><span class="line">                df.to_excel(writer, sheet_name, index=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_excel</span>(<span class="params">path_list, excel_path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    df_dict = extract_all_data(path_list)</span><br><span class="line">    df_to_excel(df_dict, excel_path, one_sheet)</span><br></pre></td></tr></table></figure>
-<h2 id="企业微信机器人通知">企业微信机器人通知</h2>
-<p>主动推送有很多方式可以选择，我个人之前了解过的包括但不限于：</p>
-<ul>
-<li>SMTP 发送邮件</li>
-<li>Server 酱之类的 Push 服务</li>
-<li>QQ 机器人</li>
-<li>微信机器人</li>
-<li>企业微信应用</li>
-<li>企业微信群机器人</li>
-</ul>
-<p>这些方式各有其优缺点。实验结果推送的需求为：</p>
-<ul>
-<li>实时性好：发送后能立即接受并通知</li>
-<li>无响应：只需单向通知，无需设置回复</li>
-</ul>
-<p>因此，在衡量了上述需求，以及考虑实现的便捷性，选用企业微信群机器人来作为信息推送的方式。</p>
-<p>首先，创建一个企业微信群机器人：</p>
-<ol type="1">
-<li>创建一个企业微信群聊（&gt;=3人即可）</li>
-<li>把无关的人都踢了</li>
-<li>添加一个群机器人</li>
-<li>查看机器人信息，在<code>Webhook</code>地址中找到<code>key</code>值并记录</li>
-</ol>
-<p>然后把<code>key</code>填入下面脚本中即可使用</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib3.util.retry <span class="keyword">import</span> Retry</span><br><span class="line"><span class="keyword">from</span> requests.adapters <span class="keyword">import</span> HTTPAdapter</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SLEEP_INTERVAL = <span class="number">0.1</span> <span class="comment"># sleep time between retries</span></span><br><span class="line">MAX_RETRIES = <span class="number">1</span> <span class="comment"># Number of times to retry a request</span></span><br><span class="line"></span><br><span class="line">retries=Retry(</span><br><span class="line">    total=MAX_RETRIES,</span><br><span class="line">    backoff_factor=SLEEP_INTERVAL,</span><br><span class="line">    status_forcelist=[<span class="number">403</span>, <span class="number">500</span>, <span class="number">502</span>, <span class="number">503</span>, <span class="number">504</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">default_headers=&#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client = requests.Session()</span><br><span class="line">client.mount(<span class="string">&quot;http://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.mount(<span class="string">&quot;https://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.headers=default_headers</span><br><span class="line"></span><br><span class="line">BotList = &#123;</span><br><span class="line">    <span class="string">&quot;实验小助手&quot;</span>:<span class="string">&quot;XXX&quot;</span> <span class="comment"># 这里填群聊机器人key</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bot</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, key</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self._base_url = <span class="string">&quot;https://qyapi.weixin.qq.com/cgi-bin/webhook/send&quot;</span></span><br><span class="line">        self._key = key</span><br><span class="line">        self._url = <span class="string">f&quot;<span class="subst">&#123;self._base_url&#125;</span>?key=<span class="subst">&#123;self._key&#125;</span>&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_msg</span>(<span class="params">self, msg</span>):</span><br><span class="line">        response = client.post(self._url, json=msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_text</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">            <span class="string">&quot;text&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_image</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(image_path, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># encode an image to base64</span></span><br><span class="line">            image = f.read()</span><br><span class="line">            base64_bytes = <span class="built_in">str</span>(base64.b64encode(image))[<span class="number">2</span>:-<span class="number">1</span>]</span><br><span class="line">            md5 = hashlib.md5(image).hexdigest()</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;image&quot;</span>,</span><br><span class="line">            <span class="string">&quot;image&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;base64&quot;</span>: base64_bytes,</span><br><span class="line">                <span class="string">&quot;md5&quot;</span>: md5</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_markdown</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">            <span class="string">&quot;markdown&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_news</span>(<span class="params">self, articles</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;news&quot;</span>,</span><br><span class="line">            <span class="string">&quot;news&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;articles&quot;</span>: articles</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line"></span><br><span class="line">research_bot = Bot(BotList[<span class="string">&quot;实验小助手&quot;</span>])</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    research_bot.send_text(<span class="string">&quot;Hello I&#x27;m your research assistant&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+\begin{align}
+H(x) &amp; = -\int p(x) \ln p(x) \mathrm{d}x \notag \\
+&amp; = -\int
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot \ln
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\mathrm{d}x \notag \\
+&amp; = -\int
+\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \cdot
+(-\ln {\sqrt{2\pi\sigma^2}}-\frac{(x-\mu)^2}{2\sigma^2}) \mathrm{d}x
+\notag \\
+&amp; = \int \frac{\ln
+{\sqrt{2\pi\sigma^2}}}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\cdot
+\mathrm{d}x+\int\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\cdot\frac{(x-\mu)^2}{2\sigma^2} \mathrm{d}x \notag \\
+&amp; = \ln\sqrt{2\pi\sigma^2}+\frac {1}{\sqrt{\pi}}\int e^{-t^2}\cdot
+t^2\mathrm{d}t \notag \\
+&amp; = \ln\sqrt{2\pi\sigma^2}+\frac 12 \notag \\
+&amp; = \frac 12(\ln(2\pi\sigma^2)+1)
+\end{align}
+\]</span> 其中： <span class="math display">\[
+\begin{equation}
+\int e^{-x^2}\mathrm{d}x = \sqrt\pi
+\end{equation}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\int x^2\cdot e^{-x^2}\mathrm{d}x &amp; = -\frac12 \int
+x(-2x)e^{-x^2}\mathrm{d}x \notag \\
+&amp;=-\frac12 \int x\mathrm{d}e^{-x^2} \notag \\
+&amp;=-\frac12 (x\cdot e^{-x^2}\Big|_{-\infty}^{+\infty}-\int
+e^{-x^2}\mathrm{d}x) \notag \\
+&amp;=\frac12 \int e^{-x^2}\mathrm{d}x) \notag \\
+&amp;=\frac {\sqrt{\pi}}{2}
+\end{align}
+\]</span></p>
 ]]></content>
       <categories>
-        <category>Tips</category>
+        <category>Study</category>
       </categories>
       <tags>
-        <tag>Python</tag>
-        <tag>Script</tag>
+        <tag>Math</tag>
       </tags>
   </entry>
 </search>
