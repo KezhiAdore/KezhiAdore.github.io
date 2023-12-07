@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/green/pace-theme-flash.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.kezhi.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况： - 过一段时间检查一下实验结果，无法专心干别的事情。 - 撇下不管，实验跑g了也不知道，跑完了也不知道。 为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard 数据提取，企业微信机器人通知。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python脚本+企业微信通知实验结果">
+<meta property="og:url" content="https://www.kezhi.tech/4d54863.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况： - 过一段时间检查一下实验结果，无法专心干别的事情。 - 撇下不管，实验跑g了也不知道，跑完了也不知道。 为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard 数据提取，企业微信机器人通知。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp">
+<meta property="article:published_time" content="2023-12-07T09:13:39.000Z">
+<meta property="article:modified_time" content="2023-12-07T09:13:39.674Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Script">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp">
+
+
+<link rel="canonical" href="https://www.kezhi.tech/4d54863.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.kezhi.tech/4d54863.html","path":"4d54863.html","title":"Python脚本+企业微信通知实验结果"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python脚本+企业微信通知实验结果 | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://server.kezhi.tech:8361/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kezhi's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">94</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">54</span></a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a></li><li class="menu-item menu-item-gallery"><a href="/gallery/" rel="section"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a></li><li class="menu-item menu-item-anime"><a href="/bangumis/" rel="section"><i class="fa fa-tv fa-fw"></i>anime</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7"><span class="nav-text">进程监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorboard-%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="nav-text">Tensorboard 数据提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5"><span class="nav-text">企业微信机器人通知</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhao@163.com" title="E-Mail → mailto:yuzhao@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+      
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=Yrta9qQDj8isri1_KNjhT7WenyEDA1dzZcv9bkzWhMw"></script>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://uptime.kezhi.tech/status/web" title="https:&#x2F;&#x2F;uptime.kezhi.tech&#x2F;status&#x2F;web" rel="noopener" target="_blank">网站监控</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/4d54863.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python脚本+企业微信通知实验结果 | Kezhi's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python脚本+企业微信通知实验结果
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-07 17:13:39" itemprop="dateCreated datePublished" datetime="2023-12-07T17:13:39+08:00">2023-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tips/" itemprop="url" rel="index"><span itemprop="name">Tips</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/4d54863.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/4d54863.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>深度学习的实验通常都需要跑很久，如果没有主动推送的手段，那么就会出现以下两种情况：
+- 过一段时间检查一下实验结果，无法专心干别的事情。 -
+撇下不管，实验跑g了也不知道，跑完了也不知道。</p>
+<p>为解决以上问题，就需要给实验程序加上监控进程，在实验结束后进行通知并发送实验结果。本文的脚本主要包含三部分内容：进程监控，tensorboard
+数据提取，企业微信机器人通知。</p>
+<p><img src="https://download.kezhi.tech/img/202312071711241.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<span id="more"></span>
+<h2 id="进程监控">进程监控</h2>
+<p>通常来说，实验放在后台跑会比较安全，不会因为<code>terminal</code>关闭而停止，放后台跑的命令为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup your_command &gt;log_name.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>进程监控的作用有两个：</p>
+<ul>
+<li>当实验异常结束时及时通知</li>
+<li>当实验正常结束时通知结果</li>
+</ul>
+<p>实现起来比较简单，只要监控进程是否结束就行，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> utils.wechat_bot <span class="keyword">import</span> research_bot</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_num</span>(<span class="params">key_words=<span class="string">&quot;&quot;</span></span>):</span><br><span class="line">    num_process = <span class="built_in">int</span>(os.popen(<span class="string">f&quot;ps -ef |grep -v grep|grep <span class="subst">&#123;key_words&#125;</span>|wc -l&quot;</span>).read())</span><br><span class="line">    <span class="keyword">return</span> num_process</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> process_num() == <span class="number">0</span>:</span><br><span class="line">        now = datetime.datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">        send_report_text(<span class="string">&quot;实验结束，正在分析结果...&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    time.sleep(<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># do something</span></span><br></pre></td></tr></table></figure>
+<h2 id="tensorboard-数据提取">Tensorboard 数据提取</h2>
+<p>深度学习的学习过程数据通常由 <code>tensorboard</code>
+记录到日志文件中，使用 <code>tensorboard</code>
+可以很方便的查看训练数据，但这也降低了对训练数据进行其他操作的便捷性。下面这个脚本可以用来提取
+<code>tensorboard</code> 产生的日志数据，并将其写入到 <code>excel</code>
+文件中 。</p>
+<p>使用时只需调用 <code>tb_to_excel</code> 函数即可，输入格式为：</p>
+<ul>
+<li>path_list：字符串构成的列表，每一项为一个日志的路径，如
+<code>['logs/0','logs/1']</code></li>
+<li>excel_path：导出的 <code>excel</code> 路径，如
+<code>'export.xlsx'</code></li>
+<li>one_sheet(default: False)：是否将所有数据合并到一个 excel sheet
+中</li>
+</ul>
+<p>执行结果：path_list 中的日志文件导出到目标 excel 文件中，path_list
+中的每一项对应 excel 文件中的每个 sheet。若
+<code>on_sheet=True</code>，则所有数据将通过 <code>pd.concat</code>
+合并到一个 sheet中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> tensorboard.backend.event_processing <span class="keyword">import</span> event_accumulator</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Dict</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_data</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = event_accumulator.EventAccumulator(path)</span><br><span class="line">    tb_data.Reload()</span><br><span class="line">    <span class="keyword">return</span> tb_data</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_df</span>(<span class="params">tb_data: event_accumulator.EventAccumulator</span>):</span><br><span class="line">    keys = tb_data.scalars.Keys()</span><br><span class="line">    df = pd.DataFrame(columns=keys)</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> keys:</span><br><span class="line">        data = tb_data.scalars.Items(key)</span><br><span class="line">        df[key] = pd.Series([item.value <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;step&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;step&#x27;</span>] = pd.Series([item.step <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;wall_time&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">            df[<span class="string">&#x27;wall_time&#x27;</span>] = pd.Series([item.wall_time <span class="keyword">for</span> item <span class="keyword">in</span> data])</span><br><span class="line"></span><br><span class="line">    order = [<span class="string">&#x27;step&#x27;</span>, <span class="string">&#x27;wall_time&#x27;</span>] + keys</span><br><span class="line">    df = df[order]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_tb_df</span>(<span class="params">path</span>):</span><br><span class="line">    tb_data = get_tb_data(path)</span><br><span class="line">    df = tb_to_df(tb_data)</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_all_data</span>(<span class="params">path_list:<span class="built_in">list</span></span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, pd.DataFrame]:</span><br><span class="line">    data_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> filepath <span class="keyword">in</span> path_list:</span><br><span class="line">        fn = filepath.split(<span class="string">&#x27;/&#x27;</span>)[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(filepath):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;读取并处理：&quot;</span>, filepath)</span><br><span class="line">            sheet_name = fn</span><br><span class="line">            df = get_tb_df(filepath)</span><br><span class="line">            data_dict[sheet_name] = df</span><br><span class="line">    <span class="keyword">return</span> data_dict</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">df_to_excel</span>(<span class="params">df_dict, path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="keyword">if</span> one_sheet:</span><br><span class="line">        df_all = pd.DataFrame()</span><br><span class="line">        <span class="keyword">for</span> df <span class="keyword">in</span> df_dict.values():</span><br><span class="line">            df_all = pd.concat([df_all, df], ignore_index=<span class="literal">True</span>)</span><br><span class="line">        df_all.to_excel(path, index=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">with</span> pd.ExcelWriter(path) <span class="keyword">as</span> writer:</span><br><span class="line">            <span class="keyword">for</span> sheet_name, df <span class="keyword">in</span> df_dict.items():</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;写入表：&quot;</span>, sheet_name)</span><br><span class="line">                df.to_excel(writer, sheet_name, index=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tb_to_excel</span>(<span class="params">path_list, excel_path, one_sheet=<span class="literal">False</span></span>):</span><br><span class="line">    df_dict = extract_all_data(path_list)</span><br><span class="line">    df_to_excel(df_dict, excel_path, one_sheet)</span><br></pre></td></tr></table></figure>
+<h2 id="企业微信机器人通知">企业微信机器人通知</h2>
+<p>主动推送有很多方式可以选择，我个人之前了解过的包括但不限于：</p>
+<ul>
+<li>SMTP 发送邮件</li>
+<li>Server 酱之类的 Push 服务</li>
+<li>QQ 机器人</li>
+<li>微信机器人</li>
+<li>企业微信应用</li>
+<li>企业微信群机器人</li>
+</ul>
+<p>这些方式各有其优缺点。实验结果推送的需求为：</p>
+<ul>
+<li>实时性好：发送后能立即接受并通知</li>
+<li>无响应：只需单向通知，无需设置回复</li>
+</ul>
+<p>因此，在衡量了上述需求，以及考虑实现的便捷性，选用企业微信群机器人来作为信息推送的方式。</p>
+<p>首先，创建一个企业微信群机器人：</p>
+<ol type="1">
+<li>创建一个企业微信群聊（&gt;=3人即可）</li>
+<li>把无关的人都踢了</li>
+<li>添加一个群机器人</li>
+<li>查看机器人信息，在<code>Webhook</code>地址中找到<code>key</code>值并记录</li>
+</ol>
+<p>然后把<code>key</code>填入下面脚本中即可使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib3.util.retry <span class="keyword">import</span> Retry</span><br><span class="line"><span class="keyword">from</span> requests.adapters <span class="keyword">import</span> HTTPAdapter</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SLEEP_INTERVAL = <span class="number">0.1</span> <span class="comment"># sleep time between retries</span></span><br><span class="line">MAX_RETRIES = <span class="number">1</span> <span class="comment"># Number of times to retry a request</span></span><br><span class="line"></span><br><span class="line">retries=Retry(</span><br><span class="line">    total=MAX_RETRIES,</span><br><span class="line">    backoff_factor=SLEEP_INTERVAL,</span><br><span class="line">    status_forcelist=[<span class="number">403</span>, <span class="number">500</span>, <span class="number">502</span>, <span class="number">503</span>, <span class="number">504</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">default_headers=&#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client = requests.Session()</span><br><span class="line">client.mount(<span class="string">&quot;http://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.mount(<span class="string">&quot;https://&quot;</span>, HTTPAdapter(max_retries=retries))</span><br><span class="line">client.headers=default_headers</span><br><span class="line"></span><br><span class="line">BotList = &#123;</span><br><span class="line">    <span class="string">&quot;实验小助手&quot;</span>:<span class="string">&quot;XXX&quot;</span> <span class="comment"># 这里填群聊机器人key</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bot</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, key</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self._base_url = <span class="string">&quot;https://qyapi.weixin.qq.com/cgi-bin/webhook/send&quot;</span></span><br><span class="line">        self._key = key</span><br><span class="line">        self._url = <span class="string">f&quot;<span class="subst">&#123;self._base_url&#125;</span>?key=<span class="subst">&#123;self._key&#125;</span>&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_msg</span>(<span class="params">self, msg</span>):</span><br><span class="line">        response = client.post(self._url, json=msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_text</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">            <span class="string">&quot;text&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_image</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(image_path, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># encode an image to base64</span></span><br><span class="line">            image = f.read()</span><br><span class="line">            base64_bytes = <span class="built_in">str</span>(base64.b64encode(image))[<span class="number">2</span>:-<span class="number">1</span>]</span><br><span class="line">            md5 = hashlib.md5(image).hexdigest()</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;image&quot;</span>,</span><br><span class="line">            <span class="string">&quot;image&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;base64&quot;</span>: base64_bytes,</span><br><span class="line">                <span class="string">&quot;md5&quot;</span>: md5</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_markdown</span>(<span class="params">self, content</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">            <span class="string">&quot;markdown&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_news</span>(<span class="params">self, articles</span>):</span><br><span class="line">        msg = &#123;</span><br><span class="line">            <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;news&quot;</span>,</span><br><span class="line">            <span class="string">&quot;news&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;articles&quot;</span>: articles</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        self.send_msg(msg)</span><br><span class="line"></span><br><span class="line">research_bot = Bot(BotList[<span class="string">&quot;实验小助手&quot;</span>])</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    research_bot.send_text(<span class="string">&quot;Hello I&#x27;m your research assistant&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.kezhi.tech/4d54863.html" title="Python脚本+企业微信通知实验结果">https://www.kezhi.tech/4d54863.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Script/" rel="tag"><i class="fa fa-tag"></i> Script</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/80e25821.html" rel="prev" title="高斯分布熵的推导">
+                  <i class="fa fa-angle-left"></i> 高斯分布熵的推导
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">229k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:28</span>
+  </span>
+</div>
+<div class="busuanzi-count" style="display: inline">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file"></i>
+      </span>
+      <span class="page-pv" title="文章访问量">
+        <span id="busuanzi_value_page_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://server.kezhi.tech:8361/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":{"placeholder":"Welcome to comment"},"emoji":["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba"],"meta":["nick","mail","link"],"requiredMeta":["nick","mail"],"wordLimit":0,"login":"enable","pageSize":10,"dark":false,"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/4d54863.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
