@@ -49,15 +49,11 @@
     <link href="https://www.kezhi.tech/80e25821.html"/>
     <id>https://www.kezhi.tech/80e25821.html</id>
     <published>2023-12-05T08:56:58.000Z</published>
-    <updated>2023-12-07T09:13:25.280Z</updated>
+    <updated>2023-12-07T09:29:20.693Z</updated>
     
     
-    <summary type="html">&lt;p&gt;一元高斯分布熵的推导： &lt;span class=&quot;math display&quot;&gt;&#92;[
-&#92;begin{equation}
-p(x) = &#92;frac{1}{&#92;sqrt{2&#92;pi&#92;sigma^2}}e^{-&#92;frac{(x-&#92;mu)^2}{2&#92;sigma}}
-&#92;end{equation}
-&#92;]&lt;/span&gt;
-&lt;img src=&quot;https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp&quot; alt=&quot;113646456_p0&quot; style=&quot;width:33%;&quot; /&gt;&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;本文主要进行了一元高斯分布熵的推导：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp&quot; alt=&quot;113646456_p0&quot; style=&quot;width:33%;&quot; /&gt;&lt;/p&gt;</summary>
     
     
     

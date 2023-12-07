@@ -8646,13 +8646,14 @@ src="https://download.kezhi.tech/img/20200623012410.png?x-oss-process=style/webp
   <entry>
     <title>高斯分布熵的推导</title>
     <url>/80e25821.html</url>
-    <content><![CDATA[<p>一元高斯分布熵的推导： <span class="math display">\[
+    <content><![CDATA[<p>本文主要进行了一元高斯分布熵的推导：</p>
+<p><img src="https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp" alt="113646456_p0" style="width:33%;" /></p>
+<span id="more"></span>
+<p><span class="math display">\[
 \begin{equation}
 p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma}}
 \end{equation}
-\]</span>
-<img src="https://download.kezhi.tech/img/202312051655209.jpg?x-oss-process=style/webp" alt="113646456_p0" style="width:33%;" /></p>
-<span id="more"></span>
+\]</span></p>
 <p><span class="math display">\[
 \begin{align}
 H(x) &amp; = -\int p(x) \ln p(x) \mathrm{d}x \notag \\
