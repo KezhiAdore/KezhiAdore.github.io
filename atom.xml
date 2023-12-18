@@ -6,7 +6,7 @@
   <link href="https://www.kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-12-07T09:18:12.494Z</updated>
+  <updated>2023-12-18T11:20:46.231Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Policy Optimization</title>
+    <link href="https://www.kezhi.tech/309dbe23.html"/>
+    <id>https://www.kezhi.tech/309dbe23.html</id>
+    <published>2023-12-12T03:44:21.000Z</published>
+    <updated>2023-12-18T11:20:46.231Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本文主要对基于策略优化定理的强化学习算法及相关变体进行一个梳理和总结。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202312181919546.jpg?x-oss-process=style/webp&quot; style=&quot;width:66%;&quot; /&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    
+    
+    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    
+    <category term="Policy Optimization" scheme="https://www.kezhi.tech/tags/Policy-Optimization/"/>
+    
+  </entry>
   
   <entry>
     <title>Python脚本+企业微信通知实验结果</title>

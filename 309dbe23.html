@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_logosc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_logosc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_logosc/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon_logosc/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/green/pace-theme-flash.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.kezhi.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":"auto","version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要对基于策略优化定理的强化学习算法及相关变体进行一个梳理和总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Policy Optimization">
+<meta property="og:url" content="https://www.kezhi.tech/309dbe23.html">
+<meta property="og:site_name" content="Kezhi&#39;s Blog">
+<meta property="og:description" content="本文主要对基于策略优化定理的强化学习算法及相关变体进行一个梳理和总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://download.kezhi.tech/img/202312181919546.jpg?x-oss-process=style/webp">
+<meta property="og:image" content="https://download.kezhi.tech/img/202312181717935.png">
+<meta property="article:published_time" content="2023-12-12T03:44:21.000Z">
+<meta property="article:modified_time" content="2023-12-18T11:20:46.231Z">
+<meta property="article:author" content="Yu Zhao">
+<meta property="article:tag" content="Reinforcement Learning">
+<meta property="article:tag" content="Policy Optimization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://download.kezhi.tech/img/202312181919546.jpg?x-oss-process=style/webp">
+
+
+<link rel="canonical" href="https://www.kezhi.tech/309dbe23.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.kezhi.tech/309dbe23.html","path":"309dbe23.html","title":"Policy Optimization"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Policy Optimization | Kezhi's Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://server.kezhi.tech:8361/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style><link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kezhi's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">95</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">55</span></a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言板</a></li><li class="menu-item menu-item-gallery"><a href="/gallery/" rel="section"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a></li><li class="menu-item menu-item-anime"><a href="/bangumis/" rel="section"><i class="fa fa-tv fa-fw"></i>anime</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#approximately-optimal-approximate-reinforcement-learning"><span class="nav-text">Approximately
+Optimal Approximate Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trpo"><span class="nav-text">TRPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ppo"><span class="nav-text">PPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#impala"><span class="nav-text">IMPALA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-trace-target"><span class="nav-text">V-trace Target</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#off-policy-trpo"><span class="nav-text">Off-Policy TRPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#off-policy-ppo"><span class="nav-text">Off-Policy PPO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#behavior-ppo"><span class="nav-text">Behavior PPO</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu Zhao"
+      src="/images/%E5%B0%8F%E5%9F%8B.jpg">
+  <p class="site-author-name" itemprop="name">Yu Zhao</p>
+  <div class="site-description" itemprop="description">知识因被记录而产生价值</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KezhiAdore" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KezhiAdore" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yuzhao@163.com" title="E-Mail → mailto:yuzhao@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+      
+      
+      
+      
+      <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=Yrta9qQDj8isri1_KNjhT7WenyEDA1dzZcv9bkzWhMw"></script>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://gwyxjtu.github.io/" title="https:&#x2F;&#x2F;gwyxjtu.github.io&#x2F;" rel="noopener" target="_blank">果果的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="/collection/" title="&#x2F;collection&#x2F;">于小鸡的收藏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="/linux-command/" title="&#x2F;linux-command&#x2F;">Linux命令查询</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.foreverblog.cn/go.html" title="https:&#x2F;&#x2F;www.foreverblog.cn&#x2F;go.html" rel="noopener" target="_blank">虫洞</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://uptime.kezhi.tech/status/web" title="https:&#x2F;&#x2F;uptime.kezhi.tech&#x2F;status&#x2F;web" rel="noopener" target="_blank">网站监控</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.kezhi.tech/309dbe23.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%B0%8F%E5%9F%8B.jpg">
+      <meta itemprop="name" content="Yu Zhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kezhi's Blog">
+      <meta itemprop="description" content="知识因被记录而产生价值">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Policy Optimization | Kezhi's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Policy Optimization
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-12 11:44:21" itemprop="dateCreated datePublished" datetime="2023-12-12T11:44:21+08:00">2023-12-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-18 19:20:46" itemprop="dateModified" datetime="2023-12-18T19:20:46+08:00">2023-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Research/" itemprop="url" rel="index"><span itemprop="name">Research</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/309dbe23.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/309dbe23.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文主要对基于策略优化定理的强化学习算法及相关变体进行一个梳理和总结。</p>
+<p><img src="https://download.kezhi.tech/img/202312181919546.jpg?x-oss-process=style/webp" style="width:66%;" /></p>
+<span id="more"></span>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>一个马尔可夫决策过程（Markov decision process, MDP）可以由五元组
+<span
+class="math inline">\(&lt;\mathcal{S},\mathcal{A},\mathcal{R},\mathcal{T},\gamma,\rho_0&gt;\)</span>
+定义，其中：</p>
+<ul>
+<li><span class="math inline">\(\mathcal{S}\)</span>
+表示状态空间，是由状态构成的集合</li>
+<li><span class="math inline">\(\mathcal{A}\)</span>
+表示动作空间，是由动作构成的集合</li>
+<li><span
+class="math inline">\(\mathcal{R}:\mathcal{S}\times\mathcal{A}\rightarrow
+\mathbb{R}\)</span> 表示奖励函数，<span
+class="math inline">\(\mathcal{R} (s,a)\)</span> 表示在状态 <span
+class="math inline">\(s\)</span> 下执行动作 <span
+class="math inline">\(a\)</span> 获得的奖励</li>
+<li><span class="math inline">\(\mathcal{T}:
+\mathcal{S}\times\mathcal{A}\times\mathcal{S}\rightarrow[0,1]\)</span>
+表示状态转移概率函数，<span
+class="math inline">\(\mathcal{T}(s&#39;|s,a)\)</span> 表示在状态 <span
+class="math inline">\(s\)</span> 下执行动作 <span
+class="math inline">\(a\)</span> 到达状态<span
+class="math inline">\(s&#39;\)</span> 的概率</li>
+<li><span class="math inline">\(\gamma\)</span> 表示折扣因子</li>
+<li><span
+class="math inline">\(\rho_0:\mathcal{S}\rightarrow[0,1]\)</span>
+表示状态初始分布</li>
+</ul>
+<p>Agent 的决策过程由一个随机策略 <span
+class="math inline">\(\pi:\mathcal{S}\times\mathcal{A}\rightarrow[0,1]\)</span>
+表示，<span class="math inline">\(\pi(a|s)\)</span> 表示 agent 在状态
+<span class="math inline">\(s\)</span> 下选择动作 <span
+class="math inline">\(a\)</span> 的概率。基于策略 <span
+class="math inline">\(\pi\)</span> 可以定义出状态价值函数： <span
+class="math display">\[
+\begin{equation} \label{v}
+V_\pi(s)=\mathbb{E}\left[\sum_{t=0}^\infty
+\gamma^t\mathcal{R}(s_t,a_t)|\pi,s\right]
+\end{equation}
+\]</span> 状态动作价值函数： <span class="math display">\[
+\begin{equation}    \label{q}
+Q_\pi(s,a) =
+\mathcal{R}(s,a)+\gamma\mathbb{E}_{s&#39;\sim\mathcal{T}(\cdot|s,a)}[V_\pi(s&#39;)]
+\end{equation}
+\]</span></p>
+<p>优势函数： <span class="math display">\[
+\begin{equation}    \label{adv}
+A_\pi(s,a) = Q_\pi(s,a)-V_\pi(s)
+\end{equation}
+\]</span> Agent 的优化目标通常为最大化在初始状态分布上的折扣汇报，即：
+<span class="math display">\[
+\begin{equation} \label{eta}
+\eta(\pi) = \mathbb{E}_{s\sim\rho_0}[V_\pi(s)]
+\end{equation}
+\]</span> 状态的折扣访问频率表示为： <span class="math display">\[
+\begin{equation}    \label{rho-pi}
+\rho_\pi(s)=(P(s_0=s)+\gamma P(s_1=s)+\gamma^2 P(s_2=s)+...)
+\end{equation}
+\]</span></p>
+<p>策略梯度定理： <span class="math display">\[
+\begin{equation} \label{policy-gradient}
+\nabla \eta(\pi) = \sum_{s,a}\rho_\pi(s)\nabla \pi(a|s)Q_\pi(s,a)
+\end{equation}
+\]</span></p>
+<h2
+id="approximately-optimal-approximate-reinforcement-learning">Approximately
+Optimal Approximate Reinforcement Learning</h2>
+<p>Kakade, S. &amp; Langford, J. Approximately Optimal Approximate
+Reinforcement Learning. in <em>Proceedings of the Nineteenth
+International Conference on Machine Learning</em> 267–274 (Morgan
+Kaufmann Publishers Inc., 2002).</p>
+<p>本文提出了三个想要回答的问题：</p>
+<ol type="1">
+<li>是否存在性能度量可以保证每一步更新都有提升？</li>
+<li>验证某个更新提升该性能度量有多么困难？</li>
+<li>在一定合理的次数的策略更新后，策略性能能达到什么样的水平？</li>
+</ol>
+<p>考虑如下保守策略更新规则： <span class="math display">\[
+\begin{equation}
+\pi_{new}(a|s)=(1-\alpha)\pi(a|s)+\alpha\pi&#39;(a|s)
+\end{equation}
+\]</span> 其中，<span
+class="math inline">\(\alpha\in[0,1]\)</span>，如果要在 <span
+class="math inline">\(\alpha=1\)</span> 时保证策略提升，那么 <span
+class="math inline">\(\pi&#39;\)</span> 需要在每个状态下都采取比 <span
+class="math inline">\(\pi\)</span> 更好的动作。考虑 <span
+class="math inline">\(0&lt;\alpha &lt;1\)</span> 时，策略提升只需要
+<span class="math inline">\(\pi&#39;\)</span>
+在大部分而非全部状态选择更好的动作。定义策略优势 <span
+class="math inline">\(\mathbb{A}_{\pi,\rho_0}(\pi&#39;)\)</span> 为
+<span class="math display">\[
+\mathbb{A}_{\pi,\rho_0}(\pi&#39;)=\mathbb{E}_{s\sim\rho_\pi}\left[\mathbb{E}_{a\sim\pi&#39;(\cdot|s)}[A_\pi(s,a)]\right]
+\]</span> 该策略优势函数衡量了在状态初始分布为 <span
+class="math inline">\(\rho_0\)</span>，行动策略为 <span
+class="math inline">\(\pi\)</span> 时，<span
+class="math inline">\(\pi&#39;\)</span> 选择具有更大优势动作的程度。对于
+<span class="math inline">\(\alpha=0\)</span> 时，显然有 <span
+class="math inline">\(\frac{\part \eta}{\part
+\alpha}\big|_{\alpha=0}=\frac{1}{1-\gamma}\mathbb{A}_{\pi,\rho_0}\)</span></p>
+<p>to be continue......</p>
+<h2 id="trpo">TRPO</h2>
+<p>Schulman, J., Levine, S., Moritz, P., Jordan, M. &amp; Abbeel, P.
+Trust region policy optimization. in <em>Proceedings of the 32nd
+International Conference on International Conference on Machine Learning
+- Volume 37</em> 1889–1897 (JMLR.org, 2015).</p>
+<p>策略优势定理： <span class="math display">\[
+\begin{equation} \label{policy-improve}
+\eta(\tilde\pi)=\eta(\pi)+\mathbb{E}_{s_0\sim\rho_0,a\sim\tilde\pi(\cdot|s),s&#39;\sim\mathcal{T}(\cdot|s,a)}\left[\sum_{t=1}^{\infty}\gamma^tA_\pi(s_t,a_t)\right]
+\end{equation}
+\]</span> 证明如下（为方便书写，省略期望下标中的 <span
+class="math inline">\(s_0\sim\rho_0,s&#39;\sim\mathcal{T}(\cdot|s,a)\)</span>，<span
+class="math inline">\(a\sim\pi(\cdot|s)\)</span> 简写为 <span
+class="math inline">\(a\sim\pi\)</span>）： <span
+class="math display">\[
+\begin{align}   \label{proof-policy-improve}
+&amp;\mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^tA_\pi(s_t,a_t)\right]\\    \notag
+&amp;=\mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^t\left[Q_\pi(s_t,a_t)-V_\pi(s_t)\right]\right]\\   \notag
+&amp;=
+\mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^t\left[r_t+\gamma
+V_\pi(s_{t+1})-V_\pi(s_t)\right]\right]\\   \notag
+&amp;= \mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^t
+r_t\right]+\mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^{t+1}
+V_\pi(s_{t+1})\right]-\mathbb{E}_{a\sim\tilde\pi}\left[\sum_{t=0}^{\infty}\gamma^t
+V_\pi(s_t)\right]\\  \notag
+&amp;=\eta(\tilde\pi)-\mathbb{E}_{a\sim\tilde\pi}[V_\pi(s_0)]\\ \notag
+&amp;=\eta(\tilde\pi)-\eta(\pi)
+\end{align}
+\]</span></p>
+<p>根据式 <span class="math inline">\(\ref{rho-pi}\)</span> ，式 <span
+class="math inline">\(\ref{policy-improve}\)</span>
+表明也可以写为以下形式： <span class="math display">\[
+\begin{equation}    \label{policy-improve-2}
+\eta(\tilde\pi)=\eta(\pi)+\sum_s\rho_{\tilde\pi}(s)\sum_a\tilde\pi(a|s)A_\pi(s,a)
+\end{equation}
+\]</span> 根据式 <span
+class="math inline">\(\ref{policy-improve-2}\)</span>，如果对于每一个状态
+<span class="math inline">\(s\)</span>，使 <span
+class="math inline">\(\sum_a\tilde\pi(a|s)A_\pi(s,a)\geq
+0\)</span>，那么就保证了新策略是比旧策略好的。然而，式 <span
+class="math inline">\(\ref{policy-improve-2}\)</span> 对于 <span
+class="math inline">\(\rho_{\tilde\pi}\)</span>
+的依赖导致在实际优化过程中无法直接计算，由此，考虑下面对 <span
+class="math inline">\(\eta\)</span> 的局部估计： <span
+class="math display">\[
+\begin{equation} \label{surrogate-improve}
+L_\pi(\tilde\pi)
+=\eta(\pi)+\sum_s\rho_{\pi}(s)\sum_a\tilde\pi(a|s)A_\pi(s,a)
+\end{equation}
+\]</span> <span class="math inline">\(L_\pi(\tilde\pi)\)</span> 和 <span
+class="math inline">\(\eta(\tilde\pi)\)</span> 唯一的区别在于把 <span
+class="math inline">\(\rho_{\tilde\pi}\)</span> 换为了 <span
+class="math inline">\(\rho_{\pi}\)</span>，接下来对 <span
+class="math inline">\(L_\pi(\tilde\pi)\)</span>
+进行分析。若有一参数化的策略<span
+class="math inline">\(\pi_\theta\)</span> 且对 <span
+class="math inline">\(\theta\)</span> 可微，则有： <span
+class="math display">\[
+L_{\pi_{\theta_0}}(\pi_{\theta_0})=\eta(\pi_{\theta_0})\\
+\nabla_\theta
+L_{\pi_{\theta_0}}(\pi_{\theta})\big|_{\theta=\theta_0}=\nabla_\theta\eta(\pi_{\theta})\big|_{\theta=\theta_0}
+\]</span> 因此，如果 <span class="math inline">\(\pi\)</span>
+更新的足够小，则提升 <span class="math inline">\(L_\pi\)</span> 也会提升
+<span class="math inline">\(\eta\)</span>，考虑如下策略更新： <span
+class="math display">\[
+\tilde\pi(a|s)=(1-\alpha)\pi(a|s)+\alpha\pi&#39;(a|s)
+\]</span> 其中，<span
+class="math inline">\(\pi&#39;=\arg\max_{\pi&#39;}L_\pi(\tilde\pi)\)</span>，从而有（证明见
+<a
+target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~pabbeel/cs287-fa09/readings/KakadeLangford-icml2002.pdf"
+title="Approximately Optimal Approximate Reinforcement Learning">(Kakade
+&amp; Langford, 2002)</a>）： <span class="math display">\[
+\eta(\tilde\pi)\geq
+L_{\pi}(\tilde\pi)-\frac{2\epsilon\gamma}{(1-\gamma(1-\alpha))(1-\gamma)}\alpha^2
+\]</span> 其中 <span class="math inline">\(\epsilon =
+\max_s|\mathbb{E}_{a\sim\tilde\pi(\cdot|s)}A_\pi(s,a)|\)</span></p>
+<p>当 <span class="math inline">\(\alpha\)</span> 足够小的时候则有：
+<span class="math display">\[
+\begin{equation} \label{surrogate-bound}
+\eta(\tilde\pi)\geq
+L_{\pi}(\tilde\pi)-\frac{2\epsilon\gamma}{(1-\gamma)^2}\alpha^2
+\end{equation}
+\]</span> 令 <span class="math inline">\(\alpha =
+D_{TV}^\max(\pi,\tilde\pi)\)</span>，<span
+class="math inline">\(\epsilon = \max_s\max_aA_\pi(s,a)\)</span>，则式
+<span class="math inline">\(\ref{surrogate-bound}\)</span>
+依然成立，证明见 <a href="trpo">(Schulman et al., 2015)</a>。考虑到
+<span class="math inline">\(D_{TV}(p||q)^2\leq
+D_{KL}(p||q)\)</span>，则有： <span class="math display">\[
+\begin{equation} \label{}
+\eta(\tilde\pi)\geq L_{\pi}(\tilde\pi)-CD_{KL}^\max(\pi,\tilde\pi)
+\end{equation}
+\]</span> 令 <span class="math inline">\(M_i(\pi) =
+L_{\pi_i}(\pi)-CD_{KL}^\max(\pi,\tilde\pi)\)</span>，则有： <span
+class="math display">\[
+M_i(\pi_i)=\eta(\pi_i)\\
+M_i(\pi_{i+1})\leq \eta(\pi_{i+1})\\
+M_i(\pi_{i+1})-M_i(\pi_i)\leq \eta(\pi_{i+1})-\eta(\pi_i)
+\]</span> 因此，如果最大化 <span
+class="math inline">\(M_i(\pi)\)</span>，则 <span
+class="math inline">\(\eta(\pi)\)</span>
+也会随之不断提升，对于参数化的策略 <span
+class="math inline">\(\pi_\theta\)</span>，策略优化问题便可以转换为下面的优化问题：
+<span class="math display">\[
+\max_\theta\left[L_{\theta_{old}}(\theta)-CD_{KL}^\max(\theta_{old},\theta)\right]
+\]</span> 转换为信赖域约束的形式为： <span class="math display">\[
+\begin{align}
+&amp; \max_\theta L_{\theta_{old}}(\theta)\\
+&amp;s.t.   D_{KL}^\max(\theta_{old},\theta)\leq \delta
+\end{align}
+\]</span></p>
+<p>上述优化稳定的约束很难进行技术员，可以使用平均 <span
+class="math inline">\(KL\)</span> 散度作为对该约束启发式的估计： <span
+class="math display">\[
+\bar D^\rho_{KL}(\theta_{1},\theta_2) =
+\mathbb{E}_{s\sim\rho}[D_{KL}(\pi_{\theta_1}(\cdot|s)||\pi_{\theta_2}(\cdot|s))]
+\]</span> 在采样估计时有如下形式： <span class="math display">\[
+\begin{align}
+&amp;\max_\theta \sum_s \rho_{\theta_{old}}\sum_a
+\pi_\theta(a|s)A_{\theta_{old}}(s,a)\\
+&amp;s.t. \bar D^{\rho_{\theta_{old}}}_{KL}(\theta_{old},\theta)\leq
+\delta
+\end{align}
+\]</span> 使用重要性采样（Importance Samping）可得： <span
+class="math display">\[
+\sum_a \pi_\theta(a|s)A_{\theta_{old}}(s,a) =
+\mathbb{E}_{a\sim\pi_{\theta_{old}}}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}A_{\theta_{old}}(s,a)\right]
+\]</span> 从而得到TRPO的优化目标： <span class="math display">\[
+\begin{align}
+&amp;\max_\theta \mathbb{E}_{s\sim
+\rho_{\theta_{old}},\  a\sim\pi_{\theta_{old}}}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}A_{\theta_{old}}(s,a)\right]\\
+&amp;s.t.\mathbb{E}_{s\sim
+\rho_{\theta_{old}}}[D_{KL}(\pi_{\theta_{old}}(\cdot|s)||\pi_\theta(\cdot|s))]
+\end{align}
+\]</span></p>
+<h2 id="ppo">PPO</h2>
+<p>Schulman, J., Wolski, F., Dhariwal, P., Radford, A. &amp; Klimov, O.
+Proximal Policy Optimization Algorithms. Preprint at
+http://arxiv.org/abs/1707.06347 (2017).</p>
+<p>TRPO的优化目标为： <span class="math display">\[
+\begin{align}
+&amp;\max_\theta \mathbb{E}_{s\sim
+\rho_{\theta_{old}},\  a\sim\pi_{\theta_{old}}}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}A_{\theta_{old}}(s,a)\right]\\
+&amp;s.t.\mathbb{E}_{s\sim
+\rho_{\theta_{old}}}[D_{KL}(\pi_{\theta_{old}}(\cdot|s)||\pi_\theta(\cdot|s))]
+\end{align}
+\]</span> 将约束转换为一个惩罚项，即可将该优化问题转换为无约束优化 <span
+class="math display">\[
+\max_\theta \mathbb{E}_{s\sim
+\rho_{\theta_{old}},\  a\sim\pi_{\theta_{old}}}\left[\frac{\pi_\theta(a|s)}{\pi_{\theta_{old}}(a|s)}A_{\theta_{old}}(s,a)-\beta
+D_{KL}(\pi_{\theta_{old}}(\cdot|s)||\pi_\theta(\cdot|s))\right]
+\]</span> 令 <span
+class="math inline">\(r_t(\theta)=\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}\)</span>，则<span
+class="math inline">\(r_t(\theta_{old})=1\)</span>，TRPO的近似优化目标为：
+<span class="math display">\[
+L^{CPI}(\theta) =\mathbb{E}_t\left[r_t(\theta)\hat A_t\right]
+\]</span> 在无约束的情况下，<span class="math inline">\(L^{CPI}\)</span>
+可能会导致一次优化产生很大的策略更新，为此，约束 <span
+class="math inline">\(r_t(\theta)\)</span> 在 1 附近来限制优化幅度：
+<span class="math display">\[
+L^{CLIP}(\theta) =\mathbb{E}_t\left[\min(r_t(\theta)\hat
+A_t,\text{clip}(r_t(\theta),1-\epsilon,1+\epsilon)\hat A_t\right]
+\]</span></p>
+<h2 id="impala">IMPALA</h2>
+<p>Espeholt, L. <em>et al.</em> IMPALA: Scalable Distributed Deep-RL
+with Importance Weighted Actor-Learner Architectures. in <em>Proceedings
+of the 35th International Conference on Machine Learning</em> 1407–1416
+(PMLR, 2018).</p>
+<p>IMPALA 采用异步收集经验的方式来提高采样效率，使用 V-trace
+解决采样策略和更新策略不一致的问题。</p>
+<p><img src="https://download.kezhi.tech/img/202312181717935.png" /></p>
+<h3 id="v-trace-target">V-trace Target</h3>
+<p><span class="math display">\[
+v_t=V(s_t)+\sum_{\tau=t}^{t+n-1}\gamma^{\tau-t}(\prod_{i=t}^{\tau-1}c_i)\delta_\tau
+V
+\]</span></p>
+<p>其中，<span class="math inline">\(\delta_\tau
+V=\rho_\tau(r_\tau+\gamma V(s_{\tau+1})-V(s_\tau))\)</span>，<span
+class="math inline">\(\rho_\tau=\min(\bar\rho,\frac{\pi(a_\tau|s_\tau)}{\mu(a_\tau|s_\tau)})\)</span>，<span
+class="math inline">\(c_i=\min(\bar
+c,\frac{\pi(a_i|s_i)}{\mu(a_i|s_i)})\)</span>，规定当<span
+class="math inline">\(t=\tau\)</span>时，<span
+class="math inline">\(\prod_{i=t}^{\tau-1}c_i=1\)</span>，此外<span
+class="math inline">\(\bar\rho\geq\bar c\)</span>，当<span
+class="math inline">\(\pi=\mu\)</span>时，<span
+class="math inline">\(\rho_\tau=1\)</span>且<span
+class="math inline">\(c_i=1\)</span>，则上式转变为 on-policy n-step
+<span class="math inline">\(TD\)</span>的形式： <span
+class="math display">\[
+\begin{align} \notag
+v_t
+&amp;=V(s_t)+\sum_{\tau=t}^{t+n-1}\gamma^{\tau-t}(r_\tau+\gamma
+V(s_{\tau+1})-V(s_\tau)) \notag\\
+&amp;=\sum_{\tau=t}^{t+n-1}\gamma^{\tau-t}r_\tau+\gamma^nV(s_{t+n})
+\end{align}
+\]</span></p>
+<p>V-trace 可以由如下递归形式计算： <span class="math display">\[
+v_t=V(s_t)+\delta_tV+\gamma c_t(v_{t+1}-V(s_{t+1}))
+\]</span> 可以考虑给 <span class="math inline">\(c_i\)</span>
+的计算中加入类似 <span class="math inline">\(Retrace(\lambda)\)</span>
+的折扣系数 <span class="math inline">\(\lambda\in[0,1]\)</span>，得到
+<span class="math inline">\(c_i=\lambda\min(\bar
+c,\frac{\pi(a_i|s_i)}{\mu(a_i|s_i)})\)</span>，在 on-policy 场景下，当
+<span class="math inline">\(n=\infty\)</span> 时，V-trace 变为 <span
+class="math inline">\(TD(\lambda)\)</span></p>
+<h2 id="off-policy-trpo">Off-Policy TRPO</h2>
+<p>Meng, W., Zheng, Q., Shi, Y. &amp; Pan, G. An Off-Policy Trust Region
+Policy Optimization Method With Monotonic Improvement Guarantee for Deep
+Reinforcement Learning. <em>IEEE Transactions on Neural Networks and
+Learning Systems</em> <strong>33</strong>, 2223–2235 (2022).</p>
+<p>策略优势定理为<span
+class="math inline">\(\ref{policy-improve}\)</span>，在 TRPO 中使用其
+on-policy 的近似形式 <span
+class="math inline">\(\ref{surrogate-improve}\)</span>，两者的区别在于
+TRPO 使用了近似状态分布 <span class="math inline">\(\rho_\pi\)</span>
+替代策略分布 <span
+class="math inline">\(\rho_{\tilde\pi}\)</span>。Off-policy TRPO
+更进一步，采用行为策略 <span class="math inline">\(\mu\)</span>
+来进行经验收集更新策略 <span
+class="math inline">\(\pi\)</span>，从而提出新的近似形式： <span
+class="math display">\[
+\begin{equation}
+L_{\pi,\mu}(\tilde\pi)=\eta(\pi)+\sum_s\rho_\mu(s)\sum_a\tilde\pi(a|s)A_\pi(s,a)
+\end{equation}
+\]</span> 由该近似推出 off-policy 的优化目标： <span
+class="math display">\[
+\begin{align} \notag
+&amp; \max_\theta
+\mathbb{E}_{s\sim\rho_\mu,a\sim\mu}\left[\frac{\pi_\theta(a|s)}{\mu(a|s)}A_{\pi_{\theta_{old}}}(s,a)\right]\\
+&amp; s.t.\bar
+D_{KL}^{\rho_\mu,sqrt}(\mu,\theta_{old})D_{KL}^{\rho_\mu,sqrt}(\theta_{old},\theta)+D_{KL}^{\rho_\mu}(\theta_{old},\theta)\leq
+\delta
+\end{align}
+\]</span> 详细证明见<a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9334437"
+title="An Off-Policy Trust Region Policy Optimization Method With Monotonic Improvement Guarantee for Deep Reinforcement Learning">(Meng
+et al., 2022)</a></p>
+<h2 id="off-policy-ppo">Off-Policy PPO</h2>
+<p>Meng, W., Zheng, Q., Pan, G. &amp; Yin, Y. Off-Policy Proximal Policy
+Optimization. <em>Proceedings of the AAAI Conference on Artificial
+Intelligence</em> <strong>37</strong>, 9162–9170 (2023).</p>
+<p>off-policy trpo 的 clip 近似形式，使用如下 clipped surrogate object：
+<span class="math display">\[
+L^{\text{CLIP}}_{\text{Off-Policy}}=\mathbb{E}_{s\sim\rho_\mu,a\sim\mu}\left[\min[r(s,a)A_{\pi_{old}}(s,a),
+\text{clip}(r(s,a),l(s,a),h(s,a)),\hat A_{\pi_{old}}(s,a)]\right]
+\]</span> 其中 <span
+class="math inline">\(r(s,a)=\frac{\pi(a|s)}{\mu(a|s)}\)</span>，<span
+class="math inline">\(l(s,a)=\frac{\pi_{old}(a|s)}{\mu(a|s)}(1-\epsilon)\)</span>，<span
+class="math inline">\(h(s,a)=\frac{\pi_{old}(a|s)}{\mu(a|s)}(1+\epsilon)\)</span></p>
+<p>详见<a target="_blank" rel="noopener" href="https://ojs.aaai.org/index.php/AAAI/article/view/26099"
+title="Off-Policy Proximal Policy Optimization">(Meng et al.,
+2023)</a></p>
+<h2 id="behavior-ppo">Behavior PPO</h2>
+<p>Zhuang, Z., Lei, K., Liu, J., Wang, D. &amp; Guo, Y. Behavior
+Proximal Policy Optimization. in <em>Proceedings of the eleventh
+International Conference on Learning Representation</em> (2023).</p>
+<blockquote>
+<p>在线同策略算法天然可以解决离线强化学习问题</p>
+</blockquote>
+<p>该工作的架构为 BC（行为克隆）+RL（强化学习），RL部分通过保守更新和
+<span class="math inline">\(\epsilon\)</span> 来实现在 offline dataset
+上的多步更新。</p>
+<p>根据 <span class="math inline">\(\ref{policy-improve}\)</span>
+策略优势可写为： <span class="math display">\[
+J_\Delta
+(\pi,\hat\pi_\beta)=\mathbb{E}_{s\sim\rho_{\pi},a\sim\pi(\cdot|s)}[A_{\hat\pi_\beta}(s,a)]
+\]</span> 其中，<span class="math inline">\(\hat \pi_\beta\)</span>
+为行为策略（behavior policy，可以从 dataset 通过行为克隆学习）</p>
+<p>提出其在 offline dataset <span
+class="math inline">\(\mathcal{D}\)</span> 上的近似形式为： <span
+class="math display">\[
+\hat J_\Delta
+(\pi,\hat\pi_\beta)=\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi(\cdot|s)}[A_{\hat\pi_\beta}(s,a)]
+\]</span> 两者之间的差距为： <span class="math display">\[
+\begin{align} \notag
+J_\Delta (\pi,\hat\pi_\beta)\geq &amp;\hat J_\Delta
+(\pi,\hat\pi_\beta)\\ \notag
+&amp;-4\gamma\mathbb{A}_{\hat\pi_\beta}\cdot\max_s
+D_{TV}(\pi||\hat\pi_\beta)[s]\cdot\mathbb{E}_{s\sim\rho_{\hat\pi_\beta}(\cdot)}[D_{TV}(\pi||\hat\pi_\beta)[s]]
+\\ \label{behavior-theorem-1}
+&amp;-2\gamma\mathbb{A}_{\hat\pi_\beta}\cdot\max_s
+D_{TV}(\pi||\hat\pi_\beta)[s]\cdot\mathbb{E}_{s\sim\rho_{\mathcal{D}}(\cdot)}[1-\hat\pi_\beta(a|s)]
+\end{align}
+\]</span> 其中，<span
+class="math inline">\(\mathbb{A}_{\hat\pi_\beta}=\max_{s,a}|A_{\hat\pi_\beta}(s,a)|\)</span>，详细证明见<a
+target="_blank" rel="noopener" href="https://openreview.net/forum?id=3c13LptpIph"
+title="Behavior Proximal Policy Optimization">(Zhuang et al.,
+2023)</a>。由式 <span
+class="math inline">\(\ref{behavior-theorem-1}\)</span>
+可知，要保证优化目标 <span class="math inline">\(J_\Delta
+(\pi,\hat\pi_\beta)\)</span> 不下降，应该在最大化 <span
+class="math inline">\(\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi(\cdot|s)}[A_{\hat\pi_\beta}(s,a)]\)</span>
+的同时最小化 <span class="math inline">\(\max_s
+D_{TV}(\pi||\hat\pi_\beta)[s]\)</span>，由此便得到了从 <span
+class="math inline">\(\hat\pi_\beta\)</span> 出发的单步更新。</p>
+<p>考虑在离线数据集 <span class="math inline">\(\mathcal{D}\)</span>
+上进行多步更新，即在 <span class="math inline">\(\pi_k\)</span>
+的基础上优化得到 <span class="math inline">\(\pi_{k+1}\)</span>
+，根据策略优势定理，优化目标为： <span class="math display">\[
+J_\Delta(\pi,\pi_k)=\mathbb{E}_{s\sim\rho_{\pi},a\sim\pi(\cdot|s)}[A_{\pi_k}(s,a)]
+\]</span></p>
+<p>考虑状态从离线数据集 <span class="math inline">\(\mathcal{D}\)</span>
+进行采样的如下近似形式： <span class="math display">\[
+\hat
+J_\Delta(\pi,\pi_k)=\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi(\cdot|s)}[A_{\pi_k}(s,a)]
+\]</span> 两者之间的差距为： <span class="math display">\[
+\begin{align} \notag
+J_\Delta(\pi,\pi_k)\geq&amp;\hat J_\Delta(\pi,\pi_k)\\  \notag
+&amp;-4\gamma\mathbb{A}_{k}\cdot\max_s
+D_{TV}(\pi||\pi_k)[s]\cdot\mathbb{E}_{s\sim\rho_{\pi_k}(\cdot)}[D_{TV}(\pi||\pi_k)[s]]
+\\ \notag
+&amp;-4\gamma\mathbb{A}_{k}\cdot\max_s
+D_{TV}(\pi||\pi_k)[s]\cdot\mathbb{E}_{s\sim\rho_{\hat\pi_\beta}(\cdot)}[D_{TV}(\pi_k||\hat\pi_\beta)[s]]
+\\ \label{behavior-theorem-2}
+&amp;-2\gamma\mathbb{A}_{\pi_k}\cdot\max_s
+D_{TV}(\pi||\pi_k)[s]\cdot\mathbb{E}_{s\sim\rho_{\mathcal{D}}(\cdot)}[1-\hat\pi_\beta(a|s)]
+\end{align}
+\]</span> 其中，<span
+class="math inline">\(\mathbb{A}_{\pi_k}=\max_{s,a}|A_{\pi_k}(s,a)|\)</span>，详细证明见<a
+target="_blank" rel="noopener" href="https://openreview.net/forum?id=3c13LptpIph"
+title="Behavior Proximal Policy Optimization">(Zhuang et al.,
+2023)</a>。由式 <span
+class="math inline">\(\ref{behavior-theorem-2}\)</span> 可知，若保证
+<span class="math inline">\(J_\Delta(\pi,\pi_k)\)</span>
+非降，则需要在最大化 <span
+class="math inline">\(\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi(\cdot|s)}[A_{\pi_k}(s,a)]\)</span>
+的同时最小化 <span class="math inline">\(\mathbb{A}_{k}\cdot\max_s
+D_{TV}(\pi||\pi_k)[s]\)</span>，从而实现在离线数据集 <span
+class="math inline">\(\mathcal{D}\)</span> 上的多步更新。</p>
+<p>上述结论可写为： <span class="math display">\[
+\begin{align} \notag
+&amp;\max_\pi
+\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi(\cdot|s)}[A_{\pi_k}(s,a)]\\
+\notag
+&amp;s.t.\max_s D_{TV}(\pi||\pi_k)\leq \epsilon
+\end{align}
+\]</span> 经过一系列推导之后得到 clip 形式的无约束优化目标为： <span
+class="math display">\[
+L_k=\mathbb{E}_{s\sim\rho_{\mathcal{D}},a\sim\pi_k(\cdot|s)}\left[\min\left(\frac{\pi(a|s)}{\pi_k(a|s)}A_{\pi_k}(s,a),\text{clip}\left(\frac{\pi(a|s)}{\pi_k(a|s)},1-2\epsilon,
+1+2\epsilon\right)A_{\pi_k}(s,a)\right)\right]
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WeChatpay.png" alt="Yu Zhao 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/Alipay.png" alt="Yu Zhao 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Yu Zhao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.kezhi.tech/309dbe23.html" title="Policy Optimization">https://www.kezhi.tech/309dbe23.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Reinforcement-Learning/" rel="tag"><i class="fa fa-tag"></i> Reinforcement Learning</a>
+              <a href="/tags/Policy-Optimization/" rel="tag"><i class="fa fa-tag"></i> Policy Optimization</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/4d54863.html" rel="prev" title="Python脚本+企业微信通知实验结果">
+                  <i class="fa fa-angle-left"></i> Python脚本+企业微信通知实验结果
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20004764号 </a>
+      <img src="/images/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yu Zhao</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">243k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:41</span>
+  </span>
+</div>
+<div class="busuanzi-count" style="display: inline">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file"></i>
+      </span>
+      <span class="page-pv" title="文章访问量">
+        <span id="busuanzi_value_page_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://server.kezhi.tech:8361/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":{"placeholder":"Welcome to comment"},"emoji":["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba"],"meta":["nick","mail","link"],"requiredMeta":["nick","mail"],"wordLimit":0,"login":"enable","pageSize":10,"dark":"auto","el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/309dbe23.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/ Relative","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":270},"mobile":{"show":false},"react":{"opacityDefault":0.7}});</script></body>
+</html>
