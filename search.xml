@@ -8802,7 +8802,7 @@ class="math inline">\(\rho_0\)</span>，行动策略为 <span
 class="math inline">\(\pi\)</span> 时，<span
 class="math inline">\(\pi&#39;\)</span> 选择具有更大优势动作的程度。对于
 <span class="math inline">\(\alpha=0\)</span> 时，显然有 <span
-class="math inline">\(\frac{\part \eta}{\part
+class="math inline">\(\frac{\partial \eta}{\partial
 \alpha}\big|_{\alpha=0}=\frac{1}{1-\gamma}\mathbb{A}_{\pi,\rho_0}\)</span></p>
 <p>to be continue......</p>
 <h2 id="trpo">TRPO</h2>
