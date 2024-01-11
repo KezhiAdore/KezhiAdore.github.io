@@ -3021,7 +3021,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 100% 100%;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .sidebar {
   background: #fff;
@@ -3047,7 +3047,7 @@ body {
 }
 .site-brand-container {
   background: #009393;
-  opacity: 0.8;
+  opacity: 1;
   border-radius: 20px 20px 0 0;
 }
 .popup {
