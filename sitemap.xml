@@ -633,13 +633,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/docker/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -648,6 +641,13 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/Reinforcement-Learning/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/docker/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -766,6 +766,13 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/Script/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/Cython/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -774,13 +781,6 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/Numpy/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Script/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -822,13 +822,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Schedule/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -837,6 +830,13 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/branch-and-bound/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/Schedule/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -906,7 +906,21 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/</loc>
+    <loc>https://www.kezhi.tech/tags/%E6%8B%8D%E6%91%84/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E7%94%B5%E5%BD%B1/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -941,21 +955,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E6%8B%8D%E6%91%84/</loc>
+    <loc>https://www.kezhi.tech/tags/Automation/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/</loc>
+    <loc>https://www.kezhi.tech/tags/Q-Learning/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -983,20 +990,6 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/Automation/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/Q-Learning/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1012,6 +1005,20 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E5%8D%8F%E4%BD%9C/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1039,21 +1046,7 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/</loc>
+    <loc>https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1061,6 +1054,13 @@
   
   <url>
     <loc>https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1235,6 +1235,13 @@
   </url>
   
   <url>
+    <loc>https://www.kezhi.tech/tags/Math/</loc>
+    <lastmod>2024-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.kezhi.tech/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1262,13 +1269,6 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://www.kezhi.tech/tags/Math/</loc>
-    <lastmod>2024-02-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
@@ -1286,14 +1286,14 @@
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/categories/Tips/</loc>
+    <loc>https://www.kezhi.tech/categories/Research/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.kezhi.tech/categories/Research/</loc>
+    <loc>https://www.kezhi.tech/categories/Tips/</loc>
     <lastmod>2024-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
