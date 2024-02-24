@@ -30,7 +30,7 @@
 <meta property="og:description" content="图像配准即对于内容大致相同，但在角度，大小或是其他几何位置上有所偏差的两张或几张图像进行坐标变换。使得这些图像矫正到同一规整的大小，角度，坐标上。 图像配准对于图像拼接，制作全景图像，进行环境识别等方面有很大的用处。其原理简单，使用矩阵运算转换速度也很快，在选取映射点合适的情况下，配准效果很好。具体的转化方法如下：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-14T09:04:38.000Z">
-<meta property="article:modified_time" content="2023-11-10T02:14:51.204Z">
+<meta property="article:modified_time" content="2024-02-24T12:17:21.472Z">
 <meta property="article:author" content="Yu Zhao">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="数字图像">
@@ -59,8 +59,8 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-<link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
-<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style><link rel="alternate" href="/atom.xml" title="Kezhi's Blog" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -541,7 +541,7 @@ if(canvas.getContext){
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-10 10:14:51" itemprop="dateModified" datetime="2023-11-10T10:14:51+08:00">2023-11-10</time>
+      <time title="修改时间：2024-02-24 20:17:21" itemprop="dateModified" datetime="2024-02-24T20:17:21+08:00">2024-02-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -648,13 +648,13 @@ class="math inline">\(H\)</span></li>
 <p>例如：以图像A为模板配准图像B <img
 src="https://download.kezhi.tech/img/20200429001311.jpg?x-oss-process=style/webp"
 alt="Image A" /> <img
-src="https://download.kezhi.tech/img/Image%20B.jpg?x-oss-process=style/webp/watermark"
+src="https://download.kezhi.tech/img/Image%20B.jpg?x-oss-process=style/webp"
 alt="图像B" /> 在其中选取七个点，分布为:</p>
 <blockquote>
 <p>这里采用画图进行选点，画图显示的坐标与(x,y)坐标是正好相反的，在进行坐标记录时需要注意。</p>
 </blockquote>
 <p><img
-src="https://download.kezhi.tech/img/Image%20A(选点).jpg?x-oss-process=style/webp/watermark"
+src="https://download.kezhi.tech/img/Image%20A(选点).jpg?x-oss-process=style/webp"
 alt="选点（图像A）" /> <span class="math display">\[
 P=\begin{bmatrix}1448&amp;1694&amp;1756&amp;383&amp;2290&amp;2035&amp;2150\\1308&amp;1198&amp;2744&amp;2516&amp;933&amp;2693&amp;1968\\1&amp;1&amp;1&amp;1&amp;1&amp;1&amp;1\end{bmatrix}
 \]</span></p>
@@ -664,7 +664,7 @@ Q=\begin{bmatrix}1042&amp;1252&amp;1708&amp;323&amp;1761&amp;1966&amp;1890\\1077
 <p>求出的转换矩阵： <span class="math display">\[
 H=QP^{-1}=\begin{bmatrix}0.9668&amp;0.2565&amp;693.0275\\-0.2570&amp;0.9671&amp;184.1373\\0.0000&amp;0.0000&amp;1.0000\end{bmatrix}
 \]</span> 通过转换矩阵对图像B进行转换，最终得到的结果如下: <img
-src="https://download.kezhi.tech/img/result.jpg?x-oss-process=style/webp/watermark"
+src="https://download.kezhi.tech/img/result.jpg?x-oss-process=style/webp"
 alt="配准后的图像B" /></p>
 <p>源码:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="comment">#np.set_printoptions(threshold=np.inf)</span></span><br><span class="line"></span><br><span class="line">imgA=cv.imread(<span class="string">&quot;Image A.jpg?x-oss-process=style/webp&quot;</span>)</span><br><span class="line">imgB=cv.imread(<span class="string">&quot;Image B.jpg?x-oss-process=style/webp&quot;</span>)</span><br><span class="line">point_A=np.array([[<span class="number">1448</span>,<span class="number">1694</span>,<span class="number">1756</span>,<span class="number">383</span>,<span class="number">2290</span>,<span class="number">2035</span>,<span class="number">2150</span>],[<span class="number">1308</span>,<span class="number">1198</span>,<span class="number">2744</span>,<span class="number">2516</span>,<span class="number">933</span>,<span class="number">2693</span>,<span class="number">1968</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">point_B=np.array([[<span class="number">1042</span>,<span class="number">1252</span>,<span class="number">1708</span>,<span class="number">323</span>,<span class="number">1761</span>,<span class="number">1966</span>,<span class="number">1890</span>],[<span class="number">1077</span>,<span class="number">907</span>,<span class="number">2387</span>,<span class="number">2519</span>,<span class="number">498</span>,<span class="number">2265</span>,<span class="number">1535</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">H=np.dot(point_B,np.linalg.pinv(point_A))</span><br><span class="line"><span class="built_in">print</span>(H)</span><br><span class="line">shape_A=imgA.shape</span><br><span class="line">shape_B=imgB.shape</span><br><span class="line">result,mistake=np.zeros(shape_A),np.zeros(shape_A)</span><br><span class="line">result=result.astype(np.uint8)</span><br><span class="line">mistake=mistake.astype(np.uint8)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(shape_A[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(shape_A[<span class="number">1</span>]):</span><br><span class="line">        address=np.dot(H,np.array([i,j,<span class="number">1</span>]))</span><br><span class="line">        address=address.astype(np.<span class="built_in">int</span>)</span><br><span class="line">        <span class="keyword">if</span> address[<span class="number">0</span>]&gt;<span class="number">0</span> <span class="keyword">and</span> address[<span class="number">0</span>]&lt;shape_B[<span class="number">0</span>] <span class="keyword">and</span> address[<span class="number">1</span>]&gt;<span class="number">0</span> <span class="keyword">and</span> address[<span class="number">1</span>]&lt;shape_B[<span class="number">1</span>]:</span><br><span class="line">            result[i][j]=imgB[address[<span class="number">0</span>]][address[<span class="number">1</span>]]</span><br><span class="line">            mistake[i][j]=imgA[i][j]-result[i][j]</span><br><span class="line">cv.namedWindow(<span class="string">&quot;test&quot;</span>,cv.WINDOW_NORMAL)</span><br><span class="line">cv.imshow(<span class="string">&quot;test&quot;</span>,mistake)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line">cv.imwrite(<span class="string">&quot;result.jpg?x-oss-process=style/webp&quot;</span>,result)</span><br><span class="line">cv.imwrite(<span class="string">&quot;mistake.jpg?x-oss-process=style/webp&quot;</span>,mistake)</span><br></pre></td></tr></table></figure>
