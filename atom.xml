@@ -6,7 +6,7 @@
   <link href="https://www.kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://www.kezhi.tech/"/>
-  <updated>2023-12-18T11:23:46.640Z</updated>
+  <updated>2024-03-07T12:57:59.416Z</updated>
   <id>https://www.kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一篇论文完成后</title>
+    <link href="https://www.kezhi.tech/437bf60f.html"/>
+    <id>https://www.kezhi.tech/437bf60f.html</id>
+    <published>2024-03-07T12:57:59.000Z</published>
+    <updated>2024-03-07T12:57:59.416Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;前段时间，我完成了第一篇论文，经历了从选题 -&amp;gt; 实验 -&amp;gt; 结果分析
+-&amp;gt;
+论文的全过程。在此期间虽然走了一些弯路，但也对科研发文的方法论有了新的认识。本文将围绕该次发文过程，概述科研大体流程，并对其中的一些细节进行思考。为今后的科研发文以及想要发文章的朋友们提供参考。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;致谢：感谢在实验和论文撰写过程中给予我指导的老师以及与我探讨的朋友们。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202403072056399.jpg?x-oss-process=style/webp&quot; alt=&quot;放一只芙芙在这&quot; style=&quot;width:75%;&quot; /&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    
+    
+    <category term="research" scheme="https://www.kezhi.tech/tags/research/"/>
+    
+    <category term="总结" scheme="https://www.kezhi.tech/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Policy Optimization</title>
