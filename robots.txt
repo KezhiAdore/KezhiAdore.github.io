@@ -9,4 +9,4 @@ Disallow: /vendors/
 Disallow: /fancybox/
 Disallow: /yizhu.html
 
-Sitemap: https://www.kezhi.tech/sitemap.xml
+Sitemap: https://kezhi.tech/sitemap.xml

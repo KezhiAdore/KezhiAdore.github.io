@@ -3,11 +3,11 @@
   <title>Kezhi&#39;s Blog</title>
   
   
-  <link href="https://www.kezhi.tech/atom.xml" rel="self"/>
+  <link href="https://kezhi.tech/atom.xml" rel="self"/>
   
-  <link href="https://www.kezhi.tech/"/>
+  <link href="https://kezhi.tech/"/>
   <updated>2024-03-07T13:21:16.024Z</updated>
-  <id>https://www.kezhi.tech/</id>
+  <id>https://kezhi.tech/</id>
   
   <author>
     <name>Yu Zhao</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>第一篇论文完成后</title>
-    <link href="https://www.kezhi.tech/437bf60f.html"/>
-    <id>https://www.kezhi.tech/437bf60f.html</id>
+    <link href="https://kezhi.tech/437bf60f.html"/>
+    <id>https://kezhi.tech/437bf60f.html</id>
     <published>2024-03-07T12:57:59.000Z</published>
     <updated>2024-03-07T13:21:16.024Z</updated>
     
@@ -34,19 +34,19 @@
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="research" scheme="https://www.kezhi.tech/tags/research/"/>
+    <category term="research" scheme="https://kezhi.tech/tags/research/"/>
     
-    <category term="总结" scheme="https://www.kezhi.tech/tags/%E6%80%BB%E7%BB%93/"/>
+    <category term="总结" scheme="https://kezhi.tech/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>Policy Optimization</title>
-    <link href="https://www.kezhi.tech/309dbe23.html"/>
-    <id>https://www.kezhi.tech/309dbe23.html</id>
+    <link href="https://kezhi.tech/309dbe23.html"/>
+    <id>https://kezhi.tech/309dbe23.html</id>
     <published>2023-12-12T03:44:21.000Z</published>
     <updated>2023-12-18T11:23:46.640Z</updated>
     
@@ -56,19 +56,19 @@
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    <category term="Reinforcement Learning" scheme="https://kezhi.tech/tags/Reinforcement-Learning/"/>
     
-    <category term="Policy Optimization" scheme="https://www.kezhi.tech/tags/Policy-Optimization/"/>
+    <category term="Policy Optimization" scheme="https://kezhi.tech/tags/Policy-Optimization/"/>
     
   </entry>
   
   <entry>
     <title>Python脚本+企业微信通知实验结果</title>
-    <link href="https://www.kezhi.tech/4d54863.html"/>
-    <id>https://www.kezhi.tech/4d54863.html</id>
+    <link href="https://kezhi.tech/4d54863.html"/>
+    <id>https://kezhi.tech/4d54863.html</id>
     <published>2023-12-07T09:13:39.000Z</published>
     <updated>2023-12-07T09:18:12.494Z</updated>
     
@@ -84,19 +84,19 @@
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Script" scheme="https://www.kezhi.tech/tags/Script/"/>
+    <category term="Script" scheme="https://kezhi.tech/tags/Script/"/>
     
   </entry>
   
   <entry>
     <title>高斯分布熵的推导</title>
-    <link href="https://www.kezhi.tech/80e25821.html"/>
-    <id>https://www.kezhi.tech/80e25821.html</id>
+    <link href="https://kezhi.tech/80e25821.html"/>
+    <id>https://kezhi.tech/80e25821.html</id>
     <published>2023-12-05T08:56:58.000Z</published>
     <updated>2023-12-07T09:29:20.693Z</updated>
     
@@ -106,19 +106,19 @@
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Math" scheme="https://www.kezhi.tech/tags/Math/"/>
+    <category term="Math" scheme="https://kezhi.tech/tags/Math/"/>
     
   </entry>
   
   <entry>
     <title>电脑软件配置单</title>
-    <link href="https://www.kezhi.tech/f9af8ec4.html"/>
-    <id>https://www.kezhi.tech/f9af8ec4.html</id>
+    <link href="https://kezhi.tech/f9af8ec4.html"/>
+    <id>https://kezhi.tech/f9af8ec4.html</id>
     <published>2023-11-06T09:20:23.000Z</published>
-    <updated>2023-12-20T08:44:21.335Z</updated>
+    <updated>2024-03-14T03:14:06.941Z</updated>
     
     
     <summary type="html">&lt;p&gt;我过去经常帮身边的朋友指导电脑硬件配置。然而，对于个人电脑来说，如果胡乱装软件，或者用了不合适的软件，会让电脑的使用效率事倍功半。同时，在我个人拿到一台新电脑时，也需要根据我的习惯初始化配置很多软件到新电脑上。由此，便有了写一份软件配置清单的想法，一来可以给大家做一些软件推荐，二来我自己也留一份作为参考。&lt;/p&gt;
@@ -126,17 +126,17 @@
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="List" scheme="https://www.kezhi.tech/tags/List/"/>
+    <category term="List" scheme="https://kezhi.tech/tags/List/"/>
     
   </entry>
   
   <entry>
     <title>Docker-VNC桌面配置</title>
-    <link href="https://www.kezhi.tech/d97606bd.html"/>
-    <id>https://www.kezhi.tech/d97606bd.html</id>
+    <link href="https://kezhi.tech/d97606bd.html"/>
+    <id>https://kezhi.tech/d97606bd.html</id>
     <published>2023-11-03T13:40:24.000Z</published>
     <updated>2023-11-10T02:14:51.214Z</updated>
     
@@ -152,17 +152,17 @@ href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ub
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="docker" scheme="https://www.kezhi.tech/tags/docker/"/>
+    <category term="docker" scheme="https://kezhi.tech/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>DDPG算法中AC学习率设置对训练效果的影响</title>
-    <link href="https://www.kezhi.tech/46493a5d.html"/>
-    <id>https://www.kezhi.tech/46493a5d.html</id>
+    <link href="https://kezhi.tech/46493a5d.html"/>
+    <id>https://kezhi.tech/46493a5d.html</id>
     <published>2023-10-23T07:59:19.845Z</published>
     <updated>2023-12-07T09:24:25.408Z</updated>
     
@@ -172,19 +172,19 @@ href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ub
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="强化学习" scheme="https://www.kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    <category term="强化学习" scheme="https://kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    <category term="Reinforcement Learning" scheme="https://kezhi.tech/tags/Reinforcement-Learning/"/>
     
   </entry>
   
   <entry>
     <title>聚会互认问题小记</title>
-    <link href="https://www.kezhi.tech/244334e3.html"/>
-    <id>https://www.kezhi.tech/244334e3.html</id>
+    <link href="https://kezhi.tech/244334e3.html"/>
+    <id>https://kezhi.tech/244334e3.html</id>
     <published>2023-07-01T03:27:39.000Z</published>
     <updated>2023-11-10T02:16:20.216Z</updated>
     
@@ -194,17 +194,17 @@ href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ub
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="图论" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E8%AE%BA/"/>
+    <category term="图论" scheme="https://kezhi.tech/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>2023毕业快乐</title>
-    <link href="https://www.kezhi.tech/48e66169.html"/>
-    <id>https://www.kezhi.tech/48e66169.html</id>
+    <link href="https://kezhi.tech/48e66169.html"/>
+    <id>https://kezhi.tech/48e66169.html</id>
     <published>2023-06-13T02:43:44.000Z</published>
     <updated>2023-11-23T06:26:34.904Z</updated>
     
@@ -215,17 +215,17 @@ href=&quot;https://hub.docker.com/r/kezhiadore/ubuntu-vnc&quot;&gt;kezhiadore/ub
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="毕业" scheme="https://www.kezhi.tech/tags/%E6%AF%95%E4%B8%9A/"/>
+    <category term="毕业" scheme="https://kezhi.tech/tags/%E6%AF%95%E4%B8%9A/"/>
     
   </entry>
   
   <entry>
     <title>GITM:LLM和RL的一次交融</title>
-    <link href="https://www.kezhi.tech/b222cfe2.html"/>
-    <id>https://www.kezhi.tech/b222cfe2.html</id>
+    <link href="https://kezhi.tech/b222cfe2.html"/>
+    <id>https://kezhi.tech/b222cfe2.html</id>
     <published>2023-06-07T02:30:53.000Z</published>
     <updated>2023-11-10T02:16:20.211Z</updated>
     
@@ -239,21 +239,21 @@ src=&quot;https://download.kezhi.tech/img/202306041618232.png?x-oss-process=styl
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="GPT" scheme="https://www.kezhi.tech/tags/GPT/"/>
+    <category term="GPT" scheme="https://kezhi.tech/tags/GPT/"/>
     
-    <category term="RL" scheme="https://www.kezhi.tech/tags/RL/"/>
+    <category term="RL" scheme="https://kezhi.tech/tags/RL/"/>
     
-    <category term="Minecraft" scheme="https://www.kezhi.tech/tags/Minecraft/"/>
+    <category term="Minecraft" scheme="https://kezhi.tech/tags/Minecraft/"/>
     
   </entry>
   
   <entry>
     <title>强化学习中的Terminated 和 Truncated</title>
-    <link href="https://www.kezhi.tech/5be4b154.html"/>
-    <id>https://www.kezhi.tech/5be4b154.html</id>
+    <link href="https://kezhi.tech/5be4b154.html"/>
+    <id>https://kezhi.tech/5be4b154.html</id>
     <published>2023-05-24T13:25:19.000Z</published>
     <updated>2023-11-10T02:16:20.293Z</updated>
     
@@ -268,19 +268,19 @@ src=&quot;https://download.kezhi.tech/img/202306041618232.png?x-oss-process=styl
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    <category term="Reinforcement Learning" scheme="https://kezhi.tech/tags/Reinforcement-Learning/"/>
     
-    <category term="Q-Learning" scheme="https://www.kezhi.tech/tags/Q-Learning/"/>
+    <category term="Q-Learning" scheme="https://kezhi.tech/tags/Q-Learning/"/>
     
   </entry>
   
   <entry>
     <title>转折</title>
-    <link href="https://www.kezhi.tech/36e895f1.html"/>
-    <id>https://www.kezhi.tech/36e895f1.html</id>
+    <link href="https://kezhi.tech/36e895f1.html"/>
+    <id>https://kezhi.tech/36e895f1.html</id>
     <published>2023-05-16T18:29:39.000Z</published>
     <updated>2023-05-23T07:46:31.861Z</updated>
     
@@ -294,21 +294,21 @@ src=&quot;https://download.kezhi.tech/img/202306041618232.png?x-oss-process=styl
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="日记" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E8%AE%B0/"/>
+    <category term="日记" scheme="https://kezhi.tech/tags/%E6%97%A5%E8%AE%B0/"/>
     
-    <category term="心情" scheme="https://www.kezhi.tech/tags/%E5%BF%83%E6%83%85/"/>
+    <category term="心情" scheme="https://kezhi.tech/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
   <entry>
     <title>强化学习算法实现中的细节</title>
-    <link href="https://www.kezhi.tech/aaafe79.html"/>
-    <id>https://www.kezhi.tech/aaafe79.html</id>
+    <link href="https://kezhi.tech/aaafe79.html"/>
+    <id>https://kezhi.tech/aaafe79.html</id>
     <published>2023-03-06T02:44:18.000Z</published>
-    <updated>2023-11-10T02:14:51.204Z</updated>
+    <updated>2024-03-14T03:14:04.375Z</updated>
     
     
     <summary type="html">&lt;p&gt;强化学习在算法实现时需要非常注意细节，否则网络很难收敛或没有训练效果。本文主要记录我在实现各种强化学习算法时踩到的一些坑以及需要注意的细节，持续更新......&lt;/p&gt;
@@ -318,17 +318,17 @@ href=&quot;https://github.com/KezhiAdore/RL-Algorithm&quot;&gt;https://github.co
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    <category term="Reinforcement Learning" scheme="https://kezhi.tech/tags/Reinforcement-Learning/"/>
     
   </entry>
   
   <entry>
     <title>PyTorch中的CrossEntropyLoss与交叉熵计算不一致</title>
-    <link href="https://www.kezhi.tech/e295e676.html"/>
-    <id>https://www.kezhi.tech/e295e676.html</id>
+    <link href="https://kezhi.tech/e295e676.html"/>
+    <id>https://kezhi.tech/e295e676.html</id>
     <published>2023-03-04T05:58:17.000Z</published>
     <updated>2023-11-10T02:16:20.299Z</updated>
     
@@ -338,19 +338,19 @@ href=&quot;https://github.com/KezhiAdore/RL-Algorithm&quot;&gt;https://github.co
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="PyTorch" scheme="https://www.kezhi.tech/tags/PyTorch/"/>
+    <category term="PyTorch" scheme="https://kezhi.tech/tags/PyTorch/"/>
     
-    <category term="Deep Learning" scheme="https://www.kezhi.tech/tags/Deep-Learning/"/>
+    <category term="Deep Learning" scheme="https://kezhi.tech/tags/Deep-Learning/"/>
     
   </entry>
   
   <entry>
     <title>Vanilla Policy Gradient关于loss mean与sum的探讨</title>
-    <link href="https://www.kezhi.tech/b69f94c6.html"/>
-    <id>https://www.kezhi.tech/b69f94c6.html</id>
+    <link href="https://kezhi.tech/b69f94c6.html"/>
+    <id>https://kezhi.tech/b69f94c6.html</id>
     <published>2023-03-01T14:05:22.000Z</published>
     <updated>2023-11-10T02:16:20.299Z</updated>
     
@@ -365,21 +365,21 @@ Gradient在计算最终loss时求平均和求和对于网络训练的影响，�
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="Reinforcement Learning" scheme="https://www.kezhi.tech/tags/Reinforcement-Learning/"/>
+    <category term="Reinforcement Learning" scheme="https://kezhi.tech/tags/Reinforcement-Learning/"/>
     
-    <category term="Deep Learning" scheme="https://www.kezhi.tech/tags/Deep-Learning/"/>
+    <category term="Deep Learning" scheme="https://kezhi.tech/tags/Deep-Learning/"/>
     
-    <category term="Neural Network" scheme="https://www.kezhi.tech/tags/Neural-Network/"/>
+    <category term="Neural Network" scheme="https://kezhi.tech/tags/Neural-Network/"/>
     
   </entry>
   
   <entry>
     <title>Zotero插件推荐及下载</title>
-    <link href="https://www.kezhi.tech/b2344ef.html"/>
-    <id>https://www.kezhi.tech/b2344ef.html</id>
+    <link href="https://kezhi.tech/b2344ef.html"/>
+    <id>https://kezhi.tech/b2344ef.html</id>
     <published>2023-02-28T08:25:48.000Z</published>
     <updated>2023-11-10T02:16:20.301Z</updated>
     
@@ -396,21 +396,21 @@ Gradient在计算最终loss时求平均和求和对于网络训练的影响，�
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="Zotero" scheme="https://www.kezhi.tech/tags/Zotero/"/>
+    <category term="Zotero" scheme="https://kezhi.tech/tags/Zotero/"/>
     
-    <category term="插件" scheme="https://www.kezhi.tech/tags/%E6%8F%92%E4%BB%B6/"/>
+    <category term="插件" scheme="https://kezhi.tech/tags/%E6%8F%92%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>线性滤波与非线性滤波实验</title>
-    <link href="https://www.kezhi.tech/10ee70e7.html"/>
-    <id>https://www.kezhi.tech/10ee70e7.html</id>
+    <link href="https://kezhi.tech/10ee70e7.html"/>
+    <id>https://kezhi.tech/10ee70e7.html</id>
     <published>2022-11-29T09:15:13.000Z</published>
-    <updated>2023-11-10T02:16:20.213Z</updated>
+    <updated>2024-03-14T03:14:08.177Z</updated>
     
     
     <summary type="html">&lt;p&gt;本文围绕自由落体运动的估计，进行了线性滤波和非线性滤波的实验。下面这张图是源自西安交通大学蔡远利教授的《随即滤波与控制》课程。
@@ -424,21 +424,21 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Kalman Filter" scheme="https://www.kezhi.tech/tags/Kalman-Filter/"/>
+    <category term="Kalman Filter" scheme="https://kezhi.tech/tags/Kalman-Filter/"/>
     
-    <category term="Linear Filter" scheme="https://www.kezhi.tech/tags/Linear-Filter/"/>
+    <category term="Linear Filter" scheme="https://kezhi.tech/tags/Linear-Filter/"/>
     
-    <category term="Nonlinear Filter" scheme="https://www.kezhi.tech/tags/Nonlinear-Filter/"/>
+    <category term="Nonlinear Filter" scheme="https://kezhi.tech/tags/Nonlinear-Filter/"/>
     
   </entry>
   
   <entry>
     <title>王者荣耀目标检测--Yolov5实现</title>
-    <link href="https://www.kezhi.tech/86b4b2c0.html"/>
-    <id>https://www.kezhi.tech/86b4b2c0.html</id>
+    <link href="https://kezhi.tech/86b4b2c0.html"/>
+    <id>https://kezhi.tech/86b4b2c0.html</id>
     <published>2022-11-29T09:01:37.000Z</published>
     <updated>2023-11-10T02:16:20.214Z</updated>
     
@@ -449,19 +449,19 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Project" scheme="https://www.kezhi.tech/categories/Project/"/>
+    <category term="Project" scheme="https://kezhi.tech/categories/Project/"/>
     
     
-    <category term="Computer Vision" scheme="https://www.kezhi.tech/tags/Computer-Vision/"/>
+    <category term="Computer Vision" scheme="https://kezhi.tech/tags/Computer-Vision/"/>
     
-    <category term="Target Detection" scheme="https://www.kezhi.tech/tags/Target-Detection/"/>
+    <category term="Target Detection" scheme="https://kezhi.tech/tags/Target-Detection/"/>
     
   </entry>
   
   <entry>
     <title>XJTU System Optimization and Scheduling Final Report</title>
-    <link href="https://www.kezhi.tech/a7067052.html"/>
-    <id>https://www.kezhi.tech/a7067052.html</id>
+    <link href="https://kezhi.tech/a7067052.html"/>
+    <id>https://kezhi.tech/a7067052.html</id>
     <published>2022-11-29T08:39:37.000Z</published>
     <updated>2023-11-10T02:14:51.208Z</updated>
     
@@ -472,21 +472,21 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Optimal" scheme="https://www.kezhi.tech/tags/Optimal/"/>
+    <category term="Optimal" scheme="https://kezhi.tech/tags/Optimal/"/>
     
-    <category term="背包问题" scheme="https://www.kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+    <category term="背包问题" scheme="https://kezhi.tech/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     
-    <category term="branch-and-bound" scheme="https://www.kezhi.tech/tags/branch-and-bound/"/>
+    <category term="branch-and-bound" scheme="https://kezhi.tech/tags/branch-and-bound/"/>
     
   </entry>
   
   <entry>
     <title>XJTU System Optimization and Scheduling Midterm Report</title>
-    <link href="https://www.kezhi.tech/f95f8ff4.html"/>
-    <id>https://www.kezhi.tech/f95f8ff4.html</id>
+    <link href="https://kezhi.tech/f95f8ff4.html"/>
+    <id>https://kezhi.tech/f95f8ff4.html</id>
     <published>2022-11-29T08:31:55.000Z</published>
     <updated>2023-11-10T02:16:20.289Z</updated>
     
@@ -497,17 +497,17 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Optimal" scheme="https://www.kezhi.tech/tags/Optimal/"/>
+    <category term="Optimal" scheme="https://kezhi.tech/tags/Optimal/"/>
     
   </entry>
   
   <entry>
     <title>XJTU System Optimization and Scheduling Course Assignments</title>
-    <link href="https://www.kezhi.tech/7d0182be.html"/>
-    <id>https://www.kezhi.tech/7d0182be.html</id>
+    <link href="https://kezhi.tech/7d0182be.html"/>
+    <id>https://kezhi.tech/7d0182be.html</id>
     <published>2022-11-29T08:08:38.000Z</published>
     <updated>2023-11-10T02:16:20.293Z</updated>
     
@@ -517,19 +517,19 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Optimal" scheme="https://www.kezhi.tech/tags/Optimal/"/>
+    <category term="Optimal" scheme="https://kezhi.tech/tags/Optimal/"/>
     
-    <category term="Schedule" scheme="https://www.kezhi.tech/tags/Schedule/"/>
+    <category term="Schedule" scheme="https://kezhi.tech/tags/Schedule/"/>
     
   </entry>
   
   <entry>
     <title>程序中的命名与作用域</title>
-    <link href="https://www.kezhi.tech/48242c23.html"/>
-    <id>https://www.kezhi.tech/48242c23.html</id>
+    <link href="https://kezhi.tech/48242c23.html"/>
+    <id>https://kezhi.tech/48242c23.html</id>
     <published>2022-11-26T11:23:38.000Z</published>
     <updated>2023-11-10T02:16:20.216Z</updated>
     
@@ -539,17 +539,17 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="Programming" scheme="https://www.kezhi.tech/tags/Programming/"/>
+    <category term="Programming" scheme="https://kezhi.tech/tags/Programming/"/>
     
   </entry>
   
   <entry>
     <title>限制WSL内存使用</title>
-    <link href="https://www.kezhi.tech/a587561c.html"/>
-    <id>https://www.kezhi.tech/a587561c.html</id>
+    <link href="https://kezhi.tech/a587561c.html"/>
+    <id>https://kezhi.tech/a587561c.html</id>
     <published>2022-10-15T03:54:01.000Z</published>
     <updated>2022-10-25T06:53:01.872Z</updated>
     
@@ -558,17 +558,17 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="WSL" scheme="https://www.kezhi.tech/tags/WSL/"/>
+    <category term="WSL" scheme="https://kezhi.tech/tags/WSL/"/>
     
   </entry>
   
   <entry>
     <title>Pytorch网络构造Tips</title>
-    <link href="https://www.kezhi.tech/a7298e70.html"/>
-    <id>https://www.kezhi.tech/a7298e70.html</id>
+    <link href="https://kezhi.tech/a7298e70.html"/>
+    <id>https://kezhi.tech/a7298e70.html</id>
     <published>2022-09-26T09:25:50.000Z</published>
     <updated>2023-11-10T02:16:20.299Z</updated>
     
@@ -579,21 +579,21 @@ alt=&quot;Map of Control Theory&quot; /&gt;
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Neural Network" scheme="https://www.kezhi.tech/tags/Neural-Network/"/>
+    <category term="Pytorch" scheme="https://kezhi.tech/tags/Pytorch/"/>
     
-    <category term="Pytorch" scheme="https://www.kezhi.tech/tags/Pytorch/"/>
+    <category term="Neural Network" scheme="https://kezhi.tech/tags/Neural-Network/"/>
     
   </entry>
   
   <entry>
     <title>云南施甸二中支教小记</title>
-    <link href="https://www.kezhi.tech/ebd84d05.html"/>
-    <id>https://www.kezhi.tech/ebd84d05.html</id>
+    <link href="https://kezhi.tech/ebd84d05.html"/>
+    <id>https://kezhi.tech/ebd84d05.html</id>
     <published>2022-07-28T17:30:26.000Z</published>
     <updated>2023-11-10T02:14:51.212Z</updated>
     
@@ -610,21 +610,21 @@ alt=&quot;(摄影师: 蔡育倍)&quot; /&gt;
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
+    <category term="日常" scheme="https://kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
     
-    <category term="支教" scheme="https://www.kezhi.tech/tags/%E6%94%AF%E6%95%99/"/>
+    <category term="支教" scheme="https://kezhi.tech/tags/%E6%94%AF%E6%95%99/"/>
     
-    <category term="感悟" scheme="https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
+    <category term="感悟" scheme="https://kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
     
   </entry>
   
   <entry>
     <title>科研问题记录</title>
-    <link href="https://www.kezhi.tech/4efb358.html"/>
-    <id>https://www.kezhi.tech/4efb358.html</id>
+    <link href="https://kezhi.tech/4efb358.html"/>
+    <id>https://kezhi.tech/4efb358.html</id>
     <published>2022-07-19T18:00:14.000Z</published>
     <updated>2023-11-10T02:14:51.206Z</updated>
     
@@ -635,21 +635,21 @@ alt=&quot;(摄影师: 蔡育倍)&quot; /&gt;
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="强化学习" scheme="https://www.kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    <category term="强化学习" scheme="https://kezhi.tech/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="博弈论" scheme="https://www.kezhi.tech/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"/>
+    <category term="博弈论" scheme="https://kezhi.tech/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"/>
     
-    <category term="多智能体" scheme="https://www.kezhi.tech/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/"/>
+    <category term="多智能体" scheme="https://kezhi.tech/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/"/>
     
   </entry>
   
   <entry>
     <title>实数六大基本定理的相互证明</title>
-    <link href="https://www.kezhi.tech/24a1693.html"/>
-    <id>https://www.kezhi.tech/24a1693.html</id>
+    <link href="https://kezhi.tech/24a1693.html"/>
+    <id>https://kezhi.tech/24a1693.html</id>
     <published>2022-06-30T07:26:13.000Z</published>
     <updated>2023-11-10T02:14:51.208Z</updated>
     
@@ -670,21 +670,21 @@ src=&quot;https://download.kezhi.tech/img/202206301525923.jpg?x-oss-process=styl
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="实数" scheme="https://www.kezhi.tech/tags/%E5%AE%9E%E6%95%B0/"/>
+    <category term="实数" scheme="https://kezhi.tech/tags/%E5%AE%9E%E6%95%B0/"/>
     
-    <category term="证明" scheme="https://www.kezhi.tech/tags/%E8%AF%81%E6%98%8E/"/>
+    <category term="证明" scheme="https://kezhi.tech/tags/%E8%AF%81%E6%98%8E/"/>
     
-    <category term="数学分析" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
+    <category term="数学分析" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title>修改操作系统安装时间</title>
-    <link href="https://www.kezhi.tech/629d278e.html"/>
-    <id>https://www.kezhi.tech/629d278e.html</id>
+    <link href="https://kezhi.tech/629d278e.html"/>
+    <id>https://kezhi.tech/629d278e.html</id>
     <published>2022-06-23T11:52:49.000Z</published>
     <updated>2023-11-10T02:16:20.301Z</updated>
     
@@ -694,21 +694,21 @@ src=&quot;https://download.kezhi.tech/img/202206301525923.jpg?x-oss-process=styl
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="操作系统" scheme="https://www.kezhi.tech/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    <category term="操作系统" scheme="https://kezhi.tech/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-    <category term="安装时间" scheme="https://www.kezhi.tech/tags/%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/"/>
+    <category term="安装时间" scheme="https://kezhi.tech/tags/%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4/"/>
     
-    <category term="系统修改" scheme="https://www.kezhi.tech/tags/%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9/"/>
+    <category term="系统修改" scheme="https://kezhi.tech/tags/%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9/"/>
     
   </entry>
   
   <entry>
     <title>影片《字节跳动》创作阐述</title>
-    <link href="https://www.kezhi.tech/fa011f5e.html"/>
-    <id>https://www.kezhi.tech/fa011f5e.html</id>
+    <link href="https://kezhi.tech/fa011f5e.html"/>
+    <id>https://kezhi.tech/fa011f5e.html</id>
     <published>2022-06-07T08:25:29.000Z</published>
     <updated>2023-11-10T02:16:20.217Z</updated>
     
@@ -720,23 +720,23 @@ src=&quot;https://download.kezhi.tech/img/202206071619140.jpg?x-oss-process=styl
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="创作" scheme="https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
+    <category term="创作" scheme="https://kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
     
-    <category term="影视创作" scheme="https://www.kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
+    <category term="影视创作" scheme="https://kezhi.tech/tags/%E5%BD%B1%E8%A7%86%E5%88%9B%E4%BD%9C/"/>
     
-    <category term="微电影" scheme="https://www.kezhi.tech/tags/%E5%BE%AE%E7%94%B5%E5%BD%B1/"/>
+    <category term="微电影" scheme="https://kezhi.tech/tags/%E5%BE%AE%E7%94%B5%E5%BD%B1/"/>
     
-    <category term="协作" scheme="https://www.kezhi.tech/tags/%E5%8D%8F%E4%BD%9C/"/>
+    <category term="协作" scheme="https://kezhi.tech/tags/%E5%8D%8F%E4%BD%9C/"/>
     
   </entry>
   
   <entry>
     <title>关于影视创作</title>
-    <link href="https://www.kezhi.tech/624fe65f.html"/>
-    <id>https://www.kezhi.tech/624fe65f.html</id>
+    <link href="https://kezhi.tech/624fe65f.html"/>
+    <id>https://kezhi.tech/624fe65f.html</id>
     <published>2022-05-25T09:25:13.000Z</published>
     <updated>2022-07-28T16:24:21.804Z</updated>
     
@@ -751,23 +751,23 @@ src=&quot;https://download.kezhi.tech/img/202205251718490.webp&quot; /&gt;&lt;/p
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="感悟" scheme="https://www.kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
+    <category term="感悟" scheme="https://kezhi.tech/tags/%E6%84%9F%E6%82%9F/"/>
     
-    <category term="拍摄" scheme="https://www.kezhi.tech/tags/%E6%8B%8D%E6%91%84/"/>
+    <category term="拍摄" scheme="https://kezhi.tech/tags/%E6%8B%8D%E6%91%84/"/>
     
-    <category term="电影" scheme="https://www.kezhi.tech/tags/%E7%94%B5%E5%BD%B1/"/>
+    <category term="电影" scheme="https://kezhi.tech/tags/%E7%94%B5%E5%BD%B1/"/>
     
-    <category term="创作" scheme="https://www.kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
+    <category term="创作" scheme="https://kezhi.tech/tags/%E5%88%9B%E4%BD%9C/"/>
     
   </entry>
   
   <entry>
     <title>网站收藏</title>
-    <link href="https://www.kezhi.tech/16fab331.html"/>
-    <id>https://www.kezhi.tech/16fab331.html</id>
+    <link href="https://kezhi.tech/16fab331.html"/>
+    <id>https://kezhi.tech/16fab331.html</id>
     <published>2022-05-16T11:54:58.000Z</published>
     <updated>2022-07-28T16:20:34.222Z</updated>
     
@@ -777,43 +777,43 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
     
     
     
-    <category term="Collection" scheme="https://www.kezhi.tech/categories/Collection/"/>
+    <category term="Collection" scheme="https://kezhi.tech/categories/Collection/"/>
     
     
-    <category term="软件" scheme="https://www.kezhi.tech/tags/%E8%BD%AF%E4%BB%B6/"/>
+    <category term="软件" scheme="https://kezhi.tech/tags/%E8%BD%AF%E4%BB%B6/"/>
     
-    <category term="网站" scheme="https://www.kezhi.tech/tags/%E7%BD%91%E7%AB%99/"/>
+    <category term="网站" scheme="https://kezhi.tech/tags/%E7%BD%91%E7%AB%99/"/>
     
-    <category term="收藏" scheme="https://www.kezhi.tech/tags/%E6%94%B6%E8%97%8F/"/>
+    <category term="收藏" scheme="https://kezhi.tech/tags/%E6%94%B6%E8%97%8F/"/>
     
   </entry>
   
   <entry>
     <title>来选头像</title>
-    <link href="https://www.kezhi.tech/ca112d32.html"/>
-    <id>https://www.kezhi.tech/ca112d32.html</id>
+    <link href="https://kezhi.tech/ca112d32.html"/>
+    <id>https://kezhi.tech/ca112d32.html</id>
     <published>2022-05-11T07:52:09.000Z</published>
-    <updated>2022-07-28T16:20:44.635Z</updated>
+    <updated>2024-03-14T03:14:05.546Z</updated>
     
     
-    <summary type="html">&lt;iframe src=&quot;//www.kezhi.tech/avatar/&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;
+    <summary type="html">&lt;iframe src=&quot;//kezhi.tech/avatar/&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;
 &lt;/iframe&gt;</summary>
     
     
     
-    <category term="Collection" scheme="https://www.kezhi.tech/categories/Collection/"/>
+    <category term="Collection" scheme="https://kezhi.tech/categories/Collection/"/>
     
     
-    <category term="JavaScript" scheme="https://www.kezhi.tech/tags/JavaScript/"/>
+    <category term="JavaScript" scheme="https://kezhi.tech/tags/JavaScript/"/>
     
   </entry>
   
   <entry>
     <title>于小鸡历险记（一）</title>
-    <link href="https://www.kezhi.tech/32347def.html"/>
-    <id>https://www.kezhi.tech/32347def.html</id>
+    <link href="https://kezhi.tech/32347def.html"/>
+    <id>https://kezhi.tech/32347def.html</id>
     <published>2022-05-10T15:09:25.000Z</published>
-    <updated>2023-11-10T02:14:51.201Z</updated>
+    <updated>2024-03-14T03:14:02.879Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;引子&quot;&gt;引子&lt;/h2&gt;
@@ -822,17 +822,17 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
     
     
     
-    <category term="Journal" scheme="https://www.kezhi.tech/categories/Journal/"/>
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
     
     
-    <category term="日常" scheme="https://www.kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
+    <category term="日常" scheme="https://kezhi.tech/tags/%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
   <entry>
     <title>Git commit message 规范</title>
-    <link href="https://www.kezhi.tech/58877bc8.html"/>
-    <id>https://www.kezhi.tech/58877bc8.html</id>
+    <link href="https://kezhi.tech/58877bc8.html"/>
+    <id>https://kezhi.tech/58877bc8.html</id>
     <published>2022-04-07T14:05:01.000Z</published>
     <updated>2022-07-28T16:26:27.552Z</updated>
     
@@ -843,19 +843,19 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="git" scheme="https://www.kezhi.tech/tags/git/"/>
+    <category term="git" scheme="https://kezhi.tech/tags/git/"/>
     
-    <category term="语法规范" scheme="https://www.kezhi.tech/tags/%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/"/>
+    <category term="语法规范" scheme="https://kezhi.tech/tags/%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83/"/>
     
   </entry>
   
   <entry>
     <title>Python高性能编程</title>
-    <link href="https://www.kezhi.tech/411c70cb.html"/>
-    <id>https://www.kezhi.tech/411c70cb.html</id>
+    <link href="https://kezhi.tech/411c70cb.html"/>
+    <id>https://kezhi.tech/411c70cb.html</id>
     <published>2022-04-07T14:03:09.000Z</published>
     <updated>2022-10-18T06:43:48.444Z</updated>
     
@@ -864,21 +864,21 @@ src=&quot;https://download.kezhi.tech/img/202205251650671.webp&quot; /&gt;&lt;/p
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Cython" scheme="https://www.kezhi.tech/tags/Cython/"/>
+    <category term="Cython" scheme="https://kezhi.tech/tags/Cython/"/>
     
-    <category term="Numpy" scheme="https://www.kezhi.tech/tags/Numpy/"/>
+    <category term="Numpy" scheme="https://kezhi.tech/tags/Numpy/"/>
     
   </entry>
   
   <entry>
     <title>NexT标签云配置</title>
-    <link href="https://www.kezhi.tech/47930864.html"/>
-    <id>https://www.kezhi.tech/47930864.html</id>
+    <link href="https://kezhi.tech/47930864.html"/>
+    <id>https://kezhi.tech/47930864.html</id>
     <published>2022-03-22T09:11:28.000Z</published>
     <updated>2023-11-10T02:16:20.213Z</updated>
     
@@ -891,19 +891,19 @@ src=&quot;https://download.kezhi.tech/img/20220322172925.jpg?x-oss-process=style
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
-    <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
     
   </entry>
   
   <entry>
     <title>创新港体育场馆自动预定</title>
-    <link href="https://www.kezhi.tech/66f3a0f6.html"/>
-    <id>https://www.kezhi.tech/66f3a0f6.html</id>
+    <link href="https://kezhi.tech/66f3a0f6.html"/>
+    <id>https://kezhi.tech/66f3a0f6.html</id>
     <published>2022-03-21T13:05:38.000Z</published>
     <updated>2023-11-10T02:16:20.285Z</updated>
     
@@ -916,21 +916,21 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Project" scheme="https://www.kezhi.tech/categories/Project/"/>
+    <category term="Project" scheme="https://kezhi.tech/categories/Project/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Script" scheme="https://www.kezhi.tech/tags/Script/"/>
+    <category term="Script" scheme="https://kezhi.tech/tags/Script/"/>
     
-    <category term="Automation" scheme="https://www.kezhi.tech/tags/Automation/"/>
+    <category term="Automation" scheme="https://kezhi.tech/tags/Automation/"/>
     
   </entry>
   
   <entry>
     <title>Hexo本地写作环境配置</title>
-    <link href="https://www.kezhi.tech/315fc17e.html"/>
-    <id>https://www.kezhi.tech/315fc17e.html</id>
+    <link href="https://kezhi.tech/315fc17e.html"/>
+    <id>https://kezhi.tech/315fc17e.html</id>
     <published>2022-03-20T15:21:53.000Z</published>
     <updated>2022-10-18T06:43:48.442Z</updated>
     
@@ -940,19 +940,19 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
-    <category term="node.js" scheme="https://www.kezhi.tech/tags/node-js/"/>
+    <category term="node.js" scheme="https://kezhi.tech/tags/node-js/"/>
     
   </entry>
   
   <entry>
     <title>NLP工具NLTK的安装及使用</title>
-    <link href="https://www.kezhi.tech/3300cce2.html"/>
-    <id>https://www.kezhi.tech/3300cce2.html</id>
+    <link href="https://kezhi.tech/3300cce2.html"/>
+    <id>https://kezhi.tech/3300cce2.html</id>
     <published>2021-10-21T13:24:53.000Z</published>
     <updated>2023-11-10T02:16:20.300Z</updated>
     
@@ -963,21 +963,21 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="NLP" scheme="https://www.kezhi.tech/tags/NLP/"/>
+    <category term="NLP" scheme="https://kezhi.tech/tags/NLP/"/>
     
-    <category term="NLTK" scheme="https://www.kezhi.tech/tags/NLTK/"/>
+    <category term="NLTK" scheme="https://kezhi.tech/tags/NLTK/"/>
     
   </entry>
   
   <entry>
     <title>社会心理学（一）</title>
-    <link href="https://www.kezhi.tech/1eea1e9f.html"/>
-    <id>https://www.kezhi.tech/1eea1e9f.html</id>
+    <link href="https://kezhi.tech/1eea1e9f.html"/>
+    <id>https://kezhi.tech/1eea1e9f.html</id>
     <published>2021-06-08T13:37:03.000Z</published>
     <updated>2022-07-28T16:25:56.399Z</updated>
     
@@ -987,17 +987,17 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="心理学" scheme="https://www.kezhi.tech/tags/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
+    <category term="心理学" scheme="https://kezhi.tech/tags/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>摘抄</title>
-    <link href="https://www.kezhi.tech/639b053d.html"/>
-    <id>https://www.kezhi.tech/639b053d.html</id>
+    <link href="https://kezhi.tech/639b053d.html"/>
+    <id>https://kezhi.tech/639b053d.html</id>
     <published>2021-06-08T11:09:06.000Z</published>
     <updated>2022-11-26T08:14:43.184Z</updated>
     
@@ -1011,19 +1011,19 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Note" scheme="https://www.kezhi.tech/categories/Note/"/>
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
     
     
-    <category term="读书笔记" scheme="https://www.kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <category term="读书笔记" scheme="https://kezhi.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="摘抄" scheme="https://www.kezhi.tech/tags/%E6%91%98%E6%8A%84/"/>
+    <category term="摘抄" scheme="https://kezhi.tech/tags/%E6%91%98%E6%8A%84/"/>
     
   </entry>
   
   <entry>
     <title>Vue学习笔记</title>
-    <link href="https://www.kezhi.tech/71513ccb.html"/>
-    <id>https://www.kezhi.tech/71513ccb.html</id>
+    <link href="https://kezhi.tech/71513ccb.html"/>
+    <id>https://kezhi.tech/71513ccb.html</id>
     <published>2021-04-13T03:32:27.000Z</published>
     <updated>2022-10-18T06:43:48.444Z</updated>
     
@@ -1041,19 +1041,19 @@ src=&quot;https://download.kezhi.tech/img/202203212104191.jpg?x-oss-process=styl
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Vue" scheme="https://www.kezhi.tech/tags/Vue/"/>
+    <category term="Vue" scheme="https://kezhi.tech/tags/Vue/"/>
     
-    <category term="前端" scheme="https://www.kezhi.tech/tags/%E5%89%8D%E7%AB%AF/"/>
+    <category term="前端" scheme="https://kezhi.tech/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>Scrapy爬虫相关</title>
-    <link href="https://www.kezhi.tech/68a55fd7.html"/>
-    <id>https://www.kezhi.tech/68a55fd7.html</id>
+    <link href="https://kezhi.tech/68a55fd7.html"/>
+    <id>https://kezhi.tech/68a55fd7.html</id>
     <published>2020-10-24T15:10:17.000Z</published>
     <updated>2023-11-10T02:16:20.303Z</updated>
     
@@ -1066,21 +1066,21 @@ src=&quot;https://download.kezhi.tech/img/20201024223544.png?x-oss-process=style
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Scrapy" scheme="https://www.kezhi.tech/tags/Scrapy/"/>
+    <category term="Scrapy" scheme="https://kezhi.tech/tags/Scrapy/"/>
     
-    <category term="Crawler" scheme="https://www.kezhi.tech/tags/Crawler/"/>
+    <category term="Crawler" scheme="https://kezhi.tech/tags/Crawler/"/>
     
   </entry>
   
   <entry>
     <title>爬取B站所有番剧数据并进行数据分析</title>
-    <link href="https://www.kezhi.tech/6b2dc3cb.html"/>
-    <id>https://www.kezhi.tech/6b2dc3cb.html</id>
+    <link href="https://kezhi.tech/6b2dc3cb.html"/>
+    <id>https://kezhi.tech/6b2dc3cb.html</id>
     <published>2020-10-14T16:24:39.000Z</published>
     <updated>2023-11-10T02:16:20.289Z</updated>
     
@@ -1094,25 +1094,25 @@ href=&quot;https://gitee.com/KezhiAdore/BilibiliAnimeData_Analysis&quot;&gt;http
     
     
     
-    <category term="Project" scheme="https://www.kezhi.tech/categories/Project/"/>
+    <category term="Project" scheme="https://kezhi.tech/categories/Project/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="Crawler" scheme="https://www.kezhi.tech/tags/Crawler/"/>
+    <category term="Crawler" scheme="https://kezhi.tech/tags/Crawler/"/>
     
-    <category term="Big Data" scheme="https://www.kezhi.tech/tags/Big-Data/"/>
+    <category term="Big Data" scheme="https://kezhi.tech/tags/Big-Data/"/>
     
-    <category term="Aprior Algorithm" scheme="https://www.kezhi.tech/tags/Aprior-Algorithm/"/>
+    <category term="Aprior Algorithm" scheme="https://kezhi.tech/tags/Aprior-Algorithm/"/>
     
-    <category term="K-Means" scheme="https://www.kezhi.tech/tags/K-Means/"/>
+    <category term="K-Means" scheme="https://kezhi.tech/tags/K-Means/"/>
     
   </entry>
   
   <entry>
     <title>黄蜂群算法改进的多机器人区域覆盖</title>
-    <link href="https://www.kezhi.tech/623a6b90.html"/>
-    <id>https://www.kezhi.tech/623a6b90.html</id>
+    <link href="https://kezhi.tech/623a6b90.html"/>
+    <id>https://kezhi.tech/623a6b90.html</id>
     <published>2020-06-22T17:30:24.000Z</published>
     <updated>2023-11-10T02:16:20.215Z</updated>
     
@@ -1132,23 +1132,23 @@ href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gi
     
     
     
-    <category term="Research" scheme="https://www.kezhi.tech/categories/Research/"/>
+    <category term="Research" scheme="https://kezhi.tech/categories/Research/"/>
     
     
-    <category term="智能计算" scheme="https://www.kezhi.tech/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
+    <category term="智能计算" scheme="https://kezhi.tech/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97/"/>
     
-    <category term="多机器人" scheme="https://www.kezhi.tech/tags/%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    <category term="多机器人" scheme="https://kezhi.tech/tags/%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
     
-    <category term="覆盖问题" scheme="https://www.kezhi.tech/tags/%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/"/>
+    <category term="覆盖问题" scheme="https://kezhi.tech/tags/%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/"/>
     
-    <category term="算法改进" scheme="https://www.kezhi.tech/tags/%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B/"/>
+    <category term="算法改进" scheme="https://kezhi.tech/tags/%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（六）频域滤波器</title>
-    <link href="https://www.kezhi.tech/b8e0d4a2.html"/>
-    <id>https://www.kezhi.tech/b8e0d4a2.html</id>
+    <link href="https://kezhi.tech/b8e0d4a2.html"/>
+    <id>https://kezhi.tech/b8e0d4a2.html</id>
     <published>2020-05-08T13:17:21.000Z</published>
     <updated>2023-11-10T02:14:51.205Z</updated>
     
@@ -1164,23 +1164,23 @@ href=&quot;https://gitee.com/KezhiAdore/MultiRobots_CoverMap&quot;&gt;https://gi
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="滤波器" scheme="https://www.kezhi.tech/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    <category term="滤波器" scheme="https://kezhi.tech/tags/%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
-    <category term="频域" scheme="https://www.kezhi.tech/tags/%E9%A2%91%E5%9F%9F/"/>
+    <category term="频域" scheme="https://kezhi.tech/tags/%E9%A2%91%E5%9F%9F/"/>
     
   </entry>
   
   <entry>
     <title>BP神经网络</title>
-    <link href="https://www.kezhi.tech/4f98a72.html"/>
-    <id>https://www.kezhi.tech/4f98a72.html</id>
+    <link href="https://kezhi.tech/4f98a72.html"/>
+    <id>https://kezhi.tech/4f98a72.html</id>
     <published>2020-05-06T06:45:22.000Z</published>
     <updated>2023-11-10T02:16:20.181Z</updated>
     
@@ -1192,21 +1192,21 @@ Hecht-Nielsen）这为神经网络的应用提供了理论依据。&lt;/p&gt;</s
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="机器学习" scheme="https://www.kezhi.tech/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://kezhi.tech/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="神经网络" scheme="https://www.kezhi.tech/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    <category term="神经网络" scheme="https://kezhi.tech/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
-    <category term="BP" scheme="https://www.kezhi.tech/tags/BP/"/>
+    <category term="BP" scheme="https://kezhi.tech/tags/BP/"/>
     
   </entry>
   
   <entry>
     <title>Git常用命令</title>
-    <link href="https://www.kezhi.tech/caff8000.html"/>
-    <id>https://www.kezhi.tech/caff8000.html</id>
+    <link href="https://kezhi.tech/caff8000.html"/>
+    <id>https://kezhi.tech/caff8000.html</id>
     <published>2020-04-25T07:38:41.000Z</published>
     <updated>2023-11-10T02:16:20.210Z</updated>
     
@@ -1221,19 +1221,19 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Git" scheme="https://www.kezhi.tech/tags/Git/"/>
+    <category term="Git" scheme="https://kezhi.tech/tags/Git/"/>
     
-    <category term="命令行" scheme="https://www.kezhi.tech/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    <category term="命令行" scheme="https://kezhi.tech/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（五）空域高通滤波器</title>
-    <link href="https://www.kezhi.tech/bbc72bae.html"/>
-    <id>https://www.kezhi.tech/bbc72bae.html</id>
+    <link href="https://kezhi.tech/bbc72bae.html"/>
+    <id>https://kezhi.tech/bbc72bae.html</id>
     <published>2020-03-30T07:27:33.000Z</published>
     <updated>2023-11-10T02:16:20.285Z</updated>
     
@@ -1242,23 +1242,23 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（四）空域低通滤波器</title>
-    <link href="https://www.kezhi.tech/29443507.html"/>
-    <id>https://www.kezhi.tech/29443507.html</id>
+    <link href="https://kezhi.tech/29443507.html"/>
+    <id>https://kezhi.tech/29443507.html</id>
     <published>2020-03-27T08:03:46.000Z</published>
     <updated>2023-11-10T02:16:20.283Z</updated>
     
@@ -1267,23 +1267,23 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="空域滤波器" scheme="https://www.kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
+    <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>一个用单片机放视频的小项目</title>
-    <link href="https://www.kezhi.tech/d9a2f421.html"/>
-    <id>https://www.kezhi.tech/d9a2f421.html</id>
+    <link href="https://kezhi.tech/d9a2f421.html"/>
+    <id>https://kezhi.tech/d9a2f421.html</id>
     <published>2020-03-24T11:40:59.000Z</published>
     <updated>2023-11-10T02:16:20.293Z</updated>
     
@@ -1293,19 +1293,19 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     
     
-    <category term="Project" scheme="https://www.kezhi.tech/categories/Project/"/>
+    <category term="Project" scheme="https://kezhi.tech/categories/Project/"/>
     
     
-    <category term="Protues" scheme="https://www.kezhi.tech/tags/Protues/"/>
+    <category term="Protues" scheme="https://kezhi.tech/tags/Protues/"/>
     
-    <category term="单片机" scheme="https://www.kezhi.tech/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    <category term="单片机" scheme="https://kezhi.tech/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（三）直方图均衡</title>
-    <link href="https://www.kezhi.tech/a6c8a314.html"/>
-    <id>https://www.kezhi.tech/a6c8a314.html</id>
+    <link href="https://kezhi.tech/a6c8a314.html"/>
+    <id>https://kezhi.tech/a6c8a314.html</id>
     <published>2020-03-19T13:33:46.000Z</published>
     <updated>2023-11-10T02:16:20.289Z</updated>
     
@@ -1314,23 +1314,23 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="直方图均衡" scheme="https://www.kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
+    <category term="直方图均衡" scheme="https://kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
     
   </entry>
   
   <entry>
     <title>LeTaX数学公式常用语法</title>
-    <link href="https://www.kezhi.tech/fc7e112.html"/>
-    <id>https://www.kezhi.tech/fc7e112.html</id>
+    <link href="https://kezhi.tech/fc7e112.html"/>
+    <id>https://kezhi.tech/fc7e112.html</id>
     <published>2020-03-14T09:35:38.000Z</published>
     <updated>2023-11-10T02:14:51.198Z</updated>
     
@@ -1343,17 +1343,17 @@ src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg?x-oss-process=style/webp&qu
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="LetaX" scheme="https://www.kezhi.tech/tags/LetaX/"/>
+    <category term="LetaX" scheme="https://kezhi.tech/tags/LetaX/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（二）图像配准</title>
-    <link href="https://www.kezhi.tech/3cac2a44.html"/>
-    <id>https://www.kezhi.tech/3cac2a44.html</id>
+    <link href="https://kezhi.tech/3cac2a44.html"/>
+    <id>https://kezhi.tech/3cac2a44.html</id>
     <published>2020-03-14T09:04:38.000Z</published>
     <updated>2024-02-24T12:17:21.472Z</updated>
     
@@ -1363,23 +1363,23 @@ src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg?x-oss-process=style/webp&qu
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="图像配准" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    <category term="图像配准" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
     
   </entry>
   
   <entry>
     <title>NexT写作常用样式</title>
-    <link href="https://www.kezhi.tech/61ad1e34.html"/>
-    <id>https://www.kezhi.tech/61ad1e34.html</id>
+    <link href="https://kezhi.tech/61ad1e34.html"/>
+    <id>https://kezhi.tech/61ad1e34.html</id>
     <published>2020-03-13T15:32:16.000Z</published>
     <updated>2023-11-10T02:14:51.199Z</updated>
     
@@ -1394,21 +1394,21 @@ alt=&quot;8MAadJ.md&quot; /&gt;</summary>
     
     
     
-    <category term="Tips" scheme="https://www.kezhi.tech/categories/Tips/"/>
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://www.kezhi.tech/tags/Hexo/"/>
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
-    <category term="NexT" scheme="https://www.kezhi.tech/tags/NexT/"/>
+    <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
     
-    <category term="Markdown" scheme="https://www.kezhi.tech/tags/Markdown/"/>
+    <category term="Markdown" scheme="https://kezhi.tech/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>数字图像处理（一）图像插值(Python)</title>
-    <link href="https://www.kezhi.tech/2b8fba10.html"/>
-    <id>https://www.kezhi.tech/2b8fba10.html</id>
+    <link href="https://kezhi.tech/2b8fba10.html"/>
+    <id>https://kezhi.tech/2b8fba10.html</id>
     <published>2020-03-13T08:18:30.000Z</published>
     <updated>2023-11-10T02:16:20.283Z</updated>
     
@@ -1421,16 +1421,16 @@ alt=&quot;8MAadJ.md&quot; /&gt;</summary>
     
     
     
-    <category term="Study" scheme="https://www.kezhi.tech/categories/Study/"/>
+    <category term="Study" scheme="https://kezhi.tech/categories/Study/"/>
     
     
-    <category term="Python" scheme="https://www.kezhi.tech/tags/Python/"/>
+    <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://www.kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
-    <category term="图像处理" scheme="https://www.kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="插值" scheme="https://www.kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
+    <category term="插值" scheme="https://kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
     
   </entry>
   
