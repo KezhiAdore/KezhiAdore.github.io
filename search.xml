@@ -9214,4 +9214,155 @@ src="https://download.kezhi.tech/img/20200623012410.png?x-oss-process=style/webp
         <tag>算法改进</tag>
       </tags>
   </entry>
+  <entry>
+    <title>炼丹工业化——mlflow使用简介</title>
+    <url>/b01892d.html</url>
+    <content><![CDATA[<p>丹药管理是炼丹术中很重要的部分。毕竟，当一批一批的丹药通过不同的材料和火候炼制出来之后，我们总是会产生如下需求：
+- 对丹药效果进行评估，筛选出好的丹药 -
+将一批丹药的效果进行对比，从而发现好的材料配比（超参数） -
+发现了一颗效果好的丹药，想要复现这颗丹药的生产过程 - ......</p>
+<p><img src="https://download.kezhi.tech/img/202403212027204.png?x-oss-process=style/webp" style="width:67%;" /></p>
+<p>为了实现以上需求，我们便需要炼丹管理技术，简单来说，就是要在
+<code>代码</code>，<code>超参数</code>，<code>模型</code>之间建立映射关系并对齐进行存储，以便支持后续的分析以及训练过程的回溯。由此，诞生了很多机器学习全生命周期管理软件，本文主要介绍一款开源软件：<code>MLflow</code>
+的简单使用流程</p>
+<span id="more"></span>
+<h2 id="安装">安装</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install mlflow</span><br></pre></td></tr></table></figure>
+<h2 id="管理面板">管理面板</h2>
+<p>启动管理面板：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mlflow ui --host=127.0.0.1 --port 8000 </span><br></pre></td></tr></table></figure>
+<p>管理面板的页面结构很简单，自行摸索即可。</p>
+<p>这里主要说一下数据集中存储的方案。在多台机器跑同一个实验时，通常采用的方案是把所有的
+<code>log</code> download
+到一台机器上进行比较。这样手动管理十分繁杂且容易出错。<code>mlflow</code>
+采用的是 <code>client-server</code>
+结构，因此可以用一台机器作为服务器，其他机器在跑实验时通过访问
+<code>uri</code>
+将数据推送到服务器端，最后统一在服务器端进行查看比较即可。</p>
+<p>一种实现思路是在一台服务器上部署 <code>mlflow</code> 并开放访问：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mlflow ui --host=0.0.0.0 --port 8000 </span><br></pre></td></tr></table></figure>
+<p>假设这台机器的 <code>ip</code> 为 <code>192.168.1.12</code></p>
+<p>那么对其他机器上的 <code>uri</code> 进行对应修改即可：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mlflow.set_tracking_uri(uri=<span class="string">&quot;http://192.168.1.12:8000&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>此外也可以加入权限认证：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mlflow server --app-name basic-auth</span><br></pre></td></tr></table></figure>
+<p>关于权限认证更详细的内容见 <a
+href="https://www.mlflow.org/docs/latest/auth/index.html#">MLflow
+Authentication — MLflow 2.11.2 documentation</a></p>
+<h2 id="mlflow-结构简介">MLflow 结构简介</h2>
+<p>MLflow 主要分为以下几个模块</p>
+<ul>
+<li><p>MLflow
+Tracking：用来记录实验的<code>logging</code>信息，包括<code>parameters</code>，<code>metric</code>等</p></li>
+<li><p>System
+Metrics：记录程序运行过程中的系统状态（CPU占用，内存占用，...）</p></li>
+<li><p>MLflow Models：保存训练出来的模型</p></li>
+<li><p>MLflow Model
+Registry：模型登记，用于对训练出的模型进行管理</p></li>
+<li><p>MLflow
+Projects：项目管理模块，通过记录运行环境和程序入口，来实现</p></li>
+<li><p>MLflow Plugins：支持第三方插件</p></li>
+</ul>
+<h2 id="mlflow-使用说明">MLflow 使用说明</h2>
+<p>MLflow 的使用可以支持机器学习项目的整个生命流程，如下图所示</p>
+<p><img
+src="https://download.kezhi.tech/img/202403211850657.png?x-oss-process=style/webp" /><a
+href="https://mlflow.org/docs/latest/introduction/index.html">What is
+MLflow? — MLflow 2.11.2 documentation</a></p>
+<p>下面对 <code>MLflow</code>的各个部分使用逐一进行简单介绍</p>
+<h3 id="mlflow-tracking">MLflow Tracking</h3>
+<p>Tracking 的主要作用类似于
+<code>tensorboard</code>，即对训练的超参数和过程数据进行记录，使用如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mlflow</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set our tracking server uri for logging</span></span><br><span class="line">mlflow.set_tracking_uri(uri=<span class="string">&quot;http://127.0.0.1:8000&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a new MLflow Experiment</span></span><br><span class="line">mlflow.set_experiment(<span class="string">&quot;MLflow Quickstart&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> mlflow.start_run():</span><br><span class="line">    <span class="comment"># log parameters</span></span><br><span class="line">    mlflow.log_param(<span class="string">&quot;lr&quot;</span>, <span class="number">0.001</span>)</span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">&quot;epoch&quot;</span>: <span class="number">100</span>,</span><br><span class="line">        <span class="string">&quot;hidden_size&quot;</span>: <span class="number">256</span>,</span><br><span class="line">        <span class="string">&quot;is_truncated&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    mlflow:log_params(params)</span><br><span class="line">    <span class="comment"># Your ml code</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment"># log metric</span></span><br><span class="line">    mlflow.log_metric(<span class="string">&quot;val_loss&quot;</span>, val_loss, step)</span><br><span class="line">    metric = &#123;</span><br><span class="line">        <span class="string">&quot;policy_loss&quot;</span>: policy_loss,</span><br><span class="line">        <span class="string">&quot;critic_loss&quot;</span>: critic_loss,</span><br><span class="line">    &#125;</span><br><span class="line">    mlflow.log_metrics(metric, step)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>mlflow.set_tracking_uri</code> 指定了 <code>mlflow</code>
+数据存放的位置，不指定则默认为本地文件夹下存储</li>
+<li><code>mlflow.set_experiment</code> 定义实验名称，可以认为与
+<code>project</code> 对应，同一个 <code>project</code>
+的不同算法版本以及不同的超参数选取应使用同一个实验名称</li>
+<li><a
+href="https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.log_param"><code>mlflow.log_param</code></a>：记录某个超参数</li>
+<li><a
+href="https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.log_params"><code>mlflow.log_parame</code></a>：记录多个超参数，通过字典传入</li>
+<li><a
+href="https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.log_metric"><code>mlflow.log_metric</code></a>：记录某个过程指标</li>
+<li><a
+href="https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.log_metrics"><code>mlflow.log_metrics</code></a>：记录多个过程指标，通过字典传入</li>
+</ul>
+<p>此外，还有很多其他的函数来实现诸如：记录
+image，记录<code>matplotlib</code>绘制的
+figure，记录文件等，这里便不逐一列举了，可以参考官方文档：<a
+href="https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.log_artifact">mlflow
+— MLflow 2.11.2 documentation</a></p>
+<h4 id="auto-logging">Auto Logging</h4>
+<p>此外，<code>MLflow</code>
+也支持对过程数据自动进行追踪，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mlflow</span><br><span class="line"></span><br><span class="line">mlflow.autolog()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Your training code...</span></span><br></pre></td></tr></table></figure>
+<p>自动追踪记录会对哪些数据记录我还没有尝试过，这里放一张官方文档的示意图：</p>
+<p><img
+src="https://download.kezhi.tech/img/202403211923270.png?x-oss-process=style/webp" /></p>
+<p><a
+href="https://mlflow.org/docs/latest/getting-started/index.html">Getting
+Started with MLflow — MLflow 2.11.2 documentation</a></p>
+<p>关于 Auto Logging 的进一步说明可以参考：<a
+href="https://mlflow.org/docs/latest/tracking/autolog.html">Automatic
+Logging with MLflow Tracking — MLflow 2.11.2 documentation</a></p>
+<h3 id="system-metrics">System Metrics</h3>
+<p>System Metrics
+模块用来监控在训练过程中的各项系统状态指标，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mlflow</span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable automatic logging of system metrics (e.g., CPU and memory usage)</span></span><br><span class="line">mlflow.enable_system_metrics_logging()</span><br><span class="line"><span class="comment"># Set the sampling interval for system metrics to 1 second</span></span><br><span class="line">mlflow.set_system_metrics_sampling_interval(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>系统监控在默认情况下是不打开的，如需记录则执行以上代码即可</p>
+<h3 id="mlflow-models">MLflow Models</h3>
+<p>MLflow Models
+模块主要用于存储代码训练产生的模型，对于不同的深度学习库该模块有不同的实现，以
+<code>pytorch</code> 为例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> mlflow</span><br><span class="line"><span class="keyword">from</span> mlflow.models <span class="keyword">import</span> infer_signature</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">net = nn.Linear(<span class="number">6</span>, <span class="number">1</span>)</span><br><span class="line">loss_function = nn.L1Loss()</span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=<span class="number">1e-4</span>)</span><br><span class="line"></span><br><span class="line">X = torch.randn(<span class="number">6</span>)</span><br><span class="line">y = torch.randn(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">epochs = <span class="number">5</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    outputs = net(X)</span><br><span class="line"></span><br><span class="line">    loss = loss_function(outputs, y)</span><br><span class="line">    loss.backward()</span><br><span class="line"></span><br><span class="line">    optimizer.step()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> mlflow.start_run() <span class="keyword">as</span> run:</span><br><span class="line">    signature = infer_signature(X.numpy(), net(X).detach().numpy())</span><br><span class="line">    model_info = mlflow.pytorch.log_model(net, <span class="string">&quot;model&quot;</span>, signature=signature)</span><br><span class="line"></span><br><span class="line">pytorch_pyfunc = mlflow.pyfunc.load_model(model_uri=model_info.model_uri)</span><br><span class="line"><span class="comment"># model_uri 可以在 ui 面板里找到</span></span><br><span class="line">predictions = pytorch_pyfunc.predict(torch.randn(<span class="number">6</span>).numpy())</span><br><span class="line"><span class="built_in">print</span>(predictions)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>更详细的内容见：<a
+href="https://mlflow.org/docs/latest/models.html">MLflow Models — MLflow
+2.11.2 documentation</a></p>
+<h3 id="mlflow-model-registry">MLflow Model Registry</h3>
+<p>Model Registry 的功能简单来说就是对生产出的模型进行版本管理，在 ui
+面板上操作即可。具体流程见 <a
+href="https://mlflow.org/docs/latest/model-registry.html">MLflow Model
+Registry — MLflow 2.11.2 documentation</a></p>
+<h3 id="mlflow-projects">MLflow Projects</h3>
+<p>MLflow Projects
+通过一个配置文件来记录代码运行环境以及程序入口，从而便于对程序进行分发。</p>
+<p>其主要结构包含三部分内容：</p>
+<ul>
+<li>Name：项目名称</li>
+<li>Entry Points：程序入口，可以带参，并且可以使用多个入口组成
+pipeline</li>
+<li>Environment：运行环境配置，支持
+<code>conda</code>，<code>Vitrualenv</code> 以及
+<code>Docker</code></li>
+</ul>
+<p>在项目的根目录新建
+<code>MLproject</code>，并向其中写入配置，例如：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">My</span> <span class="string">Project</span></span><br><span class="line"></span><br><span class="line"><span class="attr">python_env:</span> <span class="string">python_env.yaml</span></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="comment"># conda_env: my_env.yaml</span></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="comment"># docker_env:</span></span><br><span class="line"><span class="comment">#    image:  mlflow-docker-example</span></span><br><span class="line"></span><br><span class="line"><span class="attr">entry_points:</span></span><br><span class="line">  <span class="attr">main:</span></span><br><span class="line">    <span class="attr">parameters:</span></span><br><span class="line">      <span class="attr">data_file:</span> <span class="string">path</span></span><br><span class="line">      <span class="attr">regularization:</span> &#123;<span class="attr">type:</span> <span class="string">float</span>, <span class="attr">default:</span> <span class="number">0.1</span>&#125;</span><br><span class="line">    <span class="attr">command:</span> <span class="string">&quot;python train.py -r &#123;regularization&#125; &#123;data_file&#125;&quot;</span></span><br><span class="line">  <span class="attr">validate:</span></span><br><span class="line">    <span class="attr">parameters:</span></span><br><span class="line">      <span class="attr">data_file:</span> <span class="string">path</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">&quot;python validate.py &#123;data_file&#125;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>仿照上面的例子创建好配置文件后，便可以使用 <code>mlflow</code>
+来自动运行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mlflow run /path/to/project --env-manager=conda</span><br></pre></td></tr></table></figure>
+<p>此外，也可以指定 <code>Github</code> 仓库来运行项目：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mlflow run git@github.com:mlflow/mlflow-example.git -P alpha=0.5</span><br></pre></td></tr></table></figure>
+<p>对于 <code>mlflow run</code> 的更多信息可以使用
+<code>mlflow run --help</code> 来进行查看。</p>
+<p>关于 <code>MLflow Project</code> 更详细的说明见 <a
+href="https://mlflow.org/docs/latest/projects.html#overview">MLflow
+Projects — MLflow 2.11.2 documentation</a></p>
+<h3 id="mlflow-plugins">MLflow Plugins</h3>
+<p>MLflow
+是一个开源项目，并且支持各种各样的插件，各位也可以开发相应的插件来满足自己的个性化需求。关于插件的开发，安装，以及当前社区流行的插件见
+<a href="https://mlflow.org/docs/latest/plugins.html">MLflow Plugins —
+MLflow 2.11.2 documentation</a></p>
+]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>deep learning</tag>
+        <tag>mlflow</tag>
+      </tags>
+  </entry>
 </search>

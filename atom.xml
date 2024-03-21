@@ -6,7 +6,7 @@
   <link href="https://kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://kezhi.tech/"/>
-  <updated>2024-03-07T13:21:16.024Z</updated>
+  <updated>2024-03-21T12:29:44.000Z</updated>
   <id>https://kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>炼丹工业化——mlflow使用简介</title>
+    <link href="https://kezhi.tech/b01892d.html"/>
+    <id>https://kezhi.tech/b01892d.html</id>
+    <published>2024-03-21T12:29:43.000Z</published>
+    <updated>2024-03-21T12:29:44.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;丹药管理是炼丹术中很重要的部分。毕竟，当一批一批的丹药通过不同的材料和火候炼制出来之后，我们总是会产生如下需求：
+- 对丹药效果进行评估，筛选出好的丹药 -
+将一批丹药的效果进行对比，从而发现好的材料配比（超参数） -
+发现了一颗效果好的丹药，想要复现这颗丹药的生产过程 - ......&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202403212027204.png?x-oss-process=style/webp&quot; style=&quot;width:67%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;为了实现以上需求，我们便需要炼丹管理技术，简单来说，就是要在
+&lt;code&gt;代码&lt;/code&gt;，&lt;code&gt;超参数&lt;/code&gt;，&lt;code&gt;模型&lt;/code&gt;之间建立映射关系并对齐进行存储，以便支持后续的分析以及训练过程的回溯。由此，诞生了很多机器学习全生命周期管理软件，本文主要介绍一款开源软件：&lt;code&gt;MLflow&lt;/code&gt;
+的简单使用流程&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Note" scheme="https://kezhi.tech/categories/Note/"/>
+    
+    
+    <category term="deep learning" scheme="https://kezhi.tech/tags/deep-learning/"/>
+    
+    <category term="mlflow" scheme="https://kezhi.tech/tags/mlflow/"/>
+    
+  </entry>
   
   <entry>
     <title>第一篇论文完成后</title>
