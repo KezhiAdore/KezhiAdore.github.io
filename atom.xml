@@ -6,7 +6,7 @@
   <link href="https://kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://kezhi.tech/"/>
-  <updated>2024-03-21T12:32:34.088Z</updated>
+  <updated>2024-03-25T09:33:18.594Z</updated>
   <id>https://kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈信任</title>
+    <link href="https://kezhi.tech/190fc18.html"/>
+    <id>https://kezhi.tech/190fc18.html</id>
+    <published>2024-03-25T09:33:18.000Z</published>
+    <updated>2024-03-25T09:33:18.594Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;不得不说，信任是十分珍贵且稀少的一样东西。其珍贵和稀少的原因很简单——怀疑是很容易的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202403251731371.jpg?x-oss-process=style/webp&quot; style=&quot;width:50%;&quot; /&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>炼丹工业化——mlflow使用简介</title>
