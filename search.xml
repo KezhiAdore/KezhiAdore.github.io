@@ -20934,6 +20934,7 @@ microsoft/RdpGamepad: Remote Desktop Plugin for Xbox Gamepads</a></li>
     <title>常用代理配置</title>
     <url>/278ab762.html</url>
     <content><![CDATA[<p>在开发过程中，由于众所周知的原因，不可避免的要使用代理，而各个软件使用代理的方式不尽相同，本文对常用软件的代理设置进行简单的整理。</p>
+<span id="more"></span>
 <h2 id="shell">Shell</h2>
 <p>最方便的就是直接在命令行里面设置代理，这样设置后大部分在命令行里执行的程序，设置方式如下：
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:7890</span><br><span class="line">export https_proxy=http://127.0.0.1:7890</span><br></pre></td></tr></table></figure></p>
@@ -21005,6 +21006,7 @@ improve the translation. Thanks!</p>
 inevitable to use proxies. However, the ways in which various software
 uses proxies are different. This article provides a simple summary of
 proxy settings for commonly used software.</p>
+<span id="more"></span>
 <h2 id="shell">Shell</h2>
 <p>The most convenient way is to directly set the proxy in the command
 line. This way, most programs executed in the command line will use the
@@ -21078,6 +21080,211 @@ Docker 配置网络代理 - CharyGao - 博客园 (cnblogs.com)</a></li>
         <tag>docker</tag>
         <tag>代理</tag>
         <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>再见2024，你好2025</title>
+    <url>/7b768278.html</url>
+    <content><![CDATA[<p>今天是2024年的最后一天，其实并不是多么特别的一天，还是像前几天一样<code>跑实验——结果不理想——再跑实验</code>。距离IJCAI截稿还有不到一个月，希望能顺利写完文章投稿吧。</p>
+<p><img src="https://download.kezhi.tech/img/202412312202051.jpg?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>我个人并无写日记的习惯，只会在觉得需要写点东西的时候写一篇文章放入博客中。因为我觉得一天的时间太短，
+很难形成值得思考和记录的东西。不过每隔一段时间回过头看看反思一下是很必要的，因此有了这篇年度总结，如果不出意外，以后每年年末都会有这么一篇文章来对这一年的工作和生活进行总结。</p>
+<span id="more"></span>
+<h2 id="科研">科研</h2>
+<p>今年的科研并不算特别顺利，第一篇文章投稿ICML收获了334的低分被reject，打算改投Neurips因记错了投稿ddl导致错过时间，后面改投Cybernetics因为主题不符被拒，改投NN的时候有几张图片差错了被拒。总之十分命途坎坷。</p>
+<p>再加上4月从北京回来之后，就接受lh的烂摊子几乎从头开发也基本没有时间进行科研。直到10月下旬项目结题后才有时间来读论文想后面的论文安排，从论文阅读统计也能明显看出这个趋势（笑）</p>
+<p><img
+src="https://download.kezhi.tech/img/202412312041926.jpg?x-oss-process=style/webp" /></p>
+<p>尽管并不十分顺利，但在我看来今年是十分重要的一年。一来在自动化所张希老师的指导下，完成了从一个idea到最终论文成型投稿的全过程，也不完全算是门外汉了，后面要做的就是依葫芦画瓢不断refine这个流程中的各个环节，投更多的论文；另一方面，今年结题了lh这个项目，组里项目相关的事情是告一段落了，后面可以专心读论文做实验写文章，就一切都在往好的方向发展。</p>
+<p>希望明年多投文章哈o(<em>￣▽￣</em>)ブ</p>
+<h2 id="项目">项目</h2>
+<p>4月份回学校之后，开始接手lh这个项目的开发工作。这个项目是去年底我负责对接签下来的，项目为其一年从去年十月份到今年十月份，签下来没多久我就去了自动化所没有太管这个项目的开发情况，项目的推进主要由两个师弟在负责。这个项目的主要内容是在另一家公司开发的仿真器上进行算法设计和强化学习的训练。而在我回来的时候，项目的进度一塌糊涂：仿真器中存在大量的bug没有修复，算法代码与仿真器的代码耦合难以管理，开发还停留在接口验证阶段，没有进行合同中要求的场景和算法开发。</p>
+<p>而在这样的开发进度下，一位师弟五月份要出去实习，另一位师弟开发能力有限，组内其他人过来继续开发需要大量的交接成本。在这种情况下，我承接了这个项目的后续开发工作，主要有以下几个方面的考虑：</p>
+<ul>
+<li>之前学习过一些关于软件项目管理的书，但一直没有机会对里面的内容进行实践。这个项目开发是一个挺好的平台来实践一下项目管理</li>
+<li>去自动化所学习是承了导师的情，完成这个项目也算是对他的回报，同时也跟导师谈好做完这个项目以后我专心科研不再参与其他项目的事情</li>
+</ul>
+<p>经过这个项目开发之后，我总结了一些关于项目开发的经验：</p>
+<ul>
+<li>要考虑什么功能是必要的，那些功能是不需要的，再好的代码也不如没有代码。</li>
+<li>要多跟甲方沟通，开放性的项目甲方通常也不知道自己想要什么，要以最小原型来和甲方进行沟通从而明确后续的开发安排（敏捷开发）</li>
+<li>在一个较为长期的项目中，代码的可维护性要远高于代码的性能。因为找个算法大师优化某一个模块的性能要比在屎山代码里进行修改功能容易的多得多。</li>
+</ul>
+<p>总的来说，在这个项目开发的过程中我收获很多。过去我主要关注写代码时的性能和可读性，现在接触更多项目后转而关注代码的可维护性和可用性，步入DevOps之路hhh。</p>
+<h2 id="生活">生活</h2>
+<p>年初的时候在北京入了switch（没电脑打游戏又不能不打游戏/(ㄒoㄒ)/~~）。朋友在我生日的时候送了不少卡带给我。</p>
+<p><img src="https://download.kezhi.tech/img/202412312117402.webp?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>跟楚篱去了大观园，还碰到了园里在直播带货。</p>
+<p><img src="https://download.kezhi.tech/img/202412312121227.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312121540.png?x-oss-process=style/webp" style="width:67%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312124722.png?x-oss-process=style/webp" style="width:67%;" /></p>
+<p>给楚篱配了台电脑，全白色配件+透明机箱</p>
+<p><img src="https://download.kezhi.tech/img/202412312129848.png?x-oss-process=style/webp" style="width:33%;" /></p>
+<p>从北京回来之前去了圆明园</p>
+<p><img src="https://download.kezhi.tech/img/202412312130644.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312130741.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>回港里之后组里搞了台新服务器，我选的配置，2颗AMD EPYC
+9654，192C384T@3.7GHz，AMD YES!</p>
+<p><img src="https://download.kezhi.tech/img/202412312133809.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>五月份和杰哥坐了西安地铁运营的西户线，这个时代少见的库库库冒黑烟的地铁！</p>
+<p><img src="https://download.kezhi.tech/img/202412312136396.png?x-oss-process=style/webp" style="width:30%;" /></p>
+<p>参加了青年博士太原行（<a
+href="https://kezhi.tech/35bdcdc0.html">锦绣太原青年博士行 | Kezhi's
+Blog</a>）</p>
+<p>爬了华阳草甸，朱雀森林公园，</p>
+<p><img src="https://download.kezhi.tech/img/202412312152315.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312153903.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312154959.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>在武汉爬了庐山，连夜背诗免门票结果走错门了。</p>
+<p><img src="https://download.kezhi.tech/img/202412312153594.png?x-oss-process=style/webp" style="width:30%;" /></p>
+<p>送走了很多毕业的朋友（<a
+href="https://kezhi.tech/35956731.html">2024毕业快乐 | Kezhi's
+Blog</a>）</p>
+<p><img src="https://download.kezhi.tech/img/202412312150624.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p><img src="https://download.kezhi.tech/img/202412312152107.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>用RDP打完了黑猴（<a
+href="https://kezhi.tech/763d29e2.html">使用RDP在内网远程游戏思路 |
+Kezhi's Blog</a>）</p>
+<p><img src="https://download.kezhi.tech/img/202412312150481.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>到函谷关见了老子</p>
+<p><img src="https://download.kezhi.tech/img/202412312150763.png?x-oss-process=style/webp" style="width:30%;" /></p>
+<p>双十一趁着国补入手了一台3D打印机，开展新业务</p>
+<p><img src="https://download.kezhi.tech/img/202412312150616.png?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>今年，嵩哥结婚了，表姐订婚了，果果和胖婷在一起了，周小天和陶老师也订婚了。</p>
+<p>愿未来大家都能找到合适的另一半，多多结婚让我沾沾喜气，从而多发文章！</p>
+]]></content>
+      <categories>
+        <category>Journal</category>
+      </categories>
+      <tags>
+        <tag>年度总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Goodbye 2024, hello 2025.</title>
+    <url>/en/7b768278.html</url>
+    <content><![CDATA[<div class="note info"><p>This is an automatically translated post by LLM. The <a
+href="https://kezhi.tech/7b768278.html">original post</a> is in Chinese.
+If you find any translation errors, please leave a comment to help me
+improve the translation. Thanks!</p>
+</div>
+<p>Today is the last day of 2024, not particularly special, just like
+the past few days, running experiments - unsatisfactory results -
+running experiments again. Less than a month left until the deadline for
+IJCAI submission, hoping to finish writing the article smoothly.</p>
+<p><img src="https://download.kezhi.tech/img/202412312202051.jpg?x-oss-process=style/webp" style="width:50%;" /></p>
+<p>I don't have the habit of writing a diary personally, I only write an
+article and put it on my blog when I feel the need to write something.
+Because I feel that a day is too short to form something worth thinking
+about and recording. However, it is necessary to reflect on things every
+once in a while, so here is this annual summary. If nothing unexpected
+happens, there will be such an article at the end of each year to
+summarize the work and life of the year.</p>
+<span id="more"></span>
+<h2 id="research">Research</h2>
+<p>This year's research was not particularly smooth. The first paper
+submitted to ICML received a low score of 334 and was rejected, planning
+to submit to Neurips but missed the deadline due to a mistake in
+submission time. Later, when resubmitted to Cybernetics, it was rejected
+due to mismatched themes, and when resubmitted to NN, it was rejected
+due to some incorrect images. In short, it was a very bumpy road.</p>
+<p>In addition, after returning from Beijing in April, I almost started
+the development of the lh project from scratch and had little time for
+research. It wasn't until the end of October, after the project was
+completed, that I had time to read papers and plan for future research.
+From the statistics of paper reading, this trend is clearly visible
+(laughs).</p>
+<p>Even though it wasn't very smooth, this year was very important to
+me. Firstly, under the guidance of Professor Zhang Xi from the Institute
+of Automation, I completed the entire process from an idea to the final
+paper submission. I am not entirely a novice anymore, and what I need to
+do next is to continuously refine the various aspects of this process
+and submit more papers. Secondly, this year the lh project was
+completed, and the team's project-related matters came to an end,
+allowing me to focus on reading papers, conducting experiments, and
+writing articles. Everything is moving in a positive direction.</p>
+<p>Hope to submit more articles next year o(<em>￣▽￣</em>)ブ</p>
+<h2 id="project">Project</h2>
+<p>After returning to school in April, I started working on the
+development of the lh project. This project was signed by me at the end
+of last year and lasted from October of last year to October of this
+year. Shortly after signing the project, I went to the Institute of
+Automation and did not pay much attention to the development progress of
+the project. The progress of the project was mainly handled by two
+junior brothers. The main content of this project is algorithm design
+and reinforcement learning training on a simulator developed by another
+company. When I returned, the progress of the project was in a mess:
+there were many bugs in the simulator that were not fixed, the algorithm
+code was coupled with the simulator code and difficult to manage, the
+development was still at the interface verification stage, and the
+required scene and algorithm development in the contract were not
+carried out.</p>
+<p>With such a development progress, one junior brother was going for an
+internship in May, and the other junior brother had limited development
+capabilities. It would require a lot of handover costs for other team
+members to continue the development. In this situation, I took over the
+subsequent development work of this project, mainly considering the
+following aspects:</p>
+<ul>
+<li>I had studied some books on software project management before, but
+I had never had the opportunity to put the content into practice. This
+project development was a good platform to practice project
+management.</li>
+<li>Studying at the Institute of Automation was a favor to the mentor,
+completing this project was also a return to him. At the same time, I
+had discussed with the mentor that after completing this project, I
+would focus on research and not participate in other projects.</li>
+</ul>
+<p>After the development of this project, I summarized some experiences
+about project development:</p>
+<ul>
+<li>Consider what features are necessary and which ones are not needed.
+No code is better than unnecessary code.</li>
+<li>Communicate more with the client. In open projects, the client
+usually does not know what they want. Communicate with the client using
+the minimum prototype to clarify the subsequent development arrangements
+(agile development).</li>
+<li>In a long-term project, code maintainability is far more important
+than code performance. Because it is much easier to find an algorithm
+master to optimize a module's performance than to modify functionality
+in a pile of code.</li>
+</ul>
+<p>Overall, I gained a lot during the development of this project. In
+the past, I focused on code performance and readability, but now, after
+encountering more projects, I focus on code maintainability and
+usability, stepping into the DevOps path.</p>
+<h2 id="life">Life</h2>
+<p>At the beginning of the year, I bought a Switch in Beijing (no
+computer to play games and can't not play games/(ㄒoㄒ)/~~). My friend
+gave me a lot of game cartridges for my birthday.</p>
+<p>I went to the Grand View Garden with Chuli and encountered live
+streaming for product sales in the garden.</p>
+<p>I built a white computer for Chuli, with all white accessories and a
+transparent case.</p>
+<p>Before returning from Beijing, I went to the Old Summer Palace.</p>
+<p>After returning to the lab, we set up a new server, with the
+configuration I chose, 2 AMD EPYC 9654, 192C384T@3.7GHz, AMD YES!</p>
+<p>In May, I rode the Xi'an Metro's Xihu Line with Jiege, a rare subway
+with black smoke in this era!</p>
+<p>I participated in the Young Doctoral Scholars' Trip to Taiyuan.</p>
+<p>I climbed Huayang Grassland, Zhuge Forest Park.</p>
+<p>I climbed Lushan in Wuhan, recited poems all night to enter for free
+but went to the wrong gate.</p>
+<p>I bid farewell to many graduating friends.</p>
+<p>I completed the game Black Monkey using RDP.</p>
+<p>I visited Laozi at Hangu Pass.</p>
+<p>I bought a 3D printer on Double Eleven to start a new business.</p>
+<p>This year, Song got married, my cousin got engaged, Guoguo and
+Panting got together, Zhou Xiaotian and Teacher Tao also got
+engaged.</p>
+<p>I hope everyone can find the right partner in the future, get married
+more, let me share the joy, and write more articles!</p>
+]]></content>
+      <categories>
+        <category>Journal</category>
+      </categories>
+      <tags>
+        <tag>年度总结</tag>
       </tags>
   </entry>
 </search>
