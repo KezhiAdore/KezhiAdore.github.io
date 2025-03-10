@@ -6,7 +6,7 @@
   <link href="https://kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://kezhi.tech/"/>
-  <updated>2024-12-31T14:03:44.430Z</updated>
+  <updated>2025-03-10T05:34:16.694Z</updated>
   <id>https://kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>研究生指北</title>
+    <link href="https://kezhi.tech/9191ea89.html"/>
+    <id>https://kezhi.tech/9191ea89.html</id>
+    <published>2025-03-10T05:33:29.000Z</published>
+    <updated>2025-03-10T05:34:16.694Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在交大读研已经是第四个年头，这些年自己经历了许多，也了解了一些朋友和师弟师妹的读研经历。这篇文章是以自身经历和所见所闻总结出的一些规律，并不能涵盖所有情况，供后来人参考和批判。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文主要讨论计算机相关的课题组现状，不一定适用于所有实验室。若读者是其他专业领域的实验室有一些其他的规律，也欢迎在评论补充。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
+    
+    
+    <category term="研究生" scheme="https://kezhi.tech/tags/%E7%A0%94%E7%A9%B6%E7%94%9F/"/>
+    
+    <category term="经验" scheme="https://kezhi.tech/tags/%E7%BB%8F%E9%AA%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A Guide for Graduate Students.</title>
+    <link href="https://kezhi.tech/en/9191ea89.html"/>
+    <id>https://kezhi.tech/en/9191ea89.html</id>
+    <published>2025-03-10T05:33:29.000Z</published>
+    <updated>2025-03-10T05:36:55.768Z</updated>
+    
+    
+    <summary type="html">&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;This is an automatically translated post by LLM. The &lt;a
+href=&quot;https://kezhi.tech/9191ea89.html&quot;&gt;original post&lt;/a&gt; is in Chinese.
+If you find any translation errors, please leave a comment to help me
+improve the translation. Thanks!&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Having been a graduate student at Jiaotong University for four years,
+I&#39;ve experienced a lot and learned about the journeys of some friends
+and junior students. This article summarizes some patterns based on my
+own experiences and observations, and it doesn&#39;t cover every situation.
+It&#39;s meant for future students to reference and critique.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This article mainly discusses the current state of computer-related
+research groups, which may not apply to all laboratories. If readers
+from other fields have different insights, they are welcome to share
+them in the comments.&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
+    
+    
+    <category term="研究生" scheme="https://kezhi.tech/tags/%E7%A0%94%E7%A9%B6%E7%94%9F/"/>
+    
+    <category term="经验" scheme="https://kezhi.tech/tags/%E7%BB%8F%E9%AA%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>再见2024，你好2025</title>
@@ -2601,9 +2661,9 @@ src=&quot;https://download.kezhi.tech/img/20220322172925.jpg?x-oss-process=style
     <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
-    
     <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
+    
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
   </entry>
   
@@ -2631,9 +2691,9 @@ src=&quot;https://download.kezhi.tech/img/20220322172925.jpg?x-oss-process=style
     <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
-    
     <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
+    
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
   </entry>
   
@@ -3400,9 +3460,9 @@ src=&quot;https://download.kezhi.tech/img/20200424230007.png?x-oss-process=style
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -3429,9 +3489,9 @@ href=&quot;https://kezhi.tech/bbc72bae.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -3454,9 +3514,9 @@ href=&quot;https://kezhi.tech/bbc72bae.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -3483,9 +3543,9 @@ href=&quot;https://kezhi.tech/29443507.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="空域滤波器" scheme="https://kezhi.tech/tags/%E7%A9%BA%E5%9F%9F%E6%BB%A4%E6%B3%A2%E5%99%A8/"/>
     
@@ -3563,9 +3623,9 @@ reference.&lt;/p&gt;</summary>
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="直方图均衡" scheme="https://kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
     
@@ -3592,9 +3652,9 @@ href=&quot;https://kezhi.tech/a6c8a314.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="直方图均衡" scheme="https://kezhi.tech/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1/"/>
     
@@ -3669,9 +3729,9 @@ src=&quot;https://download.kezhi.tech/img/8QXOvd.jpg?x-oss-process=style/webp&qu
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="图像配准" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
     
@@ -3698,9 +3758,9 @@ href=&quot;https://kezhi.tech/3cac2a44.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="图像配准" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
     
@@ -3727,9 +3787,9 @@ alt=&quot;8MAadJ.md&quot; /&gt;</summary>
     <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
-    
     <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
+    
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
     <category term="Markdown" scheme="https://kezhi.tech/tags/Markdown/"/>
     
@@ -3754,9 +3814,9 @@ href=&quot;https://kezhi.tech/61ad1e34.html&quot;&gt;original post&lt;/a&gt;</su
     <category term="Tips" scheme="https://kezhi.tech/categories/Tips/"/>
     
     
-    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
-    
     <category term="NexT" scheme="https://kezhi.tech/tags/NexT/"/>
+    
+    <category term="Hexo" scheme="https://kezhi.tech/tags/Hexo/"/>
     
     <category term="Markdown" scheme="https://kezhi.tech/tags/Markdown/"/>
     
@@ -3783,9 +3843,9 @@ href=&quot;https://kezhi.tech/61ad1e34.html&quot;&gt;original post&lt;/a&gt;</su
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="插值" scheme="https://kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
     
@@ -3820,9 +3880,9 @@ There are three main interpolation methods for images:&lt;/p&gt;
     
     <category term="Python" scheme="https://kezhi.tech/tags/Python/"/>
     
-    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
-    
     <category term="图像处理" scheme="https://kezhi.tech/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="数字图像" scheme="https://kezhi.tech/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F/"/>
     
     <category term="插值" scheme="https://kezhi.tech/tags/%E6%8F%92%E5%80%BC/"/>
     
