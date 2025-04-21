@@ -6,7 +6,7 @@
   <link href="https://kezhi.tech/atom.xml" rel="self"/>
   
   <link href="https://kezhi.tech/"/>
-  <updated>2025-03-10T05:34:16.694Z</updated>
+  <updated>2025-04-21T14:34:15.219Z</updated>
   <id>https://kezhi.tech/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>陪伴是爱的最高形式</title>
+    <link href="https://kezhi.tech/9e218dda.html"/>
+    <id>https://kezhi.tech/9e218dda.html</id>
+    <published>2025-04-21T14:32:00.000Z</published>
+    <updated>2025-04-21T14:34:15.219Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;长期以来一直在思考一个问题就是什么是爱。最近有了一些阶段性的感悟，在这里讨论一下。简单来说就是：&lt;/p&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;
+&lt;p&gt;陪伴是爱的最高形式&lt;/p&gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202504212230562.png?x-oss-process=style/webp&quot; alt=&quot;清言AI画图生成&quot; style=&quot;width:67%;&quot; /&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
+    
+    
+    <category term="爱情" scheme="https://kezhi.tech/tags/%E7%88%B1%E6%83%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Companionship is the highest form of love.</title>
+    <link href="https://kezhi.tech/en/9e218dda.html"/>
+    <id>https://kezhi.tech/en/9e218dda.html</id>
+    <published>2025-04-21T14:32:00.000Z</published>
+    <updated>2025-04-21T14:34:38.230Z</updated>
+    
+    
+    <summary type="html">&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;This is an automatically translated post by LLM. The &lt;a
+href=&quot;https://kezhi.tech/9e218dda.html&quot;&gt;original post&lt;/a&gt; is in Chinese.
+If you find any translation errors, please leave a comment to help me
+improve the translation. Thanks!&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;I&#39;ve long pondered the question: what is love? Recently, I&#39;ve gained
+some new insights, and I&#39;d like to share and discuss them here. To put
+it simply:&lt;/p&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;
+&lt;p&gt;Companionship is the highest form of love.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://download.kezhi.tech/img/202504212230562.png?x-oss-process=style/webp&quot; alt=&quot;清言AI画图生成&quot; style=&quot;width:67%;&quot; /&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Journal" scheme="https://kezhi.tech/categories/Journal/"/>
+    
+    
+    <category term="爱情" scheme="https://kezhi.tech/tags/%E7%88%B1%E6%83%85/"/>
+    
+  </entry>
   
   <entry>
     <title>研究生指北</title>
@@ -3796,18 +3851,25 @@ alt=&quot;8MAadJ.md&quot; /&gt;</summary>
   </entry>
   
   <entry>
-    <title>Next写作常用样式</title>
+    <title>Common styles for NexT writing.</title>
     <link href="https://kezhi.tech/en/61ad1e34.html"/>
     <id>https://kezhi.tech/en/61ad1e34.html</id>
     <published>2020-03-13T15:32:16.000Z</published>
-    <updated>2024-04-20T12:30:12.546Z</updated>
+    <updated>2025-04-21T14:36:10.927Z</updated>
     
     
-      
-      
     <summary type="html">&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;This is an automatically translated post by LLM. The &lt;a
-href=&quot;https://kezhi.tech/61ad1e34.html&quot;&gt;original post&lt;/a&gt;</summary>
-      
+href=&quot;https://kezhi.tech/61ad1e34.html&quot;&gt;original post&lt;/a&gt; is in Chinese.
+If you find any translation errors, please leave a comment to help me
+improve the translation. Thanks!&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Some Syntax Rules Beyond Markdown for a More Elegant Article&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This article is excerpted from &lt;mark class=&quot;label success&quot;&gt;Zhou Yufeng&#39;s Blog&lt;/mark&gt; &lt;a
+href=&quot;https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/&quot;&gt;Original
+Link&lt;/a&gt; &lt;img
+src=&quot;https://download.kezhi.tech/img/8MAadJ.md.jpg?x-oss-process=style/webp&quot;
+alt=&quot;8MAadJ.md&quot; /&gt;</summary>
     
     
     

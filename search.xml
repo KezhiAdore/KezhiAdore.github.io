@@ -11411,73 +11411,97 @@ elements in a matrix.</p>
       </tags>
   </entry>
   <entry>
-    <title>Next写作常用样式</title>
+    <title>Common styles for NexT writing.</title>
     <url>/en/61ad1e34.html</url>
     <content><![CDATA[<div class="note info"><p>This is an automatically translated post by LLM. The <a
 href="https://kezhi.tech/61ad1e34.html">original post</a> is in Chinese.
 If you find any translation errors, please leave a comment to help me
 improve the translation. Thanks!</p>
 </div>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Some syntax rules beyond markdown make the article more aesthetically pleasing.</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; This article is excerpted from [<span class="string">Zhou Yufeng&#x27;s blog</span>](<span class="link">https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/</span>).</span></span><br><span class="line"></span><br><span class="line">![<span class="string">8MAadJ.md</span>](<span class="link">https://download.kezhi.tech/img/8MAadJ.md.jpg?x-oss-process=style/webp</span>)</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">### 1. Text Alignment</span></span><br><span class="line"></span><br><span class="line">Effect:</span><br><span class="line">&#123;% cq %&#125;</span><br><span class="line">Life is like a mirror,</span><br><span class="line">Knowing oneself from the mirror,</span><br><span class="line">I call it a top priority,</span><br><span class="line">It is also the goal we pursue!</span><br><span class="line">&#123;% endcq %&#125;</span><br><span class="line"></span><br><span class="line">Source Code:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<blockquote class="blockquote-center">
-<p>Life is like a mirror, Knowing oneself from the mirror, I call it a
-top priority, It is also the goal we pursue!</p>
-
+<p>Some Syntax Rules Beyond Markdown for a More Elegant Article</p>
+<blockquote>
+<p>This article is excerpted from <mark class="label success">Zhou Yufeng's Blog</mark> <a
+href="https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%EF%BC%89/">Original
+Link</a> <img
+src="https://download.kezhi.tech/img/8MAadJ.md.jpg?x-oss-process=style/webp"
+alt="8MAadJ.md" /> <span id="more"></span></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">For more tags provided by NexT theme, click: [http://theme-next.iissnan.com/tag-plugins.html](http://theme-next.iissnan.com/tag-plugins.html)</span><br><span class="line"></span><br><span class="line">### 2. Theme&#x27;s Built-in Style Note Tag</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="centered-text">1. Centered Text</h3>
+<p>Effect: <blockquote class="blockquote-center">
+<p>Life is like a mirror. Understanding yourself through the mirror, I
+would call this the most important thing, and it is simply the goal we
+pursue!</p>
+
+</blockquote> Source code:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% cq %&#125;</span><br><span class="line">人生乃是一面镜子，</span><br><span class="line">从镜子里认识自己，</span><br><span class="line">我要称之为头等大事，</span><br><span class="line">也只是我们追求的目的！</span><br><span class="line">&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
+<p>For more built-in tags in the NexT theme, visit: <a
+href="http://theme-next.iissnan.com/tag-plugins.html">http://theme-next.iissnan.com/tag-plugins.html</a></p>
+<h3 id="built-in-note-tag-styles">2. Built-in Note Tag Styles</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;default&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note default">
 <p>
 default
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;default&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note primary&quot;&gt;&lt;p&gt;primary&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note primary">
 <p>
 primary
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note primary&quot;&gt;&lt;p&gt;primary&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note success&quot;&gt;&lt;p&gt;success&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note success">
 <p>
 success
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note success&quot;&gt;&lt;p&gt;success&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;info&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note info">
 <p>
 info
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note info&quot;&gt;&lt;p&gt;info&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note warning&quot;&gt;&lt;p&gt;warning&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note warning">
 <p>
 warning
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note warning&quot;&gt;&lt;p&gt;warning&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note danger&quot;&gt;&lt;p&gt;danger&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note danger">
 <p>
 danger
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note danger&quot;&gt;&lt;p&gt;danger&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;note danger no-icon&quot;&gt;&lt;p&gt;danger no-icon&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <div class="note danger no-icon">
 <p>
 danger no-icon
 </p>
 </div>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div class=&quot;note danger no-icon&quot;&gt;&lt;p&gt;danger no-icon&lt;/p&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">First, configure in the theme configuration file:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="note-tag-bs-callout.">Note tag (bs-callout).</h1>
-<p>note: # Style style: flat # Whether to have icons icons: true #
-Rounded rectangle border_radius: 3 light_bg_offset: <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 3. Built-in Label</span><br><span class="line"></span><br><span class="line">&#123;% label default@default %&#125;</span><br></pre></td></tr></table></figure>
-<mark class="label default">default</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label primary@primary %&#125;</span><br></pre></td></tr></table></figure> <mark class="label primary">primary</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label success@success %&#125;</span><br></pre></td></tr></table></figure>
-<mark class="label success">success</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label info@info %&#125;</span><br></pre></td></tr></table></figure> <mark class="label info">info</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label warning@warning %&#125;</span><br></pre></td></tr></table></figure>
-<mark class="label warning">warning</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label danger@danger %&#125;</span><br></pre></td></tr></table></figure> <mark class="label danger">danger</mark> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 4. Tabs</span><br><span class="line"></span><br><span class="line">&#123;% tabs Tabs, 2 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**This is Tab 1** Haha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha...</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**This is Tab 2**</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**This is Tab 3** Wow, you found me! φ(≧ω≦*)♪～</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<div class="tabs" id="tabs"><ul class="nav-tabs"><li class="tab"><a href="#tabs-1">Tabs 1</a></li><li class="tab active"><a href="#tabs-2">Tabs 2</a></li><li class="tab"><a href="#tabs-3">Tabs 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="tabs-1"><p><strong>This is Tab 1</strong> Haha, hahaha, hahaha, hahaha, hahaha,
-hahaha, hahaha, hahaha, hahaha, hahaha, hahaha, hahaha...</p></div><div class="tab-pane active" id="tabs-2"><p><strong>This is Tab 2</strong></p></div><div class="tab-pane" id="tabs-3"><p><strong>This is Tab 3</strong> Wow, you found me! φ(≧ω≦*)♪～</p></div></div></div></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 5. Theme&#x27;s Built-in Tabs</span><br><span class="line"></span><br><span class="line">Source Code:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<a class="btn" href="https://www.baidu.com"><i class="fa fa-download fa-lg fa-fw"></i>Click to download Baidu</a>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Effect:&#123;% btn https://www.baidu.com, Click to download Baidu, download fa-lg fa-fw %&#125;</span><br></pre></td></tr></table></figure>
+<p>First, configure in the theme configuration file: <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Note tag (bs-callout).</span><br><span class="line">note:</span><br><span class="line">  # Style</span><br><span class="line">  style: flat</span><br><span class="line">  # Show icons or not</span><br><span class="line">  icons: true</span><br><span class="line">  # Border radius</span><br><span class="line">  border_radius: 3</span><br><span class="line">  light_bg_offset:</span><br></pre></td></tr></table></figure></p>
+<h3 id="built-in-labels">3. Built-in Labels</h3>
+<mark class="label default">default</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label default@default %&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label primary">primary</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label primary@primary %&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label success">success</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label success@success %&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label info">info</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label info@info %&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label warning">warning</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label warning@warning %&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label danger">danger</mark>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% label danger@danger %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="tabs">4. Tabs</h3>
+<div class="tabs" id="tabs"><ul class="nav-tabs"><li class="tab"><a href="#tabs-1">Tabs 1</a></li><li class="tab active"><a href="#tabs-2">Tabs 2</a></li><li class="tab"><a href="#tabs-3">Tabs 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="tabs-1"><p><strong>This is Tab 1</strong> Haha, lots of laughter, haha, lots of
+laughter, haha, lots of laughter, haha, lots of laughter, haha, lots of
+laughter, haha, lots of laughter, haha, lots of laughter, haha, lots of
+laughter, haha, lots of laughter, haha, lots of laughter, haha, lots of
+laughter, haha, lots of laughter...</p></div><div class="tab-pane active" id="tabs-2"><p><strong>This is Tab 2</strong></p></div><div class="tab-pane" id="tabs-3"><p><strong>This is Tab 3</strong> Wow, you found me! φ(≧ω≦*)♪～</p></div></div></div>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% tabs 选项卡, 2 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 1** 呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈……</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 2**</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 3** 哇，你找到我了！φ(≧ω≦*)♪～</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="built-in-tabs-of-the-theme">5. Built-in Tabs of the Theme</h3>
+<p>Source code: <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% btn https://www.baidu.com, Click to Download Baidu, download fa-lg fa-fw %&#125;</span><br></pre></td></tr></table></figure> Effect: <a class="btn" href="https://www.baidu.com"><i class="fa fa-download fa-lg fa-fw"></i>Click to Download Baidu</a></p>
 ]]></content>
       <categories>
         <category>Tips</category>
@@ -21434,6 +21458,170 @@ need to end your life here, no matter what.</li>
       <tags>
         <tag>研究生</tag>
         <tag>经验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>陪伴是爱的最高形式</title>
+    <url>/9e218dda.html</url>
+    <content><![CDATA[<p>长期以来一直在思考一个问题就是什么是爱。最近有了一些阶段性的感悟，在这里讨论一下。简单来说就是：</p>
+<blockquote class="blockquote-center">
+<p>陪伴是爱的最高形式</p>
+
+</blockquote>
+<p><img src="https://download.kezhi.tech/img/202504212230562.png?x-oss-process=style/webp" alt="清言AI画图生成" style="width:67%;" /></p>
+<span id="more"></span>
+<p>爱在不同的哲学思想，不同的宗教，不同的文化背景下，有着不同的诠释，包含着各类不同的内容。这里并不探讨在这些背景下对爱的理解，仅代表个人观念。</p>
+<p>在我看来，爱是一样很难理解的事物，直到现在我对它的感受也是模糊不清的。因为它通常被掩盖在层层的感情和外在表现形式之下。</p>
+<p>以一段一般情况下的恋爱进展为例，大概流程是这样的：</p>
+<ol type="1">
+<li>男女双方中的一人向另一人表现好感，付出努力去追求，另一方答应后进入亲密关系（喜欢）</li>
+<li>在亲密关系中，双方进入热恋期，如胶似漆亲密无间，恨不得时时刻刻在一起（激情）</li>
+<li>热恋过后，双方进入感情的平淡期，逐渐习惯日常生活中有了对方，也慢慢接受对方身上的缺点，为未来共同生活打下基础（责任）</li>
+</ol>
+<p>尽管存在个体差异，但几乎每段恋爱都包含了以上几个过程。这不禁让人思考，这其中的什么部分构成了爱，说明了爱，或者体现了爱呢。</p>
+<p>我很难直接回答这个问题，但从另一个角度来说，如果能够剔除掉这其中与爱无关的成分，那么剩下的内容也许就是爱的体现形式了。</p>
+<p>因此，重新思考上面的过程可以发现：</p>
+<ul>
+<li>对人的好感可能来源于性冲动、好奇、感激等心理活动，这些心理活动通常与爱是无关的</li>
+<li>付出努力追求的驱动力来源于产生好感的心理活动，以及对未来两个人在一起之后的期望回报，这种驱动力是不长久的，短暂的，因此无法体现爱</li>
+<li>对另一方情感的回应与对人的好感来源是类似的，也通常并不与爱有关</li>
+<li>在亲密关系的热恋期，双方受到身体中激素的支配而持续对对方产生向往，这个时候的两人看上去很亲密，很恩爱，但属于小头控制大头，也无法体现出爱</li>
+<li>在热恋过后，进入感情的平淡期后，当注意力逐渐从对方的优点和自己身体的激素支配中走出来，看到对方的缺点并接纳对方后，两人准备步入未来的共同生活。这一部分目前看起来是整个过程中最能体现爱的，因为这个过程对于当事人来说是痛苦的，而在这个痛苦的过程中，必然有着什么正向的东西能够支撑人完成这个过程。</li>
+</ul>
+<p>经过上面的思考，我们可以初步得出结论：在整个恋爱进展中，从热恋期进入平淡期接受对方的过程是其中最能体现爱的。</p>
+<p>然而，这个结论并不能令我满意，因为这个过程依然可以由很多其他的因素所驱动，举例来说：</p>
+<ul>
+<li>因为对方好看/富有/聪明/靠谱而想要不断从对方身上获取现实价值和精神价值</li>
+<li>因为对对方的付出感激而无法拒绝对方</li>
+<li>因为对方身上有着自己所一直向往的特质，像飞蛾扑火般围在身边</li>
+<li>......</li>
+</ul>
+<p>总而言之，两个人在一起克服平淡期的痛苦，可以有着很多的外部因素而并非只有爱这一个驱动力。</p>
+<p>为此，再来考虑一下爱所具备的一些属性：</p>
+<ul>
+<li>爱是一种单方面的行为，爱一个人并不意味着需要得到对方的爱</li>
+<li>爱是不求回报的，要求回报的情感都会被回报所异化</li>
+</ul>
+<p>那么，将不属于这些属性的行为从上面的过程中剥离后，剩下的行为便大致可以认为是爱的体现了。总结一下剩下的行为，那就是
+<strong>陪伴</strong>。</p>
+<p>在写这篇文章前，我分别问了<code>DeepSeekV3</code>和<code>DeepSeekR1</code>关于本文标题的看法，我认为它们的回答能很好的解释陪伴的意义。在本文的最后，以它们的回答结尾。</p>
+<p><img
+src="https://download.kezhi.tech/img/202504212215246.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202504212216042.png?x-oss-process=style/webp" /></p>
+]]></content>
+      <categories>
+        <category>Journal</category>
+      </categories>
+      <tags>
+        <tag>爱情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Companionship is the highest form of love.</title>
+    <url>/en/9e218dda.html</url>
+    <content><![CDATA[<div class="note info"><p>This is an automatically translated post by LLM. The <a
+href="https://kezhi.tech/9e218dda.html">original post</a> is in Chinese.
+If you find any translation errors, please leave a comment to help me
+improve the translation. Thanks!</p>
+</div>
+<p>I've long pondered the question: what is love? Recently, I've gained
+some new insights, and I'd like to share and discuss them here. To put
+it simply:</p>
+<blockquote class="blockquote-center">
+<p>Companionship is the highest form of love.</p>
+
+</blockquote>
+<p><img src="https://download.kezhi.tech/img/202504212230562.png?x-oss-process=style/webp" alt="清言AI画图生成" style="width:67%;" /></p>
+<span id="more"></span>
+<p>Love is interpreted differently across various philosophies,
+religions, and cultural backgrounds, each imbuing it with unique
+meanings. Here, I won't delve into those perspectives; what follows
+reflects only my personal views.</p>
+<p>In my opinion, love is something profoundly difficult to grasp. Even
+now, my understanding of it remains vague, as it is often shrouded
+beneath layers of emotion and outward expressions.</p>
+<p>Take, for example, the typical progression of a romantic
+relationship. The general process goes something like this:</p>
+<ol type="1">
+<li>One person expresses affection and makes efforts to pursue the
+other; once the other agrees, they enter into an intimate relationship
+(liking).</li>
+<li>During the relationship, both experience a passionate phase,
+inseparable and longing to be together at every moment (passion).</li>
+<li>After the passion fades, the relationship settles into a calmer
+phase. Both gradually get used to each other's presence in daily life,
+slowly accept each other's flaws, and lay the foundation for a shared
+future (commitment).</li>
+</ol>
+<p>Although individual experiences may vary, nearly every romantic
+relationship includes these stages. This naturally leads to the
+question: which part of this process constitutes love, demonstrates
+love, or embodies love?</p>
+<p>It's difficult for me to answer this question directly. However, from
+another perspective, if we can strip away the elements unrelated to
+love, perhaps what remains is the true manifestation of love.</p>
+<p>Re-examining the process above, we find:</p>
+<ul>
+<li>Affection for someone may stem from sexual attraction, curiosity,
+gratitude, and other psychological impulses—these are usually unrelated
+to love.</li>
+<li>The motivation to pursue someone arises from these impulses and the
+expectation of future rewards from being together. Such motivation is
+fleeting and cannot represent love.</li>
+<li>Responding to another's feelings is similar in origin to one's own
+affection and is also not necessarily related to love.</li>
+<li>During the passionate phase, both are driven by hormones, longing
+for each other. Though they appear deeply in love, this is more about
+physical desire than genuine love.</li>
+<li>After the passion fades and the relationship enters a calmer phase,
+attention shifts away from each other's strengths and hormonal
+influences. When both begin to see and accept each other's flaws,
+preparing for a shared future, this stage seems to best embody love.
+This process is often painful, and it is sustained by something positive
+that helps both endure and grow.</li>
+</ul>
+<p>From this reflection, we can tentatively conclude: in the course of a
+romantic relationship, the transition from passion to calm acceptance is
+where love is most evident.</p>
+<p>Yet, even this conclusion feels incomplete, as many other factors can
+drive this process. For example:</p>
+<ul>
+<li>The desire to continually gain material or emotional value from
+someone attractive, wealthy, intelligent, or reliable.</li>
+<li>Gratitude for the other’s efforts, making it hard to refuse
+them.</li>
+<li>Being drawn to qualities in the other that one has always longed
+for, like a moth to a flame.</li>
+<li>......</li>
+</ul>
+<p>In short, overcoming the challenges of the calm phase in a
+relationship can be driven by many external factors, not just love
+alone.</p>
+<p>Therefore, let's consider some inherent qualities of love:</p>
+<ul>
+<li>Love is a unilateral act; loving someone does not require their love
+in return.</li>
+<li>Love seeks no reward; any feeling that demands reciprocation is
+transformed by that expectation.</li>
+</ul>
+<p>If we strip away behaviors that do not fit these attributes, what
+remains can be considered the true expression of love. In summary, that
+is <strong>companionship</strong>.</p>
+<p>Before writing this article, I asked both <code>DeepSeekV3</code> and
+<code>DeepSeekR1</code> for their thoughts on the title. I believe their
+responses beautifully capture the meaning of companionship. I’ll end
+this piece with their answers.</p>
+<p><img
+src="https://download.kezhi.tech/img/202504212215246.png?x-oss-process=style/webp" /></p>
+<p><img
+src="https://download.kezhi.tech/img/202504212216042.png?x-oss-process=style/webp" /></p>
+]]></content>
+      <categories>
+        <category>Journal</category>
+      </categories>
+      <tags>
+        <tag>爱情</tag>
       </tags>
   </entry>
 </search>
