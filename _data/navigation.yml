@@ -1,0 +1,14 @@
+- title: Home
+  url: "/"
+
+- title: Publication
+  url: "#publications"
+
+- title: Group
+  url: "#group"
+
+- title: Contact
+  url: "#contact"
+
+- title: Misc
+  url: "#misc"

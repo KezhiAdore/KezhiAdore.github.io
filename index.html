@@ -35,6 +35,17 @@ layout: null
                 {% if site.data.profile.twitter != "#" %}<a href="{{ site.data.profile.twitter }}">Twitter</a>{% endif %}
                 {% if site.data.profile.linkedin != "#" %}<a href="{{ site.data.profile.linkedin }}">LinkedIn</a>{% endif %}
             </div>
+
+            <!-- Navigation Bar -->
+            {% if site.data.navigation %}
+            <nav class="main-nav">
+                <ul>
+                    {% for item in site.data.navigation %}
+                    <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
     </header>
 
