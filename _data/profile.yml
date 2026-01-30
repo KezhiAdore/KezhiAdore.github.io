@@ -11,8 +11,8 @@ linkedin: "#"
 bio: |
   I am a Ph.D. student at [Xi'an Jiaotong University](https://en.xjtu.edu.cn/), advised by *Prof. [Liangjun Ke](https://gr.xjtu.edu.cn/web/keljxjtu)*.
 
-  My research interests lie in **Reward Design** in **Reinforcement Learning**.
+  My research interests lie in **Reinforcement Learning** and the **Reward Design** problem.
 
-  Specifically, I think the purpose of reward design is to ***tell an agent what we want it to do***, and  this is more important than teaching it how to do it. This issue is not limited to artificial intelligence; it is widespread in human education, business, and politics. It forms the basis of cooperation in human society, and I believe it will also be the foundation for building collaboration between humans and AI.
+  I think that ***tell agents what we want them to do*** is more important than teaching it how to do it. This issue is not limited to artificial intelligence; it is widespread in human education, business, and politics. It forms the basis of cooperation in human society, and I believe it will also be the foundation for building collaboration between humans and AI.
 
 image: assets/images/IMG_51371.jpeg
