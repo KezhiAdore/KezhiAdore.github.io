@@ -1,0 +1,15 @@
+name: Kezhi Adore
+position: Ph.D. Student
+university: Your University Name
+department: Department of Computer Science
+email: kezhi.adore@university.edu
+google_scholar: "#"
+github: "https://github.com/KezhiAdore"
+twitter: "#"
+linkedin: "#"
+# bio support markdown
+bio: |
+  I am a Ph.D. student at [Your University], advised by [Advisor Name]. 
+  My research interests lie in **Embodied AI**, **Computer Vision**, and **Robotics**.
+  Specifically, I am interested in building generalist robots that can understand and interact with the complex physical world.
+image: assets/images/profile.jpg

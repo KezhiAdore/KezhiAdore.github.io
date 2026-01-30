@@ -1,0 +1,8 @@
+title: "Kezhi Adore"
+description: "Ph.D. Student in Embodied AI"
+baseurl: "" # Keep empty for user pages (username.github.io)
+url: "https://KezhiAdore.github.io"
+markdown: kramdown
+theme: null # We are building a custom layout
+plugins:
+  - jekyll-seo-tag
