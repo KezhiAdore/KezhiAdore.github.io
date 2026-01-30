@@ -187,7 +187,8 @@ footer {
 
 /* Navigation Bar */
 .main-nav {
-    margin-top: 30px;
+    margin-top: 0;
+    margin-bottom: 40px; /* Space between nav and content */
     border: 1px solid #ddd;
     border-radius: 4px;
     background: #fff;
