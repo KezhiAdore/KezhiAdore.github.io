@@ -1,102 +1,41 @@
 ---
-layout: null
+layout: default
+title: Home
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.data.profile.name }} | {{ site.data.profile.university }}</title>
-    <meta name="description" content="{{ site.description }}">
-    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
-    <!-- Optional: Add Google Fonts here -->
-</head>
-<body>
 
-<div class="container">
-    <!-- Header / Profile Section -->
-    <header>
-        <div class="profile-photo">
-            <!-- You can replace this with your actual photo path in _data/profile.yml -->
-            <img src="{{ site.data.profile.image | relative_url }}" alt="{{ site.data.profile.name }}" onerror="this.src='{{ '/assets/images/placeholder.svg' | relative_url }}';">
+<!-- Header / Profile Section -->
+<header>
+    <div class="profile-photo">
+        <!-- You can replace this with your actual photo path in _data/profile.yml -->
+        <img src="{{ site.data.profile.image | relative_url }}" alt="{{ site.data.profile.name }}" onerror="this.src='{{ '/assets/images/placeholder.svg' | relative_url }}';">
+    </div>
+    <div class="profile-info">
+        <h1>{{ site.data.profile.name }}</h1>
+        <h2>{{ site.data.profile.position }}<br>{{ site.data.profile.department }}<br>{{ site.data.profile.university }}</h2>
+        
+        <div class="bio">
+            {{ site.data.profile.bio | markdownify }}
         </div>
-        <div class="profile-info">
-            <h1>{{ site.data.profile.name }}</h1>
-            <h2>{{ site.data.profile.position }}<br>{{ site.data.profile.department }}<br>{{ site.data.profile.university }}</h2>
-            
-            <div class="bio">
-                {{ site.data.profile.bio | markdownify }}
-            </div>
 
-            <div class="social-links">
-                <a href="mailto:{{ site.data.profile.email }}">Email</a>
-                {% if site.data.profile.google_scholar != "#" %}<a href="{{ site.data.profile.google_scholar }}">Google Scholar</a>{% endif %}
-                {% if site.data.profile.github != "#" %}<a href="{{ site.data.profile.github }}">GitHub</a>{% endif %}
-                {% if site.data.profile.twitter != "#" %}<a href="{{ site.data.profile.twitter }}">Twitter</a>{% endif %}
-                {% if site.data.profile.linkedin != "#" %}<a href="{{ site.data.profile.linkedin }}">LinkedIn</a>{% endif %}
-            </div>
-
-            <!-- Navigation Bar -->
-            {% if site.data.navigation %}
-            <nav class="main-nav">
-                <ul>
-                    {% for item in site.data.navigation %}
-                    <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
-            {% endif %}
+        <div class="social-links">
+            <a href="mailto:{{ site.data.profile.email }}">Email</a>
+            {% if site.data.profile.google_scholar != "#" %}<a href="{{ site.data.profile.google_scholar }}">Google Scholar</a>{% endif %}
+            {% if site.data.profile.github != "#" %}<a href="{{ site.data.profile.github }}">GitHub</a>{% endif %}
+            {% if site.data.profile.twitter != "#" %}<a href="{{ site.data.profile.twitter }}">Twitter</a>{% endif %}
+            {% if site.data.profile.linkedin != "#" %}<a href="{{ site.data.profile.linkedin }}">LinkedIn</a>{% endif %}
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- News Section -->
-    {% if site.data.news %}
-    <section id="news">
-        <h3 class="section-title">News</h3>
-        {% for item in site.data.news limit:5 %}
-        <div class="news-item">
-            <div class="news-date">{{ item.date }}</div>
-            <div class="news-content">{{ item.content | markdownify }}</div>
-        </div>
-        {% endfor %}
-    </section>
-    {% endif %}
-
-    <!-- Publications Section -->
-    {% if site.data.publications %}
-    <section id="publications">
-        <h3 class="section-title">Publications</h3>
-        {% for pub in site.data.publications %}
-        <div class="publication-item">
-            <div class="pub-image">
-                {% if pub.image %}
-                <img src="{{ pub.image | relative_url }}" alt="{{ pub.title }}" onerror="this.style.display='none'">
-                {% endif %}
-            </div>
-            <div class="pub-details">
-                <a href="{{ pub.links[0].url }}" class="pub-title">{{ pub.title }}</a>
-                <div class="pub-authors">{{ pub.authors | markdownify | remove: '<p>' | remove: '</p>' }}</div>
-                <div class="pub-venue">
-                    {{ pub.venue }} 
-                    {% if pub.highlight %}
-                    <span class="pub-highlight">({{ pub.highlight }})</span>
-                    {% endif %}
-                </div>
-                <div class="pub-links">
-                    {% for link in pub.links %}
-                    <a href="{{ link.url }}">{{ link.name }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </section>
-    {% endif %}
-
-    <footer>
-        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.data.profile.name }}. Powered by Jekyll.</p>
-    </footer>
-</div>
-
-</body>
-</html>
+<!-- News Section -->
+{% if site.data.news %}
+<section id="news">
+    <h3 class="section-title">News</h3>
+    {% for item in site.data.news limit:5 %}
+    <div class="news-item">
+        <div class="news-date">{{ item.date }}</div>
+        <div class="news-content">{{ item.content | markdownify }}</div>
+    </div>
+    {% endfor %}
+</section>
+{% endif %}

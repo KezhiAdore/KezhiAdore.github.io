@@ -2,13 +2,13 @@
   url: "/"
 
 - title: Publication
-  url: "#publications"
+  url: "/publications/"
 
 - title: Group
-  url: "#group"
+  url: "/group/"
 
 - title: Contact
-  url: "#contact"
+  url: "/contact/"
 
 - title: Misc
-  url: "#misc"
+  url: "/misc/"

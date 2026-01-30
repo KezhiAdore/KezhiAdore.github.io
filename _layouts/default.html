@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.data.profile.name }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+</head>
+<body>
+
+<div class="container">
+    <!-- Navigation Bar -->
+    {% if site.data.navigation %}
+    <nav class="main-nav">
+        <ul>
+            {% for item in site.data.navigation %}
+            <li><a href="{{ item.url | relative_url }}" {% if page.url == item.url %}class="active"{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {{ content }}
+
+    <footer>
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.data.profile.name }}. Powered by Jekyll.</p>
+    </footer>
+</div>
+
+</body>
+</html>
