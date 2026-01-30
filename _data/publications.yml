@@ -1,3 +1,17 @@
+
+
+- title: "Test-driven Reinforcement Learning in Continuous Control"
+  authors: "**Zhao Yu**, Xiuping Wu, Liangjun Ke"
+  venue: "AAAI 2026"
+  venue_short: "AAAI"
+  highlight: "Oral"
+  image: assets/images/publications/TdRL2025.png
+  links:
+    - name: "arXiv"
+      url: "https://doi.org/10.48550/arXiv.2511.07904"
+    - name: "Code"
+      url: "https://github.com/kezhiAdore/tdrl"
+
 - title: "Scattered data augmentation for generalization in visual reinforcement learning"
   authors: "Hao Lei, **Yu Zhao**, Yi Xin, Zhang Shaonan, Ke Liangjun"
   venue: "Neurocomputing, 2025"
