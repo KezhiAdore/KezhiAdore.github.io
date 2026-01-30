@@ -1,3 +1,19 @@
+- title: "Role can be beneficial to mean field multi-agent reinforcement learning"
+  authors: "Shaonan Zhang, **Zhao Yu**, Lei Hao, Liangjun Ke"
+  venue: "Information Sciences, 2025"
+  venue_short: "Information Sciences"
+  links:
+    - name: "DOI"
+      url: "https://doi.org/10.1016/j.ins.2025.122522"
+
+- title: "Scattered data augmentation for generalization in visual reinforcement learning"
+  authors: "Hao Lei, **Yu Zhao**, Yi Xin, Zhang Shaonan, Ke Liangjun"
+  venue: "Neurocomputing, 2025"
+  venue_short: "Neurocomputing"
+  links:
+    - name: "DOI"
+      url: "https://doi.org/10.1016/j.neucom.2025.131492"
+
 - title: "Learning to Manipulate with Dexterous Hands"
   authors: "**Kezhi Adore**, Collaborator A, Collaborator B, Advisor Name"
   venue: "Conference on Robot Learning (CoRL), 2025"
