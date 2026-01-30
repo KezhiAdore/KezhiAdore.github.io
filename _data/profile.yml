@@ -9,7 +9,10 @@ twitter: "#"
 linkedin: "#"
 # bio support markdown
 bio: |
-  I am a Ph.D. student at Xi'an Jiaotong University, advised by Prof. [Lliangjun Ke](https://gr.xjtu.edu.cn/web/keljxjtu).
-  My research interests lie in **Reinforcement Learning**.
-  Specifically, I am interested in building generalist robots that can understand and interact with the complex physical world.
-image: assets/images/IMG_51371.jpeg
+  I am a Ph.D. student at [Xi'an Jiaotong University](https://en.xjtu.edu.cn/), advised by *Prof. [Lliangjun Ke](https://gr.xjtu.edu.cn/web/keljxjtu)*.
+
+  My research interests lie in **Reward Design** in **Reinforcement Learning**.
+
+  Specifically, I think the purpose of reward design is to ***tell an agent what we want it to do***, and  this is more important than teaching it how to do it. This issue is not limited to artificial intelligence; it is widespread in human education, business, and politics. It forms the basis of cooperation in human society, and I believe it will also be the foundation for building collaboration between humans and AI.
+
+image: assets/images/profile.jpg
