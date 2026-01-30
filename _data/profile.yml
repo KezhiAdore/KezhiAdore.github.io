@@ -1,15 +1,15 @@
-name: Kezhi Adore
+name: Zha Yu
 position: Ph.D. Student
-university: Your University Name
-department: Department of Computer Science
-email: kezhi.adore@university.edu
-google_scholar: "#"
+university: Xi'an Jiaotong University
+department: Department of  Automation Science and Engineering
+email: yuzhaokz@stu.xjtu.edu.cn
+google_scholar: "https://scholar.google.com/citations?user=23Zwi3wAAAAJ&hl=zh-CN"
 github: "https://github.com/KezhiAdore"
 twitter: "#"
 linkedin: "#"
 # bio support markdown
 bio: |
-  I am a Ph.D. student at [Your University], advised by [Advisor Name]. 
-  My research interests lie in **Embodied AI**, **Computer Vision**, and **Robotics**.
+  I am a Ph.D. student at Xi'an Jiaotong University, advised by Prof. [Lliangjun Ke](https://gr.xjtu.edu.cn/web/keljxjtu).
+  My research interests lie in **Reinforcement Learning**.
   Specifically, I am interested in building generalist robots that can understand and interact with the complex physical world.
 image: assets/images/profile.jpg
