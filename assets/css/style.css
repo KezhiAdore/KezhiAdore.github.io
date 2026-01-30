@@ -99,17 +99,23 @@ h3.section-title {
 /* News Section */
 .news-item {
     display: flex;
-    margin-bottom: 15px;
+    align-items: center; /* Vertically center align */
+    margin-bottom: 10px; /* Reduce bottom margin */
 }
 
 .news-date {
     min-width: 100px;
     font-weight: bold;
     color: var(--meta-color);
+    flex-shrink: 0; /* Prevent date from shrinking */
 }
 
 .news-content {
     flex: 1;
+}
+
+.news-content p {
+    margin: 0; /* Remove default paragraph margin */
 }
 
 /* Publications Section */
