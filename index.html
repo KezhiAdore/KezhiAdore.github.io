@@ -13,10 +13,6 @@ title: Home
         <h1>{{ site.data.profile.name }}</h1>
         <h2>{{ site.data.profile.position }}<br>{{ site.data.profile.department }}<br>{{ site.data.profile.university }}</h2>
         
-        <div class="bio">
-            {{ site.data.profile.bio | markdownify }}
-        </div>
-
         <div class="social-links">
             <a href="mailto:{{ site.data.profile.email }}">Email</a>
             {% if site.data.profile.google_scholar != "#" %}<a href="{{ site.data.profile.google_scholar }}">Google Scholar</a>{% endif %}
@@ -24,6 +20,9 @@ title: Home
             {% if site.data.profile.twitter != "#" %}<a href="{{ site.data.profile.twitter }}">Twitter</a>{% endif %}
             {% if site.data.profile.linkedin != "#" %}<a href="{{ site.data.profile.linkedin }}">LinkedIn</a>{% endif %}
         </div>
+    </div>
+    <div class="bio" style="width: 100%;">
+        {{ site.data.profile.bio | markdownify }}
     </div>
 </header>
 
